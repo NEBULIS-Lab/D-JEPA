@@ -1,0 +1,16 @@
+module: granular-relational
+train: data/D-JEPA-supervision-v1/granular/train
+calibration: data/D-JEPA-supervision-v1/granular/calibration
+output: outputs/granular-relational-trained
+updates: 1500
+seed: 20260831
+batch_size: 16
+learning_rate: 0.0003
+weight_decay: 0.0001
+max_grad_norm: 1.0
+tail_k: 16
+evaluate_every: 25
+hidden_dim: 64
+low_rank: 8
+max_correction: 0.2
+mg_grid_step: 0.05

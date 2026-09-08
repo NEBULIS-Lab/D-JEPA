@@ -1,7 +1,8 @@
 # Dependencies and release permissions
 
 The lightweight package uses PyTorch, NumPy and PyYAML. Optional artifact downloads
-use huggingface-hub; development packaging uses build. Its extracted scientific modules
+use huggingface-hub; optional video export uses imageio/imageio-ffmpeg;
+development packaging uses build. Its extracted scientific modules
 are project-authored; source/export hashes are in SOURCE_PROVENANCE.json.
 
 ## Research foundations

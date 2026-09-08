@@ -24,9 +24,10 @@ python -m zipfile -e data/D-JEPA-supervision-v1.zip data
 The download helper selects only requested profiles, resolves Hub revisions to
 immutable commits, and verifies weight/ZIP hashes against the release manifests.
 It records revisions in local download receipts. Rerunning resumes Hub-cache
-transfers and verifies existing outputs without replacing them. Interrupted
-destination copies fail validation on retry; move the named incomplete file
-aside before retrying. No automatic archive extraction occurs.
+transfers and verifies existing outputs without replacing them. Destination
+copies are published atomically only after checksum verification. An existing
+file with the wrong checksum is never overwritten; move that named file aside
+before retrying. No automatic archive extraction occurs.
 
 Use `--revision COMMIT` and `--dataset-revision COMMIT` to replay the same release.
 `--checkpoint-dir` and `--data-dir` change destinations. The helper uses the HF
@@ -63,7 +64,11 @@ The full-model Reacher checkpoint is available, but its formal native scoring
 is not an inference-ready cached-score release. No generic MSE substitute or
 misleading Reacher replay YAML is provided. Other modules expose their original
 implementations/objectives; the portable training CLI currently supports the
-three-coordinate ordinal instance, not every historical training pipeline.
+three-coordinate ordinal instance. Additional released-data recipes for PushT
+relational alignment and Granular spatial/multiview alignment are available in
+[MODULE_TRAINING.md](MODULE_TRAINING.md). Native predictor feature extraction
+and fixed-horizon physics execution are described in
+[NATIVE_REPRODUCING.md](NATIVE_REPRODUCING.md), with their required raw inputs.
 
 ```bash
 python scripts/download_artifacts.py --profile pushobj-unseen-shapes --profile pusht-visual-shifts --profile granular-relational
@@ -78,6 +83,44 @@ Calibrated composition remains a separate configuration from the relational
 replay. See [protocols](PROTOCOLS.md) for the distinction. Numerical results are
 presented on the [project website](https://nebulis-lab.com/D-JEPA#results); reference
 outcomes remain in the HF supervision archive, not in the code repository.
+
+## Preflight and resumable paper matrix
+
+```bash
+python scripts/doctor.py --checkpoint checkpoints/pusht-relational
+python scripts/verify_dataset.py --data-root data/D-JEPA-supervision-v1 --checksums
+bash scripts/reproduce_paper.sh --dry-run
+bash scripts/reproduce_paper.sh
+bash scripts/reproduce_paper.sh --resume
+```
+
+Download all four profiles in the replay coverage table before running the whole
+matrix. Select individual runs with `--only pusht-independent` (repeatable).
+`--data-root`, `--checkpoint-root`, `--matrix` and `--output` accept custom paths.
+The doctor runs on CPU and does not initialize a GPU or simulator.
+Dataset validation checks candidate identities, finite inputs, feature shapes
+and boolean observation masks; `--checksums` additionally verifies every file
+listed in the extracted dataset manifest. Use `--split PATH --checkpoint PROFILE`
+for a single split's feature-dimension preflight.
+
+The matrix preserves protocol names: PushT independent, Granular formal,
+PushObj calibration and visual-shift calibration are separate runs. For PushT
+and Granular, selected IDs must exactly match their recorded authorities from
+the downloaded dataset. Other matrix rows report their calibration metrics
+without claiming a fresh formal benchmark. The matrix never trains on these rows.
+
+Each run creates `report.json`, `report.config.json`, `run.log` and `receipt.json`
+under `outputs/paper/RUN_ID/`. The receipt records SHA-256 fingerprints for inputs,
+checkpoint, settings, package source and outputs. `--resume` skips only a completed
+run with matching fingerprints; it refuses changed or partial runs. To recover
+from an interrupted run, inspect its log and select a new output directory (or
+move that specific incomplete run aside). No output is silently overwritten.
+
+```bash
+python scripts/summarize_results.py outputs/paper/*/report.json --output outputs/paper-summary
+```
+
+Summary tables stay in ignored local outputs, not in the published source tree.
 
 ## Layout and compatibility
 

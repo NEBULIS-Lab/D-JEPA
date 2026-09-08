@@ -1,0 +1,32 @@
+# Cached-feature release matrix. Split names deliberately retain protocol identity.
+# Formal simulator tasks and calibration populations are not pooled together.
+schema: 1
+runs:
+  - id: pusht-independent
+    task: pusht
+    split: independent_256
+    profile: pusht-relational
+    labels: true
+    reference:
+      file: results/pusht-independent-256.json
+      kind: selected_ids
+      method: dtail_jepa_r
+  - id: granular-formal
+    task: granular
+    split: formal
+    profile: granular-relational
+    labels: false
+    reference:
+      file: results/granular-64.json
+      kind: media_rows
+      method: da_jepa_r
+  - id: pushobj-calibration
+    task: pushobj
+    split: calibration
+    profile: pushobj-unseen-shapes
+    labels: true
+  - id: visual-shifts-calibration
+    task: pusht_visual_shifts
+    split: calibration
+    profile: pusht-visual-shifts
+    labels: true

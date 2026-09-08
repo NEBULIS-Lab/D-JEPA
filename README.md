@@ -90,10 +90,15 @@ Download and verify the **`pusht-relational/` profile** plus supervision:
 ```bash
 python scripts/download_artifacts.py --profile pusht-relational --dataset
 python -m zipfile -e data/D-JEPA-supervision-v1.zip data
-bash scripts/reproduce.sh
+python scripts/doctor.py --checkpoint checkpoints/pusht-relational
+python scripts/verify_dataset.py --data-root data/D-JEPA-supervision-v1 --checksums
+bash scripts/reproduce_paper.sh --only pusht-independent
 ```
 
 This replays the relational checkpoint on the independent PushT population.
+Use `--resume` to verify and skip a completed, unchanged run. The
+[release matrix](configs/reproduction/paper.yaml) also includes Granular formal
+decisions and the two task-local calibration replays, with distinct run identities.
 See the [project website](https://nebulis-lab.com/D-JEPA#results) for reported results.
 
 <details>
@@ -131,6 +136,12 @@ bitwise-identical retraining across software/hardware versions.
 
 </details>
 
+For relational alignment and sparse spatial/multiview training, use the
+[module-training recipes](docs/MODULE_TRAINING.md). The
+[native execution guide](docs/NATIVE_REPRODUCING.md) covers feature preparation
+from upstream predictors and fixed-horizon physics rollouts, separately from
+cached replay. Run settings, inputs and output artifacts are recorded locally.
+
 ## Results
 
 Visit the [project website](https://nebulis-lab.com/D-JEPA#results) for numerical
@@ -144,6 +155,9 @@ not as a separate results directory in this code repository.
 | Guide | Contents |
 |---|---|
 | [Reproduction guide](docs/REPRODUCING.md) | Installation, verified downloads, YAML runs and summary scripts |
+| [Module training](docs/MODULE_TRAINING.md) | Relational and sparse-supervision training recipes |
+| [Native execution](docs/NATIVE_REPRODUCING.md) | Raw-input feature extraction, model factories and physics rollouts |
+| [Release scope](docs/RELEASE_SCOPE.md) | Available workflows and future paper, video and experiment updates |
 | [Protocols and data schema](docs/PROTOCOLS.md) | Evaluation populations, identities and supervision semantics |
 | [Checkpoint profiles](docs/CHECKPOINTS.md) | Loading, composition and upstream dependencies |
 | [Validation](docs/VALIDATION.md) | Tested release scope and cached-decision replay |
@@ -153,9 +167,9 @@ not as a separate results directory in this code repository.
 ### Repository map
 
 ```text
-src/djepa/      models · objectives · data · evaluation · cli
-configs/       executable training and evaluation YAMLs
-scripts/       download · train · evaluate · reproduce · summarize · preview
+src/djepa/      models · objectives · data · evaluation · native · cli
+configs/       training · evaluation · reproduction · native
+scripts/       download · preflight · train · evaluate · reproduce · summarize · preview
 examples/      label-free inference and sparse metrics
 tests/         scientific behavior and workflow tests
 docs/          project website and technical documentation

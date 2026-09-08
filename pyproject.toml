@@ -12,6 +12,7 @@ readme = "README.md"
 
 [project.optional-dependencies]
 download = ["huggingface-hub>=0.24"]
+media = ["imageio>=2.31", "imageio-ffmpeg>=0.4.9"]
 dev = ["build>=1.2"]
 
 [project.urls]

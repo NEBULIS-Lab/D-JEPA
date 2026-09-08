@@ -1,10 +1,16 @@
 {
-  "scope": "Repository organization, executable configs/scripts and static project page",
+  "scope": "Current-study release closure: preflight, replay, training, native contracts and static project page",
   "date": "2026-09-09",
   "device": "CPU",
-  "unit_and_workflow_tests": 20,
+  "unit_and_workflow_tests": 39,
   "scientific_implementations_preserved_byte_for_byte": 12,
-  "installed_wheel_modules_imported": 41,
+  "installed_wheel_modules_imported": 49,
+  "released_dataset_splits_validated": 12,
+  "released_manifest_files_verified": 47,
+  "cached_matrix_runs_completed": 4,
+  "real_data_one_update_training_and_strict_load": [
+    "pusht-relational", "granular-relational", "granular-multiview"
+  ],
   "pusht_independent_cached_replay": {
     "selected_ids_matching_recorded_authority": 256,
     "population": 256,
@@ -17,6 +23,15 @@
     "Evaluation wrapper, successful selections and output collision rejection",
     "Observed versus unknown outcome handling in CSV/Markdown summaries",
     "Corrupt artifact checksum rejection",
+    "Atomic verified artifact copies preserve existing destinations",
+    "Input/checkpoint dimension validation and sparse Boolean mask validation",
+    "Matrix resume verifies source/input/output fingerprints and rejects changed output",
+    "Granular formal replay matches all 64 recorded candidate IDs",
+    "Module fitting/calibration identities and sparse unknown-label invariance",
+    "JSON-safe disabled gate remains disabled across float32/float64 score rounding",
+    "Native predictor contract matches original float-cost-before-half descriptor ordering",
+    "Native fixed-horizon contract executes all 25 controls and binds action identities",
+    "Native sidecars bind checkpoint, split and raw input hashes; early output collision refusal",
     "All 12 locally prepared checkpoint configs match download manifest schema",
     "Wheel build and import outside repository checkout",
     "Website local links, navigation IDs, artwork slot definitions and 14 copied asset hashes",
@@ -24,6 +39,8 @@
     "JavaScript and shell syntax checks"
   ],
   "not_performed": [
+    "Actual upstream native predictor/physics execution in a fresh runtime",
+    "Full historical-training reruns or bitwise checkpoint retraining",
     "Live Hugging Face artifact download",
     "Remote GitHub Actions execution",
     "Browser visual or interaction testing",

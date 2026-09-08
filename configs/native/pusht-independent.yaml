@@ -1,0 +1,30 @@
+schema: djepa_native_pusht_v1
+task: pusht
+evaluation_split: independent_256
+checkpoint:
+  path: ../../checkpoints/pusht-exact-realization-full
+  weights_sha256: 983be0921f3b1d393ce9c6b0e6acfda8272b546ec7009e93ec0a4466a91a1ba2
+  config_sha256: 7d59feb2a785ccd4823f6366beb1d4493b11339d9075be0621417dcac5999441
+protocol:
+  candidate_count: 63
+  context_frames: 3
+  history_controls: 10
+  control_horizon: 25
+  action_block: 5
+  future_blocks: 5
+  action_units: relative_position_delta
+  action_low: [-1.0, -1.0]
+  action_high: [1.0, 1.0]
+  control_hz: 10
+  physics_dt: 0.01
+  integrator_steps_per_control: 10
+decision:
+  fusion_alpha: 0.42
+  gate_threshold: -0.03162526342176623
+  gate_comparison: strict_gt
+  gate_advantage_decimals: 4
+preprocessing:
+  image_mean: [0.485, 0.456, 0.406]
+  image_std: [0.229, 0.224, 0.225]
+  action_mean: [-0.007812565192580223, 0.006860686466097832]
+  action_std: [0.2084674835205078, 0.20674866437911987]

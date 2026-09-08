@@ -7,9 +7,11 @@ The HF cache handles interrupted transfers; rerun the same command to resume.
 import argparse
 import hashlib
 import json
+import os
 from pathlib import Path, PurePosixPath
 import re
 import shutil
+import tempfile
 
 
 def verify_sha256(path, expected):
@@ -30,9 +32,18 @@ def copy_verified(source, destination, expected):
         verify_sha256(destination, expected)
         return
     destination.parent.mkdir(parents=True, exist_ok=True)
-    with destination.open('xb') as target, Path(source).open('rb') as stream:
-        shutil.copyfileobj(stream, target)
-    verify_sha256(destination, expected)
+    # Keep partial copies out of the final filename; a hard link publishes the
+    # verified file atomically without replacing a destination created meanwhile.
+    with tempfile.NamedTemporaryFile(dir=destination.parent, prefix='.djepa-download-') as target:
+        with Path(source).open('rb') as stream:
+            shutil.copyfileobj(stream, target)
+        target.flush()
+        os.fsync(target.fileno())
+        verify_sha256(target.name, expected)
+        try:
+            os.link(target.name, destination)
+        except FileExistsError:
+            verify_sha256(destination, expected)
 
 
 def main():
