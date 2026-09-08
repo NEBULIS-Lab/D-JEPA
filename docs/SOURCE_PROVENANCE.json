@@ -1,0 +1,86 @@
+[
+  {
+    "module": "relational.py",
+    "source_file": "5.2.JEPA/code/dcv/dtail_v2_refine.py",
+    "source_sha256": "c1339ea569efd1547a024c06f0782a51b5fd3094dd7ca19dd1c4c2fd13b538cd",
+    "export_sha256": "2e8c20fd74ed53b5e4280991ec9b733677807ca503c23c8d54177c83982b0985",
+    "transformation": "dependency-isolated extraction and scientific identifier rename"
+  },
+  {
+    "module": "ordinal.py",
+    "source_file": "5.2.DA-JEPA-EXPANSION/src/dajepa_expansion/pushobj/relational.py",
+    "source_sha256": "4db0e1740c89fdcbaea98cd07abd1f5d0fbdee85abb42d3791524dc6a6a8bc86",
+    "export_sha256": "0308d1225992b2a81c7e3053debc1f49741e64311a1900229702bce7a9d342bc",
+    "transformation": "dependency-isolated extraction and scientific identifier rename"
+  },
+  {
+    "module": "multi_geometry.py",
+    "source_file": "5.2.DTAIL-BACKBONE-STUDY/code/dtail_study/multi_geometry.py",
+    "source_sha256": "e3a50a62fd36b4552ae19623691b044442af36bbb1c3925d410c027884d76ac2",
+    "export_sha256": "e3a50a62fd36b4552ae19623691b044442af36bbb1c3925d410c027884d76ac2",
+    "transformation": "dependency-isolated extraction and scientific identifier rename"
+  },
+  {
+    "module": "temporal_transport.py",
+    "source_file": "5.2.DTAIL-WM-reacher/code/dtail_wm/reacher_future_transport.py",
+    "source_sha256": "fc4eb60c0cb0d1624dcdd168741707551da56094b8e3f1b3f0071692691d06d6",
+    "export_sha256": "fc4eb60c0cb0d1624dcdd168741707551da56094b8e3f1b3f0071692691d06d6",
+    "transformation": "dependency-isolated extraction and scientific identifier rename"
+  },
+  {
+    "module": "transport_objective.py",
+    "source_file": "5.2.DTAIL-WM-reacher/code/dtail_wm/reacher_training_objective.py",
+    "source_sha256": "39635a739855c62079aee7b17a023830fd9183a558bc93b24bcd93128bcad34e",
+    "export_sha256": "a7bb857ec94f89d3b1a5c72684f1333744ef116a673a51db9e8ba09173264e74",
+    "transformation": "dependency-isolated extraction and scientific identifier rename"
+  },
+  {
+    "module": "plasticity.py",
+    "source_file": "5.2.JEPA/code/dcv/dtail_v2_plastic.py",
+    "source_sha256": "09f0140772ea98962fcc78a2383d2d8d309b3e55bcea71f3c1ff28af15b460a9",
+    "export_sha256": "6bbcdd4f0b01c57bb83fd48d0c052c6814fcdcde3978ff0abf7d79a858396855",
+    "transformation": "dependency-isolated extraction and scientific identifier rename"
+  },
+  {
+    "module": "granular.py",
+    "source_file": "5.2.JEPA/code/dcv/granular_r_mg.py",
+    "source_sha256": "d267a9cdd5e2d8947f7bcb0d7bf49a0180d643a3a345e6bad3bc41b40df7ec81",
+    "export_sha256": "6536b69c54efec1259af01ee7afd5203837fddc8bd5663f1ba741874df970dde",
+    "transformation": "dependency-isolated extraction and scientific identifier rename"
+  },
+  {
+    "module": "predictor_boundary.py",
+    "source_file": "5.2.JEPA/code/dcv/dtail_jepa.py",
+    "source_sha256": "8bf8a807738be2b99018f7ad3a264401b8d1463c9082173930f7f6ce26fdda89",
+    "export_sha256": "53b80203807e678dda54cbd24f5cefdfe4cd5aa98bc78ce9ddaa8ff261d7d908",
+    "transformation": "dependency-isolated extraction and scientific identifier rename"
+  },
+  {
+    "module": "exact_realization.py",
+    "source_file": "5.2.DTAIL-WM/code/dtail_wm/unified_r_model.py",
+    "source_sha256": "6efad8811121cbd5c218daad6e319dd967de1d989fb6bc23fbe4bb2f78f3f1c3",
+    "export_sha256": "e5b085a7d8423dc147ce06b903ed22cfd6c070c2794c4cd3d33dd1ca3a7f0a5b",
+    "transformation": "dependency-isolated extraction and scientific identifier rename"
+  },
+  {
+    "module": "native_scoring.py",
+    "source_file": "5.2.DTAIL-WM/code/dtail_wm/native_scoring.py",
+    "source_sha256": "be4ca10748c41fea1edd92ba1b766843200a4136ac87d0f44ee2d7a830a3deb9",
+    "export_sha256": "3f58b1c0272f9d9ea558ada1c1864b09c5cc585a4c5d129b2ea08d72b31ecd12",
+    "transformation": "dependency-isolated extraction and scientific identifier rename"
+  },
+  {
+    "module": "reacher_contract.py",
+    "source_file": "5.2.DTAIL-WM-reacher/code/dtail_wm/reacher_contract.py",
+    "source_sha256": "0f6f0b89ed70245f93c6e3f4f9bcb1e193c462f12f17411b88a11f8921f12529",
+    "export_sha256": "0f6f0b89ed70245f93c6e3f4f9bcb1e193c462f12f17411b88a11f8921f12529",
+    "transformation": "dependency-isolated extraction and scientific identifier rename"
+  },
+  {
+    "module": "reacher_world_model.py",
+    "source_file": "5.2.DTAIL-WM-reacher/code/dtail_wm/unified_r_reacher_model.py",
+    "source_sha256": "d3694b540876bbf4f697eec0063542c167e6cff120f9d9edfc72b462a0efa6f1",
+    "export_sha256": "4ebb0ce5ca8cc9c4fb1a2b4da616a6f3e7f46a4aca11cec7d09e089cffc2a30d",
+    "transformation": "dependency-isolated extraction and scientific identifier rename"
+  }
+]

@@ -1,0 +1,3439 @@
+{
+  "bootstrap": {
+    "confidence_level": 0.95,
+    "draws": 10000,
+    "seed": 3072,
+    "unit": "paired_start"
+  },
+  "count": 64,
+  "gallery_candidates": {
+    "da_jepa_mg_vs_da_jepa_r": [
+      "granular-formal-t00846-o00",
+      "granular-formal-t00318-o05",
+      "granular-formal-t00441-o05",
+      "granular-formal-t00894-o00",
+      "granular-formal-t00395-o10",
+      "granular-formal-t00638-o05",
+      "granular-formal-t00559-o05",
+      "granular-formal-t00712-o05",
+      "granular-formal-t00877-o05",
+      "granular-formal-t00554-o00"
+    ],
+    "da_jepa_mg_vs_frozen_dino_wm": [
+      "granular-formal-t00318-o05",
+      "granular-formal-t00441-o05",
+      "granular-formal-t00894-o00",
+      "granular-formal-t00395-o10",
+      "granular-formal-t00638-o05",
+      "granular-formal-t00877-o05",
+      "granular-formal-t00554-o00",
+      "granular-formal-t00146-o00"
+    ],
+    "da_jepa_r_vs_frozen_dino_wm": [
+      "granular-formal-t00007-o10",
+      "granular-formal-t00400-o10",
+      "granular-formal-t00617-o05",
+      "granular-formal-t00621-o10",
+      "granular-formal-t00481-o10",
+      "granular-formal-t00146-o00"
+    ],
+    "unified_da_jepa_r_vs_da_jepa_mg": [
+      "granular-formal-t00566-o05",
+      "granular-formal-t00007-o10",
+      "granular-formal-t00662-o05",
+      "granular-formal-t00115-o10",
+      "granular-formal-t00014-o00",
+      "granular-formal-t00710-o05",
+      "granular-formal-t00097-o00",
+      "granular-formal-t00400-o10",
+      "granular-formal-t00969-o10",
+      "granular-formal-t00556-o00",
+      "granular-formal-t00736-o00",
+      "granular-formal-t00617-o05",
+      "granular-formal-t00621-o10",
+      "granular-formal-t00080-o05",
+      "granular-formal-t00481-o10",
+      "granular-formal-t00002-o05",
+      "granular-formal-t00465-o00"
+    ],
+    "unified_da_jepa_r_vs_da_jepa_r": [],
+    "unified_da_jepa_r_vs_frozen_dino_wm": [
+      "granular-formal-t00007-o10",
+      "granular-formal-t00400-o10",
+      "granular-formal-t00617-o05",
+      "granular-formal-t00621-o10",
+      "granular-formal-t00481-o10",
+      "granular-formal-t00146-o00"
+    ]
+  },
+  "media_rows": [
+    {
+      "goal_id": "granular-formal-goal-t00846-o05",
+      "methods": {
+        "da_jepa_mg": {
+          "final_chamfer": 0.16961824894422467,
+          "main_success": true,
+          "selected_action_sha256": "ebdc4495c8cc68f834d2146cc191a9eb36cf5db49e6a8e18dbcbd192c9c0514a",
+          "selected_candidate_id": 56,
+          "strict_success": false,
+          "success": true
+        },
+        "da_jepa_r": {
+          "final_chamfer": 1.0242185913198136,
+          "main_success": false,
+          "selected_action_sha256": "0bc941db19d228dd3da0ac2c9146aff3dd3b2691d08e5b9b4c614d0676150008",
+          "selected_candidate_id": 30,
+          "strict_success": false,
+          "success": false
+        },
+        "frozen_dino_wm": {
+          "final_chamfer": 0.16961824894422467,
+          "main_success": true,
+          "selected_action_sha256": "ebdc4495c8cc68f834d2146cc191a9eb36cf5db49e6a8e18dbcbd192c9c0514a",
+          "selected_candidate_id": 56,
+          "strict_success": false,
+          "success": true
+        },
+        "unified_da_jepa_r": {
+          "final_chamfer": 1.0242185913198136,
+          "main_success": false,
+          "selected_action_sha256": "0bc941db19d228dd3da0ac2c9146aff3dd3b2691d08e5b9b4c614d0676150008",
+          "selected_candidate_id": 30,
+          "strict_success": false,
+          "success": false
+        }
+      },
+      "start_id": "granular-formal-t00846-o00"
+    },
+    {
+      "goal_id": "granular-formal-goal-t00566-o10",
+      "methods": {
+        "da_jepa_mg": {
+          "final_chamfer": 1.012865736909033,
+          "main_success": false,
+          "selected_action_sha256": "5e33a175ff4d565af7563d3b10f96aa170795b53b7df44e1d4c8796a20df0c0c",
+          "selected_candidate_id": 31,
+          "strict_success": false,
+          "success": false
+        },
+        "da_jepa_r": {
+          "final_chamfer": 0.09365790678728882,
+          "main_success": true,
+          "selected_action_sha256": "18909928506641fd68ffb421dcbf94ff39423d2929ccb2d2049f031159f36067",
+          "selected_candidate_id": 51,
+          "strict_success": true,
+          "success": true
+        },
+        "frozen_dino_wm": {
+          "final_chamfer": 0.09365790678728882,
+          "main_success": true,
+          "selected_action_sha256": "18909928506641fd68ffb421dcbf94ff39423d2929ccb2d2049f031159f36067",
+          "selected_candidate_id": 51,
+          "strict_success": true,
+          "success": true
+        },
+        "unified_da_jepa_r": {
+          "final_chamfer": 0.09365790678728882,
+          "main_success": true,
+          "selected_action_sha256": "18909928506641fd68ffb421dcbf94ff39423d2929ccb2d2049f031159f36067",
+          "selected_candidate_id": 51,
+          "strict_success": true,
+          "success": true
+        }
+      },
+      "start_id": "granular-formal-t00566-o05"
+    },
+    {
+      "goal_id": "granular-formal-goal-t00007-o15",
+      "methods": {
+        "da_jepa_mg": {
+          "final_chamfer": 0.433797921724285,
+          "main_success": false,
+          "selected_action_sha256": "5e3c6c3563e597b74b13c9fa8f7903f29dfb92c84cead17386501b6df0f9bfb3",
+          "selected_candidate_id": 36,
+          "strict_success": false,
+          "success": false
+        },
+        "da_jepa_r": {
+          "final_chamfer": 0.12186212083245179,
+          "main_success": true,
+          "selected_action_sha256": "b3f29eb879f131cef06246a3cba85b775bd0b78fddbddedc8fb4d19823f137a2",
+          "selected_candidate_id": 55,
+          "strict_success": false,
+          "success": true
+        },
+        "frozen_dino_wm": {
+          "final_chamfer": 0.2630233757375362,
+          "main_success": false,
+          "selected_action_sha256": "b1a8a6be3b9efd0cf3d173fa24af630eb76901e59a145f1b35f3a19e56e54848",
+          "selected_candidate_id": 15,
+          "strict_success": false,
+          "success": false
+        },
+        "unified_da_jepa_r": {
+          "final_chamfer": 0.12186212083245179,
+          "main_success": true,
+          "selected_action_sha256": "b3f29eb879f131cef06246a3cba85b775bd0b78fddbddedc8fb4d19823f137a2",
+          "selected_candidate_id": 55,
+          "strict_success": false,
+          "success": true
+        }
+      },
+      "start_id": "granular-formal-t00007-o10"
+    },
+    {
+      "goal_id": "granular-formal-goal-t00240-o05",
+      "methods": {
+        "da_jepa_mg": {
+          "final_chamfer": 1.0314855221584338,
+          "main_success": false,
+          "selected_action_sha256": "44b28d16744c87ce9b8ae09cce21d5905da73bcea877f0ff38c74faa362d0a30",
+          "selected_candidate_id": 32,
+          "strict_success": false,
+          "success": false
+        },
+        "da_jepa_r": {
+          "final_chamfer": 0.5843038824311976,
+          "main_success": false,
+          "selected_action_sha256": "59d69ad87b15def4b340c8e157d3b24604429fed14f40c7f51a3badfe8ea40e8",
+          "selected_candidate_id": 27,
+          "strict_success": false,
+          "success": false
+        },
+        "frozen_dino_wm": {
+          "final_chamfer": 0.5843038824311976,
+          "main_success": false,
+          "selected_action_sha256": "59d69ad87b15def4b340c8e157d3b24604429fed14f40c7f51a3badfe8ea40e8",
+          "selected_candidate_id": 27,
+          "strict_success": false,
+          "success": false
+        },
+        "unified_da_jepa_r": {
+          "final_chamfer": 0.5843038824311976,
+          "main_success": false,
+          "selected_action_sha256": "59d69ad87b15def4b340c8e157d3b24604429fed14f40c7f51a3badfe8ea40e8",
+          "selected_candidate_id": 27,
+          "strict_success": false,
+          "success": false
+        }
+      },
+      "start_id": "granular-formal-t00240-o00"
+    },
+    {
+      "goal_id": "granular-formal-goal-t00770-o10",
+      "methods": {
+        "da_jepa_mg": {
+          "final_chamfer": 0.4237526124035753,
+          "main_success": false,
+          "selected_action_sha256": "5b6210492f525edde8121aaf52aa02854abaf9201da1e0b0203460bb65446bfc",
+          "selected_candidate_id": 62,
+          "strict_success": false,
+          "success": false
+        },
+        "da_jepa_r": {
+          "final_chamfer": 0.4124072886104449,
+          "main_success": false,
+          "selected_action_sha256": "74a6e46a7d67a9916e9227be78174c28d6d3b29f1361d717dafaff3c8509528b",
+          "selected_candidate_id": 61,
+          "strict_success": false,
+          "success": false
+        },
+        "frozen_dino_wm": {
+          "final_chamfer": 0.4124072886104449,
+          "main_success": false,
+          "selected_action_sha256": "74a6e46a7d67a9916e9227be78174c28d6d3b29f1361d717dafaff3c8509528b",
+          "selected_candidate_id": 61,
+          "strict_success": false,
+          "success": false
+        },
+        "unified_da_jepa_r": {
+          "final_chamfer": 0.4124072886104449,
+          "main_success": false,
+          "selected_action_sha256": "74a6e46a7d67a9916e9227be78174c28d6d3b29f1361d717dafaff3c8509528b",
+          "selected_candidate_id": 61,
+          "strict_success": false,
+          "success": false
+        }
+      },
+      "start_id": "granular-formal-t00770-o05"
+    },
+    {
+      "goal_id": "granular-formal-goal-t00806-o15",
+      "methods": {
+        "da_jepa_mg": {
+          "final_chamfer": 0.3132294227322605,
+          "main_success": false,
+          "selected_action_sha256": "a577cf7dedc38832131f01dc9ef55e6ba8f7ff3b1fa15e1ef4e67ccda1225909",
+          "selected_candidate_id": 36,
+          "strict_success": false,
+          "success": false
+        },
+        "da_jepa_r": {
+          "final_chamfer": 0.3132294227322605,
+          "main_success": false,
+          "selected_action_sha256": "a577cf7dedc38832131f01dc9ef55e6ba8f7ff3b1fa15e1ef4e67ccda1225909",
+          "selected_candidate_id": 36,
+          "strict_success": false,
+          "success": false
+        },
+        "frozen_dino_wm": {
+          "final_chamfer": 0.3132294227322605,
+          "main_success": false,
+          "selected_action_sha256": "a577cf7dedc38832131f01dc9ef55e6ba8f7ff3b1fa15e1ef4e67ccda1225909",
+          "selected_candidate_id": 36,
+          "strict_success": false,
+          "success": false
+        },
+        "unified_da_jepa_r": {
+          "final_chamfer": 0.3132294227322605,
+          "main_success": false,
+          "selected_action_sha256": "a577cf7dedc38832131f01dc9ef55e6ba8f7ff3b1fa15e1ef4e67ccda1225909",
+          "selected_candidate_id": 36,
+          "strict_success": false,
+          "success": false
+        }
+      },
+      "start_id": "granular-formal-t00806-o10"
+    },
+    {
+      "goal_id": "granular-formal-goal-t00898-o05",
+      "methods": {
+        "da_jepa_mg": {
+          "final_chamfer": 0.3550602541778574,
+          "main_success": false,
+          "selected_action_sha256": "40a0af537d13479034cb2db5da4e4bcbe5b5ed7c29d07a8d2ede3e875ad1149c",
+          "selected_candidate_id": 16,
+          "strict_success": false,
+          "success": false
+        },
+        "da_jepa_r": {
+          "final_chamfer": 0.5484104353375362,
+          "main_success": false,
+          "selected_action_sha256": "b331aeadafac20f34a39c4c272d4f519417f9de91dc0c50d0cdf3c305e3e6e31",
+          "selected_candidate_id": 18,
+          "strict_success": false,
+          "success": false
+        },
+        "frozen_dino_wm": {
+          "final_chamfer": 0.5484104353375362,
+          "main_success": false,
+          "selected_action_sha256": "b331aeadafac20f34a39c4c272d4f519417f9de91dc0c50d0cdf3c305e3e6e31",
+          "selected_candidate_id": 18,
+          "strict_success": false,
+          "success": false
+        },
+        "unified_da_jepa_r": {
+          "final_chamfer": 0.5484104353375362,
+          "main_success": false,
+          "selected_action_sha256": "b331aeadafac20f34a39c4c272d4f519417f9de91dc0c50d0cdf3c305e3e6e31",
+          "selected_candidate_id": 18,
+          "strict_success": false,
+          "success": false
+        }
+      },
+      "start_id": "granular-formal-t00898-o00"
+    },
+    {
+      "goal_id": "granular-formal-goal-t00318-o10",
+      "methods": {
+        "da_jepa_mg": {
+          "final_chamfer": 0.15394940971260446,
+          "main_success": true,
+          "selected_action_sha256": "6deab01b9c300571166513e16ad3a09b0a7e50a484ce592c63e6731a7e2a226b",
+          "selected_candidate_id": 53,
+          "strict_success": false,
+          "success": true
+        },
+        "da_jepa_r": {
+          "final_chamfer": 0.3873345909485868,
+          "main_success": false,
+          "selected_action_sha256": "40fe4d9fe61b23b73f113deec5a36cd5f866b79def191e2c5877dd3f7ead28b1",
+          "selected_candidate_id": 9,
+          "strict_success": false,
+          "success": false
+        },
+        "frozen_dino_wm": {
+          "final_chamfer": 0.3873345909485868,
+          "main_success": false,
+          "selected_action_sha256": "40fe4d9fe61b23b73f113deec5a36cd5f866b79def191e2c5877dd3f7ead28b1",
+          "selected_candidate_id": 9,
+          "strict_success": false,
+          "success": false
+        },
+        "unified_da_jepa_r": {
+          "final_chamfer": 0.3873345909485868,
+          "main_success": false,
+          "selected_action_sha256": "40fe4d9fe61b23b73f113deec5a36cd5f866b79def191e2c5877dd3f7ead28b1",
+          "selected_candidate_id": 9,
+          "strict_success": false,
+          "success": false
+        }
+      },
+      "start_id": "granular-formal-t00318-o05"
+    },
+    {
+      "goal_id": "granular-formal-goal-t00254-o15",
+      "methods": {
+        "da_jepa_mg": {
+          "final_chamfer": 0.37906108223925283,
+          "main_success": false,
+          "selected_action_sha256": "12b0f55ea8b13c6dd0165168c47d7f9cf5c453155a5780318773dc305ed56549",
+          "selected_candidate_id": 9,
+          "strict_success": false,
+          "success": false
+        },
+        "da_jepa_r": {
+          "final_chamfer": 0.3065023145864638,
+          "main_success": false,
+          "selected_action_sha256": "a3ad4916f3efa3550b3f4e5f46bc803bfb31ea94384dba4449ea3e5fc07b6e56",
+          "selected_candidate_id": 16,
+          "strict_success": false,
+          "success": false
+        },
+        "frozen_dino_wm": {
+          "final_chamfer": 0.3065023145864638,
+          "main_success": false,
+          "selected_action_sha256": "a3ad4916f3efa3550b3f4e5f46bc803bfb31ea94384dba4449ea3e5fc07b6e56",
+          "selected_candidate_id": 16,
+          "strict_success": false,
+          "success": false
+        },
+        "unified_da_jepa_r": {
+          "final_chamfer": 0.3065023145864638,
+          "main_success": false,
+          "selected_action_sha256": "a3ad4916f3efa3550b3f4e5f46bc803bfb31ea94384dba4449ea3e5fc07b6e56",
+          "selected_candidate_id": 16,
+          "strict_success": false,
+          "success": false
+        }
+      },
+      "start_id": "granular-formal-t00254-o10"
+    },
+    {
+      "goal_id": "granular-formal-goal-t00219-o05",
+      "methods": {
+        "da_jepa_mg": {
+          "final_chamfer": 0.615207748608162,
+          "main_success": false,
+          "selected_action_sha256": "7302c5938ba82095e0f3c049db8f0b089987034c05c5c867bc6ba87b761eb76f",
+          "selected_candidate_id": 7,
+          "strict_success": false,
+          "success": false
+        },
+        "da_jepa_r": {
+          "final_chamfer": 0.2633306316630183,
+          "main_success": false,
+          "selected_action_sha256": "6a328ffe13bae4192ffc8184c30ffe2e6c7ead7b27da5d1487c76f9f759fd931",
+          "selected_candidate_id": 59,
+          "strict_success": false,
+          "success": false
+        },
+        "frozen_dino_wm": {
+          "final_chamfer": 0.23361987544486418,
+          "main_success": false,
+          "selected_action_sha256": "a9f0ff6afeb01ffba1bed0eb85fceb646703e07d6b6a3f11e33103f739d318b2",
+          "selected_candidate_id": 52,
+          "strict_success": false,
+          "success": false
+        },
+        "unified_da_jepa_r": {
+          "final_chamfer": 0.2633306316630183,
+          "main_success": false,
+          "selected_action_sha256": "6a328ffe13bae4192ffc8184c30ffe2e6c7ead7b27da5d1487c76f9f759fd931",
+          "selected_candidate_id": 59,
+          "strict_success": false,
+          "success": false
+        }
+      },
+      "start_id": "granular-formal-t00219-o00"
+    },
+    {
+      "goal_id": "granular-formal-goal-t00441-o10",
+      "methods": {
+        "da_jepa_mg": {
+          "final_chamfer": 0.15853964647915136,
+          "main_success": true,
+          "selected_action_sha256": "6e0d5529000d5f4321ee4e7ab5123a26770aab99fa2c252ee1b893111c37c8db",
+          "selected_candidate_id": 54,
+          "strict_success": false,
+          "success": true
+        },
+        "da_jepa_r": {
+          "final_chamfer": 0.771390181438254,
+          "main_success": false,
+          "selected_action_sha256": "987fd79c105bd23c3018b135d2b31d13b391888ec2bc29992d6e3dcbeab29dce",
+          "selected_candidate_id": 5,
+          "strict_success": false,
+          "success": false
+        },
+        "frozen_dino_wm": {
+          "final_chamfer": 0.6422137173994231,
+          "main_success": false,
+          "selected_action_sha256": "c1d92799ac96bf9fd00d405128d302015d7dd9f35f27b7fd73f1c92ea01cb32a",
+          "selected_candidate_id": 21,
+          "strict_success": false,
+          "success": false
+        },
+        "unified_da_jepa_r": {
+          "final_chamfer": 0.771390181438254,
+          "main_success": false,
+          "selected_action_sha256": "987fd79c105bd23c3018b135d2b31d13b391888ec2bc29992d6e3dcbeab29dce",
+          "selected_candidate_id": 5,
+          "strict_success": false,
+          "success": false
+        }
+      },
+      "start_id": "granular-formal-t00441-o05"
+    },
+    {
+      "goal_id": "granular-formal-goal-t00232-o15",
+      "methods": {
+        "da_jepa_mg": {
+          "final_chamfer": 0.25188276257075504,
+          "main_success": false,
+          "selected_action_sha256": "fe4553445cfa493f9037266dad1361092cff0a4a535e8d17129a2ce0981751cf",
+          "selected_candidate_id": 43,
+          "strict_success": false,
+          "success": false
+        },
+        "da_jepa_r": {
+          "final_chamfer": 0.25188276257075504,
+          "main_success": false,
+          "selected_action_sha256": "fe4553445cfa493f9037266dad1361092cff0a4a535e8d17129a2ce0981751cf",
+          "selected_candidate_id": 43,
+          "strict_success": false,
+          "success": false
+        },
+        "frozen_dino_wm": {
+          "final_chamfer": 0.25188276257075504,
+          "main_success": false,
+          "selected_action_sha256": "fe4553445cfa493f9037266dad1361092cff0a4a535e8d17129a2ce0981751cf",
+          "selected_candidate_id": 43,
+          "strict_success": false,
+          "success": false
+        },
+        "unified_da_jepa_r": {
+          "final_chamfer": 0.25188276257075504,
+          "main_success": false,
+          "selected_action_sha256": "fe4553445cfa493f9037266dad1361092cff0a4a535e8d17129a2ce0981751cf",
+          "selected_candidate_id": 43,
+          "strict_success": false,
+          "success": false
+        }
+      },
+      "start_id": "granular-formal-t00232-o10"
+    },
+    {
+      "goal_id": "granular-formal-goal-t00894-o05",
+      "methods": {
+        "da_jepa_mg": {
+          "final_chamfer": 0.1721823399047009,
+          "main_success": true,
+          "selected_action_sha256": "a67106dfcb0f6e8e9bf34f81b730daf9c9996d6264d200789b82a614f423d822",
+          "selected_candidate_id": 53,
+          "strict_success": false,
+          "success": true
+        },
+        "da_jepa_r": {
+          "final_chamfer": 0.7289965107250219,
+          "main_success": false,
+          "selected_action_sha256": "9404db7b8416a912569417b7ab1b64abd085e8afa4c3c00e07541865c1960fcb",
+          "selected_candidate_id": 11,
+          "strict_success": false,
+          "success": false
+        },
+        "frozen_dino_wm": {
+          "final_chamfer": 0.6155011925566356,
+          "main_success": false,
+          "selected_action_sha256": "e68eb0ba705109fe988e4072b26d04a59f97d7809ffc586c167c24d655c16cf8",
+          "selected_candidate_id": 61,
+          "strict_success": false,
+          "success": false
+        },
+        "unified_da_jepa_r": {
+          "final_chamfer": 0.7289965107250219,
+          "main_success": false,
+          "selected_action_sha256": "9404db7b8416a912569417b7ab1b64abd085e8afa4c3c00e07541865c1960fcb",
+          "selected_candidate_id": 11,
+          "strict_success": false,
+          "success": false
+        }
+      },
+      "start_id": "granular-formal-t00894-o00"
+    },
+    {
+      "goal_id": "granular-formal-goal-t00662-o10",
+      "methods": {
+        "da_jepa_mg": {
+          "final_chamfer": 0.6591846766283588,
+          "main_success": false,
+          "selected_action_sha256": "c35a5cd229f1882e14063b078a1bd21eeaf18e5f21d608c2820db7964c696b41",
+          "selected_candidate_id": 19,
+          "strict_success": false,
+          "success": false
+        },
+        "da_jepa_r": {
+          "final_chamfer": 0.09445281526219247,
+          "main_success": true,
+          "selected_action_sha256": "2b9f6ffc64068ee8abd858a7727675b5d73f36376bec50161313ee634602ecc2",
+          "selected_candidate_id": 44,
+          "strict_success": true,
+          "success": true
+        },
+        "frozen_dino_wm": {
+          "final_chamfer": 0.09445281526219247,
+          "main_success": true,
+          "selected_action_sha256": "2b9f6ffc64068ee8abd858a7727675b5d73f36376bec50161313ee634602ecc2",
+          "selected_candidate_id": 44,
+          "strict_success": true,
+          "success": true
+        },
+        "unified_da_jepa_r": {
+          "final_chamfer": 0.09445281526219247,
+          "main_success": true,
+          "selected_action_sha256": "2b9f6ffc64068ee8abd858a7727675b5d73f36376bec50161313ee634602ecc2",
+          "selected_candidate_id": 44,
+          "strict_success": true,
+          "success": true
+        }
+      },
+      "start_id": "granular-formal-t00662-o05"
+    },
+    {
+      "goal_id": "granular-formal-goal-t00115-o15",
+      "methods": {
+        "da_jepa_mg": {
+          "final_chamfer": 0.4251050967986687,
+          "main_success": false,
+          "selected_action_sha256": "4d1a7f67b8cbe10805cbc94d6f39dade5b36b3fc44cec4df30cc83eef7ae0e23",
+          "selected_candidate_id": 18,
+          "strict_success": false,
+          "success": false
+        },
+        "da_jepa_r": {
+          "final_chamfer": 0.17811200262761923,
+          "main_success": true,
+          "selected_action_sha256": "a27f61cd4bea4f7f1036b2f90ffdfa68c65d9cd558321602186a3e2b97320a79",
+          "selected_candidate_id": 59,
+          "strict_success": false,
+          "success": true
+        },
+        "frozen_dino_wm": {
+          "final_chamfer": 0.17811200262761923,
+          "main_success": true,
+          "selected_action_sha256": "a27f61cd4bea4f7f1036b2f90ffdfa68c65d9cd558321602186a3e2b97320a79",
+          "selected_candidate_id": 59,
+          "strict_success": false,
+          "success": true
+        },
+        "unified_da_jepa_r": {
+          "final_chamfer": 0.17811200262761923,
+          "main_success": true,
+          "selected_action_sha256": "a27f61cd4bea4f7f1036b2f90ffdfa68c65d9cd558321602186a3e2b97320a79",
+          "selected_candidate_id": 59,
+          "strict_success": false,
+          "success": true
+        }
+      },
+      "start_id": "granular-formal-t00115-o10"
+    },
+    {
+      "goal_id": "granular-formal-goal-t00014-o05",
+      "methods": {
+        "da_jepa_mg": {
+          "final_chamfer": 0.49602502527166925,
+          "main_success": false,
+          "selected_action_sha256": "745f34da0214227263625f00399e288287ac1d9ff13aa0405672b8310ce4aa49",
+          "selected_candidate_id": 3,
+          "strict_success": false,
+          "success": false
+        },
+        "da_jepa_r": {
+          "final_chamfer": 0.123149066893192,
+          "main_success": true,
+          "selected_action_sha256": "2ac80f341fd7041b6371cf4440f3b073144bb0d0718a5b5ea08386b2374bb064",
+          "selected_candidate_id": 48,
+          "strict_success": false,
+          "success": true
+        },
+        "frozen_dino_wm": {
+          "final_chamfer": 0.123149066893192,
+          "main_success": true,
+          "selected_action_sha256": "2ac80f341fd7041b6371cf4440f3b073144bb0d0718a5b5ea08386b2374bb064",
+          "selected_candidate_id": 48,
+          "strict_success": false,
+          "success": true
+        },
+        "unified_da_jepa_r": {
+          "final_chamfer": 0.123149066893192,
+          "main_success": true,
+          "selected_action_sha256": "2ac80f341fd7041b6371cf4440f3b073144bb0d0718a5b5ea08386b2374bb064",
+          "selected_candidate_id": 48,
+          "strict_success": false,
+          "success": true
+        }
+      },
+      "start_id": "granular-formal-t00014-o00"
+    },
+    {
+      "goal_id": "granular-formal-goal-t00277-o10",
+      "methods": {
+        "da_jepa_mg": {
+          "final_chamfer": 0.27593584893473616,
+          "main_success": false,
+          "selected_action_sha256": "d1837594c1d7a49c4b49fa25716a87184eed5d539d9fe09bbe03958bdda5a972",
+          "selected_candidate_id": 43,
+          "strict_success": false,
+          "success": false
+        },
+        "da_jepa_r": {
+          "final_chamfer": 0.27593584893473616,
+          "main_success": false,
+          "selected_action_sha256": "d1837594c1d7a49c4b49fa25716a87184eed5d539d9fe09bbe03958bdda5a972",
+          "selected_candidate_id": 43,
+          "strict_success": false,
+          "success": false
+        },
+        "frozen_dino_wm": {
+          "final_chamfer": 0.20513493185163917,
+          "main_success": false,
+          "selected_action_sha256": "1d5cd6c36f00f55839d61bc5f09efdd7ecf5ebd8a476f8a5af5d12742ac084f1",
+          "selected_candidate_id": 39,
+          "strict_success": false,
+          "success": false
+        },
+        "unified_da_jepa_r": {
+          "final_chamfer": 0.27593584893473616,
+          "main_success": false,
+          "selected_action_sha256": "d1837594c1d7a49c4b49fa25716a87184eed5d539d9fe09bbe03958bdda5a972",
+          "selected_candidate_id": 43,
+          "strict_success": false,
+          "success": false
+        }
+      },
+      "start_id": "granular-formal-t00277-o05"
+    },
+    {
+      "goal_id": "granular-formal-goal-t00284-o15",
+      "methods": {
+        "da_jepa_mg": {
+          "final_chamfer": 0.0934909076095427,
+          "main_success": true,
+          "selected_action_sha256": "1247ef3e9c2d86a85fd66f79ddae98611284a67d97151c2d2aa19a4b990cf8cc",
+          "selected_candidate_id": 47,
+          "strict_success": true,
+          "success": true
+        },
+        "da_jepa_r": {
+          "final_chamfer": 0.12492118264080998,
+          "main_success": true,
+          "selected_action_sha256": "4d0bc5543de19d1da6d58cb30f8ec73a60046cb19107ce38076c688f47e0a320",
+          "selected_candidate_id": 53,
+          "strict_success": false,
+          "success": true
+        },
+        "frozen_dino_wm": {
+          "final_chamfer": 0.12492118264080998,
+          "main_success": true,
+          "selected_action_sha256": "4d0bc5543de19d1da6d58cb30f8ec73a60046cb19107ce38076c688f47e0a320",
+          "selected_candidate_id": 53,
+          "strict_success": false,
+          "success": true
+        },
+        "unified_da_jepa_r": {
+          "final_chamfer": 0.12492118264080998,
+          "main_success": true,
+          "selected_action_sha256": "4d0bc5543de19d1da6d58cb30f8ec73a60046cb19107ce38076c688f47e0a320",
+          "selected_candidate_id": 53,
+          "strict_success": false,
+          "success": true
+        }
+      },
+      "start_id": "granular-formal-t00284-o10"
+    },
+    {
+      "goal_id": "granular-formal-goal-t00539-o05",
+      "methods": {
+        "da_jepa_mg": {
+          "final_chamfer": 0.8483634324254499,
+          "main_success": false,
+          "selected_action_sha256": "6b8cdc1567bd2406ca3fc8946ac7e2fc287d22ee79358a9f44c5526d693c1050",
+          "selected_candidate_id": 7,
+          "strict_success": false,
+          "success": false
+        },
+        "da_jepa_r": {
+          "final_chamfer": 0.8483634324254499,
+          "main_success": false,
+          "selected_action_sha256": "6b8cdc1567bd2406ca3fc8946ac7e2fc287d22ee79358a9f44c5526d693c1050",
+          "selected_candidate_id": 7,
+          "strict_success": false,
+          "success": false
+        },
+        "frozen_dino_wm": {
+          "final_chamfer": 0.7832746594892639,
+          "main_success": false,
+          "selected_action_sha256": "d75218dbe20a4891e8542fe9db3cf079c1807fa6747d26bcaa422ef98f86f745",
+          "selected_candidate_id": 19,
+          "strict_success": false,
+          "success": false
+        },
+        "unified_da_jepa_r": {
+          "final_chamfer": 0.8483634324254499,
+          "main_success": false,
+          "selected_action_sha256": "6b8cdc1567bd2406ca3fc8946ac7e2fc287d22ee79358a9f44c5526d693c1050",
+          "selected_candidate_id": 7,
+          "strict_success": false,
+          "success": false
+        }
+      },
+      "start_id": "granular-formal-t00539-o00"
+    },
+    {
+      "goal_id": "granular-formal-goal-t00710-o10",
+      "methods": {
+        "da_jepa_mg": {
+          "final_chamfer": 0.679388228346695,
+          "main_success": false,
+          "selected_action_sha256": "ff8fa80e06d22e6ff1b5975e30d0338004d7f2f7e38677fd82029dfdba7c5e57",
+          "selected_candidate_id": 61,
+          "strict_success": false,
+          "success": false
+        },
+        "da_jepa_r": {
+          "final_chamfer": 0.11548510455673124,
+          "main_success": true,
+          "selected_action_sha256": "60838e8452bf8198ebf0f6e2ca09b4ece2847b136a8bcbb6383beca2d712090d",
+          "selected_candidate_id": 50,
+          "strict_success": true,
+          "success": true
+        },
+        "frozen_dino_wm": {
+          "final_chamfer": 0.1770422629191183,
+          "main_success": true,
+          "selected_action_sha256": "e997a0c1700f467be4ef62649995cde3ebb88749680048c8c10b2716badc7020",
+          "selected_candidate_id": 57,
+          "strict_success": false,
+          "success": true
+        },
+        "unified_da_jepa_r": {
+          "final_chamfer": 0.11548510455673124,
+          "main_success": true,
+          "selected_action_sha256": "60838e8452bf8198ebf0f6e2ca09b4ece2847b136a8bcbb6383beca2d712090d",
+          "selected_candidate_id": 50,
+          "strict_success": true,
+          "success": true
+        }
+      },
+      "start_id": "granular-formal-t00710-o05"
+    },
+    {
+      "goal_id": "granular-formal-goal-t00395-o15",
+      "methods": {
+        "da_jepa_mg": {
+          "final_chamfer": 0.13038003859916908,
+          "main_success": true,
+          "selected_action_sha256": "6dc7344fc0fd24886b44f3dac8f64526b5c08470d495f8765a2a3379d825db7f",
+          "selected_candidate_id": 56,
+          "strict_success": false,
+          "success": true
+        },
+        "da_jepa_r": {
+          "final_chamfer": 0.41400344147449963,
+          "main_success": false,
+          "selected_action_sha256": "d603b52d10fe2a8cfd2d9363e9aca37ccf5de468e2d4fa20e2ce26a8ab74db23",
+          "selected_candidate_id": 23,
+          "strict_success": false,
+          "success": false
+        },
+        "frozen_dino_wm": {
+          "final_chamfer": 0.3333093104546311,
+          "main_success": false,
+          "selected_action_sha256": "80b91bc64c07f597d83dd1e67b30608e4f738e8366603f267b0fa61ad4959d2f",
+          "selected_candidate_id": 2,
+          "strict_success": false,
+          "success": false
+        },
+        "unified_da_jepa_r": {
+          "final_chamfer": 0.41400344147449963,
+          "main_success": false,
+          "selected_action_sha256": "d603b52d10fe2a8cfd2d9363e9aca37ccf5de468e2d4fa20e2ce26a8ab74db23",
+          "selected_candidate_id": 23,
+          "strict_success": false,
+          "success": false
+        }
+      },
+      "start_id": "granular-formal-t00395-o10"
+    },
+    {
+      "goal_id": "granular-formal-goal-t00097-o05",
+      "methods": {
+        "da_jepa_mg": {
+          "final_chamfer": 0.31998034812764,
+          "main_success": false,
+          "selected_action_sha256": "be6ec9fdbe8e0651b8ee76144088186e777dee3283d9959038624b28bef96be3",
+          "selected_candidate_id": 36,
+          "strict_success": false,
+          "success": false
+        },
+        "da_jepa_r": {
+          "final_chamfer": 0.12229956340918689,
+          "main_success": true,
+          "selected_action_sha256": "26e9578aef27d3bbd9ba9bd570d4e0a546fdd0856297ff79d3e81cb7a15259c0",
+          "selected_candidate_id": 50,
+          "strict_success": false,
+          "success": true
+        },
+        "frozen_dino_wm": {
+          "final_chamfer": 0.12229956340918689,
+          "main_success": true,
+          "selected_action_sha256": "26e9578aef27d3bbd9ba9bd570d4e0a546fdd0856297ff79d3e81cb7a15259c0",
+          "selected_candidate_id": 50,
+          "strict_success": false,
+          "success": true
+        },
+        "unified_da_jepa_r": {
+          "final_chamfer": 0.12229956340918689,
+          "main_success": true,
+          "selected_action_sha256": "26e9578aef27d3bbd9ba9bd570d4e0a546fdd0856297ff79d3e81cb7a15259c0",
+          "selected_candidate_id": 50,
+          "strict_success": false,
+          "success": true
+        }
+      },
+      "start_id": "granular-formal-t00097-o00"
+    },
+    {
+      "goal_id": "granular-formal-goal-t00638-o10",
+      "methods": {
+        "da_jepa_mg": {
+          "final_chamfer": 0.16011036572867782,
+          "main_success": true,
+          "selected_action_sha256": "9f1a1c88c6d0cad352e1fdb1def3b61b0c6ac97329d8d388537f8bffc775c8b5",
+          "selected_candidate_id": 53,
+          "strict_success": false,
+          "success": true
+        },
+        "da_jepa_r": {
+          "final_chamfer": 0.357602522890794,
+          "main_success": false,
+          "selected_action_sha256": "8cfd8ab55dc1ed745525f8229a7460798c2db8da7767d7db7701773882d039df",
+          "selected_candidate_id": 61,
+          "strict_success": false,
+          "success": false
+        },
+        "frozen_dino_wm": {
+          "final_chamfer": 0.357602522890794,
+          "main_success": false,
+          "selected_action_sha256": "8cfd8ab55dc1ed745525f8229a7460798c2db8da7767d7db7701773882d039df",
+          "selected_candidate_id": 61,
+          "strict_success": false,
+          "success": false
+        },
+        "unified_da_jepa_r": {
+          "final_chamfer": 0.357602522890794,
+          "main_success": false,
+          "selected_action_sha256": "8cfd8ab55dc1ed745525f8229a7460798c2db8da7767d7db7701773882d039df",
+          "selected_candidate_id": 61,
+          "strict_success": false,
+          "success": false
+        }
+      },
+      "start_id": "granular-formal-t00638-o05"
+    },
+    {
+      "goal_id": "granular-formal-goal-t00335-o15",
+      "methods": {
+        "da_jepa_mg": {
+          "final_chamfer": 0.24229720634171592,
+          "main_success": false,
+          "selected_action_sha256": "19e9f2dbc98bca502bb00faae22e25c9f75423fdbef7460c1b892a839469d85a",
+          "selected_candidate_id": 53,
+          "strict_success": false,
+          "success": false
+        },
+        "da_jepa_r": {
+          "final_chamfer": 0.24229720634171592,
+          "main_success": false,
+          "selected_action_sha256": "19e9f2dbc98bca502bb00faae22e25c9f75423fdbef7460c1b892a839469d85a",
+          "selected_candidate_id": 53,
+          "strict_success": false,
+          "success": false
+        },
+        "frozen_dino_wm": {
+          "final_chamfer": 0.24229720634171592,
+          "main_success": false,
+          "selected_action_sha256": "19e9f2dbc98bca502bb00faae22e25c9f75423fdbef7460c1b892a839469d85a",
+          "selected_candidate_id": 53,
+          "strict_success": false,
+          "success": false
+        },
+        "unified_da_jepa_r": {
+          "final_chamfer": 0.24229720634171592,
+          "main_success": false,
+          "selected_action_sha256": "19e9f2dbc98bca502bb00faae22e25c9f75423fdbef7460c1b892a839469d85a",
+          "selected_candidate_id": 53,
+          "strict_success": false,
+          "success": false
+        }
+      },
+      "start_id": "granular-formal-t00335-o10"
+    },
+    {
+      "goal_id": "granular-formal-goal-t00549-o05",
+      "methods": {
+        "da_jepa_mg": {
+          "final_chamfer": 0.5969702792571284,
+          "main_success": false,
+          "selected_action_sha256": "46d96e5939231316954ac69206cb46298a325787df2860295c85b6c59e935a8b",
+          "selected_candidate_id": 12,
+          "strict_success": false,
+          "success": false
+        },
+        "da_jepa_r": {
+          "final_chamfer": 0.5831985978065687,
+          "main_success": false,
+          "selected_action_sha256": "e3c0e9d6ac5b00675fe6b9bd1a7c89efab922c64569ae582b0ee0b2c7294b31f",
+          "selected_candidate_id": 8,
+          "strict_success": false,
+          "success": false
+        },
+        "frozen_dino_wm": {
+          "final_chamfer": 0.6343388491558192,
+          "main_success": false,
+          "selected_action_sha256": "cc5c152de6d442ef48b91a6a6bf9292360a5344915a72eb804027653a0ed3ac9",
+          "selected_candidate_id": 10,
+          "strict_success": false,
+          "success": false
+        },
+        "unified_da_jepa_r": {
+          "final_chamfer": 0.5831985978065687,
+          "main_success": false,
+          "selected_action_sha256": "e3c0e9d6ac5b00675fe6b9bd1a7c89efab922c64569ae582b0ee0b2c7294b31f",
+          "selected_candidate_id": 8,
+          "strict_success": false,
+          "success": false
+        }
+      },
+      "start_id": "granular-formal-t00549-o00"
+    },
+    {
+      "goal_id": "granular-formal-goal-t00559-o10",
+      "methods": {
+        "da_jepa_mg": {
+          "final_chamfer": 0.10238541340884166,
+          "main_success": true,
+          "selected_action_sha256": "ada668b8e19026f534c8b3afc7bca0d5003d64a9ee573e390bf2b64a69a8fd18",
+          "selected_candidate_id": 51,
+          "strict_success": true,
+          "success": true
+        },
+        "da_jepa_r": {
+          "final_chamfer": 0.5789751335400974,
+          "main_success": false,
+          "selected_action_sha256": "4b6ff29d61987f528cc17e927345108fd5008ea5ef77c79ba794912f84e495f2",
+          "selected_candidate_id": 28,
+          "strict_success": false,
+          "success": false
+        },
+        "frozen_dino_wm": {
+          "final_chamfer": 0.1653566762839475,
+          "main_success": true,
+          "selected_action_sha256": "83e76a42261311dea4760afe6e5dab077b9d08f5caffd55638ab5aead4fcc0ac",
+          "selected_candidate_id": 53,
+          "strict_success": false,
+          "success": true
+        },
+        "unified_da_jepa_r": {
+          "final_chamfer": 0.5789751335400974,
+          "main_success": false,
+          "selected_action_sha256": "4b6ff29d61987f528cc17e927345108fd5008ea5ef77c79ba794912f84e495f2",
+          "selected_candidate_id": 28,
+          "strict_success": false,
+          "success": false
+        }
+      },
+      "start_id": "granular-formal-t00559-o05"
+    },
+    {
+      "goal_id": "granular-formal-goal-t00400-o15",
+      "methods": {
+        "da_jepa_mg": {
+          "final_chamfer": 0.3850493226709144,
+          "main_success": false,
+          "selected_action_sha256": "19d2655a20e6af62cb15376f5f64b378a014475bc9f4ee9bc858f3519d6d2bcd",
+          "selected_candidate_id": 60,
+          "strict_success": false,
+          "success": false
+        },
+        "da_jepa_r": {
+          "final_chamfer": 0.11145669132015051,
+          "main_success": true,
+          "selected_action_sha256": "0890df11751be787ddb1c39a815bc909bbfe9c363f5056229aec85fd34ee79d6",
+          "selected_candidate_id": 45,
+          "strict_success": true,
+          "success": true
+        },
+        "frozen_dino_wm": {
+          "final_chamfer": 0.2916820841721758,
+          "main_success": false,
+          "selected_action_sha256": "259735f40b9aba881f98c021d196a57b59fe3bac552f090de21aaa2f14d2313a",
+          "selected_candidate_id": 40,
+          "strict_success": false,
+          "success": false
+        },
+        "unified_da_jepa_r": {
+          "final_chamfer": 0.11145669132015051,
+          "main_success": true,
+          "selected_action_sha256": "0890df11751be787ddb1c39a815bc909bbfe9c363f5056229aec85fd34ee79d6",
+          "selected_candidate_id": 45,
+          "strict_success": true,
+          "success": true
+        }
+      },
+      "start_id": "granular-formal-t00400-o10"
+    },
+    {
+      "goal_id": "granular-formal-goal-t00809-o05",
+      "methods": {
+        "da_jepa_mg": {
+          "final_chamfer": 0.44426123105899085,
+          "main_success": false,
+          "selected_action_sha256": "a73cecd904fe79a6eed8603f93822cda346197c3675359fb0ac8a657bfd3413a",
+          "selected_candidate_id": 39,
+          "strict_success": false,
+          "success": false
+        },
+        "da_jepa_r": {
+          "final_chamfer": 0.5295195028177982,
+          "main_success": false,
+          "selected_action_sha256": "6699b82211004f7a5933904009f45dde5eae0e70feddfc5481031f5966f6464c",
+          "selected_candidate_id": 62,
+          "strict_success": false,
+          "success": false
+        },
+        "frozen_dino_wm": {
+          "final_chamfer": 0.5295195028177982,
+          "main_success": false,
+          "selected_action_sha256": "6699b82211004f7a5933904009f45dde5eae0e70feddfc5481031f5966f6464c",
+          "selected_candidate_id": 62,
+          "strict_success": false,
+          "success": false
+        },
+        "unified_da_jepa_r": {
+          "final_chamfer": 0.5295195028177982,
+          "main_success": false,
+          "selected_action_sha256": "6699b82211004f7a5933904009f45dde5eae0e70feddfc5481031f5966f6464c",
+          "selected_candidate_id": 62,
+          "strict_success": false,
+          "success": false
+        }
+      },
+      "start_id": "granular-formal-t00809-o00"
+    },
+    {
+      "goal_id": "granular-formal-goal-t00712-o10",
+      "methods": {
+        "da_jepa_mg": {
+          "final_chamfer": 0.14452115265967602,
+          "main_success": true,
+          "selected_action_sha256": "bd40eb99318175e3d2a710ea6de0baf8f4b8401b6a5275c114cf747dea44873b",
+          "selected_candidate_id": 55,
+          "strict_success": false,
+          "success": true
+        },
+        "da_jepa_r": {
+          "final_chamfer": 0.799711746741777,
+          "main_success": false,
+          "selected_action_sha256": "40142ecd3e01014b7aa63ff90a1b0c1b57293755b26bcc40329a57c933392381",
+          "selected_candidate_id": 32,
+          "strict_success": false,
+          "success": false
+        },
+        "frozen_dino_wm": {
+          "final_chamfer": 0.14452115265967602,
+          "main_success": true,
+          "selected_action_sha256": "bd40eb99318175e3d2a710ea6de0baf8f4b8401b6a5275c114cf747dea44873b",
+          "selected_candidate_id": 55,
+          "strict_success": false,
+          "success": true
+        },
+        "unified_da_jepa_r": {
+          "final_chamfer": 0.799711746741777,
+          "main_success": false,
+          "selected_action_sha256": "40142ecd3e01014b7aa63ff90a1b0c1b57293755b26bcc40329a57c933392381",
+          "selected_candidate_id": 32,
+          "strict_success": false,
+          "success": false
+        }
+      },
+      "start_id": "granular-formal-t00712-o05"
+    },
+    {
+      "goal_id": "granular-formal-goal-t00969-o15",
+      "methods": {
+        "da_jepa_mg": {
+          "final_chamfer": 0.3003047127654051,
+          "main_success": false,
+          "selected_action_sha256": "84397201a1d406ac07c06e5fd4b71f6a38cdacabcb66e961bc3968a0776c440e",
+          "selected_candidate_id": 63,
+          "strict_success": false,
+          "success": false
+        },
+        "da_jepa_r": {
+          "final_chamfer": 0.10670290147450728,
+          "main_success": true,
+          "selected_action_sha256": "2e999c9d6a2f98d857a8a3370308803c1530624fbf0045e6cf7acc735618b715",
+          "selected_candidate_id": 47,
+          "strict_success": true,
+          "success": true
+        },
+        "frozen_dino_wm": {
+          "final_chamfer": 0.14927128037815235,
+          "main_success": true,
+          "selected_action_sha256": "cdd80279a8c07de71eb29a36dcc67d388f38030fe54e3af9cf87e22e9c9dca8d",
+          "selected_candidate_id": 56,
+          "strict_success": false,
+          "success": true
+        },
+        "unified_da_jepa_r": {
+          "final_chamfer": 0.10670290147450728,
+          "main_success": true,
+          "selected_action_sha256": "2e999c9d6a2f98d857a8a3370308803c1530624fbf0045e6cf7acc735618b715",
+          "selected_candidate_id": 47,
+          "strict_success": true,
+          "success": true
+        }
+      },
+      "start_id": "granular-formal-t00969-o10"
+    },
+    {
+      "goal_id": "granular-formal-goal-t00870-o05",
+      "methods": {
+        "da_jepa_mg": {
+          "final_chamfer": 0.1445709049002974,
+          "main_success": true,
+          "selected_action_sha256": "b93bf34c030ef776c842ea651f606c73aa6304d0227d2b320c192f541656b6bd",
+          "selected_candidate_id": 57,
+          "strict_success": false,
+          "success": true
+        },
+        "da_jepa_r": {
+          "final_chamfer": 0.15417179154304378,
+          "main_success": true,
+          "selected_action_sha256": "52f6783087e1f0a12601e6ddebb67d77f97a1a15c2a01f8a630d77f6a60a1fbf",
+          "selected_candidate_id": 58,
+          "strict_success": false,
+          "success": true
+        },
+        "frozen_dino_wm": {
+          "final_chamfer": 0.15417179154304378,
+          "main_success": true,
+          "selected_action_sha256": "52f6783087e1f0a12601e6ddebb67d77f97a1a15c2a01f8a630d77f6a60a1fbf",
+          "selected_candidate_id": 58,
+          "strict_success": false,
+          "success": true
+        },
+        "unified_da_jepa_r": {
+          "final_chamfer": 0.15417179154304378,
+          "main_success": true,
+          "selected_action_sha256": "52f6783087e1f0a12601e6ddebb67d77f97a1a15c2a01f8a630d77f6a60a1fbf",
+          "selected_candidate_id": 58,
+          "strict_success": false,
+          "success": true
+        }
+      },
+      "start_id": "granular-formal-t00870-o00"
+    },
+    {
+      "goal_id": "granular-formal-goal-t00877-o10",
+      "methods": {
+        "da_jepa_mg": {
+          "final_chamfer": 0.13728998579491802,
+          "main_success": true,
+          "selected_action_sha256": "4998701b37c44fdc4f6987b1fb8c611ee682a45fa8dce078118288e14e27a10f",
+          "selected_candidate_id": 59,
+          "strict_success": false,
+          "success": true
+        },
+        "da_jepa_r": {
+          "final_chamfer": 0.33840090437899806,
+          "main_success": false,
+          "selected_action_sha256": "cbc062b283558318ccde7f657427083347d303e6c7cbace39c5bd3247223936f",
+          "selected_candidate_id": 9,
+          "strict_success": false,
+          "success": false
+        },
+        "frozen_dino_wm": {
+          "final_chamfer": 0.33840090437899806,
+          "main_success": false,
+          "selected_action_sha256": "cbc062b283558318ccde7f657427083347d303e6c7cbace39c5bd3247223936f",
+          "selected_candidate_id": 9,
+          "strict_success": false,
+          "success": false
+        },
+        "unified_da_jepa_r": {
+          "final_chamfer": 0.33840090437899806,
+          "main_success": false,
+          "selected_action_sha256": "cbc062b283558318ccde7f657427083347d303e6c7cbace39c5bd3247223936f",
+          "selected_candidate_id": 9,
+          "strict_success": false,
+          "success": false
+        }
+      },
+      "start_id": "granular-formal-t00877-o05"
+    },
+    {
+      "goal_id": "granular-formal-goal-t00653-o15",
+      "methods": {
+        "da_jepa_mg": {
+          "final_chamfer": 0.18062838794361097,
+          "main_success": false,
+          "selected_action_sha256": "7d3b8b72f79795aef794a06593477c1ab030b2c4c748f331b18bcb45a18ea5ba",
+          "selected_candidate_id": 57,
+          "strict_success": false,
+          "success": false
+        },
+        "da_jepa_r": {
+          "final_chamfer": 0.32080057948324137,
+          "main_success": false,
+          "selected_action_sha256": "ac17cce415991b57c813eefc232b7be0e25fd09bb373015eff866f36a2e32c8a",
+          "selected_candidate_id": 36,
+          "strict_success": false,
+          "success": false
+        },
+        "frozen_dino_wm": {
+          "final_chamfer": 0.12685064589427358,
+          "main_success": true,
+          "selected_action_sha256": "b37d3a0d6f8a39444561355c197607e3fa4af18a40ef0a944bd588c1234993e4",
+          "selected_candidate_id": 56,
+          "strict_success": false,
+          "success": true
+        },
+        "unified_da_jepa_r": {
+          "final_chamfer": 0.32080057948324137,
+          "main_success": false,
+          "selected_action_sha256": "ac17cce415991b57c813eefc232b7be0e25fd09bb373015eff866f36a2e32c8a",
+          "selected_candidate_id": 36,
+          "strict_success": false,
+          "success": false
+        }
+      },
+      "start_id": "granular-formal-t00653-o10"
+    },
+    {
+      "goal_id": "granular-formal-goal-t00556-o05",
+      "methods": {
+        "da_jepa_mg": {
+          "final_chamfer": 0.4086668556551441,
+          "main_success": false,
+          "selected_action_sha256": "7d0bb1a92f5d12e5674333a7c9744442d17ef6f3d0e3c7b31734dd51a2387165",
+          "selected_candidate_id": 16,
+          "strict_success": false,
+          "success": false
+        },
+        "da_jepa_r": {
+          "final_chamfer": 0.0922791077123831,
+          "main_success": true,
+          "selected_action_sha256": "c7e3b984765e5f566de10b7d16a484e5aba2b3a3b0d0bfeaa36cca9dc088409a",
+          "selected_candidate_id": 49,
+          "strict_success": true,
+          "success": true
+        },
+        "frozen_dino_wm": {
+          "final_chamfer": 0.14528681290647188,
+          "main_success": true,
+          "selected_action_sha256": "e8684b295aaff1d56a64c8af2792dda1fb06653e40674e9e58b72afd5fc2a61d",
+          "selected_candidate_id": 15,
+          "strict_success": false,
+          "success": true
+        },
+        "unified_da_jepa_r": {
+          "final_chamfer": 0.0922791077123831,
+          "main_success": true,
+          "selected_action_sha256": "c7e3b984765e5f566de10b7d16a484e5aba2b3a3b0d0bfeaa36cca9dc088409a",
+          "selected_candidate_id": 49,
+          "strict_success": true,
+          "success": true
+        }
+      },
+      "start_id": "granular-formal-t00556-o00"
+    },
+    {
+      "goal_id": "granular-formal-goal-t00111-o10",
+      "methods": {
+        "da_jepa_mg": {
+          "final_chamfer": 0.6252957414725397,
+          "main_success": false,
+          "selected_action_sha256": "ccd8804408c59e3edc578e5e67a73a5db41593801651f383773f0ee156a992a4",
+          "selected_candidate_id": 25,
+          "strict_success": false,
+          "success": false
+        },
+        "da_jepa_r": {
+          "final_chamfer": 0.3967886634468134,
+          "main_success": false,
+          "selected_action_sha256": "2488c0aa0e74844a2cc216c8ffee53456bb3a047200ddaa78fe3e1bba9efc931",
+          "selected_candidate_id": 24,
+          "strict_success": false,
+          "success": false
+        },
+        "frozen_dino_wm": {
+          "final_chamfer": 0.31633938484062163,
+          "main_success": false,
+          "selected_action_sha256": "86e9c1f76e07eee6ef79a542f3d7d273cde507dd20235fc29d15dfb71338f1a5",
+          "selected_candidate_id": 61,
+          "strict_success": false,
+          "success": false
+        },
+        "unified_da_jepa_r": {
+          "final_chamfer": 0.3967886634468134,
+          "main_success": false,
+          "selected_action_sha256": "2488c0aa0e74844a2cc216c8ffee53456bb3a047200ddaa78fe3e1bba9efc931",
+          "selected_candidate_id": 24,
+          "strict_success": false,
+          "success": false
+        }
+      },
+      "start_id": "granular-formal-t00111-o05"
+    },
+    {
+      "goal_id": "granular-formal-goal-t00129-o15",
+      "methods": {
+        "da_jepa_mg": {
+          "final_chamfer": 0.15007722301582985,
+          "main_success": true,
+          "selected_action_sha256": "1914dc42ea518f6f5a7d9df533892c1a94f3312bcf0621c581d42a48083d35ba",
+          "selected_candidate_id": 57,
+          "strict_success": false,
+          "success": true
+        },
+        "da_jepa_r": {
+          "final_chamfer": 0.1099384364899182,
+          "main_success": true,
+          "selected_action_sha256": "ad5cae5e28ff2557ee22acc06389903d95f5802349d4559253763e768f272ad0",
+          "selected_candidate_id": 50,
+          "strict_success": true,
+          "success": true
+        },
+        "frozen_dino_wm": {
+          "final_chamfer": 0.11908758318635165,
+          "main_success": true,
+          "selected_action_sha256": "81e0650712b7d972978ab96552ff3eba851f60d84e88df8c918bbf52a43c56df",
+          "selected_candidate_id": 49,
+          "strict_success": true,
+          "success": true
+        },
+        "unified_da_jepa_r": {
+          "final_chamfer": 0.1099384364899182,
+          "main_success": true,
+          "selected_action_sha256": "ad5cae5e28ff2557ee22acc06389903d95f5802349d4559253763e768f272ad0",
+          "selected_candidate_id": 50,
+          "strict_success": true,
+          "success": true
+        }
+      },
+      "start_id": "granular-formal-t00129-o10"
+    },
+    {
+      "goal_id": "granular-formal-goal-t00736-o05",
+      "methods": {
+        "da_jepa_mg": {
+          "final_chamfer": 0.8622180534891677,
+          "main_success": false,
+          "selected_action_sha256": "c327a648857aa1f2e972c2725c1401fb57342eb8e7be4833b8f4607fbab7b5d4",
+          "selected_candidate_id": 23,
+          "strict_success": false,
+          "success": false
+        },
+        "da_jepa_r": {
+          "final_chamfer": 0.12776034904164024,
+          "main_success": true,
+          "selected_action_sha256": "426a882b5f46f7207707d1e1c3e79bfb42ffa2dd6b07f15324b239028b05aed7",
+          "selected_candidate_id": 55,
+          "strict_success": false,
+          "success": true
+        },
+        "frozen_dino_wm": {
+          "final_chamfer": 0.12776034904164024,
+          "main_success": true,
+          "selected_action_sha256": "426a882b5f46f7207707d1e1c3e79bfb42ffa2dd6b07f15324b239028b05aed7",
+          "selected_candidate_id": 55,
+          "strict_success": false,
+          "success": true
+        },
+        "unified_da_jepa_r": {
+          "final_chamfer": 0.12776034904164024,
+          "main_success": true,
+          "selected_action_sha256": "426a882b5f46f7207707d1e1c3e79bfb42ffa2dd6b07f15324b239028b05aed7",
+          "selected_candidate_id": 55,
+          "strict_success": false,
+          "success": true
+        }
+      },
+      "start_id": "granular-formal-t00736-o00"
+    },
+    {
+      "goal_id": "granular-formal-goal-t00617-o10",
+      "methods": {
+        "da_jepa_mg": {
+          "final_chamfer": 0.30016819885255364,
+          "main_success": false,
+          "selected_action_sha256": "08312ca06afcf9a575b993ab0e97386e2b2ea6d924d01d045b7fde2bb65da25a",
+          "selected_candidate_id": 41,
+          "strict_success": false,
+          "success": false
+        },
+        "da_jepa_r": {
+          "final_chamfer": 0.09619944111204383,
+          "main_success": true,
+          "selected_action_sha256": "ef43d0f5079414351ce23bd61a14e4f5ab0abd70cb9d29b6d5d101a4d5e435f2",
+          "selected_candidate_id": 46,
+          "strict_success": true,
+          "success": true
+        },
+        "frozen_dino_wm": {
+          "final_chamfer": 0.30016819885255364,
+          "main_success": false,
+          "selected_action_sha256": "08312ca06afcf9a575b993ab0e97386e2b2ea6d924d01d045b7fde2bb65da25a",
+          "selected_candidate_id": 41,
+          "strict_success": false,
+          "success": false
+        },
+        "unified_da_jepa_r": {
+          "final_chamfer": 0.09619944111204383,
+          "main_success": true,
+          "selected_action_sha256": "ef43d0f5079414351ce23bd61a14e4f5ab0abd70cb9d29b6d5d101a4d5e435f2",
+          "selected_candidate_id": 46,
+          "strict_success": true,
+          "success": true
+        }
+      },
+      "start_id": "granular-formal-t00617-o05"
+    },
+    {
+      "goal_id": "granular-formal-goal-t00621-o15",
+      "methods": {
+        "da_jepa_mg": {
+          "final_chamfer": 0.6033601853304702,
+          "main_success": false,
+          "selected_action_sha256": "d44565e8db478e350766cf075fdb98d26399991d6ffc4793672a74633b02b818",
+          "selected_candidate_id": 21,
+          "strict_success": false,
+          "success": false
+        },
+        "da_jepa_r": {
+          "final_chamfer": 0.08632381587518306,
+          "main_success": true,
+          "selected_action_sha256": "b69ccf679123a68f3b32cd2abfc54284081efd6b4f11ce78b3d8b0166d84d5ff",
+          "selected_candidate_id": 47,
+          "strict_success": true,
+          "success": true
+        },
+        "frozen_dino_wm": {
+          "final_chamfer": 0.5994648605048416,
+          "main_success": false,
+          "selected_action_sha256": "398dd86b80573d0797483cf200f919e2479674c5cc4288b19ca945795d0cb3b9",
+          "selected_candidate_id": 19,
+          "strict_success": false,
+          "success": false
+        },
+        "unified_da_jepa_r": {
+          "final_chamfer": 0.08632381587518306,
+          "main_success": true,
+          "selected_action_sha256": "b69ccf679123a68f3b32cd2abfc54284081efd6b4f11ce78b3d8b0166d84d5ff",
+          "selected_candidate_id": 47,
+          "strict_success": true,
+          "success": true
+        }
+      },
+      "start_id": "granular-formal-t00621-o10"
+    },
+    {
+      "goal_id": "granular-formal-goal-t00822-o05",
+      "methods": {
+        "da_jepa_mg": {
+          "final_chamfer": 0.44716974486572236,
+          "main_success": false,
+          "selected_action_sha256": "1e9bae157fc1f2d147d973862b15fca665922605569deb96adc1d88a8ba3f5ba",
+          "selected_candidate_id": 8,
+          "strict_success": false,
+          "success": false
+        },
+        "da_jepa_r": {
+          "final_chamfer": 0.49448712642293,
+          "main_success": false,
+          "selected_action_sha256": "af85e556a6ac58258a98f40c88c6875e2f964847377bf152adad4f35196cbc8d",
+          "selected_candidate_id": 9,
+          "strict_success": false,
+          "success": false
+        },
+        "frozen_dino_wm": {
+          "final_chamfer": 0.49448712642293,
+          "main_success": false,
+          "selected_action_sha256": "af85e556a6ac58258a98f40c88c6875e2f964847377bf152adad4f35196cbc8d",
+          "selected_candidate_id": 9,
+          "strict_success": false,
+          "success": false
+        },
+        "unified_da_jepa_r": {
+          "final_chamfer": 0.49448712642293,
+          "main_success": false,
+          "selected_action_sha256": "af85e556a6ac58258a98f40c88c6875e2f964847377bf152adad4f35196cbc8d",
+          "selected_candidate_id": 9,
+          "strict_success": false,
+          "success": false
+        }
+      },
+      "start_id": "granular-formal-t00822-o00"
+    },
+    {
+      "goal_id": "granular-formal-goal-t00519-o10",
+      "methods": {
+        "da_jepa_mg": {
+          "final_chamfer": 0.5850028548203241,
+          "main_success": false,
+          "selected_action_sha256": "292719b8773fb26acd57c8879c3646f685625c0f3a9a22a4d3ac218d81b2a014",
+          "selected_candidate_id": 31,
+          "strict_success": false,
+          "success": false
+        },
+        "da_jepa_r": {
+          "final_chamfer": 0.8559557163404692,
+          "main_success": false,
+          "selected_action_sha256": "25e73a674d03633065f4ffdce34dfc24487a87aa159f766487a114462f870e5e",
+          "selected_candidate_id": 6,
+          "strict_success": false,
+          "success": false
+        },
+        "frozen_dino_wm": {
+          "final_chamfer": 0.8559557163404692,
+          "main_success": false,
+          "selected_action_sha256": "25e73a674d03633065f4ffdce34dfc24487a87aa159f766487a114462f870e5e",
+          "selected_candidate_id": 6,
+          "strict_success": false,
+          "success": false
+        },
+        "unified_da_jepa_r": {
+          "final_chamfer": 0.8559557163404692,
+          "main_success": false,
+          "selected_action_sha256": "25e73a674d03633065f4ffdce34dfc24487a87aa159f766487a114462f870e5e",
+          "selected_candidate_id": 6,
+          "strict_success": false,
+          "success": false
+        }
+      },
+      "start_id": "granular-formal-t00519-o05"
+    },
+    {
+      "goal_id": "granular-formal-goal-t00527-o15",
+      "methods": {
+        "da_jepa_mg": {
+          "final_chamfer": 0.21385159079872026,
+          "main_success": false,
+          "selected_action_sha256": "988ba007ac9f652945c72bcd7d080454a1e72c739778e099dfd5adb99a75280f",
+          "selected_candidate_id": 54,
+          "strict_success": false,
+          "success": false
+        },
+        "da_jepa_r": {
+          "final_chamfer": 0.9592360414548058,
+          "main_success": false,
+          "selected_action_sha256": "82c7d745a10acf5a59471705a74ae1beaa12b6645dfd68b8566085c86972bed4",
+          "selected_candidate_id": 63,
+          "strict_success": false,
+          "success": false
+        },
+        "frozen_dino_wm": {
+          "final_chamfer": 0.7466475342658869,
+          "main_success": false,
+          "selected_action_sha256": "22ace677a03db543af20ae76aed18855a1c7aef9f8c77d4aec5d8e0f6a40ded4",
+          "selected_candidate_id": 62,
+          "strict_success": false,
+          "success": false
+        },
+        "unified_da_jepa_r": {
+          "final_chamfer": 0.9592360414548058,
+          "main_success": false,
+          "selected_action_sha256": "82c7d745a10acf5a59471705a74ae1beaa12b6645dfd68b8566085c86972bed4",
+          "selected_candidate_id": 63,
+          "strict_success": false,
+          "success": false
+        }
+      },
+      "start_id": "granular-formal-t00527-o10"
+    },
+    {
+      "goal_id": "granular-formal-goal-t00985-o05",
+      "methods": {
+        "da_jepa_mg": {
+          "final_chamfer": 0.09386659333490577,
+          "main_success": true,
+          "selected_action_sha256": "2d8b62cae9e886ea9a1274be5e3000c9b6aa2d45572f6df02f9316e322cff981",
+          "selected_candidate_id": 47,
+          "strict_success": true,
+          "success": true
+        },
+        "da_jepa_r": {
+          "final_chamfer": 0.09386659333490577,
+          "main_success": true,
+          "selected_action_sha256": "2d8b62cae9e886ea9a1274be5e3000c9b6aa2d45572f6df02f9316e322cff981",
+          "selected_candidate_id": 47,
+          "strict_success": true,
+          "success": true
+        },
+        "frozen_dino_wm": {
+          "final_chamfer": 0.09386659333490577,
+          "main_success": true,
+          "selected_action_sha256": "2d8b62cae9e886ea9a1274be5e3000c9b6aa2d45572f6df02f9316e322cff981",
+          "selected_candidate_id": 47,
+          "strict_success": true,
+          "success": true
+        },
+        "unified_da_jepa_r": {
+          "final_chamfer": 0.09386659333490577,
+          "main_success": true,
+          "selected_action_sha256": "2d8b62cae9e886ea9a1274be5e3000c9b6aa2d45572f6df02f9316e322cff981",
+          "selected_candidate_id": 47,
+          "strict_success": true,
+          "success": true
+        }
+      },
+      "start_id": "granular-formal-t00985-o00"
+    },
+    {
+      "goal_id": "granular-formal-goal-t00358-o10",
+      "methods": {
+        "da_jepa_mg": {
+          "final_chamfer": 0.4747099207099746,
+          "main_success": false,
+          "selected_action_sha256": "9755c035967a1b6fe31176570b8c90b780f9d2854f30965123f79378e201d199",
+          "selected_candidate_id": 10,
+          "strict_success": false,
+          "success": false
+        },
+        "da_jepa_r": {
+          "final_chamfer": 0.20802034895309468,
+          "main_success": false,
+          "selected_action_sha256": "0f05d2e1a8b98ea1ceade08d2b0d0894c2d3c60f225b18ccaa53b04c334b6c7e",
+          "selected_candidate_id": 15,
+          "strict_success": false,
+          "success": false
+        },
+        "frozen_dino_wm": {
+          "final_chamfer": 0.4747099207099746,
+          "main_success": false,
+          "selected_action_sha256": "9755c035967a1b6fe31176570b8c90b780f9d2854f30965123f79378e201d199",
+          "selected_candidate_id": 10,
+          "strict_success": false,
+          "success": false
+        },
+        "unified_da_jepa_r": {
+          "final_chamfer": 0.20802034895309468,
+          "main_success": false,
+          "selected_action_sha256": "0f05d2e1a8b98ea1ceade08d2b0d0894c2d3c60f225b18ccaa53b04c334b6c7e",
+          "selected_candidate_id": 15,
+          "strict_success": false,
+          "success": false
+        }
+      },
+      "start_id": "granular-formal-t00358-o05"
+    },
+    {
+      "goal_id": "granular-formal-goal-t00431-o15",
+      "methods": {
+        "da_jepa_mg": {
+          "final_chamfer": 0.4571335788835968,
+          "main_success": false,
+          "selected_action_sha256": "84499b8346db9c3058d340d10ecc2bdb5e7d5cc33f4e7e7b8acdaa7f517ade02",
+          "selected_candidate_id": 38,
+          "strict_success": false,
+          "success": false
+        },
+        "da_jepa_r": {
+          "final_chamfer": 0.4612872862572662,
+          "main_success": false,
+          "selected_action_sha256": "ace889bb8f7e400d97606e1e65b35900b7b565cf216c598c3a46846247463b0a",
+          "selected_candidate_id": 63,
+          "strict_success": false,
+          "success": false
+        },
+        "frozen_dino_wm": {
+          "final_chamfer": 0.4571335788835968,
+          "main_success": false,
+          "selected_action_sha256": "84499b8346db9c3058d340d10ecc2bdb5e7d5cc33f4e7e7b8acdaa7f517ade02",
+          "selected_candidate_id": 38,
+          "strict_success": false,
+          "success": false
+        },
+        "unified_da_jepa_r": {
+          "final_chamfer": 0.4612872862572662,
+          "main_success": false,
+          "selected_action_sha256": "ace889bb8f7e400d97606e1e65b35900b7b565cf216c598c3a46846247463b0a",
+          "selected_candidate_id": 63,
+          "strict_success": false,
+          "success": false
+        }
+      },
+      "start_id": "granular-formal-t00431-o10"
+    },
+    {
+      "goal_id": "granular-formal-goal-t00761-o05",
+      "methods": {
+        "da_jepa_mg": {
+          "final_chamfer": 0.19542925303251302,
+          "main_success": false,
+          "selected_action_sha256": "c472ca694d9889e73ec030302636b974b9cedd3f5df175ffea3ace1bec9bec07",
+          "selected_candidate_id": 56,
+          "strict_success": false,
+          "success": false
+        },
+        "da_jepa_r": {
+          "final_chamfer": 0.24447709741021306,
+          "main_success": false,
+          "selected_action_sha256": "e9a92d24b893713c9e60bd7c1bceb0209876604d3e9710250c0ffb8992cde6ec",
+          "selected_candidate_id": 39,
+          "strict_success": false,
+          "success": false
+        },
+        "frozen_dino_wm": {
+          "final_chamfer": 0.24447709741021306,
+          "main_success": false,
+          "selected_action_sha256": "e9a92d24b893713c9e60bd7c1bceb0209876604d3e9710250c0ffb8992cde6ec",
+          "selected_candidate_id": 39,
+          "strict_success": false,
+          "success": false
+        },
+        "unified_da_jepa_r": {
+          "final_chamfer": 0.24447709741021306,
+          "main_success": false,
+          "selected_action_sha256": "e9a92d24b893713c9e60bd7c1bceb0209876604d3e9710250c0ffb8992cde6ec",
+          "selected_candidate_id": 39,
+          "strict_success": false,
+          "success": false
+        }
+      },
+      "start_id": "granular-formal-t00761-o00"
+    },
+    {
+      "goal_id": "granular-formal-goal-t00080-o10",
+      "methods": {
+        "da_jepa_mg": {
+          "final_chamfer": 0.2975435189097487,
+          "main_success": false,
+          "selected_action_sha256": "06ed5ad2af4ed8d56d5bebc085469280d1cd143e2eaf9089750bc6248fd97334",
+          "selected_candidate_id": 37,
+          "strict_success": false,
+          "success": false
+        },
+        "da_jepa_r": {
+          "final_chamfer": 0.16466997539416445,
+          "main_success": true,
+          "selected_action_sha256": "3356fe291af18064f5c6862fb06f3984ec3251aee69e48d31a19dcba6d6cdb56",
+          "selected_candidate_id": 56,
+          "strict_success": false,
+          "success": true
+        },
+        "frozen_dino_wm": {
+          "final_chamfer": 0.16466997539416445,
+          "main_success": true,
+          "selected_action_sha256": "3356fe291af18064f5c6862fb06f3984ec3251aee69e48d31a19dcba6d6cdb56",
+          "selected_candidate_id": 56,
+          "strict_success": false,
+          "success": true
+        },
+        "unified_da_jepa_r": {
+          "final_chamfer": 0.16466997539416445,
+          "main_success": true,
+          "selected_action_sha256": "3356fe291af18064f5c6862fb06f3984ec3251aee69e48d31a19dcba6d6cdb56",
+          "selected_candidate_id": 56,
+          "strict_success": false,
+          "success": true
+        }
+      },
+      "start_id": "granular-formal-t00080-o05"
+    },
+    {
+      "goal_id": "granular-formal-goal-t00481-o15",
+      "methods": {
+        "da_jepa_mg": {
+          "final_chamfer": 0.5841645534885301,
+          "main_success": false,
+          "selected_action_sha256": "6e791feea1b743cf4107e6a63dc37abc67dbf34bbdf4bfefe7a513688b0f5292",
+          "selected_candidate_id": 6,
+          "strict_success": false,
+          "success": false
+        },
+        "da_jepa_r": {
+          "final_chamfer": 0.07072248950185628,
+          "main_success": true,
+          "selected_action_sha256": "aa7378b15bfc8103a502c3d148fdf7d47427d026e340db200a30280f37f45e60",
+          "selected_candidate_id": 48,
+          "strict_success": true,
+          "success": true
+        },
+        "frozen_dino_wm": {
+          "final_chamfer": 0.4630182400370692,
+          "main_success": false,
+          "selected_action_sha256": "f6347b99d3cb156d04297461f796ac7840c69c67b71cd5a20f158cf66c414a5a",
+          "selected_candidate_id": 13,
+          "strict_success": false,
+          "success": false
+        },
+        "unified_da_jepa_r": {
+          "final_chamfer": 0.07072248950185628,
+          "main_success": true,
+          "selected_action_sha256": "aa7378b15bfc8103a502c3d148fdf7d47427d026e340db200a30280f37f45e60",
+          "selected_candidate_id": 48,
+          "strict_success": true,
+          "success": true
+        }
+      },
+      "start_id": "granular-formal-t00481-o10"
+    },
+    {
+      "goal_id": "granular-formal-goal-t00554-o05",
+      "methods": {
+        "da_jepa_mg": {
+          "final_chamfer": 0.1578609162112945,
+          "main_success": true,
+          "selected_action_sha256": "1426b0c62f41923e3a2e625e51eed3603a54ace9deacee871e7ba4dff9a20338",
+          "selected_candidate_id": 42,
+          "strict_success": false,
+          "success": true
+        },
+        "da_jepa_r": {
+          "final_chamfer": 0.41344762922085776,
+          "main_success": false,
+          "selected_action_sha256": "b026a6323acd8c115288a0c90ffaf396e6a6d1a08ac52c9f4ca226dc3793e354",
+          "selected_candidate_id": 41,
+          "strict_success": false,
+          "success": false
+        },
+        "frozen_dino_wm": {
+          "final_chamfer": 0.41344762922085776,
+          "main_success": false,
+          "selected_action_sha256": "b026a6323acd8c115288a0c90ffaf396e6a6d1a08ac52c9f4ca226dc3793e354",
+          "selected_candidate_id": 41,
+          "strict_success": false,
+          "success": false
+        },
+        "unified_da_jepa_r": {
+          "final_chamfer": 0.41344762922085776,
+          "main_success": false,
+          "selected_action_sha256": "b026a6323acd8c115288a0c90ffaf396e6a6d1a08ac52c9f4ca226dc3793e354",
+          "selected_candidate_id": 41,
+          "strict_success": false,
+          "success": false
+        }
+      },
+      "start_id": "granular-formal-t00554-o00"
+    },
+    {
+      "goal_id": "granular-formal-goal-t00096-o10",
+      "methods": {
+        "da_jepa_mg": {
+          "final_chamfer": 0.9188703901007178,
+          "main_success": false,
+          "selected_action_sha256": "dfb0459cb3a764e9eb3ca7b5803d146956b18106d227a04a49111fa2a51f4af1",
+          "selected_candidate_id": 32,
+          "strict_success": false,
+          "success": false
+        },
+        "da_jepa_r": {
+          "final_chamfer": 0.39773054277426007,
+          "main_success": false,
+          "selected_action_sha256": "cca6e0a92ab1b649182e48d04cf8670d27bf4d638b50d25a8635bbc43ddc8628",
+          "selected_candidate_id": 37,
+          "strict_success": false,
+          "success": false
+        },
+        "frozen_dino_wm": {
+          "final_chamfer": 0.39773054277426007,
+          "main_success": false,
+          "selected_action_sha256": "cca6e0a92ab1b649182e48d04cf8670d27bf4d638b50d25a8635bbc43ddc8628",
+          "selected_candidate_id": 37,
+          "strict_success": false,
+          "success": false
+        },
+        "unified_da_jepa_r": {
+          "final_chamfer": 0.39773054277426007,
+          "main_success": false,
+          "selected_action_sha256": "cca6e0a92ab1b649182e48d04cf8670d27bf4d638b50d25a8635bbc43ddc8628",
+          "selected_candidate_id": 37,
+          "strict_success": false,
+          "success": false
+        }
+      },
+      "start_id": "granular-formal-t00096-o05"
+    },
+    {
+      "goal_id": "granular-formal-goal-t00776-o15",
+      "methods": {
+        "da_jepa_mg": {
+          "final_chamfer": 0.2745253532979878,
+          "main_success": false,
+          "selected_action_sha256": "97b424edaec18c241087e423e5f52c2d86844fb47e68fb4f729a173f815d04e6",
+          "selected_candidate_id": 13,
+          "strict_success": false,
+          "success": false
+        },
+        "da_jepa_r": {
+          "final_chamfer": 0.71538480934556,
+          "main_success": false,
+          "selected_action_sha256": "99b5333b193adcdd3f5084a5d05a94eb1f67ca7c7a65dc8f563703562e53c109",
+          "selected_candidate_id": 34,
+          "strict_success": false,
+          "success": false
+        },
+        "frozen_dino_wm": {
+          "final_chamfer": 0.71538480934556,
+          "main_success": false,
+          "selected_action_sha256": "99b5333b193adcdd3f5084a5d05a94eb1f67ca7c7a65dc8f563703562e53c109",
+          "selected_candidate_id": 34,
+          "strict_success": false,
+          "success": false
+        },
+        "unified_da_jepa_r": {
+          "final_chamfer": 0.71538480934556,
+          "main_success": false,
+          "selected_action_sha256": "99b5333b193adcdd3f5084a5d05a94eb1f67ca7c7a65dc8f563703562e53c109",
+          "selected_candidate_id": 34,
+          "strict_success": false,
+          "success": false
+        }
+      },
+      "start_id": "granular-formal-t00776-o10"
+    },
+    {
+      "goal_id": "granular-formal-goal-t00224-o05",
+      "methods": {
+        "da_jepa_mg": {
+          "final_chamfer": 0.5187341512917556,
+          "main_success": false,
+          "selected_action_sha256": "f3b1c1d44f964b5f7470004ade441cacc51503750b032566722cc04b8522c7f0",
+          "selected_candidate_id": 43,
+          "strict_success": false,
+          "success": false
+        },
+        "da_jepa_r": {
+          "final_chamfer": 0.5187341512917556,
+          "main_success": false,
+          "selected_action_sha256": "f3b1c1d44f964b5f7470004ade441cacc51503750b032566722cc04b8522c7f0",
+          "selected_candidate_id": 43,
+          "strict_success": false,
+          "success": false
+        },
+        "frozen_dino_wm": {
+          "final_chamfer": 0.5187341512917556,
+          "main_success": false,
+          "selected_action_sha256": "f3b1c1d44f964b5f7470004ade441cacc51503750b032566722cc04b8522c7f0",
+          "selected_candidate_id": 43,
+          "strict_success": false,
+          "success": false
+        },
+        "unified_da_jepa_r": {
+          "final_chamfer": 0.5187341512917556,
+          "main_success": false,
+          "selected_action_sha256": "f3b1c1d44f964b5f7470004ade441cacc51503750b032566722cc04b8522c7f0",
+          "selected_candidate_id": 43,
+          "strict_success": false,
+          "success": false
+        }
+      },
+      "start_id": "granular-formal-t00224-o00"
+    },
+    {
+      "goal_id": "granular-formal-goal-t00579-o10",
+      "methods": {
+        "da_jepa_mg": {
+          "final_chamfer": 0.27413750446251534,
+          "main_success": false,
+          "selected_action_sha256": "6718ff6fa07677e206b6703de039000a70aee979af78b4514792406ca3ab7905",
+          "selected_candidate_id": 61,
+          "strict_success": false,
+          "success": false
+        },
+        "da_jepa_r": {
+          "final_chamfer": 0.5946200446716431,
+          "main_success": false,
+          "selected_action_sha256": "af57487b6860436f852b4f421e114dde6199fdc4029273fef7ca004e304d27a9",
+          "selected_candidate_id": 29,
+          "strict_success": false,
+          "success": false
+        },
+        "frozen_dino_wm": {
+          "final_chamfer": 0.5946200446716431,
+          "main_success": false,
+          "selected_action_sha256": "af57487b6860436f852b4f421e114dde6199fdc4029273fef7ca004e304d27a9",
+          "selected_candidate_id": 29,
+          "strict_success": false,
+          "success": false
+        },
+        "unified_da_jepa_r": {
+          "final_chamfer": 0.5946200446716431,
+          "main_success": false,
+          "selected_action_sha256": "af57487b6860436f852b4f421e114dde6199fdc4029273fef7ca004e304d27a9",
+          "selected_candidate_id": 29,
+          "strict_success": false,
+          "success": false
+        }
+      },
+      "start_id": "granular-formal-t00579-o05"
+    },
+    {
+      "goal_id": "granular-formal-goal-t00918-o15",
+      "methods": {
+        "da_jepa_mg": {
+          "final_chamfer": 0.7520989951593621,
+          "main_success": false,
+          "selected_action_sha256": "7f161e5aa4a6a0c43436b5d096a18458dbd4b94d2fa8027a13c0e22bf7258af6",
+          "selected_candidate_id": 27,
+          "strict_success": false,
+          "success": false
+        },
+        "da_jepa_r": {
+          "final_chamfer": 0.36435760550318524,
+          "main_success": false,
+          "selected_action_sha256": "3cf14bf1845b5e18976325dab8a52b4d34c78a1917f87aae02e95277ae1228ed",
+          "selected_candidate_id": 60,
+          "strict_success": false,
+          "success": false
+        },
+        "frozen_dino_wm": {
+          "final_chamfer": 0.36435760550318524,
+          "main_success": false,
+          "selected_action_sha256": "3cf14bf1845b5e18976325dab8a52b4d34c78a1917f87aae02e95277ae1228ed",
+          "selected_candidate_id": 60,
+          "strict_success": false,
+          "success": false
+        },
+        "unified_da_jepa_r": {
+          "final_chamfer": 0.36435760550318524,
+          "main_success": false,
+          "selected_action_sha256": "3cf14bf1845b5e18976325dab8a52b4d34c78a1917f87aae02e95277ae1228ed",
+          "selected_candidate_id": 60,
+          "strict_success": false,
+          "success": false
+        }
+      },
+      "start_id": "granular-formal-t00918-o10"
+    },
+    {
+      "goal_id": "granular-formal-goal-t00146-o05",
+      "methods": {
+        "da_jepa_mg": {
+          "final_chamfer": 0.09422299215035204,
+          "main_success": true,
+          "selected_action_sha256": "ee4ea71a3c0f15cb216b9263ecef31228b145903166ac4759d43ad2be78980a7",
+          "selected_candidate_id": 50,
+          "strict_success": true,
+          "success": true
+        },
+        "da_jepa_r": {
+          "final_chamfer": 0.13653491386286423,
+          "main_success": true,
+          "selected_action_sha256": "82be8b22238433eb2c0fe07b18f557580fe2bd2b40e9f4ba300d41750711a24a",
+          "selected_candidate_id": 49,
+          "strict_success": false,
+          "success": true
+        },
+        "frozen_dino_wm": {
+          "final_chamfer": 0.2540838907429862,
+          "main_success": false,
+          "selected_action_sha256": "bd2e3efe1e9d528ff7f3a848fbc3074aee9e41fb8cdfcc468dd87ea014f5bddb",
+          "selected_candidate_id": 2,
+          "strict_success": false,
+          "success": false
+        },
+        "unified_da_jepa_r": {
+          "final_chamfer": 0.13653491386286423,
+          "main_success": true,
+          "selected_action_sha256": "82be8b22238433eb2c0fe07b18f557580fe2bd2b40e9f4ba300d41750711a24a",
+          "selected_candidate_id": 49,
+          "strict_success": false,
+          "success": true
+        }
+      },
+      "start_id": "granular-formal-t00146-o00"
+    },
+    {
+      "goal_id": "granular-formal-goal-t00002-o10",
+      "methods": {
+        "da_jepa_mg": {
+          "final_chamfer": 0.2842535488636966,
+          "main_success": false,
+          "selected_action_sha256": "0c0e2f8119d641d817251e65dc9f01d43463f1429750c5e22465b67ae490093c",
+          "selected_candidate_id": 42,
+          "strict_success": false,
+          "success": false
+        },
+        "da_jepa_r": {
+          "final_chamfer": 0.10583490229690014,
+          "main_success": true,
+          "selected_action_sha256": "9fd358582624fe983b34d2e40beb91f1e7063f16eb78826d648218f8788ee322",
+          "selected_candidate_id": 49,
+          "strict_success": true,
+          "success": true
+        },
+        "frozen_dino_wm": {
+          "final_chamfer": 0.10583490229690014,
+          "main_success": true,
+          "selected_action_sha256": "9fd358582624fe983b34d2e40beb91f1e7063f16eb78826d648218f8788ee322",
+          "selected_candidate_id": 49,
+          "strict_success": true,
+          "success": true
+        },
+        "unified_da_jepa_r": {
+          "final_chamfer": 0.10583490229690014,
+          "main_success": true,
+          "selected_action_sha256": "9fd358582624fe983b34d2e40beb91f1e7063f16eb78826d648218f8788ee322",
+          "selected_candidate_id": 49,
+          "strict_success": true,
+          "success": true
+        }
+      },
+      "start_id": "granular-formal-t00002-o05"
+    },
+    {
+      "goal_id": "granular-formal-goal-t00747-o15",
+      "methods": {
+        "da_jepa_mg": {
+          "final_chamfer": 0.7967618110191345,
+          "main_success": false,
+          "selected_action_sha256": "feaa33108747c6fb046d070443523e0e637704525f472ec215bc4f12c4be106b",
+          "selected_candidate_id": 43,
+          "strict_success": false,
+          "success": false
+        },
+        "da_jepa_r": {
+          "final_chamfer": 0.7967618110191345,
+          "main_success": false,
+          "selected_action_sha256": "feaa33108747c6fb046d070443523e0e637704525f472ec215bc4f12c4be106b",
+          "selected_candidate_id": 43,
+          "strict_success": false,
+          "success": false
+        },
+        "frozen_dino_wm": {
+          "final_chamfer": 0.5502734365036966,
+          "main_success": false,
+          "selected_action_sha256": "7eb514b75770f973a67ab6f29d72aef394e26bd7f0a75e5aca0af9eddf8635ab",
+          "selected_candidate_id": 42,
+          "strict_success": false,
+          "success": false
+        },
+        "unified_da_jepa_r": {
+          "final_chamfer": 0.7967618110191345,
+          "main_success": false,
+          "selected_action_sha256": "feaa33108747c6fb046d070443523e0e637704525f472ec215bc4f12c4be106b",
+          "selected_candidate_id": 43,
+          "strict_success": false,
+          "success": false
+        }
+      },
+      "start_id": "granular-formal-t00747-o10"
+    },
+    {
+      "goal_id": "granular-formal-goal-t00455-o05",
+      "methods": {
+        "da_jepa_mg": {
+          "final_chamfer": 0.1654516161934061,
+          "main_success": true,
+          "selected_action_sha256": "fe7334ad4dbb3fc6dc570f6951aae0aeb69ce1d31ef2f457dade478102c50693",
+          "selected_candidate_id": 53,
+          "strict_success": false,
+          "success": true
+        },
+        "da_jepa_r": {
+          "final_chamfer": 0.13207926824983574,
+          "main_success": true,
+          "selected_action_sha256": "e8adc35e08169d7de3aafe7240eec0c1eddd55431851c5657244c8851dea47e4",
+          "selected_candidate_id": 54,
+          "strict_success": false,
+          "success": true
+        },
+        "frozen_dino_wm": {
+          "final_chamfer": 0.13207926824983574,
+          "main_success": true,
+          "selected_action_sha256": "e8adc35e08169d7de3aafe7240eec0c1eddd55431851c5657244c8851dea47e4",
+          "selected_candidate_id": 54,
+          "strict_success": false,
+          "success": true
+        },
+        "unified_da_jepa_r": {
+          "final_chamfer": 0.13207926824983574,
+          "main_success": true,
+          "selected_action_sha256": "e8adc35e08169d7de3aafe7240eec0c1eddd55431851c5657244c8851dea47e4",
+          "selected_candidate_id": 54,
+          "strict_success": false,
+          "success": true
+        }
+      },
+      "start_id": "granular-formal-t00455-o00"
+    },
+    {
+      "goal_id": "granular-formal-goal-t00330-o10",
+      "methods": {
+        "da_jepa_mg": {
+          "final_chamfer": 0.1189693104545736,
+          "main_success": true,
+          "selected_action_sha256": "e934d215a5e04da7b92838e20d7ba771ba4bf9434a682f4ca8f0769a8b23986f",
+          "selected_candidate_id": 59,
+          "strict_success": true,
+          "success": true
+        },
+        "da_jepa_r": {
+          "final_chamfer": 0.1560563131164034,
+          "main_success": true,
+          "selected_action_sha256": "b720df719ddbd66ca97ca47b43ff766b2d072c8d2c482f0fe90b27d47c48ffd4",
+          "selected_candidate_id": 58,
+          "strict_success": false,
+          "success": true
+        },
+        "frozen_dino_wm": {
+          "final_chamfer": 0.1560563131164034,
+          "main_success": true,
+          "selected_action_sha256": "b720df719ddbd66ca97ca47b43ff766b2d072c8d2c482f0fe90b27d47c48ffd4",
+          "selected_candidate_id": 58,
+          "strict_success": false,
+          "success": true
+        },
+        "unified_da_jepa_r": {
+          "final_chamfer": 0.1560563131164034,
+          "main_success": true,
+          "selected_action_sha256": "b720df719ddbd66ca97ca47b43ff766b2d072c8d2c482f0fe90b27d47c48ffd4",
+          "selected_candidate_id": 58,
+          "strict_success": false,
+          "success": true
+        }
+      },
+      "start_id": "granular-formal-t00330-o05"
+    },
+    {
+      "goal_id": "granular-formal-goal-t00222-o15",
+      "methods": {
+        "da_jepa_mg": {
+          "final_chamfer": 0.14518908390314583,
+          "main_success": true,
+          "selected_action_sha256": "3c4179af0a47388c16b77335857ba1202de95a8074716d9f99f23b029f23025b",
+          "selected_candidate_id": 57,
+          "strict_success": false,
+          "success": true
+        },
+        "da_jepa_r": {
+          "final_chamfer": 0.1545650116373903,
+          "main_success": true,
+          "selected_action_sha256": "17536547f18e1d2cb2ca9cce158f726bc9ba76aef94224e8d34e8607c1722c81",
+          "selected_candidate_id": 58,
+          "strict_success": false,
+          "success": true
+        },
+        "frozen_dino_wm": {
+          "final_chamfer": 0.1545650116373903,
+          "main_success": true,
+          "selected_action_sha256": "17536547f18e1d2cb2ca9cce158f726bc9ba76aef94224e8d34e8607c1722c81",
+          "selected_candidate_id": 58,
+          "strict_success": false,
+          "success": true
+        },
+        "unified_da_jepa_r": {
+          "final_chamfer": 0.1545650116373903,
+          "main_success": true,
+          "selected_action_sha256": "17536547f18e1d2cb2ca9cce158f726bc9ba76aef94224e8d34e8607c1722c81",
+          "selected_candidate_id": 58,
+          "strict_success": false,
+          "success": true
+        }
+      },
+      "start_id": "granular-formal-t00222-o10"
+    },
+    {
+      "goal_id": "granular-formal-goal-t00466-o05",
+      "methods": {
+        "da_jepa_mg": {
+          "final_chamfer": 0.42600036972637634,
+          "main_success": false,
+          "selected_action_sha256": "354961de102309e76c0708780d0aabc758ebb0ba45f19ca8d446e7bd2c07a5a5",
+          "selected_candidate_id": 41,
+          "strict_success": false,
+          "success": false
+        },
+        "da_jepa_r": {
+          "final_chamfer": 0.23084040015646384,
+          "main_success": false,
+          "selected_action_sha256": "441315571c276335e2f5cb9941a87d3bb7f6654ee09ae323c0c9e935211fd5f6",
+          "selected_candidate_id": 56,
+          "strict_success": false,
+          "success": false
+        },
+        "frozen_dino_wm": {
+          "final_chamfer": 0.23084040015646384,
+          "main_success": false,
+          "selected_action_sha256": "441315571c276335e2f5cb9941a87d3bb7f6654ee09ae323c0c9e935211fd5f6",
+          "selected_candidate_id": 56,
+          "strict_success": false,
+          "success": false
+        },
+        "unified_da_jepa_r": {
+          "final_chamfer": 0.23084040015646384,
+          "main_success": false,
+          "selected_action_sha256": "441315571c276335e2f5cb9941a87d3bb7f6654ee09ae323c0c9e935211fd5f6",
+          "selected_candidate_id": 56,
+          "strict_success": false,
+          "success": false
+        }
+      },
+      "start_id": "granular-formal-t00466-o00"
+    },
+    {
+      "goal_id": "granular-formal-goal-t00151-o10",
+      "methods": {
+        "da_jepa_mg": {
+          "final_chamfer": 0.7610412417687165,
+          "main_success": false,
+          "selected_action_sha256": "28939106b41d982ef056ce9ff7e3b1e6e6e6a07e8fee768c96dcb48e239358c9",
+          "selected_candidate_id": 29,
+          "strict_success": false,
+          "success": false
+        },
+        "da_jepa_r": {
+          "final_chamfer": 0.7610412417687165,
+          "main_success": false,
+          "selected_action_sha256": "28939106b41d982ef056ce9ff7e3b1e6e6e6a07e8fee768c96dcb48e239358c9",
+          "selected_candidate_id": 29,
+          "strict_success": false,
+          "success": false
+        },
+        "frozen_dino_wm": {
+          "final_chamfer": 0.7610412417687165,
+          "main_success": false,
+          "selected_action_sha256": "28939106b41d982ef056ce9ff7e3b1e6e6e6a07e8fee768c96dcb48e239358c9",
+          "selected_candidate_id": 29,
+          "strict_success": false,
+          "success": false
+        },
+        "unified_da_jepa_r": {
+          "final_chamfer": 0.7610412417687165,
+          "main_success": false,
+          "selected_action_sha256": "28939106b41d982ef056ce9ff7e3b1e6e6e6a07e8fee768c96dcb48e239358c9",
+          "selected_candidate_id": 29,
+          "strict_success": false,
+          "success": false
+        }
+      },
+      "start_id": "granular-formal-t00151-o05"
+    },
+    {
+      "goal_id": "granular-formal-goal-t00741-o15",
+      "methods": {
+        "da_jepa_mg": {
+          "final_chamfer": 0.5992547261637692,
+          "main_success": false,
+          "selected_action_sha256": "552927efe95f093b4b25818e2281699f0655ee1a3d5ed0a0550d0bcdf2cca367",
+          "selected_candidate_id": 31,
+          "strict_success": false,
+          "success": false
+        },
+        "da_jepa_r": {
+          "final_chamfer": 0.5992547261637692,
+          "main_success": false,
+          "selected_action_sha256": "552927efe95f093b4b25818e2281699f0655ee1a3d5ed0a0550d0bcdf2cca367",
+          "selected_candidate_id": 31,
+          "strict_success": false,
+          "success": false
+        },
+        "frozen_dino_wm": {
+          "final_chamfer": 0.5992547261637692,
+          "main_success": false,
+          "selected_action_sha256": "552927efe95f093b4b25818e2281699f0655ee1a3d5ed0a0550d0bcdf2cca367",
+          "selected_candidate_id": 31,
+          "strict_success": false,
+          "success": false
+        },
+        "unified_da_jepa_r": {
+          "final_chamfer": 0.5992547261637692,
+          "main_success": false,
+          "selected_action_sha256": "552927efe95f093b4b25818e2281699f0655ee1a3d5ed0a0550d0bcdf2cca367",
+          "selected_candidate_id": 31,
+          "strict_success": false,
+          "success": false
+        }
+      },
+      "start_id": "granular-formal-t00741-o10"
+    },
+    {
+      "goal_id": "granular-formal-goal-t00465-o05",
+      "methods": {
+        "da_jepa_mg": {
+          "final_chamfer": 0.3727628016676737,
+          "main_success": false,
+          "selected_action_sha256": "3762da8a15ec9ab04f495e9d418a17ba55cda0b54f814305b0552edc5e5eb403",
+          "selected_candidate_id": 24,
+          "strict_success": false,
+          "success": false
+        },
+        "da_jepa_r": {
+          "final_chamfer": 0.16794599749603084,
+          "main_success": true,
+          "selected_action_sha256": "a210003ba93ed99c56630230aa55e5957e578c602aeee165932dd07a7dc5011e",
+          "selected_candidate_id": 56,
+          "strict_success": false,
+          "success": true
+        },
+        "frozen_dino_wm": {
+          "final_chamfer": 0.16794599749603084,
+          "main_success": true,
+          "selected_action_sha256": "a210003ba93ed99c56630230aa55e5957e578c602aeee165932dd07a7dc5011e",
+          "selected_candidate_id": 56,
+          "strict_success": false,
+          "success": true
+        },
+        "unified_da_jepa_r": {
+          "final_chamfer": 0.16794599749603084,
+          "main_success": true,
+          "selected_action_sha256": "a210003ba93ed99c56630230aa55e5957e578c602aeee165932dd07a7dc5011e",
+          "selected_candidate_id": 56,
+          "strict_success": false,
+          "success": true
+        }
+      },
+      "start_id": "granular-formal-t00465-o00"
+    }
+  ],
+  "method_order": [
+    "frozen_dino_wm",
+    "da_jepa_r",
+    "da_jepa_mg",
+    "unified_da_jepa_r"
+  ],
+  "methods": {
+    "da_jepa_mg": {
+      "final_chamfer": {
+        "bootstrap_95_ci": [
+          0.33424437848991473,
+          0.45548322416432285
+        ],
+        "mean": 0.39368231176454094,
+        "median": 0.33752030115274867,
+        "q25": 0.16857659075652004,
+        "q75": 0.5843741288214787
+      },
+      "main_success": {
+        "count": 64,
+        "rate": 0.28125,
+        "sum": 18
+      },
+      "method": "da_jepa_mg",
+      "score_bundle_sha256": "f52601002ddea02e2db5b1e2b38d74a65c38eefe34c28c2797a682be14cdb474",
+      "selected_action_sha256": [
+        "ebdc4495c8cc68f834d2146cc191a9eb36cf5db49e6a8e18dbcbd192c9c0514a",
+        "5e33a175ff4d565af7563d3b10f96aa170795b53b7df44e1d4c8796a20df0c0c",
+        "5e3c6c3563e597b74b13c9fa8f7903f29dfb92c84cead17386501b6df0f9bfb3",
+        "44b28d16744c87ce9b8ae09cce21d5905da73bcea877f0ff38c74faa362d0a30",
+        "5b6210492f525edde8121aaf52aa02854abaf9201da1e0b0203460bb65446bfc",
+        "a577cf7dedc38832131f01dc9ef55e6ba8f7ff3b1fa15e1ef4e67ccda1225909",
+        "40a0af537d13479034cb2db5da4e4bcbe5b5ed7c29d07a8d2ede3e875ad1149c",
+        "6deab01b9c300571166513e16ad3a09b0a7e50a484ce592c63e6731a7e2a226b",
+        "12b0f55ea8b13c6dd0165168c47d7f9cf5c453155a5780318773dc305ed56549",
+        "7302c5938ba82095e0f3c049db8f0b089987034c05c5c867bc6ba87b761eb76f",
+        "6e0d5529000d5f4321ee4e7ab5123a26770aab99fa2c252ee1b893111c37c8db",
+        "fe4553445cfa493f9037266dad1361092cff0a4a535e8d17129a2ce0981751cf",
+        "a67106dfcb0f6e8e9bf34f81b730daf9c9996d6264d200789b82a614f423d822",
+        "c35a5cd229f1882e14063b078a1bd21eeaf18e5f21d608c2820db7964c696b41",
+        "4d1a7f67b8cbe10805cbc94d6f39dade5b36b3fc44cec4df30cc83eef7ae0e23",
+        "745f34da0214227263625f00399e288287ac1d9ff13aa0405672b8310ce4aa49",
+        "d1837594c1d7a49c4b49fa25716a87184eed5d539d9fe09bbe03958bdda5a972",
+        "1247ef3e9c2d86a85fd66f79ddae98611284a67d97151c2d2aa19a4b990cf8cc",
+        "6b8cdc1567bd2406ca3fc8946ac7e2fc287d22ee79358a9f44c5526d693c1050",
+        "ff8fa80e06d22e6ff1b5975e30d0338004d7f2f7e38677fd82029dfdba7c5e57",
+        "6dc7344fc0fd24886b44f3dac8f64526b5c08470d495f8765a2a3379d825db7f",
+        "be6ec9fdbe8e0651b8ee76144088186e777dee3283d9959038624b28bef96be3",
+        "9f1a1c88c6d0cad352e1fdb1def3b61b0c6ac97329d8d388537f8bffc775c8b5",
+        "19e9f2dbc98bca502bb00faae22e25c9f75423fdbef7460c1b892a839469d85a",
+        "46d96e5939231316954ac69206cb46298a325787df2860295c85b6c59e935a8b",
+        "ada668b8e19026f534c8b3afc7bca0d5003d64a9ee573e390bf2b64a69a8fd18",
+        "19d2655a20e6af62cb15376f5f64b378a014475bc9f4ee9bc858f3519d6d2bcd",
+        "a73cecd904fe79a6eed8603f93822cda346197c3675359fb0ac8a657bfd3413a",
+        "bd40eb99318175e3d2a710ea6de0baf8f4b8401b6a5275c114cf747dea44873b",
+        "84397201a1d406ac07c06e5fd4b71f6a38cdacabcb66e961bc3968a0776c440e",
+        "b93bf34c030ef776c842ea651f606c73aa6304d0227d2b320c192f541656b6bd",
+        "4998701b37c44fdc4f6987b1fb8c611ee682a45fa8dce078118288e14e27a10f",
+        "7d3b8b72f79795aef794a06593477c1ab030b2c4c748f331b18bcb45a18ea5ba",
+        "7d0bb1a92f5d12e5674333a7c9744442d17ef6f3d0e3c7b31734dd51a2387165",
+        "ccd8804408c59e3edc578e5e67a73a5db41593801651f383773f0ee156a992a4",
+        "1914dc42ea518f6f5a7d9df533892c1a94f3312bcf0621c581d42a48083d35ba",
+        "c327a648857aa1f2e972c2725c1401fb57342eb8e7be4833b8f4607fbab7b5d4",
+        "08312ca06afcf9a575b993ab0e97386e2b2ea6d924d01d045b7fde2bb65da25a",
+        "d44565e8db478e350766cf075fdb98d26399991d6ffc4793672a74633b02b818",
+        "1e9bae157fc1f2d147d973862b15fca665922605569deb96adc1d88a8ba3f5ba",
+        "292719b8773fb26acd57c8879c3646f685625c0f3a9a22a4d3ac218d81b2a014",
+        "988ba007ac9f652945c72bcd7d080454a1e72c739778e099dfd5adb99a75280f",
+        "2d8b62cae9e886ea9a1274be5e3000c9b6aa2d45572f6df02f9316e322cff981",
+        "9755c035967a1b6fe31176570b8c90b780f9d2854f30965123f79378e201d199",
+        "84499b8346db9c3058d340d10ecc2bdb5e7d5cc33f4e7e7b8acdaa7f517ade02",
+        "c472ca694d9889e73ec030302636b974b9cedd3f5df175ffea3ace1bec9bec07",
+        "06ed5ad2af4ed8d56d5bebc085469280d1cd143e2eaf9089750bc6248fd97334",
+        "6e791feea1b743cf4107e6a63dc37abc67dbf34bbdf4bfefe7a513688b0f5292",
+        "1426b0c62f41923e3a2e625e51eed3603a54ace9deacee871e7ba4dff9a20338",
+        "dfb0459cb3a764e9eb3ca7b5803d146956b18106d227a04a49111fa2a51f4af1",
+        "97b424edaec18c241087e423e5f52c2d86844fb47e68fb4f729a173f815d04e6",
+        "f3b1c1d44f964b5f7470004ade441cacc51503750b032566722cc04b8522c7f0",
+        "6718ff6fa07677e206b6703de039000a70aee979af78b4514792406ca3ab7905",
+        "7f161e5aa4a6a0c43436b5d096a18458dbd4b94d2fa8027a13c0e22bf7258af6",
+        "ee4ea71a3c0f15cb216b9263ecef31228b145903166ac4759d43ad2be78980a7",
+        "0c0e2f8119d641d817251e65dc9f01d43463f1429750c5e22465b67ae490093c",
+        "feaa33108747c6fb046d070443523e0e637704525f472ec215bc4f12c4be106b",
+        "fe7334ad4dbb3fc6dc570f6951aae0aeb69ce1d31ef2f457dade478102c50693",
+        "e934d215a5e04da7b92838e20d7ba771ba4bf9434a682f4ca8f0769a8b23986f",
+        "3c4179af0a47388c16b77335857ba1202de95a8074716d9f99f23b029f23025b",
+        "354961de102309e76c0708780d0aabc758ebb0ba45f19ca8d446e7bd2c07a5a5",
+        "28939106b41d982ef056ce9ff7e3b1e6e6e6a07e8fee768c96dcb48e239358c9",
+        "552927efe95f093b4b25818e2281699f0655ee1a3d5ed0a0550d0bcdf2cca367",
+        "3762da8a15ec9ab04f495e9d418a17ba55cda0b54f814305b0552edc5e5eb403"
+      ],
+      "selected_candidate_ids": [
+        56,
+        31,
+        36,
+        32,
+        62,
+        36,
+        16,
+        53,
+        9,
+        7,
+        54,
+        43,
+        53,
+        19,
+        18,
+        3,
+        43,
+        47,
+        7,
+        61,
+        56,
+        36,
+        53,
+        53,
+        12,
+        51,
+        60,
+        39,
+        55,
+        63,
+        57,
+        59,
+        57,
+        16,
+        25,
+        57,
+        23,
+        41,
+        21,
+        8,
+        31,
+        54,
+        47,
+        10,
+        38,
+        56,
+        37,
+        6,
+        42,
+        32,
+        13,
+        43,
+        61,
+        27,
+        50,
+        42,
+        43,
+        53,
+        59,
+        57,
+        41,
+        29,
+        31,
+        24
+      ],
+      "strict_success": {
+        "count": 64,
+        "rate": 0.078125,
+        "sum": 5
+      },
+      "success_threshold_curve": {
+        "0.06": 0.0,
+        "0.09": 0.0,
+        "0.12": 0.078125,
+        "0.18": 0.28125,
+        "0.24": 0.328125
+      }
+    },
+    "da_jepa_r": {
+      "final_chamfer": {
+        "bootstrap_95_ci": [
+          0.29843080336835237,
+          0.42277937924303305
+        ],
+        "mean": 0.35834825834169787,
+        "median": 0.29121908176059996,
+        "q25": 0.12705055744143268,
+        "q75": 0.5342422359477328
+      },
+      "main_success": {
+        "count": 64,
+        "rate": 0.390625,
+        "sum": 25
+      },
+      "method": "da_jepa_r",
+      "score_bundle_sha256": "45959170063dd2be3298b9bdb111a39e9a3ef5980bda887f0dce26b4bdc229b9",
+      "selected_action_sha256": [
+        "0bc941db19d228dd3da0ac2c9146aff3dd3b2691d08e5b9b4c614d0676150008",
+        "18909928506641fd68ffb421dcbf94ff39423d2929ccb2d2049f031159f36067",
+        "b3f29eb879f131cef06246a3cba85b775bd0b78fddbddedc8fb4d19823f137a2",
+        "59d69ad87b15def4b340c8e157d3b24604429fed14f40c7f51a3badfe8ea40e8",
+        "74a6e46a7d67a9916e9227be78174c28d6d3b29f1361d717dafaff3c8509528b",
+        "a577cf7dedc38832131f01dc9ef55e6ba8f7ff3b1fa15e1ef4e67ccda1225909",
+        "b331aeadafac20f34a39c4c272d4f519417f9de91dc0c50d0cdf3c305e3e6e31",
+        "40fe4d9fe61b23b73f113deec5a36cd5f866b79def191e2c5877dd3f7ead28b1",
+        "a3ad4916f3efa3550b3f4e5f46bc803bfb31ea94384dba4449ea3e5fc07b6e56",
+        "6a328ffe13bae4192ffc8184c30ffe2e6c7ead7b27da5d1487c76f9f759fd931",
+        "987fd79c105bd23c3018b135d2b31d13b391888ec2bc29992d6e3dcbeab29dce",
+        "fe4553445cfa493f9037266dad1361092cff0a4a535e8d17129a2ce0981751cf",
+        "9404db7b8416a912569417b7ab1b64abd085e8afa4c3c00e07541865c1960fcb",
+        "2b9f6ffc64068ee8abd858a7727675b5d73f36376bec50161313ee634602ecc2",
+        "a27f61cd4bea4f7f1036b2f90ffdfa68c65d9cd558321602186a3e2b97320a79",
+        "2ac80f341fd7041b6371cf4440f3b073144bb0d0718a5b5ea08386b2374bb064",
+        "d1837594c1d7a49c4b49fa25716a87184eed5d539d9fe09bbe03958bdda5a972",
+        "4d0bc5543de19d1da6d58cb30f8ec73a60046cb19107ce38076c688f47e0a320",
+        "6b8cdc1567bd2406ca3fc8946ac7e2fc287d22ee79358a9f44c5526d693c1050",
+        "60838e8452bf8198ebf0f6e2ca09b4ece2847b136a8bcbb6383beca2d712090d",
+        "d603b52d10fe2a8cfd2d9363e9aca37ccf5de468e2d4fa20e2ce26a8ab74db23",
+        "26e9578aef27d3bbd9ba9bd570d4e0a546fdd0856297ff79d3e81cb7a15259c0",
+        "8cfd8ab55dc1ed745525f8229a7460798c2db8da7767d7db7701773882d039df",
+        "19e9f2dbc98bca502bb00faae22e25c9f75423fdbef7460c1b892a839469d85a",
+        "e3c0e9d6ac5b00675fe6b9bd1a7c89efab922c64569ae582b0ee0b2c7294b31f",
+        "4b6ff29d61987f528cc17e927345108fd5008ea5ef77c79ba794912f84e495f2",
+        "0890df11751be787ddb1c39a815bc909bbfe9c363f5056229aec85fd34ee79d6",
+        "6699b82211004f7a5933904009f45dde5eae0e70feddfc5481031f5966f6464c",
+        "40142ecd3e01014b7aa63ff90a1b0c1b57293755b26bcc40329a57c933392381",
+        "2e999c9d6a2f98d857a8a3370308803c1530624fbf0045e6cf7acc735618b715",
+        "52f6783087e1f0a12601e6ddebb67d77f97a1a15c2a01f8a630d77f6a60a1fbf",
+        "cbc062b283558318ccde7f657427083347d303e6c7cbace39c5bd3247223936f",
+        "ac17cce415991b57c813eefc232b7be0e25fd09bb373015eff866f36a2e32c8a",
+        "c7e3b984765e5f566de10b7d16a484e5aba2b3a3b0d0bfeaa36cca9dc088409a",
+        "2488c0aa0e74844a2cc216c8ffee53456bb3a047200ddaa78fe3e1bba9efc931",
+        "ad5cae5e28ff2557ee22acc06389903d95f5802349d4559253763e768f272ad0",
+        "426a882b5f46f7207707d1e1c3e79bfb42ffa2dd6b07f15324b239028b05aed7",
+        "ef43d0f5079414351ce23bd61a14e4f5ab0abd70cb9d29b6d5d101a4d5e435f2",
+        "b69ccf679123a68f3b32cd2abfc54284081efd6b4f11ce78b3d8b0166d84d5ff",
+        "af85e556a6ac58258a98f40c88c6875e2f964847377bf152adad4f35196cbc8d",
+        "25e73a674d03633065f4ffdce34dfc24487a87aa159f766487a114462f870e5e",
+        "82c7d745a10acf5a59471705a74ae1beaa12b6645dfd68b8566085c86972bed4",
+        "2d8b62cae9e886ea9a1274be5e3000c9b6aa2d45572f6df02f9316e322cff981",
+        "0f05d2e1a8b98ea1ceade08d2b0d0894c2d3c60f225b18ccaa53b04c334b6c7e",
+        "ace889bb8f7e400d97606e1e65b35900b7b565cf216c598c3a46846247463b0a",
+        "e9a92d24b893713c9e60bd7c1bceb0209876604d3e9710250c0ffb8992cde6ec",
+        "3356fe291af18064f5c6862fb06f3984ec3251aee69e48d31a19dcba6d6cdb56",
+        "aa7378b15bfc8103a502c3d148fdf7d47427d026e340db200a30280f37f45e60",
+        "b026a6323acd8c115288a0c90ffaf396e6a6d1a08ac52c9f4ca226dc3793e354",
+        "cca6e0a92ab1b649182e48d04cf8670d27bf4d638b50d25a8635bbc43ddc8628",
+        "99b5333b193adcdd3f5084a5d05a94eb1f67ca7c7a65dc8f563703562e53c109",
+        "f3b1c1d44f964b5f7470004ade441cacc51503750b032566722cc04b8522c7f0",
+        "af57487b6860436f852b4f421e114dde6199fdc4029273fef7ca004e304d27a9",
+        "3cf14bf1845b5e18976325dab8a52b4d34c78a1917f87aae02e95277ae1228ed",
+        "82be8b22238433eb2c0fe07b18f557580fe2bd2b40e9f4ba300d41750711a24a",
+        "9fd358582624fe983b34d2e40beb91f1e7063f16eb78826d648218f8788ee322",
+        "feaa33108747c6fb046d070443523e0e637704525f472ec215bc4f12c4be106b",
+        "e8adc35e08169d7de3aafe7240eec0c1eddd55431851c5657244c8851dea47e4",
+        "b720df719ddbd66ca97ca47b43ff766b2d072c8d2c482f0fe90b27d47c48ffd4",
+        "17536547f18e1d2cb2ca9cce158f726bc9ba76aef94224e8d34e8607c1722c81",
+        "441315571c276335e2f5cb9941a87d3bb7f6654ee09ae323c0c9e935211fd5f6",
+        "28939106b41d982ef056ce9ff7e3b1e6e6e6a07e8fee768c96dcb48e239358c9",
+        "552927efe95f093b4b25818e2281699f0655ee1a3d5ed0a0550d0bcdf2cca367",
+        "a210003ba93ed99c56630230aa55e5957e578c602aeee165932dd07a7dc5011e"
+      ],
+      "selected_candidate_ids": [
+        30,
+        51,
+        55,
+        27,
+        61,
+        36,
+        18,
+        9,
+        16,
+        59,
+        5,
+        43,
+        11,
+        44,
+        59,
+        48,
+        43,
+        53,
+        7,
+        50,
+        23,
+        50,
+        61,
+        53,
+        8,
+        28,
+        45,
+        62,
+        32,
+        47,
+        58,
+        9,
+        36,
+        49,
+        24,
+        50,
+        55,
+        46,
+        47,
+        9,
+        6,
+        63,
+        47,
+        15,
+        63,
+        39,
+        56,
+        48,
+        41,
+        37,
+        34,
+        43,
+        29,
+        60,
+        49,
+        49,
+        43,
+        54,
+        58,
+        58,
+        56,
+        29,
+        31,
+        56
+      ],
+      "strict_success": {
+        "count": 64,
+        "rate": 0.1875,
+        "sum": 12
+      },
+      "success_threshold_curve": {
+        "0.06": 0.0,
+        "0.09": 0.03125,
+        "0.12": 0.1875,
+        "0.18": 0.390625,
+        "0.24": 0.421875
+      }
+    },
+    "frozen_dino_wm": {
+      "final_chamfer": {
+        "bootstrap_95_ci": [
+          0.2913462073317784,
+          0.39252592818172627
+        ],
+        "mean": 0.3408865057691002,
+        "median": 0.2959251415123647,
+        "q25": 0.1556834877466501,
+        "q75": 0.5005488826401364
+      },
+      "main_success": {
+        "count": 64,
+        "rate": 0.359375,
+        "sum": 23
+      },
+      "method": "frozen_dino_wm",
+      "score_bundle_sha256": "3d25db023e336d8dc2d70a5790e8ffabdbd7b639edd3bbba2fe76fdd6c025ae0",
+      "selected_action_sha256": [
+        "ebdc4495c8cc68f834d2146cc191a9eb36cf5db49e6a8e18dbcbd192c9c0514a",
+        "18909928506641fd68ffb421dcbf94ff39423d2929ccb2d2049f031159f36067",
+        "b1a8a6be3b9efd0cf3d173fa24af630eb76901e59a145f1b35f3a19e56e54848",
+        "59d69ad87b15def4b340c8e157d3b24604429fed14f40c7f51a3badfe8ea40e8",
+        "74a6e46a7d67a9916e9227be78174c28d6d3b29f1361d717dafaff3c8509528b",
+        "a577cf7dedc38832131f01dc9ef55e6ba8f7ff3b1fa15e1ef4e67ccda1225909",
+        "b331aeadafac20f34a39c4c272d4f519417f9de91dc0c50d0cdf3c305e3e6e31",
+        "40fe4d9fe61b23b73f113deec5a36cd5f866b79def191e2c5877dd3f7ead28b1",
+        "a3ad4916f3efa3550b3f4e5f46bc803bfb31ea94384dba4449ea3e5fc07b6e56",
+        "a9f0ff6afeb01ffba1bed0eb85fceb646703e07d6b6a3f11e33103f739d318b2",
+        "c1d92799ac96bf9fd00d405128d302015d7dd9f35f27b7fd73f1c92ea01cb32a",
+        "fe4553445cfa493f9037266dad1361092cff0a4a535e8d17129a2ce0981751cf",
+        "e68eb0ba705109fe988e4072b26d04a59f97d7809ffc586c167c24d655c16cf8",
+        "2b9f6ffc64068ee8abd858a7727675b5d73f36376bec50161313ee634602ecc2",
+        "a27f61cd4bea4f7f1036b2f90ffdfa68c65d9cd558321602186a3e2b97320a79",
+        "2ac80f341fd7041b6371cf4440f3b073144bb0d0718a5b5ea08386b2374bb064",
+        "1d5cd6c36f00f55839d61bc5f09efdd7ecf5ebd8a476f8a5af5d12742ac084f1",
+        "4d0bc5543de19d1da6d58cb30f8ec73a60046cb19107ce38076c688f47e0a320",
+        "d75218dbe20a4891e8542fe9db3cf079c1807fa6747d26bcaa422ef98f86f745",
+        "e997a0c1700f467be4ef62649995cde3ebb88749680048c8c10b2716badc7020",
+        "80b91bc64c07f597d83dd1e67b30608e4f738e8366603f267b0fa61ad4959d2f",
+        "26e9578aef27d3bbd9ba9bd570d4e0a546fdd0856297ff79d3e81cb7a15259c0",
+        "8cfd8ab55dc1ed745525f8229a7460798c2db8da7767d7db7701773882d039df",
+        "19e9f2dbc98bca502bb00faae22e25c9f75423fdbef7460c1b892a839469d85a",
+        "cc5c152de6d442ef48b91a6a6bf9292360a5344915a72eb804027653a0ed3ac9",
+        "83e76a42261311dea4760afe6e5dab077b9d08f5caffd55638ab5aead4fcc0ac",
+        "259735f40b9aba881f98c021d196a57b59fe3bac552f090de21aaa2f14d2313a",
+        "6699b82211004f7a5933904009f45dde5eae0e70feddfc5481031f5966f6464c",
+        "bd40eb99318175e3d2a710ea6de0baf8f4b8401b6a5275c114cf747dea44873b",
+        "cdd80279a8c07de71eb29a36dcc67d388f38030fe54e3af9cf87e22e9c9dca8d",
+        "52f6783087e1f0a12601e6ddebb67d77f97a1a15c2a01f8a630d77f6a60a1fbf",
+        "cbc062b283558318ccde7f657427083347d303e6c7cbace39c5bd3247223936f",
+        "b37d3a0d6f8a39444561355c197607e3fa4af18a40ef0a944bd588c1234993e4",
+        "e8684b295aaff1d56a64c8af2792dda1fb06653e40674e9e58b72afd5fc2a61d",
+        "86e9c1f76e07eee6ef79a542f3d7d273cde507dd20235fc29d15dfb71338f1a5",
+        "81e0650712b7d972978ab96552ff3eba851f60d84e88df8c918bbf52a43c56df",
+        "426a882b5f46f7207707d1e1c3e79bfb42ffa2dd6b07f15324b239028b05aed7",
+        "08312ca06afcf9a575b993ab0e97386e2b2ea6d924d01d045b7fde2bb65da25a",
+        "398dd86b80573d0797483cf200f919e2479674c5cc4288b19ca945795d0cb3b9",
+        "af85e556a6ac58258a98f40c88c6875e2f964847377bf152adad4f35196cbc8d",
+        "25e73a674d03633065f4ffdce34dfc24487a87aa159f766487a114462f870e5e",
+        "22ace677a03db543af20ae76aed18855a1c7aef9f8c77d4aec5d8e0f6a40ded4",
+        "2d8b62cae9e886ea9a1274be5e3000c9b6aa2d45572f6df02f9316e322cff981",
+        "9755c035967a1b6fe31176570b8c90b780f9d2854f30965123f79378e201d199",
+        "84499b8346db9c3058d340d10ecc2bdb5e7d5cc33f4e7e7b8acdaa7f517ade02",
+        "e9a92d24b893713c9e60bd7c1bceb0209876604d3e9710250c0ffb8992cde6ec",
+        "3356fe291af18064f5c6862fb06f3984ec3251aee69e48d31a19dcba6d6cdb56",
+        "f6347b99d3cb156d04297461f796ac7840c69c67b71cd5a20f158cf66c414a5a",
+        "b026a6323acd8c115288a0c90ffaf396e6a6d1a08ac52c9f4ca226dc3793e354",
+        "cca6e0a92ab1b649182e48d04cf8670d27bf4d638b50d25a8635bbc43ddc8628",
+        "99b5333b193adcdd3f5084a5d05a94eb1f67ca7c7a65dc8f563703562e53c109",
+        "f3b1c1d44f964b5f7470004ade441cacc51503750b032566722cc04b8522c7f0",
+        "af57487b6860436f852b4f421e114dde6199fdc4029273fef7ca004e304d27a9",
+        "3cf14bf1845b5e18976325dab8a52b4d34c78a1917f87aae02e95277ae1228ed",
+        "bd2e3efe1e9d528ff7f3a848fbc3074aee9e41fb8cdfcc468dd87ea014f5bddb",
+        "9fd358582624fe983b34d2e40beb91f1e7063f16eb78826d648218f8788ee322",
+        "7eb514b75770f973a67ab6f29d72aef394e26bd7f0a75e5aca0af9eddf8635ab",
+        "e8adc35e08169d7de3aafe7240eec0c1eddd55431851c5657244c8851dea47e4",
+        "b720df719ddbd66ca97ca47b43ff766b2d072c8d2c482f0fe90b27d47c48ffd4",
+        "17536547f18e1d2cb2ca9cce158f726bc9ba76aef94224e8d34e8607c1722c81",
+        "441315571c276335e2f5cb9941a87d3bb7f6654ee09ae323c0c9e935211fd5f6",
+        "28939106b41d982ef056ce9ff7e3b1e6e6e6a07e8fee768c96dcb48e239358c9",
+        "552927efe95f093b4b25818e2281699f0655ee1a3d5ed0a0550d0bcdf2cca367",
+        "a210003ba93ed99c56630230aa55e5957e578c602aeee165932dd07a7dc5011e"
+      ],
+      "selected_candidate_ids": [
+        56,
+        51,
+        15,
+        27,
+        61,
+        36,
+        18,
+        9,
+        16,
+        52,
+        21,
+        43,
+        61,
+        44,
+        59,
+        48,
+        39,
+        53,
+        19,
+        57,
+        2,
+        50,
+        61,
+        53,
+        10,
+        53,
+        40,
+        62,
+        55,
+        56,
+        58,
+        9,
+        56,
+        15,
+        61,
+        49,
+        55,
+        41,
+        19,
+        9,
+        6,
+        62,
+        47,
+        10,
+        38,
+        39,
+        56,
+        13,
+        41,
+        37,
+        34,
+        43,
+        29,
+        60,
+        2,
+        49,
+        42,
+        54,
+        58,
+        58,
+        56,
+        29,
+        31,
+        56
+      ],
+      "strict_success": {
+        "count": 64,
+        "rate": 0.078125,
+        "sum": 5
+      },
+      "success_threshold_curve": {
+        "0.06": 0.0,
+        "0.09": 0.0,
+        "0.12": 0.078125,
+        "0.18": 0.359375,
+        "0.24": 0.40625
+      }
+    },
+    "unified_da_jepa_r": {
+      "final_chamfer": {
+        "bootstrap_95_ci": [
+          0.29649157100435275,
+          0.421298504030159
+        ],
+        "mean": 0.35834825834169787,
+        "median": 0.29121908176059996,
+        "q25": 0.12705055744143268,
+        "q75": 0.5342422359477328
+      },
+      "main_success": {
+        "count": 64,
+        "rate": 0.390625,
+        "sum": 25
+      },
+      "method": "unified_da_jepa_r",
+      "score_bundle_sha256": "f66f746e906c01a854048c3db6f60dc5a30583cbc82c18d5f86e45737091f052",
+      "selected_action_sha256": [
+        "0bc941db19d228dd3da0ac2c9146aff3dd3b2691d08e5b9b4c614d0676150008",
+        "18909928506641fd68ffb421dcbf94ff39423d2929ccb2d2049f031159f36067",
+        "b3f29eb879f131cef06246a3cba85b775bd0b78fddbddedc8fb4d19823f137a2",
+        "59d69ad87b15def4b340c8e157d3b24604429fed14f40c7f51a3badfe8ea40e8",
+        "74a6e46a7d67a9916e9227be78174c28d6d3b29f1361d717dafaff3c8509528b",
+        "a577cf7dedc38832131f01dc9ef55e6ba8f7ff3b1fa15e1ef4e67ccda1225909",
+        "b331aeadafac20f34a39c4c272d4f519417f9de91dc0c50d0cdf3c305e3e6e31",
+        "40fe4d9fe61b23b73f113deec5a36cd5f866b79def191e2c5877dd3f7ead28b1",
+        "a3ad4916f3efa3550b3f4e5f46bc803bfb31ea94384dba4449ea3e5fc07b6e56",
+        "6a328ffe13bae4192ffc8184c30ffe2e6c7ead7b27da5d1487c76f9f759fd931",
+        "987fd79c105bd23c3018b135d2b31d13b391888ec2bc29992d6e3dcbeab29dce",
+        "fe4553445cfa493f9037266dad1361092cff0a4a535e8d17129a2ce0981751cf",
+        "9404db7b8416a912569417b7ab1b64abd085e8afa4c3c00e07541865c1960fcb",
+        "2b9f6ffc64068ee8abd858a7727675b5d73f36376bec50161313ee634602ecc2",
+        "a27f61cd4bea4f7f1036b2f90ffdfa68c65d9cd558321602186a3e2b97320a79",
+        "2ac80f341fd7041b6371cf4440f3b073144bb0d0718a5b5ea08386b2374bb064",
+        "d1837594c1d7a49c4b49fa25716a87184eed5d539d9fe09bbe03958bdda5a972",
+        "4d0bc5543de19d1da6d58cb30f8ec73a60046cb19107ce38076c688f47e0a320",
+        "6b8cdc1567bd2406ca3fc8946ac7e2fc287d22ee79358a9f44c5526d693c1050",
+        "60838e8452bf8198ebf0f6e2ca09b4ece2847b136a8bcbb6383beca2d712090d",
+        "d603b52d10fe2a8cfd2d9363e9aca37ccf5de468e2d4fa20e2ce26a8ab74db23",
+        "26e9578aef27d3bbd9ba9bd570d4e0a546fdd0856297ff79d3e81cb7a15259c0",
+        "8cfd8ab55dc1ed745525f8229a7460798c2db8da7767d7db7701773882d039df",
+        "19e9f2dbc98bca502bb00faae22e25c9f75423fdbef7460c1b892a839469d85a",
+        "e3c0e9d6ac5b00675fe6b9bd1a7c89efab922c64569ae582b0ee0b2c7294b31f",
+        "4b6ff29d61987f528cc17e927345108fd5008ea5ef77c79ba794912f84e495f2",
+        "0890df11751be787ddb1c39a815bc909bbfe9c363f5056229aec85fd34ee79d6",
+        "6699b82211004f7a5933904009f45dde5eae0e70feddfc5481031f5966f6464c",
+        "40142ecd3e01014b7aa63ff90a1b0c1b57293755b26bcc40329a57c933392381",
+        "2e999c9d6a2f98d857a8a3370308803c1530624fbf0045e6cf7acc735618b715",
+        "52f6783087e1f0a12601e6ddebb67d77f97a1a15c2a01f8a630d77f6a60a1fbf",
+        "cbc062b283558318ccde7f657427083347d303e6c7cbace39c5bd3247223936f",
+        "ac17cce415991b57c813eefc232b7be0e25fd09bb373015eff866f36a2e32c8a",
+        "c7e3b984765e5f566de10b7d16a484e5aba2b3a3b0d0bfeaa36cca9dc088409a",
+        "2488c0aa0e74844a2cc216c8ffee53456bb3a047200ddaa78fe3e1bba9efc931",
+        "ad5cae5e28ff2557ee22acc06389903d95f5802349d4559253763e768f272ad0",
+        "426a882b5f46f7207707d1e1c3e79bfb42ffa2dd6b07f15324b239028b05aed7",
+        "ef43d0f5079414351ce23bd61a14e4f5ab0abd70cb9d29b6d5d101a4d5e435f2",
+        "b69ccf679123a68f3b32cd2abfc54284081efd6b4f11ce78b3d8b0166d84d5ff",
+        "af85e556a6ac58258a98f40c88c6875e2f964847377bf152adad4f35196cbc8d",
+        "25e73a674d03633065f4ffdce34dfc24487a87aa159f766487a114462f870e5e",
+        "82c7d745a10acf5a59471705a74ae1beaa12b6645dfd68b8566085c86972bed4",
+        "2d8b62cae9e886ea9a1274be5e3000c9b6aa2d45572f6df02f9316e322cff981",
+        "0f05d2e1a8b98ea1ceade08d2b0d0894c2d3c60f225b18ccaa53b04c334b6c7e",
+        "ace889bb8f7e400d97606e1e65b35900b7b565cf216c598c3a46846247463b0a",
+        "e9a92d24b893713c9e60bd7c1bceb0209876604d3e9710250c0ffb8992cde6ec",
+        "3356fe291af18064f5c6862fb06f3984ec3251aee69e48d31a19dcba6d6cdb56",
+        "aa7378b15bfc8103a502c3d148fdf7d47427d026e340db200a30280f37f45e60",
+        "b026a6323acd8c115288a0c90ffaf396e6a6d1a08ac52c9f4ca226dc3793e354",
+        "cca6e0a92ab1b649182e48d04cf8670d27bf4d638b50d25a8635bbc43ddc8628",
+        "99b5333b193adcdd3f5084a5d05a94eb1f67ca7c7a65dc8f563703562e53c109",
+        "f3b1c1d44f964b5f7470004ade441cacc51503750b032566722cc04b8522c7f0",
+        "af57487b6860436f852b4f421e114dde6199fdc4029273fef7ca004e304d27a9",
+        "3cf14bf1845b5e18976325dab8a52b4d34c78a1917f87aae02e95277ae1228ed",
+        "82be8b22238433eb2c0fe07b18f557580fe2bd2b40e9f4ba300d41750711a24a",
+        "9fd358582624fe983b34d2e40beb91f1e7063f16eb78826d648218f8788ee322",
+        "feaa33108747c6fb046d070443523e0e637704525f472ec215bc4f12c4be106b",
+        "e8adc35e08169d7de3aafe7240eec0c1eddd55431851c5657244c8851dea47e4",
+        "b720df719ddbd66ca97ca47b43ff766b2d072c8d2c482f0fe90b27d47c48ffd4",
+        "17536547f18e1d2cb2ca9cce158f726bc9ba76aef94224e8d34e8607c1722c81",
+        "441315571c276335e2f5cb9941a87d3bb7f6654ee09ae323c0c9e935211fd5f6",
+        "28939106b41d982ef056ce9ff7e3b1e6e6e6a07e8fee768c96dcb48e239358c9",
+        "552927efe95f093b4b25818e2281699f0655ee1a3d5ed0a0550d0bcdf2cca367",
+        "a210003ba93ed99c56630230aa55e5957e578c602aeee165932dd07a7dc5011e"
+      ],
+      "selected_candidate_ids": [
+        30,
+        51,
+        55,
+        27,
+        61,
+        36,
+        18,
+        9,
+        16,
+        59,
+        5,
+        43,
+        11,
+        44,
+        59,
+        48,
+        43,
+        53,
+        7,
+        50,
+        23,
+        50,
+        61,
+        53,
+        8,
+        28,
+        45,
+        62,
+        32,
+        47,
+        58,
+        9,
+        36,
+        49,
+        24,
+        50,
+        55,
+        46,
+        47,
+        9,
+        6,
+        63,
+        47,
+        15,
+        63,
+        39,
+        56,
+        48,
+        41,
+        37,
+        34,
+        43,
+        29,
+        60,
+        49,
+        49,
+        43,
+        54,
+        58,
+        58,
+        56,
+        29,
+        31,
+        56
+      ],
+      "strict_success": {
+        "count": 64,
+        "rate": 0.1875,
+        "sum": 12
+      },
+      "success_threshold_curve": {
+        "0.06": 0.0,
+        "0.09": 0.03125,
+        "0.12": 0.1875,
+        "0.18": 0.390625,
+        "0.24": 0.421875
+      }
+    }
+  },
+  "metric_authority": {
+    "implementation": "scipy_ckdtree_chunked_exact_nn",
+    "main_success_rule": "cd_sum_full <= 0.18",
+    "particle_count": 12774,
+    "particle_stride": 1,
+    "primary": "cd_sum_full",
+    "strict_success_rule": "cd_sum_full <= 0.12",
+    "success_is_secondary": true,
+    "threshold_grid": [
+      0.06,
+      0.09,
+      0.12,
+      0.18,
+      0.24
+    ],
+    "xyz_only": true
+  },
+  "paired": {
+    "da_jepa_mg_vs_da_jepa_r": {
+      "bootstrap": {
+        "chamfer_improvement_ci95": [
+          -0.11559294685429948,
+          0.048536406038355115
+        ],
+        "draws": 10000,
+        "seed": 3075,
+        "success_delta_ci95_pp": [
+          -26.5625,
+          4.6875
+        ]
+      },
+      "candidate_disagreement": {
+        "different": 54,
+        "rate": 0.84375,
+        "same": 10
+      },
+      "count": 64,
+      "gains": 10,
+      "left": "da_jepa_mg",
+      "losses": 17,
+      "mean_chamfer_improvement": -0.035334053422843126,
+      "relative_success_gain_pct": -28.000000000000004,
+      "right": "da_jepa_r",
+      "strict_gains": 4,
+      "strict_losses": 11,
+      "strict_success_delta_pp": -10.9375,
+      "strict_ties": 49,
+      "success_delta_pp": -10.9375,
+      "ties": 37
+    },
+    "da_jepa_mg_vs_frozen_dino_wm": {
+      "bootstrap": {
+        "chamfer_improvement_ci95": [
+          -0.11897028505839753,
+          0.01169401747947984
+        ],
+        "draws": 10000,
+        "seed": 3073,
+        "success_delta_ci95_pp": [
+          -21.875,
+          6.25
+        ]
+      },
+      "candidate_disagreement": {
+        "different": 52,
+        "rate": 0.8125,
+        "same": 12
+      },
+      "count": 64,
+      "gains": 8,
+      "left": "da_jepa_mg",
+      "losses": 13,
+      "mean_chamfer_improvement": -0.052795805995440794,
+      "relative_success_gain_pct": -21.73913043478261,
+      "right": "frozen_dino_wm",
+      "strict_gains": 4,
+      "strict_losses": 4,
+      "strict_success_delta_pp": 0.0,
+      "strict_ties": 56,
+      "success_delta_pp": -7.8125,
+      "ties": 43
+    },
+    "da_jepa_r_vs_frozen_dino_wm": {
+      "bootstrap": {
+        "chamfer_improvement_ci95": [
+          -0.0639223717804697,
+          0.024708800960350195
+        ],
+        "draws": 10000,
+        "seed": 3072,
+        "success_delta_ci95_pp": [
+          -6.25,
+          12.5
+        ]
+      },
+      "candidate_disagreement": {
+        "different": 26,
+        "rate": 0.40625,
+        "same": 38
+      },
+      "count": 64,
+      "gains": 6,
+      "left": "da_jepa_r",
+      "losses": 4,
+      "mean_chamfer_improvement": -0.01746175257259767,
+      "relative_success_gain_pct": 8.695652173913043,
+      "right": "frozen_dino_wm",
+      "strict_gains": 7,
+      "strict_losses": 0,
+      "strict_success_delta_pp": 10.9375,
+      "strict_ties": 57,
+      "success_delta_pp": 3.125,
+      "ties": 54
+    },
+    "unified_da_jepa_r_vs_da_jepa_mg": {
+      "bootstrap": {
+        "chamfer_improvement_ci95": [
+          -0.048607780044301906,
+          0.11667276655359834
+        ],
+        "draws": 10000,
+        "seed": 3077,
+        "success_delta_ci95_pp": [
+          -4.6875,
+          26.5625
+        ]
+      },
+      "candidate_disagreement": {
+        "different": 54,
+        "rate": 0.84375,
+        "same": 10
+      },
+      "count": 64,
+      "gains": 17,
+      "left": "unified_da_jepa_r",
+      "losses": 10,
+      "mean_chamfer_improvement": 0.035334053422843126,
+      "relative_success_gain_pct": 38.88888888888889,
+      "right": "da_jepa_mg",
+      "strict_gains": 11,
+      "strict_losses": 4,
+      "strict_success_delta_pp": 10.9375,
+      "strict_ties": 49,
+      "success_delta_pp": 10.9375,
+      "ties": 37
+    },
+    "unified_da_jepa_r_vs_da_jepa_r": {
+      "bootstrap": {
+        "chamfer_improvement_ci95": [
+          0.0,
+          0.0
+        ],
+        "draws": 10000,
+        "seed": 3076,
+        "success_delta_ci95_pp": [
+          0.0,
+          0.0
+        ]
+      },
+      "candidate_disagreement": {
+        "different": 0,
+        "rate": 0.0,
+        "same": 64
+      },
+      "count": 64,
+      "gains": 0,
+      "left": "unified_da_jepa_r",
+      "losses": 0,
+      "mean_chamfer_improvement": 0.0,
+      "relative_success_gain_pct": 0.0,
+      "right": "da_jepa_r",
+      "strict_gains": 0,
+      "strict_losses": 0,
+      "strict_success_delta_pp": 0.0,
+      "strict_ties": 64,
+      "success_delta_pp": 0.0,
+      "ties": 64
+    },
+    "unified_da_jepa_r_vs_frozen_dino_wm": {
+      "bootstrap": {
+        "chamfer_improvement_ci95": [
+          -0.06548104562742149,
+          0.02485398892137742
+        ],
+        "draws": 10000,
+        "seed": 3074,
+        "success_delta_ci95_pp": [
+          -6.25,
+          12.5
+        ]
+      },
+      "candidate_disagreement": {
+        "different": 26,
+        "rate": 0.40625,
+        "same": 38
+      },
+      "count": 64,
+      "gains": 6,
+      "left": "unified_da_jepa_r",
+      "losses": 4,
+      "mean_chamfer_improvement": -0.01746175257259767,
+      "relative_success_gain_pct": 8.695652173913043,
+      "right": "frozen_dino_wm",
+      "strict_gains": 7,
+      "strict_losses": 0,
+      "strict_success_delta_pp": 10.9375,
+      "strict_ties": 57,
+      "success_delta_pp": 3.125,
+      "ties": 54
+    }
+  },
+  "paper_table_rows": [
+    {
+      "cd_bootstrap_ci95": [
+        0.2913462073317784,
+        0.39252592818172627
+      ],
+      "mean_cd_sum_full": 0.3408865057691002,
+      "median_cd_sum_full": 0.2959251415123647,
+      "method_id": "frozen_dino_wm",
+      "n": 64,
+      "strict_success_rate": 0.078125,
+      "success_rate": 0.359375
+    },
+    {
+      "cd_bootstrap_ci95": [
+        0.29843080336835237,
+        0.42277937924303305
+      ],
+      "mean_cd_sum_full": 0.35834825834169787,
+      "median_cd_sum_full": 0.29121908176059996,
+      "method_id": "da_jepa_r",
+      "n": 64,
+      "strict_success_rate": 0.1875,
+      "success_rate": 0.390625
+    },
+    {
+      "cd_bootstrap_ci95": [
+        0.33424437848991473,
+        0.45548322416432285
+      ],
+      "mean_cd_sum_full": 0.39368231176454094,
+      "median_cd_sum_full": 0.33752030115274867,
+      "method_id": "da_jepa_mg",
+      "n": 64,
+      "strict_success_rate": 0.078125,
+      "success_rate": 0.28125
+    },
+    {
+      "cd_bootstrap_ci95": [
+        0.29649157100435275,
+        0.421298504030159
+      ],
+      "mean_cd_sum_full": 0.35834825834169787,
+      "median_cd_sum_full": 0.29121908176059996,
+      "method_id": "unified_da_jepa_r",
+      "n": 64,
+      "strict_success_rate": 0.1875,
+      "success_rate": 0.390625
+    }
+  ],
+  "schema": "dajepa_granular_formal_aggregate_v1",
+  "source_hashes": {
+    "candidate_manifest": "16ceed9a6fe88f2bc7887534c6cd6028182ed097ba86583f1fb929c12c5f2e10",
+    "dino_checkpoint": "2b1cb1db727e866c9f98136a72dcd1e55ad076379bda64b4b88273e84a23ac60",
+    "goal_manifest": "76e71125d1e091ec27959746fc4d6b528103a6c56726180b701095eff5653aec",
+    "physical_authority": "e4fa5a7004d31891b67aec55caab7ad312cfcd2b757f76270e2a528beb5dc0f1",
+    "score_bundles": {
+      "da_jepa_mg": "f52601002ddea02e2db5b1e2b38d74a65c38eefe34c28c2797a682be14cdb474",
+      "da_jepa_r": "45959170063dd2be3298b9bdb111a39e9a3ef5980bda887f0dce26b4bdc229b9",
+      "frozen_dino_wm": "3d25db023e336d8dc2d70a5790e8ffabdbd7b639edd3bbba2fe76fdd6c025ae0",
+      "unified_da_jepa_r": "f66f746e906c01a854048c3db6f60dc5a30583cbc82c18d5f86e45737091f052"
+    }
+  },
+  "status": "authorized_physical_join_complete",
+  "task": "Granular Replay-Goal (H=5)"
+}

@@ -1,0 +1,25 @@
+# Dependencies and release permissions
+
+The lightweight package uses PyTorch and NumPy. Its extracted scientific modules
+are project-authored; source/export hashes are in SOURCE_PROVENANCE.json.
+
+Full pretrained-predictor reconstruction additionally uses these recorded sources:
+
+| Dependency | Upstream source | Recorded source revision |
+|---|---|---|
+| Temporal-Distance-JEPA | https://github.com/HKBU-KnowComp/TD-JEPA | `b4c17ca4649c9bf47272fa66c38da7a684f2a020` |
+| stable-worldmodel / LeWM | https://github.com/galilai-group/stable-worldmodel | `464f97f51a287f4d16e0caad02e8a9fe87c3847c` |
+| stable-pretraining | https://github.com/galilai-group/stable-pretraining | `6a567ebd41bac4d11419bcb7bdfbd6506af576f5` |
+
+The recorded source trees declare MIT licensing (TD-JEPA's LICENSE and the two
+stable packages' package metadata). Those declarations do not automatically
+establish the terms for every pretrained weight or derived dataset. DINO-WM,
+JEPA-WM and task-specific extension predictor dependencies are identified by
+their checkpoint hashes in model/data provenance and need their own release
+term checks. Upstream source revisions do not replace actual file hashes where
+the experiment used local changes.
+
+The final project code license and model/data licenses are author decisions.
+No license grant has been invented in this staging directory. There are no
+credentials, machine-specific execution instructions, model-hosting account
+aliases, or copied private environment files in the intended public payload.

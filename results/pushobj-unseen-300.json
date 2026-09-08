@@ -1,0 +1,93 @@
+{
+  "aggregator_sha256": "4edf0a309e357a23aad598ae3275faa6c13ba2c31305e185f4871a5b5306e214",
+  "checkpoint_sha256": "941dbd680a7dd179a798e208785bb2a68e3011753eb6d938f5f44a1f7c5ff404",
+  "count": 300,
+  "methods": {
+    "calibrated_rank_fusion": {
+      "by_shape": {
+        "I": {
+          "count": 100,
+          "successes": 37
+        },
+        "small_tee": {
+          "count": 100,
+          "successes": 61
+        },
+        "square": {
+          "count": 100,
+          "successes": 36
+        }
+      },
+      "count": 300,
+      "success_rate": 0.44666666666666666,
+      "successes": 134
+    },
+    "d_jepa": {
+      "by_shape": {
+        "I": {
+          "count": 100,
+          "successes": 52
+        },
+        "small_tee": {
+          "count": 100,
+          "successes": 66
+        },
+        "square": {
+          "count": 100,
+          "successes": 43
+        }
+      },
+      "count": 300,
+      "success_rate": 0.5366666666666666,
+      "successes": 161
+    },
+    "frozen_native": {
+      "by_shape": {
+        "I": {
+          "count": 100,
+          "successes": 22
+        },
+        "small_tee": {
+          "count": 100,
+          "successes": 39
+        },
+        "square": {
+          "count": 100,
+          "successes": 24
+        }
+      },
+      "count": 300,
+      "success_rate": 0.2833333333333333,
+      "successes": 85
+    }
+  },
+  "paired_vs_baseline": {
+    "calibrated_rank_fusion": {
+      "losses": 21,
+      "net_successes": 27,
+      "success_delta_pp": 9.0,
+      "wins": 48
+    },
+    "frozen_native": {
+      "losses": 22,
+      "net_successes": 76,
+      "success_delta_pp": 25.333333333333332,
+      "wins": 98
+    }
+  },
+  "schema": "djepa-pushobj-confirmation-aggregate-v1",
+  "scope": "unseen_shape_controlled_63_candidate_selection_not_closed_loop_gd_mpc",
+  "source_completions": [
+    {
+      "completion": "source-file:COMPLETION.json",
+      "seed": 200,
+      "sha256": "5ba2780e7ab1b9485f9d8e4d706d471ff36b93204908312c73ee087ad7aba617"
+    },
+    {
+      "completion": "source-file:COMPLETION.json",
+      "seed": 300,
+      "sha256": "15a7bc21a1695b0ede155eee8f55ec3732ccfe866877b95dcfcb50d122f86adb"
+    }
+  ],
+  "status": "COMPLETE"
+}

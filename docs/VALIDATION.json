@@ -1,0 +1,58 @@
+{
+  "status": "PASS",
+  "device": "CPU",
+  "new_simulator_runs": false,
+  "checks": [
+    {
+      "check": "all public modules import",
+      "pass": true
+    },
+    {
+      "check": "strict state load for relational/transport profiles",
+      "profiles": [
+        "granular-multiview",
+        "granular-relational",
+        "pushobj-unseen-shapes",
+        "pusht-multi-geometry",
+        "pusht-relational",
+        "pusht-visual-shifts",
+        "reacher-relational",
+        "reacher-temporal-transport"
+      ],
+      "pass": true
+    },
+    {
+      "check": "pusht-relational formal selected-ID replay",
+      "matched": 256,
+      "total": 256,
+      "pass": true
+    },
+    {
+      "check": "granular-relational formal selected-ID replay",
+      "matched": 64,
+      "total": 64,
+      "pass": true
+    },
+    {
+      "check": "pushobj-unseen-shapes calibration column replay",
+      "matched": 256,
+      "pass": true
+    },
+    {
+      "check": "pusht-visual-shifts calibration column replay",
+      "matched": 441,
+      "pass": true
+    },
+    {
+      "check": "exact realization preserves actions and first four futures",
+      "matched": 256,
+      "pass": true
+    }
+  ],
+  "not_checked": [
+    "fresh-environment full upstream predictor rollout",
+    "bitwise retraining reproduction",
+    "upstream weight/data redistribution permissions",
+    "final Zenodo deposit"
+  ]
+}
