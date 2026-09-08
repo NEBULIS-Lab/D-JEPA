@@ -1,0 +1,6 @@
+# Calibration replay (256), NOT the unseen-shape 300-start confirmation.
+checkpoint: checkpoints/pushobj-unseen-shapes
+inputs: data/D-JEPA-supervision-v1/pushobj/calibration/inputs.npz
+labels: data/D-JEPA-supervision-v1/pushobj/calibration/labels.npz
+output: outputs/replay/pushobj-calibration.json
+batch_size: 16

@@ -57,5 +57,6 @@ Rebuilding predictive features and executing new simulator trajectories addition
 requires the upstream environments/models and task preprocessing. The lightweight
 CLI is not an end-to-end simulator benchmark runner.
 
-Historical method keys in `results/` are immutable source identifiers. The
+Historical method keys in the HF supervision archive's `results/` directory are
+immutable source identifiers. The
 audience-facing method is D-JEPA; configurations are documented in CHECKPOINTS.md.

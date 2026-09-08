@@ -1,0 +1,33 @@
+{
+  "scope": "Repository organization, executable configs/scripts and static project page",
+  "date": "2026-09-09",
+  "device": "CPU",
+  "unit_and_workflow_tests": 20,
+  "scientific_implementations_preserved_byte_for_byte": 12,
+  "installed_wheel_modules_imported": 41,
+  "pusht_independent_cached_replay": {
+    "selected_ids_matching_recorded_authority": 256,
+    "population": 256,
+    "configuration": "relational alignment",
+    "new_simulation": false
+  },
+  "local_checks": [
+    "YAML defaults and CLI override through actual one-epoch training",
+    "Unknown/duplicate configuration fields and invalid scalar types rejected",
+    "Evaluation wrapper, successful selections and output collision rejection",
+    "Observed versus unknown outcome handling in CSV/Markdown summaries",
+    "Corrupt artifact checksum rejection",
+    "All 12 locally prepared checkpoint configs match download manifest schema",
+    "Wheel build and import outside repository checkout",
+    "Website local links, navigation IDs, artwork slot definitions and 14 copied asset hashes",
+    "Local HTTP 200 for page, JSON, CSS, JS, logo and video",
+    "JavaScript and shell syntax checks"
+  ],
+  "not_performed": [
+    "Live Hugging Face artifact download",
+    "Remote GitHub Actions execution",
+    "Browser visual or interaction testing",
+    "Website deployment or domain configuration"
+  ],
+  "author_artwork_slots_pending": ["motivation", "overview", "alignment", "representation"]
+}

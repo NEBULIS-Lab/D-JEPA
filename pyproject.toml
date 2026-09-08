@@ -7,11 +7,22 @@ name = "djepa"
 version = "0.1.0"
 description = "D-JEPA: A Decision-Aligned Latent World Model"
 requires-python = ">=3.10"
-dependencies = ["numpy>=1.24", "torch>=2.3"]
+dependencies = ["numpy>=1.24", "torch>=2.3", "PyYAML>=6.0"]
+readme = "README.md"
+
+[project.optional-dependencies]
+download = ["huggingface-hub>=0.24"]
+dev = ["build>=1.2"]
+
+[project.urls]
+Homepage = "https://nebulis-lab.com/D-JEPA"
+Repository = "https://github.com/NEBULIS-Lab/D-JEPA"
+Models = "https://huggingface.co/Shuaijun/D-JEPA"
+Dataset = "https://huggingface.co/datasets/Shuaijun/D-JEPA-Dataset"
 
 [project.scripts]
-djepa-evaluate = "djepa.evaluate:main"
-djepa-train = "djepa.train:main"
+djepa-evaluate = "djepa.cli.evaluate:main"
+djepa-train = "djepa.cli.train:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

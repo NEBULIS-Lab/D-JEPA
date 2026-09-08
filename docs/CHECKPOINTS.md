@@ -71,7 +71,8 @@ relation profile retains its original unquantized gate. Reacher uses eight.
 
 Predictive composition is the calibrated relational decision with an adapted-
 future proposal; it is not an arithmetic average or a success-label switch. The
-paper's 225/256 is this composition, not the 223/256 relation checkpoint alone.
+paper's composition result is distinct from the relation checkpoint alone; see
+the [project website](https://nebulis-lab.com/D-JEPA#results) for numerical comparisons.
 
 Full upstream-containing checkpoints are prepared locally. Authors must settle
 the applicable upstream weight redistribution terms before uploading them.

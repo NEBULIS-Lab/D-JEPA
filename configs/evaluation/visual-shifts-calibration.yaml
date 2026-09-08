@@ -1,0 +1,6 @@
+# Calibration replay: 63 base starts x 7 conditions (441 rows).
+checkpoint: checkpoints/pusht-visual-shifts
+inputs: data/D-JEPA-supervision-v1/pusht_visual_shifts/calibration/inputs.npz
+labels: data/D-JEPA-supervision-v1/pusht_visual_shifts/calibration/labels.npz
+output: outputs/replay/visual-shifts-calibration.json
+batch_size: 16

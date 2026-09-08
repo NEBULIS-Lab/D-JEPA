@@ -10,3 +10,7 @@ outputs/
 *.npz
 *.zip
 .env
+/checkpoints/
+/data/
+/results/
+.cache/

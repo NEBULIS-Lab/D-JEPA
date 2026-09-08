@@ -1,0 +1,5 @@
+# 64 formal input sets. No dense formal labels are released; exports IDs only.
+checkpoint: checkpoints/granular-relational
+inputs: data/D-JEPA-supervision-v1/granular/formal/inputs.npz
+output: outputs/replay/granular-formal.json
+batch_size: 16

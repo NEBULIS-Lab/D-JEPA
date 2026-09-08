@@ -1,0 +1,6 @@
+# Cached decisions: 256 independent starts, relational profile.
+checkpoint: checkpoints/pusht-relational
+inputs: data/D-JEPA-supervision-v1/pusht/independent_256/inputs.npz
+labels: data/D-JEPA-supervision-v1/pusht/independent_256/labels.npz
+output: outputs/replay/pusht-independent.json
+batch_size: 16

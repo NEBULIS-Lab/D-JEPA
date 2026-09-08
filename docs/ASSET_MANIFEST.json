@@ -1,0 +1,100 @@
+[
+  {
+    "path": "static/images/pusht_independent_success.svg",
+    "source": "visual_assets/quantitative/pusht_independent_success.svg",
+    "sha256": "59fbf41bbe494312630110fa4798f64f9fc83cd5c0f2aa490b30bc46c5fdcf9e",
+    "bytes": 8727,
+    "transformation": "none; byte-identical copy"
+  },
+  {
+    "path": "static/images/reacher_formal_success.svg",
+    "source": "visual_assets/quantitative/reacher_formal_success.svg",
+    "sha256": "256f4a7562b9c8a3c3212d9966baa19dffe44f4be466465a395c52d3133b737e",
+    "bytes": 8718,
+    "transformation": "none; byte-identical copy"
+  },
+  {
+    "path": "static/images/granular_threshold_success.svg",
+    "source": "visual_assets/quantitative/granular_threshold_success.svg",
+    "sha256": "869fc83e11f6bfabe0da565e6c935c6af43cdcafe666057648858d9bbb857505",
+    "bytes": 11868,
+    "transformation": "none; byte-identical copy"
+  },
+  {
+    "path": "static/images/expansion1_pushobj_unseen_success.svg",
+    "source": "visual_assets/quantitative/expansion1_pushobj_unseen_success.svg",
+    "sha256": "922c7112947e9ad6d39ac791d48fd73b8611a8f86f8dcf7be2a686c04521e372",
+    "bytes": 11731,
+    "transformation": "none; byte-identical copy"
+  },
+  {
+    "path": "static/videos/pusht.mp4",
+    "source": "visual_assets/media/pusht/start_0057_frozen_tdjepa/comparison.mp4",
+    "sha256": "916e789776d8995e6410dc5e9d310bbd9faa60e53963244edb5b9657403701aa",
+    "bytes": 400770,
+    "transformation": "none; byte-identical copy"
+  },
+  {
+    "path": "static/images/pusht-timeline.png",
+    "source": "visual_assets/media/pusht/start_0057_frozen_tdjepa/grid_3x2.png",
+    "sha256": "0600579bfdf71503185ce41b40100c868e2a338d0e37cf230a2eb3d2c54da497",
+    "bytes": 145023,
+    "transformation": "none; byte-identical copy"
+  },
+  {
+    "path": "static/videos/reacher.mp4",
+    "source": "visual_assets/media/reacher/start_0031_temporal/comparison.mp4",
+    "sha256": "8dad2458102269eb474aba6c4c5a494ce1a1104f31b43eb53b8485686f4508d7",
+    "bytes": 307327,
+    "transformation": "none; byte-identical copy"
+  },
+  {
+    "path": "static/images/reacher-timeline.png",
+    "source": "visual_assets/media/reacher/start_0031_temporal/grid_3x2.png",
+    "sha256": "95bccf983eec185f1a81e2c65c9c75ab1c95f83a4a5a9208f87b3fa4ec62ae08",
+    "bytes": 487096,
+    "transformation": "none; byte-identical copy"
+  },
+  {
+    "path": "static/videos/granular.mp4",
+    "source": "visual_assets/media/granular/granular-formal-t00621-o10/comparison.mp4",
+    "sha256": "5d71bb19cba3f49582fb20aea14ca13e4aec39ef92276794ecd9316489fa019c",
+    "bytes": 6627111,
+    "transformation": "none; byte-identical copy"
+  },
+  {
+    "path": "static/images/granular-timeline.png",
+    "source": "visual_assets/media/granular/granular-formal-t00621-o10/grid_3x2.png",
+    "sha256": "6fcdd8ab67c82501f2c980df3afc94f072ce4056db58e67e3aeafd005daf3112",
+    "bytes": 1206443,
+    "transformation": "none; byte-identical copy"
+  },
+  {
+    "path": "static/images/branding/jepa-full-logo-light.svg",
+    "source": "D-JEPA-code-repo/assets/branding/jepa-full-logo-light.svg",
+    "sha256": "4608bc41013017414415d1e1e9820d1fb10984d70c1635c3f40b4fe0cee9b01d",
+    "bytes": 470717,
+    "transformation": "none; byte-identical copy"
+  },
+  {
+    "path": "static/images/branding/jepa-icon-light.svg",
+    "source": "D-JEPA-code-repo/assets/branding/jepa-icon-light.svg",
+    "sha256": "d9ba1e3e0bffdcc43ad7103eac31b985b52111f91e8f056d0f038bcb2030c6e0",
+    "bytes": 222900,
+    "transformation": "none; byte-identical copy"
+  },
+  {
+    "path": "static/images/branding/jepa-icon-dark.svg",
+    "source": "D-JEPA-code-repo/assets/branding/jepa-icon-dark.svg",
+    "sha256": "4f53f61156b9b5469afa176444be0bd2641445841419a55ead2a62b0a82bda45",
+    "bytes": 222876,
+    "transformation": "none; byte-identical copy"
+  },
+  {
+    "path": "static/images/branding/jepa-full-logo-dark.svg",
+    "source": "D-JEPA-code-repo/assets/branding/jepa-full-logo-dark.svg",
+    "sha256": "ee6c202b2d758d8ee83b6b57365b80526c9825bf254d154386c97afeacb9c1f0",
+    "bytes": 480449,
+    "transformation": "none; byte-identical copy"
+  }
+]

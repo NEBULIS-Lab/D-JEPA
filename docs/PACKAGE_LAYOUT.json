@@ -1,0 +1,86 @@
+[
+  {
+    "legacy_path": "src/djepa/relational.py",
+    "implementation_path": "src/djepa/models/relational.py",
+    "sha256": "2e8c20fd74ed53b5e4280991ec9b733677807ca503c23c8d54177c83982b0985",
+    "original_export_sha256": "2e8c20fd74ed53b5e4280991ec9b733677807ca503c23c8d54177c83982b0985",
+    "arithmetic_changed": false
+  },
+  {
+    "legacy_path": "src/djepa/ordinal.py",
+    "implementation_path": "src/djepa/models/ordinal.py",
+    "sha256": "0308d1225992b2a81c7e3053debc1f49741e64311a1900229702bce7a9d342bc",
+    "original_export_sha256": "0308d1225992b2a81c7e3053debc1f49741e64311a1900229702bce7a9d342bc",
+    "arithmetic_changed": false
+  },
+  {
+    "legacy_path": "src/djepa/multi_geometry.py",
+    "implementation_path": "src/djepa/models/multi_geometry.py",
+    "sha256": "e3a50a62fd36b4552ae19623691b044442af36bbb1c3925d410c027884d76ac2",
+    "original_export_sha256": "e3a50a62fd36b4552ae19623691b044442af36bbb1c3925d410c027884d76ac2",
+    "arithmetic_changed": false
+  },
+  {
+    "legacy_path": "src/djepa/temporal_transport.py",
+    "implementation_path": "src/djepa/models/temporal_transport.py",
+    "sha256": "fc4eb60c0cb0d1624dcdd168741707551da56094b8e3f1b3f0071692691d06d6",
+    "original_export_sha256": "fc4eb60c0cb0d1624dcdd168741707551da56094b8e3f1b3f0071692691d06d6",
+    "arithmetic_changed": false
+  },
+  {
+    "legacy_path": "src/djepa/transport_objective.py",
+    "implementation_path": "src/djepa/objectives/transport_objective.py",
+    "sha256": "a7bb857ec94f89d3b1a5c72684f1333744ef116a673a51db9e8ba09173264e74",
+    "original_export_sha256": "a7bb857ec94f89d3b1a5c72684f1333744ef116a673a51db9e8ba09173264e74",
+    "arithmetic_changed": false
+  },
+  {
+    "legacy_path": "src/djepa/plasticity.py",
+    "implementation_path": "src/djepa/models/plasticity.py",
+    "sha256": "6bbcdd4f0b01c57bb83fd48d0c052c6814fcdcde3978ff0abf7d79a858396855",
+    "original_export_sha256": "6bbcdd4f0b01c57bb83fd48d0c052c6814fcdcde3978ff0abf7d79a858396855",
+    "arithmetic_changed": false
+  },
+  {
+    "legacy_path": "src/djepa/granular.py",
+    "implementation_path": "src/djepa/models/granular.py",
+    "sha256": "6536b69c54efec1259af01ee7afd5203837fddc8bd5663f1ba741874df970dde",
+    "original_export_sha256": "6536b69c54efec1259af01ee7afd5203837fddc8bd5663f1ba741874df970dde",
+    "arithmetic_changed": false
+  },
+  {
+    "legacy_path": "src/djepa/predictor_boundary.py",
+    "implementation_path": "src/djepa/models/predictor_boundary.py",
+    "sha256": "53b80203807e678dda54cbd24f5cefdfe4cd5aa98bc78ce9ddaa8ff261d7d908",
+    "original_export_sha256": "53b80203807e678dda54cbd24f5cefdfe4cd5aa98bc78ce9ddaa8ff261d7d908",
+    "arithmetic_changed": false
+  },
+  {
+    "legacy_path": "src/djepa/exact_realization.py",
+    "implementation_path": "src/djepa/models/exact_realization.py",
+    "sha256": "e5b085a7d8423dc147ce06b903ed22cfd6c070c2794c4cd3d33dd1ca3a7f0a5b",
+    "original_export_sha256": "e5b085a7d8423dc147ce06b903ed22cfd6c070c2794c4cd3d33dd1ca3a7f0a5b",
+    "arithmetic_changed": false
+  },
+  {
+    "legacy_path": "src/djepa/native_scoring.py",
+    "implementation_path": "src/djepa/evaluation/native_scoring.py",
+    "sha256": "3f58b1c0272f9d9ea558ada1c1864b09c5cc585a4c5d129b2ea08d72b31ecd12",
+    "original_export_sha256": "3f58b1c0272f9d9ea558ada1c1864b09c5cc585a4c5d129b2ea08d72b31ecd12",
+    "arithmetic_changed": false
+  },
+  {
+    "legacy_path": "src/djepa/reacher_contract.py",
+    "implementation_path": "src/djepa/models/reacher_contract.py",
+    "sha256": "0f6f0b89ed70245f93c6e3f4f9bcb1e193c462f12f17411b88a11f8921f12529",
+    "original_export_sha256": "0f6f0b89ed70245f93c6e3f4f9bcb1e193c462f12f17411b88a11f8921f12529",
+    "arithmetic_changed": false
+  },
+  {
+    "legacy_path": "src/djepa/reacher_world_model.py",
+    "implementation_path": "src/djepa/models/reacher_world_model.py",
+    "sha256": "4ebb0ce5ca8cc9c4fb1a2b4da616a6f3e7f46a4aca11cec7d09e089cffc2a30d",
+    "original_export_sha256": "4ebb0ce5ca8cc9c4fb1a2b4da616a6f3e7f46a4aca11cec7d09e089cffc2a30d",
+    "arithmetic_changed": false
+  }
+]

@@ -52,7 +52,6 @@
   "not_checked": [
     "fresh-environment full upstream predictor rollout",
     "bitwise retraining reproduction",
-    "upstream weight/data redistribution permissions",
-    "final Zenodo deposit"
+    "upstream weight/data redistribution permissions"
   ]
 }

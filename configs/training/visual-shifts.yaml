@@ -1,0 +1,11 @@
+# Known-corruption training; base identities are disjoint across train/calibration.
+train: data/D-JEPA-supervision-v1/pusht_visual_shifts/train
+calibration: data/D-JEPA-supervision-v1/pusht_visual_shifts/calibration
+output: outputs/visual-shifts-trained
+epochs: 120
+seed: 20260906
+batch_size: 16
+learning_rate: 0.0003
+weight_decay: 0.0001
+max_grad_norm: 1.0
+evaluate_every: 10

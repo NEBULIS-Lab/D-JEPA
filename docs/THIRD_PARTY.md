@@ -1,7 +1,17 @@
 # Dependencies and release permissions
 
-The lightweight package uses PyTorch and NumPy. Its extracted scientific modules
+The lightweight package uses PyTorch, NumPy and PyYAML. Optional artifact downloads
+use huggingface-hub; development packaging uses build. Its extracted scientific modules
 are project-authored; source/export hashes are in SOURCE_PROVENANCE.json.
+
+## Research foundations
+
+We acknowledge [LeWorldModel (LeWM)](https://github.com/Mengarr/lewm) and
+[JEPA](https://github.com/facebookresearch/jepa) as research foundations. These
+project-level acknowledgments are distinct from the exact implementation
+dependencies and revisions below.
+
+## Implementation dependencies
 
 Full pretrained-predictor reconstruction additionally uses these recorded sources:
 

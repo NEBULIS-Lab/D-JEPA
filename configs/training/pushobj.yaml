@@ -1,0 +1,11 @@
+# Portable ordinal training, not bitwise historical retraining.
+train: data/D-JEPA-supervision-v1/pushobj/train
+calibration: data/D-JEPA-supervision-v1/pushobj/calibration
+output: outputs/pushobj-trained
+epochs: 120
+seed: 20260906
+batch_size: 16
+learning_rate: 0.0003
+weight_decay: 0.0001
+max_grad_norm: 1.0
+evaluate_every: 10

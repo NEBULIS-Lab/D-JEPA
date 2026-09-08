@@ -2,6 +2,12 @@
 
 See `VALIDATION.json` for machine-readable checks on the current exported files.
 
+The configuration/script and static-site extension is recorded separately in
+[WORKFLOW_VALIDATION.json](WORKFLOW_VALIDATION.json): 20 CPU tests, 12 preserved
+scientific implementation hashes, 41 installed-wheel module imports and a fresh
+256/256 selected-ID agreement check. Historical checks below retain
+their original validation scope; the new checks do not represent new experiments.
+
 - CPU unit tests cover ranking ties, strict and task-specific gates, bounded
   corrections, permutation equivariance, training gradients, sparse-supervision
   reporting, checkpoint loading, terminal realization and calibrated composition.
