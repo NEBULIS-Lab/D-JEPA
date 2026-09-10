@@ -21,11 +21,11 @@
     "transformation": "none; byte-identical copy"
   },
   {
-    "path": "static/images/expansion1_pushobj_unseen_success.svg",
-    "source": "visual_assets/quantitative/expansion1_pushobj_unseen_success.svg",
+    "path": "static/images/pushobj_unseen_shape_success.svg",
     "sha256": "922c7112947e9ad6d39ac791d48fd73b8611a8f86f8dcf7be2a686c04521e372",
     "bytes": 11731,
-    "transformation": "none; byte-identical copy"
+    "transformation": "none; byte-identical copy",
+    "source_identity": "sha256:922c7112947e9ad6d39ac791d48fd73b8611a8f86f8dcf7be2a686c04521e372"
   },
   {
     "path": "static/videos/pusht.mp4",

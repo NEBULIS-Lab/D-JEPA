@@ -5,7 +5,7 @@
   "changes": [
     "Require explicit recording/config paths instead of author-machine defaults.",
     "Remove device SDK comparison from the portable recorded-motion audit.",
-    "Keep all djepa_robot computational modules byte-identical to the source."
+    "Keep computational behavior unchanged; use public scientific terminology in the alignment module docstring."
   ],
   "files": [
     {
@@ -24,7 +24,7 @@
       "file": "djepa_robot/alignment.py",
       "source_file": "djepa_robot/alignment.py",
       "source_sha256": "e9a41539068b0f04e47dcbaa53ac773bd444f50163ceab1f75e6942f9bfb045a",
-      "export_sha256": "e9a41539068b0f04e47dcbaa53ac773bd444f50163ceab1f75e6942f9bfb045a"
+      "export_sha256": "23cd6daef9fe4cf9e9add86c208ea993b869978cbd6f8f04896fff238d092f97"
     },
     {
       "file": "djepa_robot/data.py",

@@ -24,7 +24,7 @@ class RelationalAligner(nn.Module):
 
     def __init__(self, *, hidden_dim: int = 64, low_rank: int = 8, max_correction: float = 0.2) -> None:
         super().__init__()
-        _require(hidden_dim % 4 == 0 and low_rank > 0 and max_correction > 0, "invalid DTAIL ranker dimensions")
+        _require(hidden_dim % 4 == 0 and low_rank > 0 and max_correction > 0, "invalid D-JEPA ranker dimensions")
         self.max_correction = float(max_correction)
         self.candidate_encoder = nn.Sequential(
             nn.Linear(2 * LATENT_DIM + 2, hidden_dim),
@@ -61,7 +61,7 @@ class RelationalAligner(nn.Module):
         _require(lewm_goal.shape == tdjepa_goal.shape == (batch, LATENT_DIM), "goal latent shape mismatch")
         _require(lewm_rank.shape == tdjepa_rank.shape == base_score.shape == (batch, CANDIDATE_COUNT), "rank score shape mismatch")
         tensors = (lewm_terminal, lewm_goal, tdjepa_terminal, tdjepa_goal, lewm_rank, tdjepa_rank, base_score)
-        _require(all(torch.is_floating_point(value) and bool(torch.isfinite(value).all()) for value in tensors), "DTAIL ranker inputs must be finite floating point")
+        _require(all(torch.is_floating_point(value) and bool(torch.isfinite(value).all()) for value in tensors), "D-JEPA ranker inputs must be finite floating point")
         return batch, lewm_terminal.device
 
     def forward(

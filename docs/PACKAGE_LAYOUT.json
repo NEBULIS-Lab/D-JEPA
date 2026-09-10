@@ -2,7 +2,7 @@
   {
     "legacy_path": "src/djepa/relational.py",
     "implementation_path": "src/djepa/models/relational.py",
-    "sha256": "2e8c20fd74ed53b5e4280991ec9b733677807ca503c23c8d54177c83982b0985",
+    "sha256": "a499b48b2b07e51f110b079668a7bc8c3a6c732a4c036378eca7055a2825655f",
     "original_export_sha256": "2e8c20fd74ed53b5e4280991ec9b733677807ca503c23c8d54177c83982b0985",
     "arithmetic_changed": false
   },
@@ -16,7 +16,7 @@
   {
     "legacy_path": "src/djepa/multi_geometry.py",
     "implementation_path": "src/djepa/models/multi_geometry.py",
-    "sha256": "e3a50a62fd36b4552ae19623691b044442af36bbb1c3925d410c027884d76ac2",
+    "sha256": "0d0f5971d15700e4887f3c1cac78a1f25674e3e387b485aa6b13dddc3579a6f2",
     "original_export_sha256": "e3a50a62fd36b4552ae19623691b044442af36bbb1c3925d410c027884d76ac2",
     "arithmetic_changed": false
   },
@@ -58,7 +58,7 @@
   {
     "legacy_path": "src/djepa/exact_realization.py",
     "implementation_path": "src/djepa/models/exact_realization.py",
-    "sha256": "e5b085a7d8423dc147ce06b903ed22cfd6c070c2794c4cd3d33dd1ca3a7f0a5b",
+    "sha256": "6d1c48eeb4babdca81b3277dd9fdfa5c3a98e228babd10f66dc5db24fc1f61cb",
     "original_export_sha256": "e5b085a7d8423dc147ce06b903ed22cfd6c070c2794c4cd3d33dd1ca3a7f0a5b",
     "arithmetic_changed": false
   },
@@ -79,7 +79,7 @@
   {
     "legacy_path": "src/djepa/reacher_world_model.py",
     "implementation_path": "src/djepa/models/reacher_world_model.py",
-    "sha256": "4ebb0ce5ca8cc9c4fb1a2b4da616a6f3e7f46a4aca11cec7d09e089cffc2a30d",
+    "sha256": "621d1779ec10d5623170a574163cfcdf4abf1d3d966f0466d7c2b6bf6deda5ed",
     "original_export_sha256": "4ebb0ce5ca8cc9c4fb1a2b4da616a6f3e7f46a4aca11cec7d09e089cffc2a30d",
     "arithmetic_changed": false
   }

@@ -1,4 +1,4 @@
-"""Feature-level action-conditioned Unified D-JEPA scaffold for DMC-Reacher."""
+"""Action-conditioned D-JEPA future representations for DMC-Reacher."""
 
 from __future__ import annotations
 

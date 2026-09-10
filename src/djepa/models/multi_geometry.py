@@ -1,4 +1,4 @@
-"""Four-geometry rank fusion and bounded DTAIL setwise refinement."""
+"""Four-geometry rank fusion and bounded D-JEPA set-wise refinement."""
 
 from __future__ import annotations
 

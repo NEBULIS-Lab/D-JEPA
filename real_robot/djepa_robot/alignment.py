@@ -1,7 +1,7 @@
 """Trainable robot adaptation of the project's existing set-wise relational head.
 
-Structural source (read-only): repositories/5.2.DTAIL-WM/code/dtail_wm/unified_r_model.py
-DTAILSetRanker. New weights; no transfer of benchmark-specific gates/alphas.
+Uses D-JEPA's set-wise relational architecture with robot-specific training.
+Benchmark-specific gate and fusion parameters are not transferred.
 """
 
 import torch

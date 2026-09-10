@@ -1,4 +1,4 @@
-"""Unified D-JEPA relational alignment decision geometry lifted into TD-JEPA futures."""
+"""D-JEPA relational decision geometry lifted into TD-JEPA future representations."""
 
 from __future__ import annotations
 
@@ -164,10 +164,10 @@ class ExactRealizationWorldModel(nn.Module):
         _require(tuple(lewm_goal.shape) == tuple(tdjepa_goal.shape) == (batch, LATENT_DIM), "goals must have shape (B,192)")
         _require(tuple(lewm_native_cost.shape) == tuple(tdjepa_native_cost.shape) == (batch, CANDIDATE_COUNT), "native costs must have shape (B,63)")
         floats = (lewm_future, lewm_goal, tdjepa_future, tdjepa_goal, lewm_native_cost, tdjepa_native_cost)
-        _require(all(torch.is_floating_point(value) for value in floats), "unified R latent and cost inputs must be floating point")
-        _require(all(bool(torch.isfinite(value).all()) for value in floats), "unified R inputs must be finite")
+        _require(all(torch.is_floating_point(value) for value in floats), "representation lifting latent and cost inputs must be floating point")
+        _require(all(bool(torch.isfinite(value).all()) for value in floats), "representation lifting inputs must be finite")
         device = lewm_future.device
-        _require(all(value.device == device for value in (*floats, candidate_ids)), "unified R inputs must share a device")
+        _require(all(value.device == device for value in (*floats, candidate_ids)), "representation lifting inputs must share a device")
         _require(candidate_ids.shape == (batch, CANDIDATE_COUNT) and candidate_ids.dtype == torch.int64, "candidate IDs must be int64 with shape (B,63)")
         _require(bool((candidate_ids > 0).all()), "candidate IDs must be positive")
         sorted_ids = torch.sort(candidate_ids, dim=1).values
