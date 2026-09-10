@@ -13,7 +13,7 @@ physics. It is distinct from the lightweight cached-feature evaluator.
 | PushObj unseen geometry | No | No | Released supervision and heads do not include a portable native simulator adapter |
 | DMC-Reacher | No | No | Full feature-level weights are released, but the recorded native observation/action preparation is not packaged here |
 | Granular manipulation | No | No | Released inputs support sparse-supervision evaluation; native simulator setup is not packaged here |
-| Real robot | No | No | The robot-side safety/runtime stack is separate; these scripts must not be presented as robot execution |
+| Real robot | Separate package | Not applicable | See `../real_robot/README.md` for offline RGB encoding, learning and planning; device control is user-supplied |
 
 The tests in `tests/test_native.py` are CPU **contract tests**. Their small,
 deterministic predictor and environment stand-ins test tensor alignment,

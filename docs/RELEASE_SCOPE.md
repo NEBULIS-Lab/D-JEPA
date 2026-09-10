@@ -18,6 +18,7 @@ repositories; they are not bundled into Git source history.
 | Native features and rollouts | `scripts/prepare_features.py`, `scripts/evaluate_rollouts.py` | Explicit upstream models/raw states and the declared fixed control horizon |
 | Local summaries | `scripts/summarize_results.py` | Per-run metrics; no pooling of different protocols |
 | Project page | `docs/index.html` | Existing approved media and author-artwork placeholders |
+| Offline robotics | `real_robot/README.md` | Independently installed recorded-data, training, scoring and planning tools |
 
 Follow [reproduction](REPRODUCING.md), [module training](MODULE_TRAINING.md) and
 [native execution](NATIVE_REPRODUCING.md) for the exact supported inputs and
@@ -26,8 +27,13 @@ workflows; a successful test of one is not reported as verification of another.
 
 ## Next content update
 
-The next planned content update is reserved for completed real-robot experiments,
-the next experimental extension, and the final paper/video with author-drawn
+The offline robotics code is now included separately under `real_robot/`.
+Device-specific control and calibration interfaces are intentionally not part of
+the public release. Publishing this code does not add robot numerical results
+or relabel simulation weights as robot checkpoints.
+
+The next planned content updates cover completed experimental extensions,
+robot experimental results, and the final paper/video with author-drawn
 method figures. Ongoing experiments are not represented as completed results.
 The Paper and Video badges currently link to explicitly marked placeholders.
 Existing numerical authorities, checkpoint identities and evaluation splits

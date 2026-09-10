@@ -1,0 +1,138 @@
+{
+  "schema": 1,
+  "source": "Project-authored offline robotics implementation, exported 2026-09-10",
+  "scope": "Offline learning and planning; device-specific control and calibration excluded by design",
+  "changes": [
+    "Require explicit recording/config paths instead of author-machine defaults.",
+    "Remove device SDK comparison from the portable recorded-motion audit.",
+    "Keep all djepa_robot computational modules byte-identical to the source."
+  ],
+  "files": [
+    {
+      "file": "djepa_robot/__init__.py",
+      "source_file": "djepa_robot/__init__.py",
+      "source_sha256": "771fd57e9302d21fc6a30a86ea48653f546807b4e0308d03f41e668153b6ccdb",
+      "export_sha256": "771fd57e9302d21fc6a30a86ea48653f546807b4e0308d03f41e668153b6ccdb"
+    },
+    {
+      "file": "djepa_robot/actions.py",
+      "source_file": "djepa_robot/actions.py",
+      "source_sha256": "638693af64a3fd54c3bdb36c9fe8715a81dcd356b3ac35d6a4e0092c14d3002e",
+      "export_sha256": "638693af64a3fd54c3bdb36c9fe8715a81dcd356b3ac35d6a4e0092c14d3002e"
+    },
+    {
+      "file": "djepa_robot/alignment.py",
+      "source_file": "djepa_robot/alignment.py",
+      "source_sha256": "e9a41539068b0f04e47dcbaa53ac773bd444f50163ceab1f75e6942f9bfb045a",
+      "export_sha256": "e9a41539068b0f04e47dcbaa53ac773bd444f50163ceab1f75e6942f9bfb045a"
+    },
+    {
+      "file": "djepa_robot/data.py",
+      "source_file": "djepa_robot/data.py",
+      "source_sha256": "9f56d5f20cbc1e574ae3fb39ab264cc6c8ac0852315d9d76ad680df6e2034fe7",
+      "export_sha256": "9f56d5f20cbc1e574ae3fb39ab264cc6c8ac0852315d9d76ad680df6e2034fe7"
+    },
+    {
+      "file": "djepa_robot/kinematics.py",
+      "source_file": "djepa_robot/kinematics.py",
+      "source_sha256": "a504c16018628d9d6d71a48a1dd83a6edd66eca7913d089ce999aa9422a4bafc",
+      "export_sha256": "a504c16018628d9d6d71a48a1dd83a6edd66eca7913d089ce999aa9422a4bafc"
+    },
+    {
+      "file": "djepa_robot/motion_audit.py",
+      "source_file": "djepa_robot/motion_audit.py",
+      "source_sha256": "7f010502ab31723edaf28e1db83efe42c48e29e99f6f9eaabeee407bb9f8cb90",
+      "export_sha256": "7f010502ab31723edaf28e1db83efe42c48e29e99f6f9eaabeee407bb9f8cb90"
+    },
+    {
+      "file": "djepa_robot/planning.py",
+      "source_file": "djepa_robot/planning.py",
+      "source_sha256": "40603a9539f1de7ff6fda2867de7c9da4ad892488c4f5b4a337de6ccba73b006",
+      "export_sha256": "40603a9539f1de7ff6fda2867de7c9da4ad892488c4f5b4a337de6ccba73b006"
+    },
+    {
+      "file": "djepa_robot/recorded_windows.py",
+      "source_file": "djepa_robot/recorded_windows.py",
+      "source_sha256": "aaf1e3197e13f7314e9034ddc27046b7d6a596f990cc88ee53291b8338470d76",
+      "export_sha256": "aaf1e3197e13f7314e9034ddc27046b7d6a596f990cc88ee53291b8338470d76"
+    },
+    {
+      "file": "djepa_robot/training.py",
+      "source_file": "djepa_robot/training.py",
+      "source_sha256": "fadb8760e685bab67f8d332241f8c0e872a66d0bbf166a1ffa8decf9d980e477",
+      "export_sha256": "fadb8760e685bab67f8d332241f8c0e872a66d0bbf166a1ffa8decf9d980e477"
+    },
+    {
+      "file": "djepa_robot/vision.py",
+      "source_file": "djepa_robot/vision.py",
+      "source_sha256": "7af7a4ccc636c36d7adde3bfe2003b185d7b2c654c787021dc7b8e057aa24ecc",
+      "export_sha256": "7af7a4ccc636c36d7adde3bfe2003b185d7b2c654c787021dc7b8e057aa24ecc"
+    },
+    {
+      "file": "djepa_robot/world_model.py",
+      "source_file": "djepa_robot/world_model.py",
+      "source_sha256": "bbc466deb449399e18af53cd79f598fb4ac4d98f5eb7cf51392795687975f4b3",
+      "export_sha256": "bbc466deb449399e18af53cd79f598fb4ac4d98f5eb7cf51392795687975f4b3"
+    },
+    {
+      "file": "scripts/__init__.py",
+      "source_file": "scripts/__init__.py",
+      "source_sha256": "060d7abd436907f1b1cd9931382fc8639b978d446c1dfd86d1c6622850e5e483",
+      "export_sha256": "060d7abd436907f1b1cd9931382fc8639b978d446c1dfd86d1c6622850e5e483"
+    },
+    {
+      "file": "scripts/audit_data.py",
+      "source_file": "scripts/audit_data.py",
+      "source_sha256": "bc8c517828f80080b6f29ef1cd3e5a16cf3631af90356495eaf3e3ded38b088d",
+      "export_sha256": "0eed4e35f4d65d6892aa53414a9c6fdc1e0a388439301b63c7c70b04f499006b"
+    },
+    {
+      "file": "scripts/audit_motion.py",
+      "source_file": "scripts/audit_motion.py",
+      "source_sha256": "2d6f4c98e717c3f8e269c7624d527ff1df7abf52229418dce96f1add4c45ef67",
+      "export_sha256": "82edb6fe836da5c796226847be387015d55660dc415e99d8c1f695e5a2dff09d"
+    },
+    {
+      "file": "scripts/cache_rgb.py",
+      "source_file": "scripts/cache_rgb.py",
+      "source_sha256": "1d01c8652cb3fa3df7b06e5838db90661ab58384c13fce82eef1f949f204bc7c",
+      "export_sha256": "1d01c8652cb3fa3df7b06e5838db90661ab58384c13fce82eef1f949f204bc7c"
+    },
+    {
+      "file": "scripts/common.py",
+      "source_file": "scripts/common.py",
+      "source_sha256": "38f6894c0c75f9b5d71595f84d0dfbcd2f647a95556e7ccbbb51f02e35b1b6b1",
+      "export_sha256": "38f6894c0c75f9b5d71595f84d0dfbcd2f647a95556e7ccbbb51f02e35b1b6b1"
+    },
+    {
+      "file": "scripts/evaluate_recorded_motion.py",
+      "source_file": "scripts/evaluate_recorded_motion.py",
+      "source_sha256": "f3fa8c59642febf487d7b06bd491304ccb975e71d9de2f840e3677f3c103b820",
+      "export_sha256": "f3fa8c59642febf487d7b06bd491304ccb975e71d9de2f840e3677f3c103b820"
+    },
+    {
+      "file": "scripts/plan_latents.py",
+      "source_file": "scripts/plan_latents.py",
+      "source_sha256": "2aa3a5bf55f223f4147364259b78af661db9e395b5e4557a5907af838fbccc5f",
+      "export_sha256": "2aa3a5bf55f223f4147364259b78af661db9e395b5e4557a5907af838fbccc5f"
+    },
+    {
+      "file": "scripts/score_candidates.py",
+      "source_file": "scripts/score_candidates.py",
+      "source_sha256": "bee2172e2fd429019c93dd28fb2ede8d0a5990b1fb19f2146f935af1d7309dbe",
+      "export_sha256": "bee2172e2fd429019c93dd28fb2ede8d0a5990b1fb19f2146f935af1d7309dbe"
+    },
+    {
+      "file": "scripts/smoke_ac.py",
+      "source_file": "scripts/smoke_ac.py",
+      "source_sha256": "b678797946f6c134908554028fbed9a57767b85740db83ae348510238e039bbf",
+      "export_sha256": "b678797946f6c134908554028fbed9a57767b85740db83ae348510238e039bbf"
+    },
+    {
+      "file": "scripts/train_alignment.py",
+      "source_file": "scripts/train_alignment.py",
+      "source_sha256": "0f5378c651c810ff3c438c5a70c92e049bd0ded1f160113fd6312b9a0ef7edac",
+      "export_sha256": "0f5378c651c810ff3c438c5a70c92e049bd0ded1f160113fd6312b9a0ef7edac"
+    }
+  ]
+}

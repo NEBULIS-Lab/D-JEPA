@@ -1,0 +1,2 @@
+# Run from real_robot/. The simulation package is not required.
+-e .[test]

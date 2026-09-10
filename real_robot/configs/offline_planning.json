@@ -1,0 +1,12 @@
+{
+  "status": "Example prediction-space search bounds; configure for your model and recording units, not actuator limits",
+  "lower": [-0.025, -0.025, -0.025, 0.0, 0.0, 0.0, -0.25],
+  "upper": [0.025, 0.025, 0.025, 0.0, 0.0, 0.0, 0.25],
+  "horizon": 2,
+  "samples": 32,
+  "elites": 8,
+  "iterations": 5,
+  "seed": 0,
+  "model_dt": 0.1,
+  "chunk_size": 4
+}

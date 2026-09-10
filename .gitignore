@@ -3,6 +3,7 @@ __pycache__/
 *.egg-info/
 .pytest_cache/
 .venv/
+/.venv-robot/
 build/
 dist/
 outputs/
@@ -14,3 +15,8 @@ outputs/
 /data/
 /results/
 .cache/
+/real_robot/vendor/
+/real_robot/runs/
+/real_robot/data/
+/real_robot/checkpoints/
+/real_robot/configs/*.local.json

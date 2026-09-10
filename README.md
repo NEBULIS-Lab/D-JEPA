@@ -44,6 +44,12 @@ inference and training, tests, and reproducibility tools. Task/module checkpoint
 distributed through the model repository; decision supervision, candidate inputs,
 fixed identities and result authorities are packaged in **one supervision ZIP**.
 
+The [offline robotics package](real_robot/README.md) is independently installed
+and maintained under `real_robot/`: recorded-data processing, V-JEPA 2-AC
+prediction, relational training, candidate scoring and offline planning.
+Simulation and robotics do not share environment-specific scripts or dependencies.
+Device-specific robot controllers and calibration are supplied by the user.
+
 ### Method at a glance
 
 | Module | Role |
@@ -157,6 +163,7 @@ not as a separate results directory in this code repository.
 | [Reproduction guide](docs/REPRODUCING.md) | Installation, verified downloads, YAML runs and summary scripts |
 | [Module training](docs/MODULE_TRAINING.md) | Relational and sparse-supervision training recipes |
 | [Native execution](docs/NATIVE_REPRODUCING.md) | Raw-input feature extraction, model factories and physics rollouts |
+| [Offline robotics](real_robot/README.md) | Separate installation, recorded observations, relational training and offline planning |
 | [Release scope](docs/RELEASE_SCOPE.md) | Available workflows and future paper, video and experiment updates |
 | [Protocols and data schema](docs/PROTOCOLS.md) | Evaluation populations, identities and supervision semantics |
 | [Checkpoint profiles](docs/CHECKPOINTS.md) | Loading, composition and upstream dependencies |
@@ -168,6 +175,7 @@ not as a separate results directory in this code repository.
 
 ```text
 src/djepa/      models · objectives · data · evaluation · native · cli
+real_robot/    independent offline robotics package · scripts · configs · tests
 configs/       training · evaluation · reproduction · native
 scripts/       download · preflight · train · evaluate · reproduce · summarize · preview
 examples/      label-free inference and sparse metrics

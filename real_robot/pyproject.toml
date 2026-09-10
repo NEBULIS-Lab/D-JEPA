@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "djepa-robot"
+version = "0.1.0"
+description = "D-JEPA offline robotics: recorded data, action-conditioned prediction and decision alignment"
+requires-python = ">=3.10"
+readme = "README.md"
+dependencies = ["numpy>=1.24", "scipy>=1.10", "h5py>=3.8", "torch>=2.6"]
+
+[project.optional-dependencies]
+test = ["pytest>=7"]
+preprocessing = ["torchvision>=0.21", "opencv-python-headless>=4.8", "Pillow>=10"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["djepa_robot*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
