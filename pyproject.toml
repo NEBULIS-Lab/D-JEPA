@@ -9,6 +9,7 @@ description = "D-JEPA: A Decision-Aligned Latent World Model"
 requires-python = ">=3.10"
 dependencies = ["numpy>=1.24", "torch>=2.3", "PyYAML>=6.0"]
 readme = "README.md"
+license = {file = "LICENSE"}
 
 [project.optional-dependencies]
 download = ["huggingface-hub>=0.24"]

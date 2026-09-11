@@ -39,7 +39,10 @@ their checkpoint hashes in model/data provenance and need their own release
 term checks. Upstream source revisions do not replace actual file hashes where
 the experiment used local changes.
 
-The final project code license and model/data licenses are author decisions.
-No license grant has been invented in this staging directory. There are no
-credentials, machine-specific execution instructions, model-hosting account
-aliases, or copied private environment files in the intended public payload.
+## Project license
+
+Project-authored D-JEPA code, including the independent offline robotics
+package, is released under the [Apache License 2.0](../LICENSE).
+This does not replace third-party licenses or grant additional rights to
+upstream code, model weights, or datasets. Checkpoint and dataset terms are
+specified by their respective releases.

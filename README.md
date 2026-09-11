@@ -19,6 +19,7 @@
   <a href="https://huggingface.co/Shuaijun/D-JEPA"><img src="https://img.shields.io/badge/Hugging_Face-Model-FFDB67?style=flat&amp;logo=huggingface&amp;logoColor=white&amp;labelColor=494150" alt="Model repository"></a>
   <a href="https://huggingface.co/datasets/Shuaijun/D-JEPA-Dataset"><img src="https://img.shields.io/badge/Hugging_Face-Dataset-8464A5?style=flat&amp;logo=huggingface&amp;logoColor=white&amp;labelColor=494150" alt="Decision-supervision dataset"></a>
   <a href="https://github.com/NEBULIS-Lab/D-JEPA"><img src="https://img.shields.io/badge/GitHub-Code-777083?style=flat&amp;logo=github&amp;logoColor=white&amp;labelColor=494150" alt="Code repository"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-Apache--2.0-A45AA8?style=flat&amp;labelColor=494150" alt="License: Apache-2.0"></a>
   <a href="https://example.com" title="Paper link placeholder"><img src="https://img.shields.io/badge/Paper-arXiv-ECA896?style=flat&amp;logo=arxiv&amp;logoColor=white&amp;labelColor=494150" alt="Paper on arXiv (link forthcoming)"></a>
   <a href="https://example.com" title="Video link placeholder"><img src="https://img.shields.io/badge/Video-YouTube-F6C17F?style=flat&amp;logo=youtube&amp;logoColor=white&amp;labelColor=494150" alt="Video on YouTube (link forthcoming)"></a>
 </p>
@@ -192,6 +193,14 @@ scientific source hashes are mapped in [PACKAGE_LAYOUT.json](docs/PACKAGE_LAYOUT
 ```bash
 bash scripts/smoke_test.sh
 ```
+
+## License
+
+D-JEPA code, including the independent offline robotics package, is released
+under the [Apache License 2.0](LICENSE). Third-party components retain their
+original licenses; see [third-party notices](docs/THIRD_PARTY.md).
+Model checkpoints and datasets are governed by the terms provided with their
+respective releases.
 
 ## Acknowledgments
 
