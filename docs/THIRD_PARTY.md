@@ -39,6 +39,22 @@ their checkpoint hashes in model/data provenance and need their own release
 term checks. Upstream source revisions do not replace actual file hashes where
 the experiment used local changes.
 
+## Task interfaces
+
+The project-authored robot interfaces use RoboTwin's RLDS/simulator conventions
+and explicit pi0.5 action conversions. Full EE branch execution accepts an
+external CoWAM-compatible simulator adapter; neither that adapter nor RoboTwin
+simulator code, policy weights or assets is bundled. See [robotic manipulation](ROBOTICS.md).
+RLDS decoding optionally uses TensorFlow CPU and TensorFlow Datasets.
+
+The driving interfaces call an externally supplied Drive-JEPA checkout and its
+NAVSIM v1 scorer. Install that checkout's requirements and retain its license;
+Drive-JEPA, NAVSIM/nuPlan source, maps, sensor data and pretrained assets are not
+copied into this package. See [autonomous driving](DRIVING.md). The extracted
+D-JEPA modules and wrappers are project-authored; code-file provenance is in
+`TASK_SOURCE_PROVENANCE.json`. No hardware-specific control interfaces or
+cluster configuration are included.
+
 ## Project license
 
 Project-authored D-JEPA code, including the independent offline robotics

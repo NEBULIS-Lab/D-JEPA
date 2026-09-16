@@ -1,0 +1,9 @@
+{
+  "schema": "D-JEPA-RoboTwin2-task-set-v1",
+  "tasks": [
+    {"name": "grab_roller", "dataset_name": "robotwin_grab_roller"},
+    {"name": "place_bread_skillet", "dataset_name": "robotwin_place_bread_skillet"},
+    {"name": "put_object_cabinet", "dataset_name": "robotwin_put_object_cabinet"},
+    {"name": "handover_block", "dataset_name": "robotwin_handover_block"}
+  ]
+}

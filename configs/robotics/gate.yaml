@@ -1,0 +1,5 @@
+entrypoint: scripts/robotics/calibrate_gate.py
+arguments:
+  repo: .
+  output: runs/robotics/gate
+  feature: closest_closed_step_fraction

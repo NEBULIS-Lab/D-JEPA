@@ -1,0 +1,11 @@
+entrypoint: djepa.driving.learn
+arguments:
+  stage: train
+  fit_cache: data/driving/fit
+  calibration_cache: data/driving/calibration
+  output: runs/driving/relational
+  seed: 20260910
+  epochs: 30
+  batch_size: 16
+  lr: 0.001
+  device: cpu

@@ -19,6 +19,8 @@ repositories; they are not bundled into Git source history.
 | Local summaries | `scripts/summarize_results.py` | Per-run metrics; no pooling of different protocols |
 | Project page | `docs/index.html` | Existing approved media and author-artwork placeholders |
 | Offline robotics | `real_robot/README.md` | Independently installed recorded-data, training, scoring and planning tools |
+| Robotic manipulation | `ROBOTICS.md` | RLDS interfaces, learned geometry candidates, preservation calibration and matched execution |
+| Autonomous driving | `DRIVING.md` | Native export, relation/risk calibration, label-free prediction and cached evaluation |
 
 Follow [reproduction](REPRODUCING.md), [module training](MODULE_TRAINING.md) and
 [native execution](NATIVE_REPRODUCING.md) for the exact supported inputs and
@@ -32,9 +34,11 @@ Device-specific control and calibration interfaces are intentionally not part of
 the public release. Publishing this code does not add robot numerical results
 or relabel simulation weights as robot checkpoints.
 
-The next planned content updates cover completed experimental extensions,
-robot experimental results, and the final paper/video with author-drawn
-method figures. Ongoing experiments are not represented as completed results.
+Robotic-manipulation and autonomous-driving interfaces are now included by
+application, alongside the shared scientific modules. Environment-specific
+dependencies and inputs are listed in their guides. Code integration does not
+re-run experiments or alter the numerical authorities. The final paper/video
+and author-drawn method figures remain separate content updates.
 The Paper and Video badges currently link to explicitly marked placeholders.
 Existing numerical authorities, checkpoint identities and evaluation splits
 remain unchanged in this release.

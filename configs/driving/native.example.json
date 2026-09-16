@@ -1,0 +1,18 @@
+{
+  "repo": "external/Drive-JEPA",
+  "assets": "external/Drive-JEPA-cache",
+  "checkpoint": "external/Drive-JEPA-cache/drive_jepa_perception_based_agent_vitl.ckpt",
+  "python": "external/drive-env/bin/python",
+  "logs": "data/driving/logs",
+  "sensors": "data/driving/sensors",
+  "maps": "data/driving/maps",
+  "manifest": "data/driving/scenes.csv",
+  "metric_index": "data/driving/metric_index.csv",
+  "runs": "runs/driving",
+  "source_split": "navtest",
+  "protocol": "log_disjoint_candidate_evaluation",
+  "seed": 20260910,
+  "counts": {"fit": 200, "calibration": 50, "test": 200},
+  "proposal_count": 32,
+  "selection": "pinned_v1_code_native_argmax"
+}

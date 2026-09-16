@@ -1,0 +1,9 @@
+entrypoint: scripts/robotics/build_candidates.py
+arguments:
+  dataset_root: data/robotwin
+  admission: runs/robotics/inventory
+  native_rollout: data/robotwin/native-rollout
+  repo: .
+  output: runs/robotics/candidates
+  task: grab_roller
+  seed: 100056

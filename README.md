@@ -51,6 +51,11 @@ prediction, relational training, candidate scoring and offline planning.
 Simulation and robotics do not share environment-specific scripts or dependencies.
 Device-specific robot controllers and calibration are supplied by the user.
 
+Task interfaces are organized by application: [robotic manipulation](docs/ROBOTICS.md),
+[autonomous driving](docs/DRIVING.md), and the separate
+[physical-robot package](real_robot/README.md). Each guide identifies data inputs,
+training/calibration commands and evaluation outputs.
+
 ### Method at a glance
 
 | Module | Role |
@@ -165,6 +170,8 @@ not as a separate results directory in this code repository.
 | [Module training](docs/MODULE_TRAINING.md) | Relational and sparse-supervision training recipes |
 | [Native execution](docs/NATIVE_REPRODUCING.md) | Raw-input feature extraction, model factories and physics rollouts |
 | [Offline robotics](real_robot/README.md) | Separate installation, recorded observations, relational training and offline planning |
+| [Robotic manipulation](docs/ROBOTICS.md) | RoboTwin data, scene-conditioned candidates, preservation gates and matched execution |
+| [Autonomous driving](docs/DRIVING.md) | Drive-JEPA features, relation/risk training, label-free selection and evaluation |
 | [Release scope](docs/RELEASE_SCOPE.md) | Available workflows and future paper, video and experiment updates |
 | [Protocols and data schema](docs/PROTOCOLS.md) | Evaluation populations, identities and supervision semantics |
 | [Checkpoint profiles](docs/CHECKPOINTS.md) | Loading, composition and upstream dependencies |
@@ -175,9 +182,9 @@ not as a separate results directory in this code repository.
 ### Repository map
 
 ```text
-src/djepa/      models · objectives · data · evaluation · native · cli
+src/djepa/      models · objectives · data · evaluation · native · robotics · driving · cli
 real_robot/    independent offline robotics package · scripts · configs · tests
-configs/       training · evaluation · reproduction · native
+configs/       training · evaluation · reproduction · native · robotics · driving
 scripts/       download · preflight · train · evaluate · reproduce · summarize · preview
 examples/      label-free inference and sparse metrics
 tests/         scientific behavior and workflow tests

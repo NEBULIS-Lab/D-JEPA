@@ -1,0 +1,185 @@
+{
+  "scope": "Project-authored task interfaces; portable imports, paths and device selection. Source equations and state keys retained.",
+  "files": [
+    {
+      "path": "src/djepa/robotics/__init__.py",
+      "source_sha256": "248b3f2ba98255620678f3c198233833e7c771b9c474cb0746669aaec2b3c4ac",
+      "export_sha256": "248b3f2ba98255620678f3c198233833e7c771b9c474cb0746669aaec2b3c4ac"
+    },
+    {
+      "path": "src/djepa/robotics/candidates.py",
+      "source_sha256": "74c199ae2fb497b9aed188f1294c3fec4e81bb6911bfa8c44df65e5567933f04",
+      "export_sha256": "74c199ae2fb497b9aed188f1294c3fec4e81bb6911bfa8c44df65e5567933f04"
+    },
+    {
+      "path": "src/djepa/robotics/grasp_geometry.py",
+      "source_sha256": "8e1e94963a5ca2cc40c96ee4bcc1522cf8dd27e1a8574f59c0f9ce3863a4ef5f",
+      "export_sha256": "8e1e94963a5ca2cc40c96ee4bcc1522cf8dd27e1a8574f59c0f9ce3863a4ef5f"
+    },
+    {
+      "path": "src/djepa/robotics/inventory.py",
+      "source_sha256": "9a691875d1b0e54358a597b66a8b90887915c97bd4cd03e5952e868f2fdf0a64",
+      "export_sha256": "cc1301718752dc09b081ab0e3906000abb93f564d649160f45a3e0361a31dd1c"
+    },
+    {
+      "path": "src/djepa/robotics/pi05.py",
+      "source_sha256": "9cdf074458c211d5dd873d0c258edaece20a33600c04d8de06d5b7e497e196db",
+      "export_sha256": "9cdf074458c211d5dd873d0c258edaece20a33600c04d8de06d5b7e497e196db"
+    },
+    {
+      "path": "src/djepa/robotics/rlds.py",
+      "source_sha256": "149fb1be3a9895067dbf04e90bbd2f36a2104c6d4e5e10bfafaa08c5f614511b",
+      "export_sha256": "149fb1be3a9895067dbf04e90bbd2f36a2104c6d4e5e10bfafaa08c5f614511b"
+    },
+    {
+      "path": "src/djepa/robotics/simulator.py",
+      "source_sha256": "a12d89d0436b0f8464547b6c997e4fd6c130a928fe66ebacf02106c05a369ecf",
+      "export_sha256": "a12d89d0436b0f8464547b6c997e4fd6c130a928fe66ebacf02106c05a369ecf"
+    },
+    {
+      "path": "src/djepa/robotics/smoke.py",
+      "source_sha256": "529295b363511da6712b19c1d3ece308770d1a92d13003333bf8dcda379ac5bf",
+      "export_sha256": "529295b363511da6712b19c1d3ece308770d1a92d13003333bf8dcda379ac5bf"
+    },
+    {
+      "path": "scripts/robotics/inventory.py",
+      "source_sha256": "d979a17f25b345db8cdea6339a0a65ab30b4273fbcc3c22f586fce7ee0e578d4",
+      "export_sha256": "dbdde1c0bf1768115cbb6aab49ce5240494a2de2abd5d9bfe11c2ecdcb2c5a18"
+    },
+    {
+      "path": "scripts/robotics/extract_observation.py",
+      "source_sha256": "60525f16fd37caadd5e2c46270630564fc4f64525f9a2b234561d0fdde4523cc",
+      "export_sha256": "88c6bb39a4e72c5419b66d58e61c987aba4c544aef2461248b1d25ffe89f1aac"
+    },
+    {
+      "path": "scripts/robotics/extract_actions.py",
+      "source_sha256": "bdd966f09b25488711c775230885caff9209b55454514f2c626cea5585e53aff",
+      "export_sha256": "0923871eba49c046750813b67cd094c6740c74cdd0baf431b33f904ece71be69"
+    },
+    {
+      "path": "scripts/robotics/build_candidates.py",
+      "source_sha256": "fa3eb1b8020056275a585a96368127db86bc27ebec7265a1a01d3a9454060bcd",
+      "export_sha256": "0d97dc5c5a877b14c38d5c156f44c4cc2ce21cdd17c1eab793225cc5705afeed"
+    },
+    {
+      "path": "scripts/robotics/calibrate_gate.py",
+      "source_sha256": "361bcc9b68af182232f0e4092b8e6aa66c766c39c26165e3a53039a392a62d09",
+      "export_sha256": "288e3417ac4f10ca19145b4e151ebdbb96ef2307829b19a0fd45dda5c2a81b57"
+    },
+    {
+      "path": "scripts/robotics/select_candidates.py",
+      "source_sha256": "5c07d380da657a63fc70200a223718c4f8c4ab7d48f2847fbd0a7bb7c9f98ce7",
+      "export_sha256": "51c8f69810ef90ce576968e5bbbd2d2a28317c5c85097deb4974c5077688e97f"
+    },
+    {
+      "path": "scripts/robotics/candidate_subset.py",
+      "source_sha256": "0373f98f121dc572cded8c7f865ab316de7ec851e5fe1f528cae11d97d7060b9",
+      "export_sha256": "30c6a028f52d2fff38e5fd52e7f425745065cd0c2348b4e5fe5d0820a63665f9"
+    },
+    {
+      "path": "scripts/robotics/evaluate_gate.py",
+      "source_sha256": "c10e4b9eeaa90684fbe65e8b66f5d7d18e264fa61561a16beed39ad604c9a036",
+      "export_sha256": "53ccbd169e61561533a6c9d5eb427165f01fa7ec90c6a49db30b6d2334746ef5"
+    },
+    {
+      "path": "scripts/robotics/evaluate_candidates.py",
+      "source_sha256": "34d02b77fabb3c8f47d1ba2dd246237c65367ab5a117f312e81d71743977855b",
+      "export_sha256": "9b004faef1e9caa93859df3812426fde0ba2694a1ac38912dbd596f39ee92081"
+    },
+    {
+      "path": "scripts/robotics/import_observation.py",
+      "source_sha256": "9b8205a6686206f8a8fe2933ff637744b785a74afe01656511aac95510888ed2",
+      "export_sha256": "87aab061ffc7ec3ebd44ca01b946e0b42b730858b9d74789b29c4fad0d4624b6"
+    },
+    {
+      "path": "tests/robotics/test_candidates.py",
+      "source_sha256": "20911b3f90b35f49eacd7151b49d970ba6ff7a5a4437e3d82bf800c1efa7275e",
+      "export_sha256": "f7f7b27f61f4fc96e661ebc0ff671bbc7763ada8b6cd675026cf8749d678f608"
+    },
+    {
+      "path": "tests/robotics/test_inventory.py",
+      "source_sha256": "0f445b9c535cfa93cb805e1a220d47285ad9e6f2b1c1ac2861713c40d31c7393",
+      "export_sha256": "4e854ed87ae7f7b8e8cafdaf83dc081dc1e909e2ec334a7ac8b1939f365546c9"
+    },
+    {
+      "path": "tests/robotics/test_rlds.py",
+      "source_sha256": "23e7858279de00bcd4d2d05db7b84211c1aaf3bd9aaf66abf3f28a4837257fd8",
+      "export_sha256": "f78777dba203ddf37f2ab2a1a55a0ea60f258c94429cda482321c22fa14613b7"
+    },
+    {
+      "path": "tests/robotics/test_pi05.py",
+      "source_sha256": "388c5c3831be975e3bc65d45786f36989b4c7508d97088d7e2c4cc2347a857db",
+      "export_sha256": "10efce23f2626066e274754224de3cf8550b733b221b7bb3461fd0939688d039"
+    },
+    {
+      "path": "tests/robotics/test_simulator.py",
+      "source_sha256": "374551a98f342c015d09a76df12d4a4f79bf1b476b3958d08382c567373fe4cb",
+      "export_sha256": "be9f6c6d66d40ad51db895796ff65abbbbe21c844a6cd9a66bfbbbad28e24944"
+    },
+    {
+      "path": "tests/robotics/test_smoke.py",
+      "source_sha256": "e073867f41f735e720e6c30b10bbf74dec1e5f111fa26c8e31802c0e66587e87",
+      "export_sha256": "945835f7959de243226fd3152c5c6a9ba388a1401dd50b564d9b34319038b627"
+    },
+    {
+      "path": "tests/robotics/test_grasp_geometry.py",
+      "source_sha256": "ae99889429d3984897a94cc12692723fe2a4e4a542e9f209e6b78ae8780bf592",
+      "export_sha256": "db24ec9dcbf751aae66938f0bf5ae69b0aa0c6f01d4f43301287796e9e9470df"
+    },
+    {
+      "path": "tests/robotics/test_grasp_geometry_candidates.py",
+      "source_sha256": "0cf01a8925655c8400a1131d0bebfdb5faa1e9c5a8112a5cce13f5bed6d15298",
+      "export_sha256": "f2a54b6b7afab8032f955525de032ba73ddbead6eb7e1b9fca53fc83717b2c23"
+    },
+    {
+      "path": "tests/robotics/test_preservation_gate_cli.py",
+      "source_sha256": "0f824d0576490902a292e43ff542413383c2cbb5f0d5ecd26737bb34f4e7ba9b",
+      "export_sha256": "c6287f31e92f5340c6b98c4c0a1bfdc91868bfaceeb3684ddc54282ab6566f85"
+    },
+    {
+      "path": "tests/robotics/test_apply_preservation_gate.py",
+      "source_sha256": "786b997c4cd6184477b308f162d74c3c87cc8850f0847f878100608410bdbc93",
+      "export_sha256": "11d330aade1060207e7111b18bf29c269322e0953b9f5e4bca05a9c9f10d265c"
+    },
+    {
+      "path": "tests/robotics/test_candidate_subset.py",
+      "source_sha256": "0932f6bfdd9d7ee735239b6f4e40df39f3ce93ee4e82420a1891b25a894a05f9",
+      "export_sha256": "ebb8060891dbb3ceb63f1a95a208b4f37d6ec1530a67986fd0ac95eef2b1c901"
+    },
+    {
+      "path": "tests/robotics/test_gate_report.py",
+      "source_sha256": "8bdfbab561c4b7b6987b6efe05c41e950017564f4876b28ebab5489c31e7db23",
+      "export_sha256": "b9d535b5cac0a95b84c03e60f1e000b1a3fd6375d4e52bcf89be8e190af6cfc8"
+    },
+    {
+      "path": "tests/robotics/test_inventory_cli.py",
+      "source_sha256": "1875a9000b80b0811943d85597ea2dbfa297a45cef1451cfb228ee811b328035",
+      "export_sha256": "0123b8711c1fb1570603497a4e43013d33bed929d56eee12563e6ffee0d7e756"
+    },
+    {
+      "path": "src/djepa/driving/alignment.py",
+      "source_sha256": "5e2a5314821ab7d6a95de339caff3616d8eb8a7e6a37db0e482c45575cb38a2e",
+      "export_sha256": "5e2a5314821ab7d6a95de339caff3616d8eb8a7e6a37db0e482c45575cb38a2e"
+    },
+    {
+      "path": "src/djepa/driving/contract.py",
+      "source_sha256": "a0ba6d66c7d3b2cab6bb9d39647fd23975d87c608c67c8ae3a359c654987483c",
+      "export_sha256": "3d95a1c2bc33bf8a8fbcdddbf5c086fbc535abdf1eb915a5cdf8d8ebce98263f"
+    },
+    {
+      "path": "src/djepa/driving/learn.py",
+      "source_sha256": "edb6a844cde23f382b1f63e75b40dcf897e7ae8bda7301844e1aa76587663c09",
+      "export_sha256": "82a412f12fa1f9eca3358b76b243efe2925124df1ff40074e3679c1337a83a7c"
+    },
+    {
+      "path": "src/djepa/driving/risk.py",
+      "source_sha256": "bc6439888ff46b552d2c8d00205b612757774fab5ee0b4f8e8fcb1e7c336d5ea",
+      "export_sha256": "d7634b69a50ab0bd5b86ce7bea6c44acd93b1b72bd4957e3f1b4a36eedb65bbc"
+    },
+    {
+      "path": "src/djepa/driving/native.py",
+      "source_sha256": "47c79f6163b39798498366f743fae100f6067be43c10e56e2319d3266655340f",
+      "export_sha256": "f6c4c12480a10b70982bd6baa7013702315626c8ea0243e62d1dd110da57024d"
+    }
+  ]
+}

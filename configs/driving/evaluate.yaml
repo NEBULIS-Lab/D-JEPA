@@ -1,0 +1,7 @@
+entrypoint: djepa.driving.learn
+arguments:
+  stage: evaluate
+  cache: data/driving/test
+  checkpoint: runs/driving/relational/alignment.pt
+  output: runs/driving/evaluation
+  device: cpu

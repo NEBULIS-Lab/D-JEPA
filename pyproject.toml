@@ -14,7 +14,8 @@ license = {file = "LICENSE"}
 [project.optional-dependencies]
 download = ["huggingface-hub>=0.24"]
 media = ["imageio>=2.31", "imageio-ffmpeg>=0.4.9"]
-dev = ["build>=1.2"]
+dev = ["build>=1.2", "pytest>=7"]
+robotics-data = ["tensorflow-cpu>=2.15,<2.17", "tensorflow-datasets>=4.9,<5"]
 
 [project.urls]
 Homepage = "https://nebulis-lab.com/D-JEPA"

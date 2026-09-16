@@ -1,0 +1,6 @@
+entrypoint: djepa.driving.risk
+arguments:
+  matrix: data/driving
+  output: runs/driving/risk
+  seed: 20260911
+  device: cpu
