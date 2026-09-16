@@ -26,7 +26,7 @@ and all three video panels remain readable without JavaScript.
 
 ## Palette and media
 
-Shared tokens are in `static/css/site.css`: purple #A64CA6, secondary purple
+Shared tokens are in `static/css/site.css`: purple #A45AA8, secondary purple
 #8464A5, lavender gray #777083, peach #ECA896, champagne #F6C17F and gold #FFDB67.
 Purple-to-gold gradients highlight the primary resource button and divider.
 Light-mode text uses darker colors for readability. Figures and videos retain
@@ -37,10 +37,20 @@ copies under `docs/static/images/branding/` make a docs-only deployment portable
 If a master changes, update its site copy and `ASSET_MANIFEST.json` together.
 
 Published comparison clips are selected baseline-failure / D-JEPA-success cases,
-not a random sample. They retain full declared fixed-action horizons. Existing
-numerical figures and media were copied byte-for-byte from the checked visual
-library; provenance and hashes are in `ASSET_MANIFEST.json`. No new simulation,
-video edit, frame synthesis or rendering was performed for this page.
+not a random sample. They retain full declared fixed-action horizons. Numerical
+figures and videos are byte-identical copies from the checked visual library.
+The page now uses the manuscript's 16 quantitative SVG panels and baseline-only
+ranking diagnostic. Numeric panels have common data-area alignment, restrained
+bar hatching and preserved source values. Row-label positions and axis-title
+baselines are aligned within each four-panel group. Desktop rows contain four equal square
+panels; narrower screens use two. Method colours, uncertainty definitions and
+evaluation populations match the manuscript, including the separate independent
+and mechanism evaluations. Table notes are enclosed in `tfoot` with a closing rule.
 
-The page has no final-paper download, final citation, venue badge or unfinished
-experiment results. Add them only when author-approved material is available.
+RoboTwin and driving use byte-identical copies of the current manuscript PNGs,
+with the original experimental frames and bird's-eye geometry retained. Provenance,
+transformations and hashes are recorded in `ASSET_MANIFEST.json`. Existing videos
+remain unchanged. Updating these local files does not deploy the website.
+
+The page has no final-paper download, final citation or venue badge. Add them
+only when author-approved material is available.

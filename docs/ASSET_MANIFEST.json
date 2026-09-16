@@ -1,33 +1,5 @@
 [
   {
-    "path": "static/images/pusht_independent_success.svg",
-    "source": "visual_assets/quantitative/pusht_independent_success.svg",
-    "sha256": "59fbf41bbe494312630110fa4798f64f9fc83cd5c0f2aa490b30bc46c5fdcf9e",
-    "bytes": 8727,
-    "transformation": "none; byte-identical copy"
-  },
-  {
-    "path": "static/images/reacher_formal_success.svg",
-    "source": "visual_assets/quantitative/reacher_formal_success.svg",
-    "sha256": "256f4a7562b9c8a3c3212d9966baa19dffe44f4be466465a395c52d3133b737e",
-    "bytes": 8718,
-    "transformation": "none; byte-identical copy"
-  },
-  {
-    "path": "static/images/granular_threshold_success.svg",
-    "source": "visual_assets/quantitative/granular_threshold_success.svg",
-    "sha256": "869fc83e11f6bfabe0da565e6c935c6af43cdcafe666057648858d9bbb857505",
-    "bytes": 11868,
-    "transformation": "none; byte-identical copy"
-  },
-  {
-    "path": "static/images/pushobj_unseen_shape_success.svg",
-    "sha256": "922c7112947e9ad6d39ac791d48fd73b8611a8f86f8dcf7be2a686c04521e372",
-    "bytes": 11731,
-    "transformation": "none; byte-identical copy",
-    "source_identity": "sha256:922c7112947e9ad6d39ac791d48fd73b8611a8f86f8dcf7be2a686c04521e372"
-  },
-  {
     "path": "static/videos/pusht.mp4",
     "source": "visual_assets/media/pusht/start_0057_frozen_tdjepa/comparison.mp4",
     "sha256": "916e789776d8995e6410dc5e9d310bbd9faa60e53963244edb5b9657403701aa",
@@ -96,5 +68,157 @@
     "sha256": "ee6c202b2d758d8ee83b6b57365b80526c9825bf254d154386c97afeacb9c1f0",
     "bytes": 480449,
     "transformation": "none; byte-identical copy"
+  },
+  {
+    "path": "static/images/pusht_independent_success.svg",
+    "sha256": "1a689845d31990274962e6fc7d032c75f847b9b392d8db8c5c66ab6be4f83cd7",
+    "source_identity": "sha256:1a689845d31990274962e6fc7d032c75f847b9b392d8db8c5c66ab6be4f83cd7",
+    "evidence": "Current manuscript: unchanged source measurements, common panel geometry and restrained texture.",
+    "bytes": 7853,
+    "transformation": "none; byte-identical current manuscript figure"
+  },
+  {
+    "path": "static/images/reacher_formal_success.svg",
+    "sha256": "63b824ad7a5fe91cace0a686de69bb5949df687162f468b3dbd551b7cfc93788",
+    "source_identity": "sha256:63b824ad7a5fe91cace0a686de69bb5949df687162f468b3dbd551b7cfc93788",
+    "evidence": "Current manuscript: unchanged source measurements, common panel geometry and restrained texture.",
+    "bytes": 7849,
+    "transformation": "none; byte-identical current manuscript figure"
+  },
+  {
+    "path": "static/images/granular_threshold_success.svg",
+    "sha256": "e7fc00fa972453b7447f934f0d7ee6779bf0844f8358364112f2dfd6e281161a",
+    "source_identity": "sha256:e7fc00fa972453b7447f934f0d7ee6779bf0844f8358364112f2dfd6e281161a",
+    "evidence": "Current manuscript: unchanged source measurements, common panel geometry and restrained texture.",
+    "bytes": 9208,
+    "transformation": "none; byte-identical current manuscript figure"
+  },
+  {
+    "path": "static/images/granular_paired_cost.svg",
+    "sha256": "3ec5bf05fbb041f503335eb785e4a673e2c8e0280589b5d955a87c9502a7481a",
+    "source_identity": "sha256:3ec5bf05fbb041f503335eb785e4a673e2c8e0280589b5d955a87c9502a7481a",
+    "evidence": "Current manuscript: unchanged source measurements, common panel geometry and restrained texture.",
+    "bytes": 16757,
+    "transformation": "none; byte-identical current manuscript figure"
+  },
+  {
+    "path": "static/images/held_out_shape_success.svg",
+    "sha256": "3db123c798fc145c17f64e5f7c184132433458c3c668bb58bfba431164042868",
+    "source_identity": "sha256:3db123c798fc145c17f64e5f7c184132433458c3c668bb58bfba431164042868",
+    "evidence": "Current manuscript: unchanged source measurements, common panel geometry and restrained texture.",
+    "bytes": 10353,
+    "transformation": "none; byte-identical current manuscript figure"
+  },
+  {
+    "path": "static/images/appearance_success.svg",
+    "sha256": "b1e353a5dbe1c42cc7e1f711830d74818437fa15dab1f835e006c0993d8bdc8d",
+    "source_identity": "sha256:b1e353a5dbe1c42cc7e1f711830d74818437fa15dab1f835e006c0993d8bdc8d",
+    "evidence": "Current manuscript: unchanged source measurements, common panel geometry and restrained texture.",
+    "bytes": 14019,
+    "transformation": "none; byte-identical current manuscript figure"
+  },
+  {
+    "path": "static/images/held_out_shape_pairs.svg",
+    "sha256": "f0214a898ae3980d999b12a632599c4976dff355d0501d4ec79bf2b5bc946d7c",
+    "source_identity": "sha256:f0214a898ae3980d999b12a632599c4976dff355d0501d4ec79bf2b5bc946d7c",
+    "evidence": "Current manuscript: unchanged source measurements, common panel geometry and restrained texture.",
+    "bytes": 8968,
+    "transformation": "none; byte-identical current manuscript figure"
+  },
+  {
+    "path": "static/images/appearance_pairs.svg",
+    "sha256": "e107d1b7191fd5d06afe342797ed78a6b9f0ee7e708151fd472cd224b74efd47",
+    "source_identity": "sha256:e107d1b7191fd5d06afe342797ed78a6b9f0ee7e708151fd472cd224b74efd47",
+    "evidence": "Current manuscript: unchanged source measurements, common panel geometry and restrained texture.",
+    "bytes": 10180,
+    "transformation": "none; byte-identical current manuscript figure"
+  },
+  {
+    "path": "static/images/alignment_ablation.svg",
+    "sha256": "fa61552d9048a6e5250d1685224c2daed2ce6ef6892d3a0882825a7fa367f0a4",
+    "source_identity": "sha256:fa61552d9048a6e5250d1685224c2daed2ce6ef6892d3a0882825a7fa367f0a4",
+    "evidence": "Current manuscript: unchanged source measurements, common panel geometry and restrained texture.",
+    "bytes": 8841,
+    "transformation": "none; byte-identical current manuscript figure"
+  },
+  {
+    "path": "static/images/predictive_source_ablation.svg",
+    "sha256": "92b27fa72a4839ddf35d35e2e0fad62a23a153ab2a76e74e9a636f89be5732dd",
+    "source_identity": "sha256:92b27fa72a4839ddf35d35e2e0fad62a23a153ab2a76e74e9a636f89be5732dd",
+    "evidence": "Current manuscript: unchanged source measurements, common panel geometry and restrained texture.",
+    "bytes": 7644,
+    "transformation": "none; byte-identical current manuscript figure"
+  },
+  {
+    "path": "static/images/multiple_predictive_geometries.svg",
+    "sha256": "e7830b4c344025d0f1c77390a424968c856087ebfab3081831a6fa2b46d0b084",
+    "source_identity": "sha256:e7830b4c344025d0f1c77390a424968c856087ebfab3081831a6fa2b46d0b084",
+    "evidence": "Current manuscript: unchanged source measurements, common panel geometry and restrained texture.",
+    "bytes": 8970,
+    "transformation": "none; byte-identical current manuscript figure"
+  },
+  {
+    "path": "static/images/deployment_latency.svg",
+    "sha256": "cbbb732074c2d2ad37f0e4e7ba52417f4ac18dba407bc7ef362a6e3f6496a8bc",
+    "source_identity": "sha256:cbbb732074c2d2ad37f0e4e7ba52417f4ac18dba407bc7ef362a6e3f6496a8bc",
+    "evidence": "Current manuscript: unchanged source measurements, common panel geometry and restrained texture.",
+    "bytes": 7059,
+    "transformation": "none; byte-identical current manuscript figure"
+  },
+  {
+    "path": "static/images/candidate_budget.svg",
+    "sha256": "590faef3c08971dca84c2589f0a95af178bb6b5d47f678bffa3f8bc5303bacd4",
+    "source_identity": "sha256:590faef3c08971dca84c2589f0a95af178bb6b5d47f678bffa3f8bc5303bacd4",
+    "evidence": "Current manuscript: unchanged source measurements, common panel geometry and restrained texture.",
+    "bytes": 12138,
+    "transformation": "none; byte-identical current manuscript figure"
+  },
+  {
+    "path": "static/images/ordinal_recovery.svg",
+    "sha256": "5602e120f6cb3c876788fe09386fcb9b2307bb4aad052237fd047fac0551721b",
+    "source_identity": "sha256:5602e120f6cb3c876788fe09386fcb9b2307bb4aad052237fd047fac0551721b",
+    "evidence": "Current manuscript: unchanged source measurements, common panel geometry and restrained texture.",
+    "bytes": 12467,
+    "transformation": "none; byte-identical current manuscript figure"
+  },
+  {
+    "path": "static/images/latent_geometry.svg",
+    "sha256": "899e9f9e3ca9ac490ce3adc50666a446f0ecca005c56a1969b6ca4d6fbc5eeb4",
+    "source_identity": "sha256:899e9f9e3ca9ac490ce3adc50666a446f0ecca005c56a1969b6ca4d6fbc5eeb4",
+    "evidence": "Current manuscript: unchanged source measurements, common panel geometry and restrained texture.",
+    "bytes": 28344,
+    "transformation": "none; byte-identical current manuscript figure"
+  },
+  {
+    "path": "static/images/temporal_transport.svg",
+    "sha256": "97c8db14930e90782102a4f86d43081658239351bdacf42ed05aa3bcf7a8f6cd",
+    "source_identity": "sha256:97c8db14930e90782102a4f86d43081658239351bdacf42ed05aa3bcf7a8f6cd",
+    "evidence": "Current manuscript: unchanged source measurements, common panel geometry and restrained texture.",
+    "bytes": 23609,
+    "transformation": "none; byte-identical current manuscript figure"
+  },
+  {
+    "path": "static/images/decision_local_ranking.svg",
+    "sha256": "7c8a67b3ca62d6e7d3488cea1ef6f623ac8d9aac9831269278e747f970c24584",
+    "source_identity": "sha256:7c8a67b3ca62d6e7d3488cea1ef6f623ac8d9aac9831269278e747f970c24584",
+    "evidence": "Current manuscript case or diagnostic; original experimental frames and data preserved.",
+    "bytes": 8508,
+    "transformation": "none; byte-identical current manuscript figure"
+  },
+  {
+    "path": "static/images/foundation_robotwin.png",
+    "sha256": "ab7a83ee2a8492e3256f25fecf4ddc0951b79c8b32ea5c015082b31770ebe206",
+    "source_identity": "sha256:ab7a83ee2a8492e3256f25fecf4ddc0951b79c8b32ea5c015082b31770ebe206",
+    "evidence": "Current manuscript case or diagnostic; original experimental frames and data preserved.",
+    "bytes": 1628856,
+    "transformation": "none; byte-identical current manuscript figure"
+  },
+  {
+    "path": "static/images/foundation_driving.png",
+    "sha256": "65f5cd3944d075a1d47283da965757e250447e3c0e583330abbe5acd6952aec5",
+    "source_identity": "sha256:65f5cd3944d075a1d47283da965757e250447e3c0e583330abbe5acd6952aec5",
+    "evidence": "Current manuscript case or diagnostic; original experimental frames and data preserved.",
+    "bytes": 3724447,
+    "transformation": "none; byte-identical current manuscript figure"
   }
 ]
