@@ -250,7 +250,6 @@ function ordinalLiftingDetail() {
     s+=rect(x,5,171,38,i===active?'var(--purple-soft)':'var(--surface)',i===active?'var(--purple)':'var(--line)',9);
     s+=text(x+11,28,String(i+1),i===active?'svg-small svg-accent':'svg-small')+text(x+29,28,label,'svg-small');
     s+='</g>';
-    if(i<3)s+=text(x+177,28,'→','svg-tiny');
   });
   s+=text(27,78,'Aligned order π','svg-label');
   d.finalOrder.forEach((id,index)=>{
