@@ -78,6 +78,7 @@ test('lifting shows rank-to-radius conversion, retained direction and exact nati
   }
   assert.equal(liftingProgress(.24),0);assert.equal(liftingProgress(1),1);
   assert.deepEqual([.08,.24,.58,1].map(liftingStep),[0,1,2,3]);
+  assert.deepEqual([.16,.34,.8].map(liftingStep),[0,1,2]);
 });
 
 test('decision timing pauses just after the competing candidates cross', () => {

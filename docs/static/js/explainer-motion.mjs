@@ -7,7 +7,7 @@ export function liftingProgress(phase) {
 }
 
 export function liftingStep(phase) {
-  return phase < .16 ? 0 : phase < .34 ? 1 : phase < .80 ? 2 : 3;
+  return phase <= .16 ? 0 : phase <= .34 ? 1 : phase <= .80 ? 2 : 3;
 }
 
 export function decisionProgress(phase, data) {

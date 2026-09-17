@@ -308,93 +308,131 @@ function liftingDetail() {
     const points = Array.from({length: 5}, (_, t) => transportPoint(state.candidate, t, state.progress));
     const map = p => [65 + p[0] * 790, 158 - p[1] * 275];
     const base = points.map(p => map(p.source)), refined = points.map(p => map(p.refined));
-    s += path(base.map(([x,y], i) => `${i ? 'L' : 'M'}${x} ${y}`).join(' '), 'detail-line', 'stroke-width="2"');
+    s += path(base.map(([x,y], i) => `${i ? 'L' : 'M'}${x} ${y}`).join(' '), 'detail-line', 'stroke-width="2" stroke-dasharray="4 5"');
     s += path(refined.map(([x,y], i) => `${i ? 'L' : 'M'}${x} ${y}`).join(' '), 'trace-line');
     points.forEach((p, t) => {
       const [x,y] = base[t], [xx,yy] = refined[t];
-      s += line(x, y, xx, yy, 'var(--purple)', 'stroke-dasharray="3 3"') + circle(x,y,5,'var(--blue)') + circle(xx,yy,6,'var(--accent)');
-      s += text(x, 258, `t${t + 1}`, 'svg-label', 'text-anchor="middle"');
-      s += text(x, 281, `β ${fmt(p.beta)}`, 'svg-mono', 'text-anchor="middle"');
+      s += line(x, y, xx, yy, 'var(--purple)', 'stroke-width="6" opacity=".18"');
+      s += line(x, y, xx, yy, 'var(--purple)', 'stroke-width="1.5"') + circle(x,y,5,'none','stroke="var(--blue)"');
+      s += circle(xx,yy,11,'var(--purple)','opacity=".13"') + circle(xx,yy,5,'var(--accent)','data-transport-point="'+t+'"');
+      const card=22+t*148,mid=card+63,beta=p.beta*state.progress;
+      s += rect(card,239,126,66,'var(--surface)','var(--line)',8);
+      s += text(card+12,258,`t${t + 1}`,'svg-small');
+      s += text(card+114,258,fmt(beta),'svg-mono svg-accent','text-anchor="end" data-transport-beta="'+t+'"');
+      s += line(card+12,281,card+114,281,'var(--line)','stroke-width="3"');
+      s += line(mid,276,mid,286,'var(--blue)');
+      s += line(mid,281,mid+beta*510,281,'var(--purple)','stroke-width="3"');
+      s += circle(mid+beta*510,281,3.5,'var(--accent)');
+      s += line(mid+p.beta*510,275,mid+p.beta*510,287,'var(--purple)','opacity=".5"');
+      s += text(card+12,299,'−0.1','svg-tiny')+text(card+114,299,'+0.1','svg-tiny','text-anchor="end"');
     });
-    s += text(380, 310, 'Blue: original future   ·   Purple: transported future   ·   |β| ≤ 0.1', 'svg-small', 'text-anchor="middle"');
+    s += text(380, 331, 'Corresponding future steps · bounded displacement at every step', 'svg-small', 'text-anchor="middle"');
   } else { return ordinalLiftingDetail(); }
   return s;
 }
 
 function ordinalLiftingDetail() {
   const d=example(state), geometry=liftingGeometry(d,state.progress), selected=geometry[state.candidate];
-  const phase=state.comparing?0:phaseProgress, active=liftingStep(phase);
+  const phase=state.comparing?0:phaseProgress,active=liftingStep(phase);
+  const convert=smooth((phase-.16)/.18),read=smooth((phase-.80)/.20);
   const nearest=[...geometry].sort((a,b)=>a.cost-b.cost)[0].id;
   const labels=['Read aligned rank','Set RMS radius','Rewrite terminal latent','Read native distance'];
-  let s='<defs><marker id="lift-arrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0 0L6 3L0 6Z" fill="var(--accent)"/></marker></defs>';
+  let s='';
   labels.forEach((label,i)=>{
     const x=16+i*185;
     s+='<g data-lift-step="'+i+'" role="button" tabindex="0" aria-label="'+(i+1)+'. '+label+'">';
     s+=rect(x,5,171,38,i===active?'var(--purple-soft)':'var(--surface)',i===active?'var(--purple)':'var(--line)',9);
-    s+=text(x+11,28,String(i+1),i===active?'svg-small svg-accent':'svg-small')+text(x+29,28,label,'svg-small');
-    s+='</g>';
+    s+=text(x+11,28,String(i+1),i===active?'svg-small svg-accent':'svg-small')+text(x+29,28,label,'svg-small')+'</g>';
   });
-  s+=text(27,78,'Aligned order π','svg-label');
+  s+=text(26,77,'Aligned order','svg-label');
   d.finalOrder.forEach((id,index)=>{
-    const y=106+index*29,chosen=id===state.candidate;
-    s+='<g data-linked-candidate="'+id+'">';
-    s+=rect(19,y-16,161,29,chosen?'var(--purple-soft)':'var(--surface)','none',6);
-    s+=tokenMark(id,37,y-1,chosen,9);
-    s+=text(72,y+3,'rank '+(index+1),'svg-mono');
-    s+=text(166,y+3,(index+1)+'/7','svg-mono', 'text-anchor="end"');
+    const y=109+index*28,chosen=id===state.candidate;
+    s+='<g data-linked-candidate="'+id+'" data-candidate="'+id+'" role="button" tabindex="0" aria-label="Trace candidate '+CANDIDATES[id]+'" opacity="'+(.4+.6*smooth((phase-index*.019)/.055))+'">';
+    s+=rect(19,y-16,159,26,chosen?'var(--purple-soft)':'var(--surface)',chosen?'var(--purple)':'none',6);
+    s+=tokenMark(id,35,y-3,chosen,8);
+    s+=text(59,y+1,'rank '+(index+1),'svg-small');
+    s+=rect(113,y-8,54,6,'var(--line)','none',3);
+    s+=rect(113,y-8,54*(index+1)/7*convert,6,chosen?'var(--accent)':'var(--purple)','none',3);
     s+='</g>';
   });
-  s+=text(26,303,'ρᵢ = πᵢ / (K + 1)','svg-mono svg-accent');
-  s+=text(26,324,'K = 6 candidates','svg-small');
-  s+=text(26,346,'Same candidate identity','svg-tiny');
-  const cx=368,cy=187,scale=76;
-  s+=text(cx,78,'Same direction · new goal distance','svg-label','text-anchor="middle"');
-  [1,2,3,4,5,6].forEach(rank=>{s+=circle(cx,cy,Math.SQRT2*rank/7*scale,'none','stroke="var(--line)" stroke-dasharray="3 5"');});
-  s+=line(cx-6,cy,cx+6,cy,'var(--gold)','stroke-width="2"')+line(cx,cy-6,cx,cy+6,'var(--gold)','stroke-width="2"');
-  s+=text(cx-28,cy+18,'goal','svg-tiny svg-gold');
+  s+=text(26,279,'ρ = '+selected.rank+'/7 = '+fmt(selected.target),'svg-mono svg-accent');
+  s+=line(27,307,172,307,'var(--line)','stroke-width="3"');
+  s+=line(27,307,27+145*selected.target*convert,307,'var(--purple)','stroke-width="3"');
+  for(let tick=0;tick<=7;tick++){
+    const x=27+145*tick/7;
+    s+=line(x,302,x,312,tick===selected.rank?'var(--accent)':'var(--line)');
+  }
+  s+=circle(27+145*selected.target*convert,307,4.5,'var(--accent)','data-lift-radius-bead="true"');
+  s+=text(27,329,'0','svg-tiny')+text(172,329,'1','svg-tiny','text-anchor="end"');
+  s+=text(26,351,'Aligned rank sets the target radius.','svg-tiny');
+
+  const cx=358,cy=185,scale=90;
+  s+=text(cx,77,'Rewrite the terminal future','svg-label','text-anchor="middle"');
+  [1,2,3,4,5,6].forEach(rank=>{
+    const chosen=rank===selected.rank;
+    s+=circle(cx,cy,Math.SQRT2*rank/7*scale,'none','stroke="'+(chosen?'var(--purple)':'var(--line)')+'" stroke-width="'+(chosen?1.1:1)+'" stroke-dasharray="'+(chosen?'2 3':'2 6')+'" opacity="'+(chosen?(.3+.55*convert):.85)+'"');
+  });
+  s+=circle(cx,cy,Math.SQRT2*selected.target*scale,'var(--purple)','opacity="'+(.035*convert)+'"');
   for(const g of geometry){
     const i=g.id,from=realizedPoint(i,1+d.base[i]*5),to=realizedPoint(i,d.ordinal[i]);
     const point=[from[0]+(to[0]-from[0])*state.progress,from[1]+(to[1]-from[1])*state.progress];
-    const x=cx+point[0]*scale,y=cy+point[1]*scale;
+    const x=cx+point[0]*scale,y=cy+point[1]*scale,chosen=i===state.candidate;
     s+='<g data-linked-candidate="'+i+'" data-latent="'+i+'" data-candidate="'+i+'" role="button" tabindex="0" aria-label="Trace future '+CANDIDATES[i]+'">';
-    s+=line(cx,cy,cx+to[0]*scale,cy+to[1]*scale,i===state.candidate?'var(--purple)':'var(--line)','stroke-dasharray="3 4"');
-    s+=circle(cx+from[0]*scale,cy+from[1]*scale,4,'none','stroke="var(--blue)"');
-    s+=circle(cx+to[0]*scale,cy+to[1]*scale,7,'none','stroke="var(--purple)" opacity=".4"');
-    if(i===state.candidate){
-      s+=line(cx+from[0]*scale,cy+from[1]*scale,cx+to[0]*scale,cy+to[1]*scale,'var(--accent)','stroke-width="2" marker-end="url(#lift-arrow)"');
+    s+=line(cx,cy,cx+to[0]*scale,cy+to[1]*scale,chosen?'var(--purple)':'var(--line)','stroke-dasharray="2 4" opacity=".65"');
+    s+=circle(cx+from[0]*scale,cy+from[1]*scale,4,'none','stroke="var(--blue)" opacity=".75"');
+    s+=circle(cx+to[0]*scale,cy+to[1]*scale,6.5,'none','stroke="var(--purple)" opacity="'+(.25+.5*convert)+'"');
+    if(chosen){
+      s+=line(cx,cy,x,y,'var(--purple)','stroke-width="1.5"');
+      s+=line(cx+from[0]*scale,cy+from[1]*scale,x,y,'var(--accent)','stroke-width="3" opacity=".45"');
+      if(state.progress>0&&state.progress<1){
+        for(let tail=1;tail<=3;tail++){
+          const p=Math.max(0,state.progress-tail*.055);
+          s+=circle(cx+(from[0]+(to[0]-from[0])*p)*scale,cy+(from[1]+(to[1]-from[1])*p)*scale,4-tail*.65,'var(--purple)','opacity="'+(.4-tail*.08)+'"');
+        }
+      }
+      s+=circle(x,y,10,'var(--purple)','opacity=".14"');
     }
-    s+=circle(x,y,i===state.candidate?6:4,i===state.candidate?'var(--accent)':'var(--blue)','data-lift-point="'+i+'"');
-    s+=text(x+9,y+(i===state.candidate?4:-8),CANDIDATES[i],i===state.candidate?'svg-label svg-accent':'svg-small');
+    s+=circle(x,y,chosen?5.5:3.5,chosen?'var(--accent)':'var(--blue)','stroke="var(--panel)" stroke-width="1.2" data-lift-point="'+i+'"');
+    s+=text(x+9,y+(chosen?4:-8),CANDIDATES[i],chosen?'svg-label svg-accent':'svg-small');
     s+='</g>';
   }
-  s+=text(cx,295,'Open: original · ring: target · filled: current','svg-tiny','text-anchor="middle"');
+  s+=circle(cx,cy,3.5,'var(--gold)')+text(cx-6,cy+17,'goal','svg-tiny svg-gold','text-anchor="end"');
+  s+=text(cx,297,'Same direction · radius '+fmt(selected.radius),'svg-small svg-accent','text-anchor="middle"');
   for(let step=0;step<5;step++){
-    const x=245+step*49;
-    s+=rect(x,314,39,21,step===4?'var(--purple-soft)':'var(--surface)',step===4?'var(--purple)':'var(--line)',5);
-    s+=text(x+19.5,328,'t'+(step+1),step===4?'svg-small svg-accent':'svg-small','text-anchor="middle"');
-    if(step<4)s+=text(x+43,328,'·','svg-tiny');
+    const x=229+step*53,last=step===4;
+    s+='<g data-future-step="'+step+'">';
+    s+=rect(x,313,47,27,last?'var(--purple-soft)':'var(--surface)',last?'var(--purple)':'var(--line)',5);
+    s+=text(x+6,330,'t'+(step+1),last?'svg-small svg-accent':'svg-small');
+    for(let j=0;j<3;j++){
+      // Teaching components: earlier cards stay fixed; only the terminal
+      // components scale along the same direction as the radial point.
+      const magnitude=last?selected.radius:(.3+.09*Math.sin(step+j));
+      s+=rect(x+22+j*7,319,4,14,last?'var(--purple)':'var(--blue)','none',1,'opacity="'+(.16+.7*magnitude)+'"');
+    }
+    s+='</g>';
   }
-  s+=text(cx,351,'t1–t4 retained · terminal t5 rewritten','svg-tiny','text-anchor="middle"');
-  s+=rect(553,66,190,242,'var(--surface)','var(--line)',10);
-  s+=text(567,93,'Candidate '+CANDIDATES[state.candidate],'svg-title svg-accent');
-  s+=text(567,121,'Aligned rank  π = '+selected.rank,'svg-mono');
-  s+=text(567,143,'Target  ρ = '+selected.rank+'/7 = '+fmt(selected.target),'svg-mono');
-  s+=line(566,155,730,155);
-  const rows=[['Original radius',selected.original],['Current radius',selected.radius],['Native cost',selected.cost]];
-  rows.forEach(([label,value],index)=>{
-    const y=181+index*25;
-    s+=text(567,y,label,'svg-small');
-    s+=text(730,y,fmt(value),'svg-mono svg-accent','text-anchor="end" data-lift-readout="'+index+'"');
+  s+=text(cx,354,'t1–t4 retained · only t5 changes','svg-tiny','text-anchor="middle"');
+
+  s+=text(548,77,'Native-distance readout','svg-label');
+  d.finalOrder.forEach((id,index)=>{
+    const g=geometry[id],y=109+index*28,chosen=id===state.candidate,win=id===nearest;
+    const scan=Math.max(0,1-Math.abs(read*6-index-.5)*2)*(read>0&&read<1?1:0);
+    s+='<g data-linked-candidate="'+id+'" data-native-row="'+id+'">';
+    s+=rect(541,y-16,202,26,win?'var(--purple-soft)':'var(--surface)',win?'var(--purple)':'none',6);
+    if(scan>0)s+=rect(541,y-16,202,26,'var(--purple)','none',6,'opacity="'+(.1*scan)+'"');
+    s+=text(550,y+1,CANDIDATES[id],chosen?'svg-small svg-accent':'svg-small');
+    s+=rect(569,y-8,112,7,'var(--line)','none',3);
+    s+=rect(569,y-8,112*g.cost,7,win?'var(--accent)':'var(--blue)','none',3,'data-native-bar="'+id+'"');
+    s+=text(733,y+1,fmt(g.cost),'svg-mono','text-anchor="end" data-native-cost="'+id+'"');
+    s+='</g>';
   });
-  s+=line(566,248,730,248);
-  s+=text(567,270,'Nearest future now','svg-small');
-  s+=text(724,289,CANDIDATES[nearest],'svg-title svg-accent','text-anchor="end" data-native-choice="true"');
-  s+=text(567,291,'arg min native distance','svg-tiny');
-  s+=text(647,329,'Native cost = RMS radius²','svg-small','text-anchor="middle"');
-  s+=text(647,348,'Planning interface retained','svg-tiny','text-anchor="middle"');
+  s+=rect(541,274,202,35,'var(--purple-soft)','var(--line)',8);
+  s+=text(552,296,'Nearest future','svg-small');
+  s+=text(728,297,CANDIDATES[nearest],'svg-title svg-accent','text-anchor="end" data-native-choice="true"');
+  s+=text(548,329,'ρ² = '+fmt(selected.cost),'svg-mono svg-accent','data-lift-readout="2"');
+  s+=text(548,351,read>=1?'Native order matches aligned order.':'Read the updated goal distances.','svg-tiny');
   return s;
 }
-
 function diagnosticDetail() {
   let s='';
   ['One decision context','Zoom into the shortlist','Observe the ranking gap'].forEach((label,i)=>{
@@ -743,9 +781,9 @@ function chapterCopy() {
   }
   if(state.stage===4&&state.lifting==='ordinal'){
     chapter.title='Turn the learned rank into a future latent.';
-    chapter.description='After relational selection, lifting places each terminal future at its rank-defined distance from the goal. Its direction and earlier future steps are retained; native distance reads out the aligned order.';
+    chapter.description='Read the aligned rank, set its target radius, then move the terminal future along its original direction. The first four steps stay fixed. Watch the native-distance bars change and recover the same aligned order.';
     chapter.visual='Representation lifting · between aligned ranks and native-distance planning';
-    chapter.caption='Follow a candidate: rank → radius → terminal latent → native distance. Click a numbered operation to inspect it.';
+    chapter.caption='Follow a candidate: rank → radius → terminal latent → native distance. Click a numbered operation to play its transformation.';
   }
   if(state.stage===4&&state.lifting==='transport'){
     chapter.title='Refine the future, step by step.';
@@ -1017,7 +1055,7 @@ document.addEventListener('click',event=>{
   const evidenceOperation=event.target.closest('[data-evidence-step]');
   if(evidenceOperation){stop();state.elapsed=[.20,.55,1][Number(evidenceOperation.dataset.evidenceStep)]*stageSeconds[1];updateAnimation();return;}
   const operation=event.target.closest('[data-lift-step]');
-  if(operation){stop();state.elapsed=[.08,.24,.58,1][Number(operation.dataset.liftStep)]*stageSeconds[4];updateAnimation();return;}
+  if(operation){stop();const i=Number(operation.dataset.liftStep);state.elapsed=[0,.16,.34,.8][i]*stageSeconds[4];updateAnimation();play(true,[.16,.34,.8,1][i]*stageSeconds[4]);return;}
   const milestone=event.target.closest('[data-jump-stage]');
   if(milestone){selectStage(Number(milestone.dataset.jumpStage));state.elapsed=Number(milestone.dataset.jumpPhase)*stageSeconds[state.stage];updateAnimation();return;}
   const stage=event.target.closest('#chapters [data-stage]');

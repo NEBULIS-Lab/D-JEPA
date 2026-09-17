@@ -125,6 +125,17 @@ stage. Training supervision opens in a dialog.
 - Trace candidates, inspect an attention head/cell, change source configuration
   and vary the schematic correction bound.
 - Switch representation mechanism and inspect intermediate native distances.
+- In ordinal lifting, each of the four operation buttons plays only its own
+  interval and then pauses. Rank rows reveal in order, rank fractions fill a
+  target-radius ruler, and the selected terminal point leaves a short radial
+  movement trail. The native-cost bars update from the same instantaneous
+  squared RMS radii and highlight the current nearest future. Their rows remain
+  in aligned order so the final increasing cost sequence can be checked directly.
+- The five-step strip keeps the first four illustrative component cards fixed
+  while the fifth responds to the terminal radius. Temporal transport shows
+  five signed coefficient gauges over the same ±0.1 bound; their numbers are
+  the currently applied coefficients, reaching the full teaching-example values
+  at the end. These remain illustrative computations, not experiment outputs.
 - Hold the before-alignment button (pointer, Space or Enter) in the decision or
   lifting stage, then release to restore the exact progress and playback state.
 - Rotate the stage-01 radial view by dragging, its angle slider, or Left/Right
