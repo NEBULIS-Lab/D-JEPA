@@ -1,9 +1,16 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { pairPhase, pairPoints, projectPoint } from '../docs/static/js/explainer-pair.mjs';
+import { pairPhase, pairPoints, projectPoint, latentIntro } from '../docs/static/js/explainer-pair.mjs';
 const pair=JSON.parse(readFileSync(new URL('../docs/static/data/explainer-pair.json',import.meta.url)));
 const traces=JSON.parse(readFileSync(new URL('../docs/static/data/explainer-pusht.json',import.meta.url)));
+test('intro camera visibly sweeps and returns without modifying measured radii',()=>{
+  assert.equal(latentIntro(0).t,0);
+  assert.ok(latentIntro(.055).yawOffset>.6);
+  assert.ok(latentIntro(.165).yawOffset<-.6);
+  assert.ok(Math.abs(latentIntro(.22).yawOffset)<1e-12);
+  assert.equal(latentIntro(1).t,1);
+});
 test('same recorded start, opposing outcomes and authoritative score-to-radius identity',()=>{
   assert.equal(pair.start,traces.start);
   for(const c of pair.candidates){

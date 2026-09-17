@@ -1,5 +1,5 @@
 import { VALIDATION_TASKS, validationFrame, syncValidationVideos, pauseValidationVideos, releaseValidationVideos } from './explainer-validation.mjs';
-import { pairPhase, latentMarkup } from './explainer-pair.mjs';
+import { pairPhase, latentMarkup, latentIntro } from './explainer-pair.mjs';
 import { DIAGNOSTIC, problemPhase } from './explainer-problem.mjs';
 import { evidenceVector, evidencePhase } from './explainer-evidence.mjs';
 import { liftingProgress, liftingStep, liftingGeometry, decisionProgress } from './explainer-motion.mjs';
@@ -412,10 +412,10 @@ function problemDetail() {
   s+=text(285,120,'Top 4','svg-small svg-gold','text-anchor="middle"');
   DIAGNOSTIC.forEach((row,i)=>{
     const y=161+i*81;
-    s+=text(23,y+4,row.model,'svg-small')+line(164,y,263,y);
+    s+=text(23,y+4,row.model,'svg-small')+line(159,y,268,y);
     for(const [x,value,color] of [[142,row.all,'var(--blue)'],[285,row.shortlist,'var(--gold)']]){
-      s+=circle(x,y,23,'var(--surface)','stroke="'+color+'"');
-      s+=text(x,y+5,value.toFixed(2),'svg-title','text-anchor="middle"');
+      s+=circle(x,y,16,'var(--surface)','stroke="'+color+'"');
+      s+=text(x,y+4,value.toFixed(2),'svg-label','text-anchor="middle"');
     }
   });
   s+=text(23,290,'Strong global order → weak decision-local order','svg-small');
@@ -437,6 +437,8 @@ function problemDetail() {
 function updateProblem(svg) {
   if(!pair||!record){updateDiagnostic(svg);return;}
   const phase=pairPhase(phaseProgress);
+  const intro=latentIntro(phaseProgress);
+  if(phase.diagnostic<1)svg.querySelector('#pair-orbit').innerHTML=latentMarkup(pair,pairYaw+(reducedMotion.matches?0:intro.yawOffset),intro.t);
   updateScenes(svg,record,phase.motion);
   svg.querySelectorAll('[data-pair-operation]').forEach(n=>{
     const active=Number(n.dataset.pairOperation)===phase.step;
@@ -733,8 +735,7 @@ function renderCandidateControls() {
   const panel=$('#candidate-controls');
   const context=state.stage===0?'problem':isRecorded()?'recorded':'schematic';
   if(context==='problem'&&pair){
-    panel.innerHTML='<span id="pair-clock">Recorded motion · 0.00 / 2.50 s</span><button id="pair-reset-view" type="button">Reset view ↺</button>';
-    $('#pair-reset-view').onclick=()=>{stop();state.elapsed=.15*stageSeconds[0];rotatePair(-.25);};
+    panel.innerHTML='';
     currentContext=context;return;
   }
   if(currentContext!==context){
@@ -869,7 +870,6 @@ function updateAnimation() {
   applyLinkedFocus();
   $('#step-progress').value=phaseProgress;
   $$('input[type=range]').forEach(input=>input.style.setProperty('--fill',100*(Number(input.value)-Number(input.min))/(Number(input.max)-Number(input.min))+'%'));
-  if(state.stage===0&&pair){const p=pairPhase(phaseProgress);$('#pair-clock').textContent='Recorded motion · '+(p.motion*2.5).toFixed(2)+' / 2.50 s';}
   $('#step-value').value=isRecorded()?(state.elapsed>8?'Cross-task view':(physicalProgress()*2.5).toFixed(2)+' s'):Math.round(phaseProgress*100)+'%';
   const seconds=stageSeconds.slice(0,state.stage).reduce((a,b)=>a+b,0)+state.elapsed;
   $('#tour-seek').value=seconds;
@@ -894,7 +894,7 @@ function stop() {
   $('#play-symbol').textContent='▶';$('#play-label').textContent='Play tour';
   $('#play').setAttribute('aria-label','Play guided tour');
 }
-function play(stepOnly=false) {
+function play(stepOnly=false,until=null) {
   if(state.playing){stop();return;}
   if(state.elapsed>=stageSeconds[state.stage]){
     if(stepOnly){state.elapsed=0;}else selectStage(state.stage===5?0:state.stage+1,false);
@@ -904,6 +904,7 @@ function play(stepOnly=false) {
   function tick(now){
     if(!state.playing)return;
     state.elapsed+=Math.min(.5,(now-previousTime)/1000)*state.speed;previousTime=now;
+    if(until!==null&&state.elapsed>=until){state.elapsed=until;updateAnimation();stop();return;}
     if(state.elapsed>=stageSeconds[state.stage]){
       if(stepOnly||state.stage===5){state.elapsed=stageSeconds[state.stage];updateAnimation();stop();return;}
       selectStage(state.stage+1,false);
@@ -931,7 +932,11 @@ document.addEventListener('click',event=>{
   const jump=event.target.closest('[data-validation-jump]');
   if(jump){stop();state.elapsed=Number(jump.dataset.validationJump);updateAnimation();return;}
   const problemOperation=event.target.closest('[data-problem-step]');
-  if(problemOperation){stop();state.elapsed=(pair?[.15,.76,1]:[.12,.5,1])[Number(problemOperation.dataset.problemStep)]*stageSeconds[0];updateAnimation();return;}
+  if(problemOperation){
+    stop();const operation=Number(problemOperation.dataset.problemStep);
+    if(pair&&operation===0){state.elapsed=0;updateAnimation();play(true,.22*stageSeconds[0]);return;}
+    state.elapsed=(pair?[.15,.76,1]:[.12,.5,1])[operation]*stageSeconds[0];updateAnimation();return;
+  }
   const preview=event.target.closest('[data-preview-candidate]');
   if(preview){previewCandidate=Number(preview.dataset.previewCandidate);currentContext='';render(false);return;}
   const evidenceOperation=event.target.closest('[data-evidence-step]');

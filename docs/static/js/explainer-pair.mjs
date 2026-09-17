@@ -18,7 +18,11 @@ export function pairPoints(pair) {
     return [Math.sin(theta)*c.rms_distance,Math.cos(theta)*c.rms_distance,0];
   });
 }
-export function latentMarkup(pair,yaw) {
+export function latentIntro(progress) {
+  const t=Math.max(0,Math.min(1,progress/.22));
+  return {t, yawOffset:.65*Math.sin(2*Math.PI*t), shell:.25+.75*Math.min(1,t*3)};
+}
+export function latentMarkup(pair,yaw,intro=1) {
   const cx=183,cy=181,scale=390;
   const screen=point=>{const p=projectPoint(point,yaw);return [cx+p[0]*scale,cy-p[1]*scale,p[2]];};
   const curve=points=>points.map((p,i)=>{const [x,y]=screen(p);return (i?'L':'M')+x.toFixed(2)+' '+y.toFixed(2);}).join(' ');
@@ -33,18 +37,22 @@ export function latentMarkup(pair,yaw) {
       return kind==='latitude'?[r*Math.cos(angle)*Math.cos(t),r*Math.sin(angle),r*Math.cos(angle)*Math.sin(t)]
         :[r*Math.cos(t)*Math.cos(angle),r*Math.sin(t),r*Math.cos(t)*Math.sin(angle)];
     });
-    for(const angle of [-.65,0,.65])s+='<path d="'+curve(ring('latitude',angle))+'" fill="none" stroke="'+colors[i]+'" opacity=".19" stroke-width=".7"/>';
-    for(const angle of [0,Math.PI/3,2*Math.PI/3])s+='<path d="'+curve(ring('meridian',angle))+'" fill="none" stroke="'+colors[i]+'" opacity=".19" stroke-width=".7"/>';
+    const shell=.09+.21*Math.min(1,intro*3);
+    for(const angle of [-.65,0,.65])s+='<path d="'+curve(ring('latitude',angle))+'" fill="none" stroke="'+colors[i]+'" opacity="'+shell+'" stroke-width=".8"/>';
+    for(const angle of [0,Math.PI/3,2*Math.PI/3])s+='<path d="'+curve(ring('meridian',angle))+'" fill="none" stroke="'+colors[i]+'" opacity="'+shell+'" stroke-width=".8"/>';
   });
   // Axis guide and the two goal-relative directions share the same camera.
   const axes=[[.27,0,0],[0,.27,0],[0,0,.27]];
   for(const p of axes){const [x,y]=screen(p);s+='<path d="M183 181L'+x+' '+y+'" stroke="var(--line)" stroke-dasharray="2 4" fill="none"/>';}
   pairPoints(pair).forEach((p,i)=>{
     const [x,y]=screen(p),label=pair.candidates[i].label;
-    s+='<path d="M183 181L'+x+' '+y+'" stroke="'+colors[i]+'" stroke-width="1.8"/>';
-    s+='<circle cx="'+x+'" cy="'+y+'" r="11" fill="'+colors[i]+'" opacity=".14"/>';
+    const reveal=Math.max(0,Math.min(1,(intro-i*.22)/.45));
+    s+='<path data-radius-ray="'+label+'" d="M183 181L'+x+' '+y+'" stroke="'+colors[i]+'" stroke-width="2.3" pathLength="1" stroke-dasharray="1" stroke-dashoffset="'+(1-reveal)+'"/>';
+    s+='<g opacity="'+reveal+'">';
+    s+='<circle cx="'+x+'" cy="'+y+'" r="'+(11+5*Math.sin(Math.PI*reveal))+'" fill="'+colors[i]+'" opacity=".2"/>';
     s+='<circle data-pair-point="'+label+'" cx="'+x+'" cy="'+y+'" r="5" fill="'+colors[i]+'" stroke="var(--panel)" stroke-width="1.5"/>';
     s+='<text x="'+(x+(i===0?-13:13))+'" y="'+(y-8)+'" text-anchor="'+(i===0?'end':'start')+'" class="svg-label" fill="'+colors[i]+'">'+label+'</text>';
+    s+='</g>';
   });
   s+='<circle cx="183" cy="181" r="10" fill="var(--purple)" opacity=".15"/><circle cx="183" cy="181" r="4" fill="var(--accent)"/>';
   s+='<text x="183" y="200" class="svg-small svg-accent" text-anchor="middle">Goal</text>';

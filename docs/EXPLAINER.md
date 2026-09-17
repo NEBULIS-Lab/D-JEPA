@@ -1,7 +1,7 @@
 # Interactive D-JEPA explainer
 
 Open [Inside D-JEPA](explainer.html) from the project page. The page is a single
-viewport-sized workbench, with a compact computation path, a large stage, an
+viewport-sized workbench, with prominent chapter navigation, a large stage, an
 inspector and a shared playback timeline. It defaults to dark and shares the
 main site's saved light/dark preference. Assets are local; no model download or
 browser inference is required.
@@ -121,6 +121,16 @@ stage. Training supervision opens in a dialog.
   lifting stage, then release to restore the exact progress and playback state.
 - Rotate the stage-01 radial view by dragging, its angle slider, or Left/Right
   while the sphere is focused. View rotation does not change distances or outcomes.
+- The first stage-01 operation automatically sweeps the camera, draws the two
+  measured-radius rays in sequence, and reveals the candidate points. Selecting
+  that operation replays its animation and pauses before physical execution.
+  Reduced-motion preference suppresses the camera sweep. Numerical radii remain
+  fixed throughout. The primary play button uses the project-page purple/peach/gold
+  gradient; chapter navigation has larger, higher-contrast text.
+- Peripheral context strips, the top status line and below-canvas captions are
+  removed from the visible workbench. Evidence identity and measurement notes
+  remain available in the inspector. Candidate Trace controls remain visible for
+  the computation stages; the stage-01 motion clock/reset strip is removed.
 - Jump to key moments via the timeline markers. The 79-second tour gives extra
   time to ranking crossings and lifting, including a brief boundary-switch hold.
 - Hover a candidate to follow its evidence, rank path or latent point while
