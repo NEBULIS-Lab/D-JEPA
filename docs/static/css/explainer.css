@@ -39,11 +39,11 @@ input[type=range]{appearance:none;-webkit-appearance:none;background:transparent
 /* Softer inspector hierarchy and bright, theme-aware measured-pair beacons. */
 :root{--pair-a:#FFDB67;--pair-b:#82BDFF;--pair-a-label:#916900;--pair-b-label:#286BBE;--caption-gold:#916900}
 :root[data-theme=dark]{--pair-a-label:#FFDB67;--pair-b-label:#82BDFF;--caption-gold:#FFDB67}
-.inspector #detail-title{font-size:clamp(19px,1.5vw,24px);line-height:1.3;letter-spacing:-.5px}
-.narration-caption #narration-subtitle{font-size:17px;color:var(--caption-gold);line-height:1.5}
-@media(max-height:800px) and (min-width:901px){.inspector #detail-title{font-size:19px}}
-@media(max-width:1100px) and (min-width:901px){.narration-caption #narration-subtitle{font-size:16px}}
-@media(max-width:900px){.inspector #detail-title{font-size:22px}.narration-caption #narration-subtitle{font-size:15px}}
+.inspector #detail-title{font-size:clamp(17px,1.3vw,21px);line-height:1.3;letter-spacing:-.5px}
+.narration-caption #narration-subtitle{font-size:19px;color:var(--caption-gold);line-height:1.5}
+@media(max-height:800px) and (min-width:901px){.inspector #detail-title{font-size:17px}}
+@media(max-width:1100px) and (min-width:901px){.narration-caption #narration-subtitle{font-size:18px}}
+@media(max-width:900px){.inspector #detail-title{font-size:20px}.narration-caption #narration-subtitle{font-size:17px}}
 /* Narrated mode shares the workbench, but has its own audio-led controls. */
 .narration-button,.narration-mute{display:flex;align-items:center;justify-content:center;gap:8px;flex-shrink:0;border-radius:24px;padding:9px 13px;font-size:12px;white-space:nowrap}.narration-button{background:#82478f;color:#fff;border-color:#a45aa8;box-shadow:0 3px 14px #a45aa81a;min-width:143px}.narration-button:hover{background:#9454a0;color:#fff}.narration-button[aria-pressed=true]{box-shadow:0 0 0 2px var(--panel),0 0 0 3px var(--purple)}.narration-button svg,.narration-mute svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}.narration-mute{background:var(--purple-soft);color:var(--accent);padding-inline:10px;font-size:11px}.narration-mute[aria-pressed=true] svg{opacity:.4}.narration-caption{flex:1;min-width:0;text-align:center;max-width:1060px;margin:auto}.narration-caption p{font:16px/1.5 Arial,sans-serif;color:var(--ink);text-wrap:pretty}.narration-caption #narration-status{font-size:11px;line-height:1.3;color:var(--accent)}.narration-caption #narration-status:empty{display:none}.narration-exit{border:0;background:none;font-size:22px;color:var(--muted);padding:4px 8px}.narrating .explainer-header{height:104px;gap:16px}.narrating .brand .header-divider,.narrating .brand>span:last-child{display:none}.narrating main{height:calc(100dvh - 104px)}.narrating .timeline-markers{visibility:hidden}.narrating .explainer-header nav{margin-left:0;white-space:nowrap}.narrating .playback{gap:8px}.narrating .timeline{margin-inline:6px}
 @media(max-width:1100px) and (min-width:901px){.narration-caption p{font-size:15px}.narration-mute span{display:none}.narration-button{min-width:130px;padding-inline:10px}}

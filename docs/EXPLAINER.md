@@ -226,8 +226,8 @@ stage. Training supervision opens in a dialog.
   traveling ray tips, gentle camera pitch and depth-dependent point opacity make
   the geometry easier to follow. Reduced-motion preference fixes the camera and
   backdrop positions while retaining the sequential distance readout.
-- Inspector titles use a quieter 19–24 px hierarchy. Narration subtitles use
-  17 px on desktop and 15 px on mobile, with theme gold (#FFDB67) in dark mode
+- Inspector titles use a quieter 17–21 px desktop hierarchy (20 px on mobile). Narration subtitles use
+  19 px on desktop and 17 px on mobile, with theme gold (#FFDB67) in dark mode
   and a darker golden tone for readable contrast in light mode.
 - Peripheral context strips, the top status line and below-canvas captions are
   removed from the visible workbench. Evidence identity and measurement notes
