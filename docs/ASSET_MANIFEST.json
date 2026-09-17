@@ -6,7 +6,7 @@
     "source_identity": "sha256:916e789776d8995e6410dc5e9d310bbd9faa60e53963244edb5b9657403701aa",
     "transformation": "Baseline header label only; TD-JEPA or DINO-WM; all frames and dimensions retained; H.264 CRF 16",
     "frames": 201,
-    "fps": 25.0
+    "fps": 25
   },
   {
     "path": "static/images/pusht-timeline.png",
@@ -22,7 +22,7 @@
     "source_identity": "sha256:579d4b41a46dbaa9b09ca9908b7fd2700c649de70aa63195011f850e5a1717e8",
     "transformation": "Baseline header label only; TD-JEPA or DINO-WM; all frames and dimensions retained; H.264 CRF 16",
     "frames": 56,
-    "fps": 10.0
+    "fps": 10
   },
   {
     "path": "static/images/reacher-timeline.png",
@@ -38,7 +38,7 @@
     "source_identity": "sha256:5d71bb19cba3f49582fb20aea14ca13e4aec39ef92276794ecd9316489fa019c",
     "transformation": "Baseline header label only; TD-JEPA or DINO-WM; all frames and dimensions retained; H.264 CRF 16",
     "frames": 981,
-    "fps": 30.0
+    "fps": 30
   },
   {
     "path": "static/images/granular-timeline.png",
@@ -387,5 +387,19 @@
     "bytes": 46203,
     "source_identity": "sha256:28d0d00db7ef95713972576997b83c01b49c1f3f621bfac35f70a34e1ab52f5a",
     "transformation": "Decoded frame at 0.4 s; proportional resize; no scene edits"
+  },
+  {
+    "path": "static/images/branding/d-jepa-full-logo2-light.svg",
+    "sha256": "d82887de6ba2012651cdd83fb2f53af63dd6916337630e8f3457eb7637d8c4ae",
+    "bytes": 480682,
+    "source_identity": "sha256:d82887de6ba2012651cdd83fb2f53af63dd6916337630e8f3457eb7637d8c4ae",
+    "transformation": "none; byte-identical author-provided hero logo; other branding unchanged"
+  },
+  {
+    "path": "static/images/branding/d-jepa-full-logo2-dark.svg",
+    "sha256": "8e46d38463d303db5a624cea15d20a6003b83ac4aa768b2a34d2a05eb4f60399",
+    "bytes": 486531,
+    "source_identity": "sha256:8e46d38463d303db5a624cea15d20a6003b83ac4aa768b2a34d2a05eb4f60399",
+    "transformation": "none; byte-identical author-provided hero logo; other branding unchanged"
   }
 ]

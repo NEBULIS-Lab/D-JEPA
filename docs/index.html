@@ -28,17 +28,17 @@
   <header class="topbar">
     <a class="wordmark" href="#home" aria-label="D-JEPA home">D-JEPA<span class="brand-dot"></span></a>
     <nav aria-label="Sections"><a href="#demonstrations">Demos</a><a href="#problem">Why</a><a href="#method">Method</a><a href="#results">Results</a><a href="#reproduce">Reproduce</a></nav>
-    <button id="theme-toggle" type="button" aria-label="Switch color theme">Theme</button>
+    <button id="theme-toggle" type="button" aria-label="Switch color theme" aria-pressed="false"><span class="theme-track" aria-hidden="true"><svg class="theme-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg><svg class="theme-moon" viewBox="0 0 24 24"><path d="M19.5 15.4A8.5 8.5 0 0 1 8.6 4.5a8.5 8.5 0 1 0 10.9 10.9Z"/></svg></span><span class="theme-label">Light</span></button>
   </header>
   <main id="main">
     <section class="hero container" id="home">
       <p class="hero-statement">D-JEPA aligns predicted futures with better actions.</p>
       <div class="hero-logo">
-        <img class="logo-light" src="static/images/branding/jepa-full-logo-light.svg" width="600" height="152" alt="D-JEPA">
-        <img class="logo-dark" src="static/images/branding/jepa-full-logo-dark.svg" width="600" height="152" alt="D-JEPA">
+        <img class="logo-light" src="static/images/branding/d-jepa-full-logo2-light.svg" width="3011" height="651" alt="D-JEPA">
+        <img class="logo-dark" src="static/images/branding/d-jepa-full-logo2-dark.svg" width="3025" height="651" alt="D-JEPA">
       </div>
       <h1>A Decision-Aligned <span class="gradient-text">Latent World Model</span></h1>
-      <p class="hero-description">D-JEPA learns decision-relevant relations across pretrained predictive models and realizes them in future representations.</p>
+      <p class="hero-description"><span>D-JEPA learns decision-relevant relations across pretrained</span> <span>predictive models and realizes them in future representations.</span></p>
       <div class="resource-links">
         <a class="button primary" href="https://nebulis-lab.com/D-JEPA">Project website <span aria-hidden="true">↗</span></a>
         <a class="button" href="https://huggingface.co/Shuaijun/D-JEPA">Model repository <span aria-hidden="true">↗</span></a>
@@ -218,17 +218,18 @@
 
 
 
-    <section class="container section" id="reproduce">
+    <section class="section reproduce-section" id="reproduce"><div class="container">
       <div class="section-heading"><span class="section-number">05 / BUILD ON D-JEPA</span><h2>From a checkpoint to a reproducible decision.</h2></div>
       <div class="reproduce-grid"><div><p class="lead">Task-specific checkpoints, decision supervision and a compact evaluation package.</p><p>Task interfaces: <a href="https://github.com/NEBULIS-Lab/D-JEPA/blob/main/docs/ROBOTICS.md">robotic manipulation</a> · <a href="https://github.com/NEBULIS-Lab/D-JEPA/blob/main/docs/DRIVING.md">autonomous driving</a> · <a href="https://github.com/NEBULIS-Lab/D-JEPA/blob/main/real_robot/README.md">physical-robot workflows</a>. Each guide describes inputs, training and evaluation commands, and environment dependencies.</p><a class="button reproduction-button" href="https://github.com/NEBULIS-Lab/D-JEPA/blob/main/docs/REPRODUCING.md">Full reproduction guide ↗</a></div><div class="code-card"><div class="code-heading"><span>Run from the repository root</span><button type="button" id="copy-command">Copy</button></div><pre><code id="reproduce-command">pip install -e '.[download]'
 python scripts/download_artifacts.py --profile pusht-relational --dataset
 python -m zipfile -e data/D-JEPA-supervision-v1.zip data
 bash scripts/reproduce.sh</code></pre><span id="copy-status" role="status" class="small"></span></div></div>
+      </div>
     </section>
   </main>
   <footer class="site-footer">
     <div class="container footer-main">
-      <a class="footer-brand" href="#home" aria-label="D-JEPA, back to top"><span>D-JEPA</span><span class="footer-lab">NEBULIS Lab</span></a>
+      <a class="footer-brand" href="#home" aria-label="D-JEPA, back to top"><span>D-JEPA<span class="brand-dot" aria-hidden="true"></span></span><span class="footer-lab">NEBULIS Lab</span></a>
       <nav class="footer-links" aria-label="Project resources"><a href="https://github.com/NEBULIS-Lab/D-JEPA">GitHub</a><a href="https://huggingface.co/Shuaijun/D-JEPA">Models</a><a href="https://huggingface.co/datasets/Shuaijun/D-JEPA-Dataset">Dataset</a><a href="#home">Back to top ↑</a></nav>
     </div>
     <div class="container footer-bottom"><span>D-JEPA: A Decision-Aligned Latent World Model</span><div><a href="https://github.com/NEBULIS-Lab/D-JEPA/blob/main/docs/THIRD_PARTY.md">Acknowledgments &amp; dependencies</a><a href="ASSET_MANIFEST.json">Asset provenance</a></div></div>

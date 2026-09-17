@@ -71,5 +71,13 @@ and section headings have their own compact scale. Navigation, footer and cards
 support light/dark themes; subtle entry and hover effects respect reduced-motion
 preferences. Updating these local files does not deploy the website.
 
+The hero alone uses the author-provided `d-jepa-full-logo2-light.svg` and
+`d-jepa-full-logo2-dark.svg`; existing logo masters and other placements are
+unchanged. Gallery, diagnostic, coverage plates and the five-column results
+grid share the main content width. The header/footer share a lavender surface;
+the reproduction section has a separate background. Theme switching uses a
+sun/moon control. Each video has a large, keyboard-accessible play overlay that
+hides during playback and returns on pause, alongside native video controls.
+
 The page has no final-paper download, final citation or venue badge. Add them
 only when author-approved material is available.
