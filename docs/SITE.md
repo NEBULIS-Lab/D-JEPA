@@ -82,6 +82,8 @@ sun/moon control. First visits default to dark, independent of the operating
 system theme; a saved manual choice takes precedence on later visits.
 Each video has a large, keyboard-accessible play overlay that
 hides during playback and returns on pause, alongside native video controls.
+The hero Paper button currently opens the public manuscript-source repository;
+replace that single URL with the arXiv record when it becomes available.
 
 Body paragraphs and long figure captions use justified alignment, with the
 last line left aligned; hero text, headings, short plot labels and metric cards
