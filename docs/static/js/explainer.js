@@ -8,6 +8,7 @@ const stageSeconds = [5.5, 7, 8, 7, 8, 6];
 let previousTime = 0;
 let frame = 0;
 let slideFrame = 0;
+let previousOrder = [];
 const fmt = (n, digits = 3) => n.toFixed(digits);
 const escapeText = text => String(text).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;');
 const text = (x, y, content, cls = 'svg-small', extra = '') => `<text x="${x}" y="${y}" class="${cls}" ${extra}>${escapeText(content)}</text>`;
@@ -34,7 +35,7 @@ const chapters = [
   { kicker: '03 / THE CORE OPERATOR', title: 'Learn the relations between futures.', description: 'Two Transformer layers compare candidates as a set. Shared attention lets each future use evidence from the alternatives; a rank-eight head produces a bounded score correction.', formula: 'δᵢ = ε tanh(Wup tanh(Wdown hᵢ))', fact: '2 layers · 4 attention heads · 64 → 8 → 1 correction head. Candidate permutations preserve the corresponding outputs.', visual: 'Candidate-to-candidate relations', caption: 'Attention and correction values are illustrative. Select a head and trace a candidate to inspect its relations.' },
   { kicker: '04 / THE DECISION RULE', title: 'Refine the choices closest to execution.', description: 'The relational correction adjusts the base ordering. A calibrated margin gate selects the relational winner when its advantage supports a switch; otherwise it keeps the base action.', formula: 'sᵢ = bᵢ + δᵢ   ·   |δᵢ| ≤ ε', fact: 'The bound limits the correction. Move it toward zero to recover the base decision in this example.', visual: 'Base scores → bounded corrections → refined scores', caption: 'Lower scores are preferred. Gold marks the base winner; purple marks the gated aligned choice.' },
   { kicker: '05 / REPRESENTATION LIFTING', title: 'Write the decision into the future.', description: 'Exact ordinal realization assigns each terminal future a goal-relative radius determined by its final rank. Native goal distance then recovers the learned order.', formula: 'z̃ᵢ,ᴴ = zgoal + [πᵢ / (K + 1)] uᵢ', fact: 'PushT exact realization retains the preceding future steps and embeds predictive and relational computation in one self-contained checkpoint.', visual: 'Aligned order → terminal future geometry', caption: 'Radii are shown in RMS units. The nearest realized future has rank 1; directions are retained.' },
-  { kicker: '06 / ACTION SELECTION', title: 'The native interface selects the aligned action.', description: 'The planner compares the realized futures with the goal, selects the nearest one and passes its corresponding action sequence to the environment.', formula: 'a* = arg minᵢ ‖z̃ᵢ,ᴴ − zgoal‖² / D', fact: 'The candidate identity connects the predicted future, aligned order and executed action sequence.', visual: 'A single decision, carried through the interface', caption: 'This is the final choice in the illustrative example. A recorded experimental comparison is available below.' },
+  { kicker: '06 / ACTION SELECTION', title: 'The native interface selects the aligned action.', description: 'The planner compares the realized futures with the goal, selects the nearest one and passes its corresponding action sequence to the environment.', formula: 'a* = arg minᵢ ‖z̃ᵢ,ᴴ − zgoal‖² / D', fact: 'The candidate identity connects the predicted future, aligned order and executed action sequence.', visual: 'A single decision, carried through the interface', caption: 'This is the final choice in the illustrative example. Recorded comparisons are available on the project page.' },
 ];
 
 function renderArchitecture() {
@@ -54,6 +55,7 @@ function renderArchitecture() {
     const d = `M${a.x + a.w} 221H${b.x - 3}`;
     svg += path(d, 'connector', 'marker-end="url(#arrow)"');
     svg += path(d, `flow-line ${state.stage > i ? 'finished' : ''}`);
+    if (state.stage >= i) svg += circle(0, 0, 3, 'var(--accent)', `class="signal-particle" style="offset-path:path('${d}');animation-delay:${i * .16}s"`);
   }
   nodes.forEach((n, i) => {
     svg += `<g class="module ${state.stage === i ? 'active' : ''}" data-stage="${i}" role="button" tabindex="0" aria-label="Explore ${n.name}" aria-pressed="${state.stage === i}">`;
@@ -88,10 +90,12 @@ function renderArchitecture() {
       svg += text(n.x + 110, 332, '2 layers · 4 heads', 'svg-mono', 'text-anchor="middle"');
     } else if (i === 3) {
       data.finalOrder.forEach((candidate, index) => {
-        const y = 140 + index * 29;
+        const y = 0;
+        svg += `<g data-ranked-candidate="${candidate}" transform="translate(0 ${140 + index * 29})">`;
         svg += tokenMark(candidate, n.x + 20, y, candidate === state.candidate, 8);
         svg += rect(n.x + 39, y - 6, Math.max(4, (data.scores[candidate] + .2) * 65), 12, candidate === data.winner ? 'var(--purple)' : 'var(--blue)', 'none', 3, 'opacity=".8"');
         if (candidate === data.winner) svg += circle(n.x + 129, y, 3, 'var(--accent)');
+        svg += '</g>';
       });
       svg += text(n.x + n.w / 2, 332, 'calibrated gate', 'svg-mono', 'text-anchor="middle"');
     } else if (i === 4) {
@@ -127,6 +131,17 @@ function renderArchitecture() {
     svg += text(663, 383, 'PREDICTIVE FUTURES  →  LEARNED RELATIONS  →  ALIGNED FUTURE GEOMETRY', 'module-kicker', 'text-anchor="middle"');
   }
   $('#architecture').innerHTML = svg;
+  if (previousOrder.length && !reducedMotion.matches) {
+    $$('[data-ranked-candidate]').forEach(node => {
+      const id = Number(node.dataset.rankedCandidate);
+      const before = previousOrder.indexOf(id), after = data.finalOrder.indexOf(id);
+      if (before !== after) node.animate([
+        { transform: `translateY(${140 + before * 29}px)` },
+        { transform: `translateY(${140 + after * 29}px)` },
+      ], { duration: 550, easing: 'cubic-bezier(.2,.75,.25,1)' });
+    });
+  }
+  previousOrder = [...data.finalOrder];
 }
 
 function candidatesDetail() {
@@ -228,7 +243,7 @@ function liftingDetail() {
     s += text(40, 28, 'Five future steps · same candidate', 'svg-label');
     s += text(711, 28, `Candidate ${CANDIDATES[state.candidate]}`, 'svg-small svg-accent', 'text-anchor="end"');
     const points = Array.from({length: 5}, (_, t) => transportPoint(state.candidate, t, state.progress));
-    const map = p => [65 + p[0] * 930, 158 - p[1] * 275];
+    const map = p => [65 + p[0] * 790, 158 - p[1] * 275];
     const base = points.map(p => map(p.source)), refined = points.map(p => map(p.refined));
     s += path(base.map(([x,y], i) => `${i ? 'L' : 'M'}${x} ${y}`).join(' '), 'detail-line', 'stroke-width="2"');
     s += path(refined.map(([x,y], i) => `${i ? 'L' : 'M'}${x} ${y}`).join(' '), 'trace-line');
@@ -317,6 +332,10 @@ function renderDetail(animate = false) {
 }
 function renderOptions(){
   const container=$('#stage-options');
+  if ($('#lifting-progress')) {
+    $('#lifting-progress').value = state.progress;
+    $('#lifting-value').value = `${Math.round(state.progress * 100)}%`;
+  }
   // Retain focused controls during pointer/keyboard range updates.
   if(container.dataset.stage===String(state.stage))return;
   container.dataset.stage=state.stage;
@@ -328,7 +347,15 @@ function renderOptions(){
   if(state.stage===4){
     container.innerHTML=`<div class="segmented" role="group" aria-label="Representation mechanism"><button type="button" data-lifting="ordinal" aria-pressed="${state.lifting==='ordinal'}">Ordinal realization</button><button type="button" data-lifting="transport" aria-pressed="${state.lifting==='transport'}">Temporal transport</button></div><button type="button" id="animate-lifting">Replay the transformation ↻</button>`;
     container.querySelectorAll('[data-lifting]').forEach(button=>button.addEventListener('click',()=>{stop();state.lifting=button.dataset.lifting;state.progress=1;container.querySelectorAll('[data-lifting]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));renderArchitecture();renderDetail(true);animateLifting();}));
+    container.insertAdjacentHTML('beforeend', '<label class="lifting-control"><span>Transformation <output id="lifting-value" for="lifting-progress">100%</output></span><input id="lifting-progress" type="range" min="0" max="1" step="0.01" value="1" aria-label="Representation transformation progress"></label>');
+    $('#lifting-progress').addEventListener('input', e => {
+      stop(); cancelAnimationFrame(slideFrame);
+      state.progress = Number(e.target.value); renderDetail();
+    });
     $('#animate-lifting').addEventListener('click',()=>{stop();animateLifting();});
+  }
+  if(state.stage===3){
+    container.innerHTML='<details class="composition-note"><summary>Complementary predictor adaptation</summary><p>Decision supervision updates the final TD-JEPA predictor block and projection. Its native-distance proposal complements the relational default through a calibrated composition gate.</p></details>';
   }
   if(state.stage===0||state.stage===2){
     const button=document.createElement('button');button.type='button';button.textContent='View training supervision';button.addEventListener('click',()=>setSupervision(!state.supervision));container.append(button);
@@ -359,25 +386,26 @@ function selectStage(stage, manual=true){
   }
   if(state.stage===4)animateLifting();
 }
-function animateLifting(){
+function animateLifting(from = 0){
   cancelAnimationFrame(slideFrame);
   if(reducedMotion.matches){state.progress=1;renderDetail();return;}
   const start=performance.now();
   function tick(now){
-    const t=Math.min(1,(now-start)/1600);state.progress=t*t*(3-2*t);renderDetail();
+    const t=Math.min(1,(now-start)/(1600 * Math.max(.01,1-from) / state.speed));state.progress=from+(1-from)*t*t*(3-2*t);renderDetail();
     if(t<1)slideFrame=requestAnimationFrame(tick);
   }
-  state.progress=0;slideFrame=requestAnimationFrame(tick);
+  state.progress=from;slideFrame=requestAnimationFrame(tick);
 }
 function updateProgress(){
   const duration=stageSeconds.reduce((a,b)=>a+b,0);
   const past=stageSeconds.slice(0,state.stage).reduce((a,b)=>a+b,0);
   $('#tour-progress').style.width=`${100*(past+state.elapsed)/duration}%`;
 }
-function stop(){state.playing=false;cancelAnimationFrame(frame);document.body.classList.remove('running');$('#play-symbol').textContent='▶';$('#play-label').textContent='Play tour';$('#play').setAttribute('aria-label','Play guided tour');}
+function stop(){state.playing=false;cancelAnimationFrame(frame);cancelAnimationFrame(slideFrame);document.body.classList.remove('running');$('#play-symbol').textContent='▶';$('#play-label').textContent='Play tour';$('#play').setAttribute('aria-label','Play guided tour');}
 function play(){
   if(state.playing){stop();return;}
   if(state.stage===5){selectStage(0,false);}
+  if(state.stage===4&&state.progress<1)animateLifting(state.progress);
   state.playing=true;previousTime=performance.now();document.body.classList.add('running');$('#play-symbol').textContent='Ⅱ';$('#play-label').textContent='Pause';$('#play').setAttribute('aria-label','Pause guided tour');
   function tick(now){
     if(!state.playing)return;
@@ -410,7 +438,6 @@ document.addEventListener('keydown',event=>{
   if(event.code==='Space'){event.preventDefault();play();}
 });
 $('#play').addEventListener('click',play);
-$('#start-tour').addEventListener('click',()=>{stop();selectStage(0,false);play();});
 $('#previous').addEventListener('click',()=>selectStage(state.stage-1));
 $('#next').addEventListener('click',()=>selectStage(state.stage+1));
 $('#reset').addEventListener('click',()=>{

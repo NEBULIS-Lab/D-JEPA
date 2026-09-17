@@ -18,17 +18,10 @@
   <a class="skip-link" href="#explorer">Skip to interactive diagram</a>
   <header class="explainer-header">
     <a class="brand" href="index.html" aria-label="Back to the D-JEPA project"><img class="logo-dark" src="static/images/branding/jepa-icon-dark.svg" width="30" height="30" alt=""><img class="logo-light" src="static/images/branding/jepa-icon-light.svg" width="30" height="30" alt=""><b>D-JEPA</b><span class="header-divider"></span><span>Inside the model</span></a>
-    <nav aria-label="Page navigation"><a href="#explorer">Explore</a><a href="#in-practice">In practice</a><a href="index.html">Project <span aria-hidden="true">↗</span></a></nav>
+    <nav aria-label="Page navigation"><a href="index.html">Project <span aria-hidden="true">↗</span></a></nav>
     <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to light theme" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="moon" d="M20 15.5A8.5 8.5 0 0 1 8.5 4 8.5 8.5 0 1 0 20 15.5Z"/><g class="sun"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></g></svg><span id="theme-label">Dark</span></button>
   </header>
   <main>
-    <section class="intro wrap">
-      <p class="eyebrow"><span class="live-dot"></span> AN INTERACTIVE LOOK INSIDE D-JEPA</p>
-      <h1>Predicted futures.<br><span class="gradient-text">Decision-aligned relations.</span></h1>
-      <p class="intro-copy">How do we turn a plausible future into a better action?<br>Follow the candidates through the model, one decision at a time.</p>
-      <a class="tour-link" href="#explorer" id="start-tour">Play the guided tour <span aria-hidden="true">↓</span></a>
-    </section>
-
     <section class="workbench wrap" id="explorer" aria-label="Interactive D-JEPA architecture">
       <div class="toolbar">
         <div class="player-controls">
@@ -80,22 +73,9 @@
       </div>
       <div class="supervision-strip" id="supervision-panel" hidden><div><span class="small-tag">DURING TRAINING</span><h3>Executed outcomes teach the relations.</h3><p>Successful candidates receive more decision mass. Local pairs sharpen the boundary; a correction penalty keeps the update bounded.</p></div><div class="loss-equation">L = L<sub>success</sub> + λ<sub>local</sub>L<sub>local</sub> + λ<sub>trust</sub>‖δ‖²</div><p class="supervision-labels">Illustrative outcomes: <b>A · success</b><b>C · success</b><span>B, D, E, F · failure</span></p></div>
       <p class="model-note" id="model-note">Dual-geometry model: two 192-dimensional descriptors and two ordinal coordinates form each 386-dimensional token.</p>
-      <noscript><p class="no-script">The interactive tour needs JavaScript. The method summary, equations and recorded comparison below remain available.</p></noscript>
+      <noscript><p class="no-script">The interactive tour needs JavaScript. Visit the project page for the method and recorded experiments.</p></noscript>
     </section>
 
-    <section class="extensions wrap" aria-labelledby="extensions-title">
-      <div class="section-heading"><p class="eyebrow">THE SAME DESIGN, EXTENDED</p><h2 id="extensions-title">More predictive evidence. One decision interface.</h2></div>
-      <div class="extension-grid">
-        <article class="extension-card"><span class="extension-number">01</span><h3>Complementary predictor adaptation</h3><p>Decision supervision also updates the final TD-JEPA predictor block and projection. The adapted future offers a proposal to the calibrated composition rule.</p><div class="mini-flow"><span>Pretrained predictor</span><i>→</i><span class="highlight">Final block + projection</span><i>→</i><span>Adapted future</span></div><details><summary>See how the proposal is used <span>+</span></summary><p>Relational selection supplies the default action. The adapted predictor supplies a native-distance proposal. Calibrated composition admits it when the score advantage exceeds its threshold.</p><div class="formula small-formula">relational default → calibrated gate ← adapted proposal</div></details></article>
-        <article class="extension-card"><span class="extension-number">02</span><h3>Complementary predictive geometries</h3><p>LeWM and TD-JEPA supply dense future–goal descriptors. JEPA-WM and DINO-WM add ordinal evidence in the four-geometry model.</p><div class="source-pills"><span>LeWM</span><span>TD-JEPA</span><span>JEPA-WM</span><span>DINO-WM</span></div><details><summary>See how the spaces connect <span>+</span></summary><p>Dense descriptors stay within their source geometry. Ranks provide a common comparison space. The four-source configuration uses a 388-dimensional token and its own learned parameters and JEPA-WM base score.</p><div class="formula small-formula">[dᴸ ; dᵀ ; rᴸ ; rᵀ ; rᴶ ; rᴰ] → 388 → 64</div></details></article>
-      </div>
-    </section>
-
-    <section class="practice wrap" id="in-practice">
-      <div class="practice-copy"><p class="eyebrow">FROM THE EXPERIMENTS</p><h2>Different choices.<br> Different physical futures.</h2><p>The animation above uses illustrative candidates to explain the computation. This recorded PushT comparison shows evaluated action sequences from a shared start and goal.</p><p class="muted">The selected example pairs baseline failure with D-JEPA success. Aggregate evaluations are available on the project page.</p><a class="pill-link" href="index.html#results">Explore the results <span>↗</span></a></div>
-      <figure><video controls playsinline preload="none" poster="static/images/poster-pusht.jpg" aria-label="Recorded PushT baseline and D-JEPA execution comparison"><source src="static/videos/pusht.mp4" type="video/mp4"></video><figcaption>Recorded execution · shared start and goal · complete 25-control sequences</figcaption></figure>
-    </section>
   </main>
-  <footer class="wrap"><a class="footer-brand" href="index.html">D-JEPA <span>·</span> NEBULIS Lab</a><div><a href="https://github.com/NEBULIS-Lab/D-JEPA">Code ↗</a><a href="https://github.com/NEBULIS-Lab/shuaijun-ICLR27-D-JEPA-paper">Paper ↗</a><details class="credits"><summary>Design references</summary><p>Interaction design inspired by <a href="https://poloclub.github.io/transformer-explainer/">Transformer Explainer</a> and <a href="https://vit-explainer.vercel.app/">ViT-Explainer</a>. D-JEPA diagrams and animation code are implemented for this project.</p></details></div></footer>
 </body>
 </html>

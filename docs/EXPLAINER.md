@@ -14,9 +14,10 @@ step, external runtime, analytics or model download.
 5. PushT exact ordinal realization or Reacher bounded temporal transport.
 6. Candidate identity and the corresponding action-selection interface.
 
-Two expandable sections explain complementary predictor adaptation/composition
-and the four-geometry configuration. A separate recorded PushT video illustrates
-executed outcomes.
+The page opens directly into a single interactive workbench. Complementary
+predictor adaptation is expandable inside the decision-rule stage; the source
+control explains the four-geometry configuration. Recorded experiments remain
+on the main project page.
 
 The six-candidate scores, descriptor cells, attention matrices, corrections,
 transport coefficients and T-shaped scenes are deterministic teaching examples,
@@ -30,8 +31,7 @@ directions and radii π/(K+1). Earlier predicted steps are retained. The current
 PushT checkpoint contains predictive models and relational computation. Reacher
 physical selection uses the relational score; temporal transport is presented
 as the separate five-step representation diagnostic. Schematic physical scenes
-are labelled illustrative; the recorded comparison below uses the existing
-published experiment video without editing.
+are labelled illustrative.
 
 ## Controls
 
@@ -40,7 +40,10 @@ published experiment video without editing.
 - Trace a candidate via the A–F buttons; inspect one of four attention heads.
 - Switch the predictive configuration between two and four sources.
 - Move the illustrative correction bound to zero to recover the base decision.
-- Toggle training supervision and replay either representation transformation.
+- Toggle training supervision, replay either representation transformation or
+  drag its progress slider to inspect intermediate states.
+- Candidate ranks animate between positions when the correction changes the
+  order; signal particles follow the pipeline during playback.
 - Arrow keys navigate stages and Space toggles playback when focus is outside
   an interactive control. Reduced-motion preferences disable animated transitions.
 - The tour is user-initiated and pauses when the browser tab becomes hidden.
