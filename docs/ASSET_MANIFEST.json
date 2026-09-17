@@ -229,10 +229,16 @@
   },
   {
     "path": "static/videos/robotwin.mp4",
-    "sha256": "aff6c690e990de9b1904456c59ce1fe27d6db41272a16041ef980e6d1eafa953",
-    "bytes": 6839817,
-    "source_identity": "sha256:aff6c690e990de9b1904456c59ce1fe27d6db41272a16041ef980e6d1eafa953",
-    "transformation": "none; byte-identical approved comparison media"
+    "sha256": "0327eebe5f0c3fb0deb9df69a6c6bf533563f055baa0aacc4965cb132bc4d0da",
+    "bytes": 1537652,
+    "source_identities": [
+      "sha256:659fcaff5ad286317d4e47d5e0f0024c60e3b7a4e9734fd290c754ecb258afe1",
+      "sha256:87ea9057efcbf90c74ca24ee0cc7ac20b32035ebf5a1cecfb66c229459041456"
+    ],
+    "transformation": "White canvas, regular labels, thin grey-blue/magenta-purple rules; full uncropped source frames resized proportionally; no scene recolouring",
+    "frames": 491,
+    "fps": 30,
+    "playback": "2x recorded frame rate; 1s initial and 2s terminal holds"
   },
   {
     "path": "static/videos/driving.mp4",
@@ -292,10 +298,10 @@
   },
   {
     "path": "static/images/poster-robotwin.jpg",
-    "sha256": "9f86081aea973b8e05d14d8ca835fcfb8d764fdcc8cd10eba0b2c4ca94f269ee",
-    "bytes": 62120,
+    "sha256": "0b52d2ebe97d2d09f2dbe92e13fbe0425ad0341e2e6f163e4cb50e50599fe3aa",
+    "bytes": 39709,
     "source": "static/videos/robotwin.mp4",
-    "transformation": "decoded frame at 0.4 s; proportional resize up to 1200 px wide; JPEG quality 3; no retouching"
+    "transformation": "Decoded initial-hold frame at 0.4s; proportionally resized to 1200px; JPEG quality 3"
   },
   {
     "path": "static/images/poster-driving.jpg",

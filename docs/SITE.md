@@ -81,5 +81,12 @@ system theme; a saved manual choice takes precedence on later visits.
 Each video has a large, keyboard-accessible play overlay that
 hides during playback and returns on pause, alongside native video controls.
 
+Body paragraphs and long figure captions use justified alignment, with the
+last line left aligned; hero text, headings, short plot labels and metric cards
+retain their intended alignment. The grasping clip uses the same white canvas,
+grey-blue/purple method rules and regular-weight labels as the other comparisons.
+It retains every recorded frame at 2× playback and explicitly labels the held
+successful terminal frame while the reference continues.
+
 The page has no final-paper download, final citation or venue badge. Add them
 only when author-approved material is available.
