@@ -15,9 +15,15 @@ class Page(HTMLParser):
         self.ids = set()
         self.links = []
         self.slots = set()
+        self.videos = []
+        self.tabs = []
 
     def handle_starttag(self, tag, attrs):
         attributes = dict(attrs)
+        if tag == 'video':
+            self.videos.append(attributes)
+        if attributes.get('role') == 'tab' or 'data-demo' in attributes:
+            self.tabs.append(attributes)
         if 'id' in attributes:
             if attributes['id'] in self.ids:
                 raise ValueError(f'duplicate HTML ID: {attributes["id"]}')
@@ -32,6 +38,11 @@ class Page(HTMLParser):
 def check():
     page = Page()
     page.feed((SITE/'index.html').read_text())
+    if len(page.videos) != 7 or page.tabs:
+        raise ValueError('gallery must expose seven videos directly, without task tabs')
+    for video in page.videos:
+        if not video.get('poster') or video.get('preload') != 'none' or 'controls' not in video:
+            raise ValueError('videos need posters, playback controls and no eager preload')
     for link in page.links:
         url = urlsplit(link)
         if url.scheme or url.netloc:
@@ -59,7 +70,7 @@ def check():
     for master in (ROOT/'assets/branding').glob('*.svg'):
         if master.read_bytes() != (SITE/'static/images/branding'/master.name).read_bytes():
             raise ValueError(f'brand copy differs: {master.name}')
-    print('PASS: local site links, section IDs, artwork slots, copied media and logos')
+    print('PASS: local links, sections, artwork, media hashes, logos and directly visible video markup')
 
 
 if __name__ == '__main__':

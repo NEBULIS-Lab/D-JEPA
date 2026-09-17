@@ -22,7 +22,9 @@ Existing Markdown documents remain technical documentation, not page sections.
 The overview, motivation and two detail slots are intentionally marked as
 awaiting author artwork. JavaScript replaces a slot only after its actual image
 loads. Missing artwork never produces a broken-image rectangle. Main content
-and all three video panels remain readable without JavaScript.
+and all seven video panels remain readable without JavaScript. Comparisons are
+displayed directly in a responsive grid, with no task-selection tabs. Video
+playback is user-initiated; starting one clip pauses the others.
 
 ## Palette and media
 
@@ -36,8 +38,8 @@ Brand masters stay in `assets/branding/` at repository root. The four identical
 copies under `docs/static/images/branding/` make a docs-only deployment portable.
 If a master changes, update its site copy and `ASSET_MANIFEST.json` together.
 
-Published comparison clips are selected baseline-failure / D-JEPA-success cases,
-not a random sample. They retain full declared fixed-action horizons. Numerical
+Published comparison clips are selected paired examples, not a random sample.
+They retain their declared execution horizons and recorded stopping points. Numerical
 figures and videos are byte-identical copies from the checked visual library.
 The page now uses the manuscript's 16 quantitative SVG panels and baseline-only
 ranking diagnostic. Numeric panels have common data-area alignment, restrained
@@ -49,8 +51,20 @@ and mechanism evaluations. Table notes are enclosed in `tfoot` with a closing ru
 
 RoboTwin and driving use byte-identical copies of the current manuscript PNGs,
 with the original experimental frames and bird's-eye geometry retained. Provenance,
-transformations and hashes are recorded in `ASSET_MANIFEST.json`. Existing videos
-remain unchanged. Updating these local files does not deploy the website.
+transformations and hashes are recorded in `ASSET_MANIFEST.json`. The gallery
+includes PushT, Reacher, Granular manipulation, bimanual grasping, driving,
+unseen object geometry and changed object appearance. Newly added clips are
+byte-identical copies. The three original core-task clips have header-only
+terminology updates to TD-JEPA and DINO-WM, retaining every frame and the original
+dimensions and frame rate. Their linked timelines have label-only updates with
+byte-identical scene pixels. Source hashes and transformations are recorded;
+lightweight posters are decoded frames, resized proportionally without retouching.
+Clips are not preloaded, keeping initial page loading lightweight.
+
+Non-title typography uses three shared sizes (14, 16 and 18 px). Metric values
+and section headings have their own compact scale. Navigation, footer and cards
+support light/dark themes; subtle entry and hover effects respect reduced-motion
+preferences. Updating these local files does not deploy the website.
 
 The page has no final-paper download, final citation or venue badge. Add them
 only when author-approved material is available.

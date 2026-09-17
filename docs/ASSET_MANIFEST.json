@@ -1,45 +1,51 @@
 [
   {
     "path": "static/videos/pusht.mp4",
-    "source": "visual_assets/media/pusht/start_0057_frozen_tdjepa/comparison.mp4",
-    "sha256": "916e789776d8995e6410dc5e9d310bbd9faa60e53963244edb5b9657403701aa",
-    "bytes": 400770,
-    "transformation": "none; byte-identical copy"
+    "sha256": "4cf45dbc0d40ae3b59b6d9b5433e17d21c8c09800c3a9774be6dff5be6c4e128",
+    "bytes": 441246,
+    "source_identity": "sha256:916e789776d8995e6410dc5e9d310bbd9faa60e53963244edb5b9657403701aa",
+    "transformation": "Baseline header label only; TD-JEPA or DINO-WM; all frames and dimensions retained; H.264 CRF 16",
+    "frames": 201,
+    "fps": 25.0
   },
   {
     "path": "static/images/pusht-timeline.png",
-    "source": "visual_assets/media/pusht/start_0057_frozen_tdjepa/grid_3x2.png",
-    "sha256": "0600579bfdf71503185ce41b40100c868e2a338d0e37cf230a2eb3d2c54da497",
-    "bytes": 145023,
-    "transformation": "none; byte-identical copy"
+    "sha256": "28988a8e6c2a01619dae339e423e998373c32040d1792861436fa4e1da310920",
+    "bytes": 141053,
+    "source_identity": "sha256:0600579bfdf71503185ce41b40100c868e2a338d0e37cf230a2eb3d2c54da497",
+    "transformation": "Baseline label only; scene pixels verified byte-identical"
   },
   {
     "path": "static/videos/reacher.mp4",
-    "source": "visual_assets/media/reacher/start_0031_temporal/comparison.mp4",
-    "sha256": "8dad2458102269eb474aba6c4c5a494ce1a1104f31b43eb53b8485686f4508d7",
-    "bytes": 307327,
-    "transformation": "none; byte-identical copy"
+    "sha256": "dd5978a577dff4bb610ccfaa4a6266067acbff2e4b51d742e9212637ac72fb3d",
+    "bytes": 366925,
+    "source_identity": "sha256:579d4b41a46dbaa9b09ca9908b7fd2700c649de70aa63195011f850e5a1717e8",
+    "transformation": "Baseline header label only; TD-JEPA or DINO-WM; all frames and dimensions retained; H.264 CRF 16",
+    "frames": 56,
+    "fps": 10.0
   },
   {
     "path": "static/images/reacher-timeline.png",
-    "source": "visual_assets/media/reacher/start_0031_temporal/grid_3x2.png",
-    "sha256": "95bccf983eec185f1a81e2c65c9c75ab1c95f83a4a5a9208f87b3fa4ec62ae08",
-    "bytes": 487096,
-    "transformation": "none; byte-identical copy"
+    "sha256": "92a28524ee87d8a2196a0be1cb672d9655215e0fe663c47d5efd76b2d7a9b408",
+    "bytes": 481250,
+    "source_identity": "sha256:92a28524ee87d8a2196a0be1cb672d9655215e0fe663c47d5efd76b2d7a9b408",
+    "transformation": "Baseline label only; scene pixels verified byte-identical"
   },
   {
     "path": "static/videos/granular.mp4",
-    "source": "visual_assets/media/granular/granular-formal-t00621-o10/comparison.mp4",
-    "sha256": "5d71bb19cba3f49582fb20aea14ca13e4aec39ef92276794ecd9316489fa019c",
-    "bytes": 6627111,
-    "transformation": "none; byte-identical copy"
+    "sha256": "14d2329174b030012f096bf2089523238a98bfd195e718a6eb22c107552074b5",
+    "bytes": 7191648,
+    "source_identity": "sha256:5d71bb19cba3f49582fb20aea14ca13e4aec39ef92276794ecd9316489fa019c",
+    "transformation": "Baseline header label only; TD-JEPA or DINO-WM; all frames and dimensions retained; H.264 CRF 16",
+    "frames": 981,
+    "fps": 30.0
   },
   {
     "path": "static/images/granular-timeline.png",
-    "source": "visual_assets/media/granular/granular-formal-t00621-o10/grid_3x2.png",
-    "sha256": "6fcdd8ab67c82501f2c980df3afc94f072ce4056db58e67e3aeafd005daf3112",
-    "bytes": 1206443,
-    "transformation": "none; byte-identical copy"
+    "sha256": "27f9430549046590a88d5e0f7591ab797652b7aa491a11994e86f5a2d1513ec3",
+    "bytes": 1202025,
+    "source_identity": "sha256:27f9430549046590a88d5e0f7591ab797652b7aa491a11994e86f5a2d1513ec3",
+    "transformation": "Baseline label only; scene pixels verified byte-identical"
   },
   {
     "path": "static/images/branding/jepa-full-logo-light.svg",
@@ -220,5 +226,96 @@
     "evidence": "Current manuscript case or diagnostic; original experimental frames and data preserved.",
     "bytes": 3724447,
     "transformation": "none; byte-identical current manuscript figure"
+  },
+  {
+    "path": "static/videos/robotwin.mp4",
+    "sha256": "aff6c690e990de9b1904456c59ce1fe27d6db41272a16041ef980e6d1eafa953",
+    "bytes": 6839817,
+    "source_identity": "sha256:aff6c690e990de9b1904456c59ce1fe27d6db41272a16041ef980e6d1eafa953",
+    "transformation": "none; byte-identical approved comparison media"
+  },
+  {
+    "path": "static/videos/driving.mp4",
+    "sha256": "f5f2e893f66948eb11a9b77f08c1c399ee7484ff5b6abf4914accc1fd5597e2e",
+    "bytes": 1218431,
+    "source_identity": "sha256:f5f2e893f66948eb11a9b77f08c1c399ee7484ff5b6abf4914accc1fd5597e2e",
+    "transformation": "none; byte-identical approved comparison media"
+  },
+  {
+    "path": "static/videos/shape.mp4",
+    "sha256": "6064d1249ac7d10989156ac7be425d475c45cff59160ffe6ce119b1c346468bd",
+    "bytes": 493144,
+    "source_identity": "sha256:6064d1249ac7d10989156ac7be425d475c45cff59160ffe6ce119b1c346468bd",
+    "transformation": "none; byte-identical approved comparison media"
+  },
+  {
+    "path": "static/videos/appearance.mp4",
+    "sha256": "2c49800aa176518d08bf933859e4f314bd241a5d400e2af0197d94b57b100d09",
+    "bytes": 587772,
+    "source_identity": "sha256:2c49800aa176518d08bf933859e4f314bd241a5d400e2af0197d94b57b100d09",
+    "transformation": "none; byte-identical approved comparison media"
+  },
+  {
+    "path": "static/images/shape-timeline.png",
+    "sha256": "67a222b10d36276eb21a1b707332d70481be06ba77678512e905d256e2627f52",
+    "bytes": 278863,
+    "source_identity": "sha256:67a222b10d36276eb21a1b707332d70481be06ba77678512e905d256e2627f52",
+    "transformation": "none; byte-identical approved comparison media"
+  },
+  {
+    "path": "static/images/appearance-timeline.png",
+    "sha256": "848c694edf5f2a1d51d9921ad66769a5a6fb4e1e9847d509d50df1ec434c60ed",
+    "bytes": 222289,
+    "source_identity": "sha256:848c694edf5f2a1d51d9921ad66769a5a6fb4e1e9847d509d50df1ec434c60ed",
+    "transformation": "none; byte-identical approved comparison media"
+  },
+  {
+    "path": "static/images/poster-pusht.jpg",
+    "sha256": "f9720f86d1f25758a98dee2d95cf4420fbd6b10d8aabc9510001b44900eb8158",
+    "bytes": 30038,
+    "source": "static/videos/pusht.mp4",
+    "transformation": "decoded frame at 0.4 s; proportional resize up to 1200 px wide; JPEG quality 3; no retouching"
+  },
+  {
+    "path": "static/images/poster-reacher.jpg",
+    "sha256": "e7d5cc72f34f2c9101b517337ccd9702ba44229085a85380978ffc191d8424d8",
+    "bytes": 38320,
+    "source": "static/videos/reacher.mp4",
+    "transformation": "decoded frame at 0.4 s; proportional resize up to 1200 px wide; JPEG quality 3; no retouching"
+  },
+  {
+    "path": "static/images/poster-granular.jpg",
+    "sha256": "910fa2de34e6ee0591d290eabbea3219b0eec8dae1b932425c7602fabd2f15c5",
+    "bytes": 51108,
+    "source": "static/videos/granular.mp4",
+    "transformation": "decoded frame at 0.4 s; proportional resize up to 1200 px wide; JPEG quality 3; no retouching"
+  },
+  {
+    "path": "static/images/poster-robotwin.jpg",
+    "sha256": "9f86081aea973b8e05d14d8ca835fcfb8d764fdcc8cd10eba0b2c4ca94f269ee",
+    "bytes": 62120,
+    "source": "static/videos/robotwin.mp4",
+    "transformation": "decoded frame at 0.4 s; proportional resize up to 1200 px wide; JPEG quality 3; no retouching"
+  },
+  {
+    "path": "static/images/poster-driving.jpg",
+    "sha256": "7e267e37fca2dcf13929d84fb4f790384448d421a5874f93f6128feeca28f39e",
+    "bytes": 79698,
+    "source": "static/videos/driving.mp4",
+    "transformation": "decoded frame at 0.4 s; proportional resize up to 1200 px wide; JPEG quality 3; no retouching"
+  },
+  {
+    "path": "static/images/poster-shape.jpg",
+    "sha256": "43ae1f73c3fa64c59864766d18b8c822d785a625c043ebb8cf8df23444dedfdb",
+    "bytes": 27191,
+    "source": "static/videos/shape.mp4",
+    "transformation": "decoded frame at 0.4 s; proportional resize up to 1200 px wide; JPEG quality 3; no retouching"
+  },
+  {
+    "path": "static/images/poster-appearance.jpg",
+    "sha256": "9a8df20867259363c16de742baf0591d680663b000df486a00fd1438dc304f50",
+    "bytes": 33278,
+    "source": "static/videos/appearance.mp4",
+    "transformation": "decoded frame at 0.4 s; proportional resize up to 1200 px wide; JPEG quality 3; no retouching"
   }
 ]

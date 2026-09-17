@@ -18,19 +18,36 @@ systemTheme.addEventListener('change', event => {
   setTheme(event.matches ? 'dark' : 'light');
 });
 
-function selectDemo(task) {
-  document.querySelectorAll('[data-demo]').forEach(button => {
-    button.setAttribute('aria-pressed', String(button.dataset.demo === task));
+// Every comparison is visible; playback starts only when requested.
+document.querySelectorAll('video').forEach(video => {
+  video.addEventListener('play', () => {
+    document.querySelectorAll('video').forEach(other => {
+      if (other !== video) other.pause();
+    });
   });
-  document.querySelectorAll('.demo-panel').forEach(panel => {
-    panel.hidden = panel.id !== `demo-${task}`;
-    if (panel.hidden) panel.querySelector('video').pause();
-  });
-}
-document.querySelectorAll('[data-demo]').forEach(button => {
-  button.addEventListener('click', () => selectDemo(button.dataset.demo));
 });
-selectDemo('pusht');
+
+const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+if ('IntersectionObserver' in window) {
+  const reveal = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      if (!reducedMotion.matches) entry.target.classList.add('reveal-in');
+      reveal.unobserve(entry.target);
+    });
+  }, { threshold: .08 });
+  document.querySelectorAll('.section-heading, .method-card, .demo-panel').forEach(el => reveal.observe(el));
+  const sections = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      document.querySelectorAll('.topbar nav a').forEach(link => {
+        if (link.hash === '#' + entry.target.id) link.setAttribute('aria-current', 'location');
+        else link.removeAttribute('aria-current');
+      });
+    });
+  }, { rootMargin: '-12% 0px -65% 0px' });
+  document.querySelectorAll('main section[id]').forEach(section => sections.observe(section));
+}
 
 document.querySelector('#copy-command').addEventListener('click', async () => {
   const status = document.querySelector('#copy-status');
