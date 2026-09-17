@@ -15,8 +15,8 @@ browser inference is required.
    Average within-start Spearman correlations over 96 matched starts fall from
    0.90 to 0.11 for LeWM and 0.80 to 0.13 for TD-JEPA (all 63 candidates → top four;
    rounded values from the project-page diagnostic). The single curated pair and
-   the aggregate diagnostic have distinct evidence identities. Stage 06 retains
-   its original three-method replay unchanged.
+   the aggregate diagnostic have distinct evidence identities. Stage 06 begins
+   with the original three-method replay, then expands to cross-task validation.
 2. **Predictive evidence:** source-specific descriptors, ordinal evidence and
    candidate-token construction, revealed in computational order. Three clickable
    operations animate goal subtraction and LayerNorm, within-source cost sorting
@@ -30,7 +30,14 @@ browser inference is required.
    and the calibrated margin gate.
 5. **Future representation:** ordinal realization or five-step temporal transport;
    displayed native distances track the moving latent points.
-6. **Action selection:** the original method-selected actions replayed in sync.
+6. **Action selection and cross-task validation:** the original method-selected
+   PushT actions replay in sync for eight presentation seconds, including the
+   complete recorded horizon and its ending hold. The whole PushT view then
+   scales down and moves to the upper-left tile; Reacher, Granular manipulation,
+   bimanual grasping, driving and unseen-shape windows enter sequentially. The
+   final wall connects one decision to evaluations across distinct physical
+   systems. Task videos share the tour clock and pause/seek together. Select a
+   window to open its full published comparison in a larger player.
 
 Candidate identity is linked across the teaching diagrams. Recorded executions
 retain their original numeric candidate IDs. The recording and the six-candidate
@@ -114,7 +121,7 @@ stage. Training supervision opens in a dialog.
   lifting stage, then release to restore the exact progress and playback state.
 - Rotate the stage-01 radial view by dragging, its angle slider, or Left/Right
   while the sphere is focused. View rotation does not change distances or outcomes.
-- Jump to key moments via the timeline markers. The 61-second tour gives extra
+- Jump to key moments via the timeline markers. The 79-second tour gives extra
   time to ranking crossings and lifting, including a brief boundary-switch hold.
 - Hover a candidate to follow its evidence, rank path or latent point while
   dimming unrelated entries. Matrix hover highlights its candidate row/column.
@@ -132,6 +139,16 @@ stage. Training supervision opens in a dialog.
   fallback shortlist-reveal timing; no interpolated statistics.
 - `static/js/explainer-pair.mjs`: radial 3D projection and paired-replay timing.
 - `static/data/explainer-pair.json`: verified latent costs, radii and pair provenance.
+- `static/js/explainer-validation.mjs`: task-wall entrance timing and video-clock
+  synchronization. Stage 06 lasts 26 seconds; its first eight seconds retain the
+  original PushT playback timing.
+- `static/videos/explainer-wall/`: lightweight camera-focused previews and a
+  provenance manifest. Reacher, Granular and shape previews retain baseline/D-JEPA
+  camera panes and omit peripheral text; shape omits the middle fusion pane.
+  Bimanual video retains both camera panes; driving retains recorded camera
+  context and simulated trajectories. Baseline is left and D-JEPA is right.
+  The wall shows excerpts; the modal opens the unchanged full published video.
+  No physical-robot footage is substituted with simulated footage.
 - `static/js/explainer-model.mjs`: pure numerical teaching example.
 - `static/js/explainer-motion.mjs`: deterministic presentation timing and
   rank-to-radius geometry, with endpoint and decision-boundary tests.
@@ -150,3 +167,9 @@ project and covered by the repository's Apache-2.0 license.
 Checks: `node --test tests/explainer-model.test.mjs` and
 `python3 scripts/check_site.py`. Preview using
 `bash scripts/preview_site.sh 8000`, then open `/explainer.html`.
+
+Rebuild the task-wall previews with `python scripts/build_explainer_wall_media.py`
+(requires `imageio-ffmpeg`). The five preview videos total under 1 MB, retain the
+original playback speeds, and load on demand. Fully buffered preview blobs make
+scrubbing work with a simple local HTTP server as well as the hosted site; they
+are released when the stage is removed. Original published videos remain intact.

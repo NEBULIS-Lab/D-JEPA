@@ -1,3 +1,4 @@
+import { VALIDATION_TASKS, validationFrame, syncValidationVideos, pauseValidationVideos, releaseValidationVideos } from './explainer-validation.mjs';
 import { pairPhase, latentMarkup } from './explainer-pair.mjs';
 import { DIAGNOSTIC, problemPhase } from './explainer-problem.mjs';
 import { evidenceVector, evidencePhase } from './explainer-evidence.mjs';
@@ -9,7 +10,7 @@ const $ = selector => document.querySelector(selector);
 const $$ = selector => [...document.querySelectorAll(selector)];
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
 const state = { stage: 0, candidate: 0, sources: 2, bound: 0.2, head: 0, lifting: 'ordinal', progress: 1, playing: false, speed: 1, elapsed: 0, supervision: false, recordCandidate:2, replay:true, comparing:false, hoverCandidate:null };
-const stageSeconds = [12, 10, 9, 10, 12, 8];
+const stageSeconds = [12, 10, 9, 10, 12, 26];
 const totalDuration = stageSeconds.reduce((a,b)=>a+b,0);
 let record = null;
 let previewCandidate = 0;
@@ -485,6 +486,65 @@ function recordedDetail() {
   s+=text(380,351,'Same start and goal · recorded physical trajectories · 0.00–2.50 s','svg-small','text-anchor="middle" data-record-caption="true"');
   return s;
 }
+
+function validationDetail() {
+  let s='<g id="validation-pusht-frame" opacity="0">';
+  s+=rect(16,49,236,136,'var(--surface)','var(--line)',10);
+  s+=text(28,67,'PushT','svg-label')+text(240,67,'Latent control','svg-tiny','text-anchor="end"');
+  s+='</g><g id="validation-origin">'+recordedDetail()+'</g>';
+  s+='<g id="validation-heading" opacity="0">';
+  s+=text(20,24,'One principle. Across tasks, embodiments, and dynamics.','svg-title');
+  s+='</g>';
+  VALIDATION_TASKS.forEach((task,i)=>{
+    const slot=i+1,x=16+(slot%3)*246,y=49+Math.floor(slot/3)*153;
+    s+='<g data-validation-card="'+i+'" opacity="0" style="pointer-events:none">';
+    s+=rect(x,y,236,136,'var(--surface)','var(--line)',10);
+    s+=text(x+12,y+18,task.title,'svg-label');
+    s+='<foreignObject x="'+(x+6)+'" y="'+(y+25)+'" width="224" height="89"><div xmlns="http://www.w3.org/1999/xhtml" class="validation-media">';
+    s+='<video data-validation-video="'+i+'" data-src="static/videos/explainer-wall/'+task.id+'.mp4" muted="" playsinline="" preload="none" poster="static/videos/explainer-wall/'+task.id+'.jpg" aria-label="'+task.detail+'"></video></div></foreignObject>';
+    s+=text(x+12,y+125,task.id==='driving'?'Context + compared trajectories':'Baseline left · D-JEPA right','svg-tiny');
+    s+=text(x+224,y+125,'Open ↗','svg-tiny svg-accent','text-anchor="end"');
+    s+='<rect data-validation-open="'+i+'" class="validation-hit" x="'+x+'" y="'+y+'" width="236" height="136" rx="10" fill="transparent" role="button" tabindex="-1" aria-label="Open full '+task.title+' video"/>';
+    s+='</g>';
+  });
+  return s;
+}
+function updateValidation(svg) {
+  const f=validationFrame(state.elapsed),wall=f.shrink>0;
+  svg.querySelector('#validation-origin').setAttribute('transform','translate('+(20*f.shrink)+' '+(70*f.shrink)+') scale('+(1-.7*f.shrink)+')');
+  for(const id of ['validation-heading','validation-pusht-frame'])svg.querySelector('#'+id).style.opacity=String(smooth((state.elapsed-9.6)/.5));
+  svg.querySelectorAll('[data-validation-card]').forEach(n=>{
+    const i=Number(n.dataset.validationCard),p=f.tasks[i].reveal;
+    n.style.opacity=String(p);n.style.pointerEvents=p>.95?'auto':'none';
+    n.setAttribute('transform','translate(0 '+(22*(1-p))+') scale(1)');
+    n.querySelector('[data-validation-open]').setAttribute('tabindex',p>.95?'0':'-1');
+  });
+  if($('#diagram-viewport').classList.contains('validation-expanded')!==wall)updateViewport();
+  svg.dataset.playbackSpeed=state.speed;
+  syncValidationVideos(svg,state.elapsed,state.playing);
+  $('#focus-label').textContent=wall?'From one decision to cross-task validation':'PushT · synchronized physical replay';
+  $('#data-badge').textContent=wall?'RECORDED EXECUTION EXCERPTS':'RECORDED EXECUTION';
+  $('#detail-title').textContent=wall?'One principle. Different physical systems.':'The choice changes the outcome.';
+  $('#detail-description').textContent=wall
+    ?'The same decision-alignment principle is evaluated across articulated control, deformable manipulation, robotic grasping, driving and geometric changes. The PushT comparison stays in view as the other task windows unfold.'
+    :'These are the original action selections from TD-JEPA, LeWM and D-JEPA. Play them together to see how the selected action changes the physical future.';
+  $('#candidate-controls').style.visibility=wall?'hidden':'';
+  $('#detail-formula').textContent=wall?'Decision alignment → task-specific action selection':chapterCopy().formula;
+  $('#detail-fact').textContent=wall?'The windows reuse the project’s published matched comparisons with their own tasks, models and protocols. They illustrate the shared principle across separately evaluated settings. The wall shows excerpts; each window opens its full published comparison.':chapterCopy().fact;
+  $('#visual-caption').textContent=wall
+    ?'Recorded excerpts from the existing comparisons. Select any task to watch its full published video.'
+    :'Recorded simulator states. After the complete PushT replay, the view expands to other evaluated tasks.';
+}
+function openValidationVideo(index) {
+  stop();
+  const task=VALIDATION_TASKS[index],dialog=$('#validation-dialog'),video=$('#validation-full-video');
+  $('#validation-video-title').textContent=task.title;
+  $('#validation-video-detail').textContent=task.detail;
+  video.src='static/videos/'+task.id+'.mp4';video.poster='static/images/poster-'+task.id+'.jpg';
+  $('#validation-video-link').href=video.src;
+  dialog.showModal();video.play().catch(()=>{});
+}
+
 function schematicScenes() {
   let s=text(28,23,'One observation and goal → six alternative action sequences','svg-label');
   for(let i=0;i<6;i++){
@@ -531,10 +591,12 @@ function contextStrip() {
 function isRecorded(){return state.stage===5&&state.replay;}
 function updateViewport(){
   const compact=matchMedia('(max-width:900px)').matches;
-  $('#diagram-viewport').classList.toggle('recorded',isRecorded());
-  $('#detail-visual').setAttribute('viewBox',compact&&isRecorded()?(14+state.recordCandidate*248)+' 8 236 350':'0 0 760 360');
-  $$('[data-record-panel]').forEach(n=>n.style.display=compact&&Number(n.dataset.recordPanel)!==state.recordCandidate?'none':'');
-  const caption=$('[data-record-caption]');if(caption)caption.style.display=compact?'none':'';
+  const expanded=isRecorded()&&state.elapsed>8;
+  $('#diagram-viewport').classList.toggle('validation-expanded',expanded);
+  $('#diagram-viewport').classList.toggle('recorded',isRecorded()&&!expanded);
+  $('#detail-visual').setAttribute('viewBox',compact&&isRecorded()&&!expanded?(14+state.recordCandidate*248)+' 8 236 350':'0 0 760 360');
+  $$('[data-record-panel]').forEach(n=>n.style.display=compact&&!expanded&&Number(n.dataset.recordPanel)!==state.recordCandidate?'none':'');
+  const caption=$('[data-record-caption]');if(caption)caption.style.display=compact&&!expanded?'none':'';
 }
 function chapterCopy() {
   const chapter={...chapters[state.stage]};
@@ -630,7 +692,8 @@ function options() {
   if(state.stage===4){
     panel.innerHTML='<div class="segmented" role="group" aria-label="Representation mechanism"><button data-lifting="ordinal" aria-pressed="'+(state.lifting==='ordinal')+'">Ordinal realization</button><button data-lifting="transport" aria-pressed="'+(state.lifting==='transport')+'">Temporal transport</button></div>';
   }
-  const localLabel=isRecorded()?'Execution time':state.stage===4?'Transformation':'Step progress';
+  if(state.stage===5&&state.replay)panel.insertAdjacentHTML('beforeend','<button data-validation-jump="0">Replay PushT</button><button data-validation-jump="12.4">Explore all tasks ↗</button>');
+  const localLabel=isRecorded()?'Scene progress':state.stage===4?'Transformation':'Step progress';
   panel.insertAdjacentHTML('beforeend','<label class="lifting-control"><span>'+localLabel+' <output id="step-value" for="step-progress">0%</output></span><input id="step-progress" type="range" min="0" max="1" step=".005" value="0" aria-label="Current step progress"></label><button id="replay-step" class="quiet-button">Replay this step ↻</button>');
   $('#step-progress').oninput=e=>{stop();state.elapsed=Number(e.target.value)*stageSeconds[state.stage];updateAnimation();};
   $('#replay-step').onclick=()=>{stop();state.elapsed=0;play(true);};
@@ -684,8 +747,9 @@ function renderCandidateControls() {
   $$('#candidate-controls [data-candidate]').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.candidate)===state.candidate)));
 }
 function renderDiagram(transition=false) {
+  releaseValidationVideos($('#detail-visual'));
   const oldTokens=new Map([...$('#detail-visual').querySelectorAll('[data-token]')].map(n=>[n.dataset.token,n.getBoundingClientRect()]));
-  let renderer=state.stage===0?problemDetail:state.stage===5?(isRecorded()?recordedDetail:schematicScenes)
+  let renderer=state.stage===0?problemDetail:state.stage===5?(isRecorded()?validationDetail:schematicScenes)
     :[null,evidenceDetail,relationsDetail,movingDecision,liftingDetail][state.stage];
   $('#detail-visual').innerHTML=renderer();
   updateViewport();
@@ -707,6 +771,7 @@ function renderDiagram(transition=false) {
 }
 function render(transition=false) {
   const c=chapterCopy();
+  $('#candidate-controls').style.visibility='';
   document.documentElement.dataset.stage=state.stage;
   $('#detail-kicker').textContent=c.kicker;$('#detail-title').textContent=c.title;
   $('#detail-description').textContent=c.description;$('#detail-formula').textContent=c.formula;
@@ -732,7 +797,7 @@ function render(transition=false) {
   contextStrip();options();renderCandidateControls();renderDiagram(transition);
 }
 function smooth(t){t=Math.max(0,Math.min(1,t));return t*t*(3-2*t);}
-function physicalProgress(){return smooth((phaseProgress-.08)/.8);}
+function physicalProgress(){return isRecorded()?validationFrame(state.elapsed).pushProgress:smooth((phaseProgress-.08)/.8);}
 function updateAnimation() {
   phaseProgress=Math.min(1,state.elapsed/stageSeconds[state.stage]);
   state.progress=state.comparing?0:state.stage===4?liftingProgress(phaseProgress):smooth((phaseProgress-.12)/.74);
@@ -743,6 +808,7 @@ function updateAnimation() {
     const p=physicalProgress();
     updateScenes(svg,record,p);
     $$('[data-outcome]').forEach(n=>n.setAttribute('opacity',p>=.999?1:0));
+    updateValidation(svg);
   } else if(state.stage===5){
     const p=physicalProgress(), endings=[[143,60,0],[103,89,-25],[134,69,8],[84,102,35],[168,91,60],[121,109,-50]];
     endings.forEach(([ex,ey,a],i)=>{
@@ -804,7 +870,7 @@ function updateAnimation() {
   $('#step-progress').value=phaseProgress;
   $$('input[type=range]').forEach(input=>input.style.setProperty('--fill',100*(Number(input.value)-Number(input.min))/(Number(input.max)-Number(input.min))+'%'));
   if(state.stage===0&&pair){const p=pairPhase(phaseProgress);$('#pair-clock').textContent='Recorded motion · '+(p.motion*2.5).toFixed(2)+' / 2.50 s';}
-  $('#step-value').value=isRecorded()?(physicalProgress()*2.5).toFixed(2)+' s':Math.round(phaseProgress*100)+'%';
+  $('#step-value').value=isRecorded()?(state.elapsed>8?'Cross-task view':(physicalProgress()*2.5).toFixed(2)+' s'):Math.round(phaseProgress*100)+'%';
   const seconds=stageSeconds.slice(0,state.stage).reduce((a,b)=>a+b,0)+state.elapsed;
   $('#tour-seek').value=seconds;
   $('#tour-seek').style.setProperty('--fill',100*seconds/totalDuration+'%');
@@ -813,6 +879,7 @@ function updateAnimation() {
   $('#timeline-label').textContent=state.playing?'Playing · '+$('#chapters [aria-current]').textContent.replace('→','').trim():'Drag to explore · '+(isRecorded()?'recorded motion':'computation');
 }
 function selectStage(stage,manual=true) {
+  pauseValidationVideos();
   if(manual)stop();
   state.comparing=false;resumeAfterCompare=false;state.hoverCandidate=null;
   state.stage=Math.max(0,Math.min(5,stage));state.elapsed=0;state.progress=0;
@@ -821,6 +888,8 @@ function selectStage(stage,manual=true) {
   tab.scrollIntoView({block:'nearest',inline:'nearest',behavior:'instant'});
 }
 function stop() {
+  pauseValidationVideos();
+  document.querySelectorAll('[data-validation-video]').forEach(v=>v.dataset.wantsPlayback='false');
   state.playing=false;cancelAnimationFrame(frame);document.body.classList.remove('running');
   $('#play-symbol').textContent='▶';$('#play-label').textContent='Play tour';
   $('#play').setAttribute('aria-label','Play guided tour');
@@ -857,6 +926,10 @@ function setTheme(theme){
   try{localStorage.setItem('djepa-theme',theme);}catch(_){}
 }
 document.addEventListener('click',event=>{
+  const task=event.target.closest('[data-validation-open]');
+  if(task){openValidationVideo(Number(task.dataset.validationOpen));return;}
+  const jump=event.target.closest('[data-validation-jump]');
+  if(jump){stop();state.elapsed=Number(jump.dataset.validationJump);updateAnimation();return;}
   const problemOperation=event.target.closest('[data-problem-step]');
   if(problemOperation){stop();state.elapsed=(pair?[.15,.76,1]:[.12,.5,1])[Number(problemOperation.dataset.problemStep)]*stageSeconds[0];updateAnimation();return;}
   const preview=event.target.closest('[data-preview-candidate]');
@@ -943,6 +1016,8 @@ $('#strength').oninput=e=>{stop();state.bound=Number(e.target.value);state.elaps
 $$('[data-sources]').forEach(b=>b.onclick=()=>{stop();state.sources=Number(b.dataset.sources);render(false);});
 $('#theme-toggle').onclick=()=>setTheme(document.documentElement.dataset.theme==='dark'?'light':'dark');
 $('#supervision-toggle').onclick=()=>{stop();$('#supervision-panel').showModal();$('#supervision-toggle').setAttribute('aria-expanded','true');};
+$('#close-validation').onclick=()=>$('#validation-dialog').close();
+$('#validation-dialog').onclose=()=>{$('#validation-full-video').pause();$('#validation-full-video').removeAttribute('src');$('#validation-full-video').load();};
 $('#close-supervision').onclick=()=>$('#supervision-panel').close();
 $('#supervision-panel').onclose=()=>$('#supervision-toggle').setAttribute('aria-expanded','false');
 $('#fullscreen').onclick=async()=>{

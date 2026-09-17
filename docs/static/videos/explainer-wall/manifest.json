@@ -1,0 +1,50 @@
+{
+  "description": "Presentation previews derived from the full published videos. Camera crops preserve recorded actions and playback speed. Baseline left, D-JEPA right; shape omits the middle fusion panel. Driving retains shared camera context and both simulated trajectories.",
+  "entries": [
+    {
+      "source": "static/videos/reacher.mp4",
+      "path": "static/videos/explainer-wall/reacher.mp4",
+      "filter": "[0:v]split=2[a][b];[a]crop=960:960:30:95,scale=320:320[l];[b]crop=960:960:1950:95,scale=320:320[r];[l][r]hstack=inputs=2,fps=12[v]",
+      "source_sha256": "dd5978a577dff4bb610ccfaa4a6266067acbff2e4b51d742e9212637ac72fb3d",
+      "sha256": "12b32a5421359784f30f7abf0ffed52c1d7919877462b9dec81a9fadb3351690",
+      "bytes": 23703,
+      "poster": "static/videos/explainer-wall/reacher.jpg"
+    },
+    {
+      "source": "static/videos/granular.mp4",
+      "path": "static/videos/explainer-wall/granular.mp4",
+      "filter": "[0:v]split=2[a][b];[a]crop=960:960:30:95,scale=320:320[l];[b]crop=960:960:1950:95,scale=320:320[r];[l][r]hstack=inputs=2,fps=12[v]",
+      "source_sha256": "14d2329174b030012f096bf2089523238a98bfd195e718a6eb22c107552074b5",
+      "sha256": "475e941673c06190412b6b4e828ef1ceb5ed085a944555e3c21f4f772485fb12",
+      "bytes": 424601,
+      "poster": "static/videos/explainer-wall/granular.jpg"
+    },
+    {
+      "source": "static/videos/shape.mp4",
+      "path": "static/videos/explainer-wall/shape.mp4",
+      "filter": "[0:v]split=2[a][b];[a]crop=960:960:30:95,scale=320:320[l];[b]crop=960:960:3870:95,scale=320:320[r];[l][r]hstack=inputs=2,fps=12[v]",
+      "source_sha256": "6064d1249ac7d10989156ac7be425d475c45cff59160ffe6ce119b1c346468bd",
+      "sha256": "9abfa46286090020ad9e26cd98fe0809a806c58f5d9092618eb547ecb713bef5",
+      "bytes": 36512,
+      "poster": "static/videos/explainer-wall/shape.jpg"
+    },
+    {
+      "source": "static/videos/robotwin.mp4",
+      "path": "static/videos/explainer-wall/robotwin.mp4",
+      "filter": "[0:v]crop=1920:690:0:72,scale=800:-2,fps=12[v]",
+      "source_sha256": "0327eebe5f0c3fb0deb9df69a6c6bf533563f055baa0aacc4965cb132bc4d0da",
+      "sha256": "7e0bc4e5f7b723d89165f4b33bc1efae9a060202d0907fbbd1c27c40bd5ba02c",
+      "bytes": 149661,
+      "poster": "static/videos/explainer-wall/robotwin.jpg"
+    },
+    {
+      "source": "static/videos/driving.mp4",
+      "path": "static/videos/explainer-wall/driving.mp4",
+      "filter": "[0:v]scale=800:-2,fps=12[v]",
+      "source_sha256": "f5f2e893f66948eb11a9b77f08c1c399ee7484ff5b6abf4914accc1fd5597e2e",
+      "sha256": "5db2b2a60f1763e9a31bb60516d5c43900ca7a317a2332b851e4d962fa8f314c",
+      "bytes": 155637,
+      "poster": "static/videos/explainer-wall/driving.jpg"
+    }
+  ]
+}
