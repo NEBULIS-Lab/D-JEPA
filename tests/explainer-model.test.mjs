@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { sampleState } from '../docs/static/js/explainer-scenes.mjs';
+import { evidenceVector, evidencePhase } from '../docs/static/js/explainer-evidence.mjs';
 import { liftingGeometry, liftingProgress, liftingStep, decisionProgress } from '../docs/static/js/explainer-motion.mjs';
 import { CANDIDATES, example, attention, realizedPoint, nativeCost, transportPoint } from '../docs/static/js/explainer-model.mjs';
 
@@ -86,4 +87,18 @@ test('decision timing pauses just after the competing candidates cross', () => {
     assert.ok(d.base[d.winner]+p*d.delta[d.winner]<d.base[d.baseWinner]+p*d.delta[d.baseWinner]);
     assert.equal(decisionProgress(0,d),0);assert.equal(decisionProgress(1,d),1);
   }
+});
+
+test('evidence animation uses consistent goal subtraction and LayerNorm', () => {
+  for(let i=0;i<6;i++)for(let source=0;source<2;source++){
+    const v=evidenceVector(i,source);
+    assert.equal(v.normalized.length,192);
+    v.delta.forEach((x,j)=>assert.ok(Math.abs(x-(v.future[j]-v.goal[j]))<1e-12));
+    const mean=v.normalized.reduce((a,b)=>a+b,0)/192;
+    const variance=v.normalized.reduce((a,b)=>a+b*b,0)/192;
+    assert.ok(Math.abs(mean)<1e-12);assert.ok(Math.abs(variance-1)<1e-3);
+  }
+  assert.deepEqual(evidencePhase(0),{difference:0,sort:0,pack:0,encode:0});
+  assert.deepEqual(evidencePhase(1),{difference:1,sort:1,pack:1,encode:1});
+  assert.equal(evidencePhase(.55).sort,1);assert.equal(evidencePhase(.55).pack,0);
 });

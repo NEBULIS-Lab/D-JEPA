@@ -11,7 +11,12 @@ browser inference is required.
 1. **Candidate futures:** synchronized PushT executions from a common start,
    or a separately labelled six-candidate teaching example.
 2. **Predictive evidence:** source-specific descriptors, ordinal evidence and
-   candidate-token construction, revealed in computational order.
+   candidate-token construction, revealed in computational order. Three clickable
+   operations animate goal subtraction and LayerNorm, within-source cost sorting
+   and rank normalization, then descriptor/rank concatenation and shared encoding.
+   The selected candidate's descriptor segments pack into one token, followed by
+   the six-candidate 64D token bank. Four-source mode adds two rank coordinates,
+   keeping the two 192D descriptors.
 3. **Relational alignment:** candidate-to-candidate attention, inspectable matrix
    cells and the bounded correction head.
 4. **Decision rule:** base scores, bounded corrections, animated rank crossings
@@ -78,7 +83,7 @@ stage. Training supervision opens in a dialog.
 - Switch representation mechanism and inspect intermediate native distances.
 - Hold the before-alignment button (pointer, Space or Enter) in the decision or
   lifting stage, then release to restore the exact progress and playback state.
-- Jump to key moments via the timeline markers. The 53-second tour gives extra
+- Jump to key moments via the timeline markers. The 57-second tour gives extra
   time to ranking crossings and lifting, including a brief boundary-switch hold.
 - Hover a candidate to follow its evidence, rank path or latent point while
   dimming unrelated entries. Matrix hover highlights its candidate row/column.
@@ -95,6 +100,8 @@ stage. Training supervision opens in a dialog.
 - `static/js/explainer-model.mjs`: pure numerical teaching example.
 - `static/js/explainer-motion.mjs`: deterministic presentation timing and
   rank-to-radius geometry, with endpoint and decision-boundary tests.
+- `static/js/explainer-evidence.mjs`: illustrative vector subtraction, LayerNorm
+  and evidence-stage timing. Eight of 192 descriptor components are displayed.
 - `static/js/explainer-scenes.mjs`: interpolation and SVG recorded-state replay.
 - `static/data/explainer-pusht.json`: compact recorded states and provenance.
 - `static/css/explainer.css`: responsive workbench and both themes.

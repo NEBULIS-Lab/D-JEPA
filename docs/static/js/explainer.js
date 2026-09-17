@@ -1,3 +1,4 @@
+import { evidenceVector, evidencePhase } from './explainer-evidence.mjs';
 import { liftingProgress, liftingStep, liftingGeometry, decisionProgress } from './explainer-motion.mjs';
 import { sampleState, sceneMarkup, updateScenes } from './explainer-scenes.mjs';
 import { CANDIDATES, COSTS, example, attention, descriptor, realizedPoint, transportPoint } from './explainer-model.mjs';
@@ -6,7 +7,7 @@ const $ = selector => document.querySelector(selector);
 const $$ = selector => [...document.querySelectorAll(selector)];
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
 const state = { stage: 0, candidate: 0, sources: 2, bound: 0.2, head: 0, lifting: 'ordinal', progress: 1, playing: false, speed: 1, elapsed: 0, supervision: false, recordCandidate:2, replay:true, comparing:false, hoverCandidate:null };
-const stageSeconds = [8, 6, 9, 10, 12, 8];
+const stageSeconds = [8, 10, 9, 10, 12, 8];
 const totalDuration = stageSeconds.reduce((a,b)=>a+b,0);
 let record = null;
 let phaseProgress = 0;
@@ -45,31 +46,118 @@ const chapters = [
   { kicker: '06 / ACTION SELECTION', title: 'The native interface selects the aligned action.', description: 'The planner compares the realized futures with the goal, selects the nearest one and passes its corresponding action sequence to the environment.', formula: 'a* = arg minᵢ ‖z̃ᵢ,ᴴ − zgoal‖² / D', fact: 'The candidate identity connects the predicted future, aligned order and executed action sequence.', visual: 'A single decision, carried through the interface', caption: 'This is the final choice in the illustrative example. Recorded comparisons are available on the project page.' },
 ];
 
+
 function evidenceDetail() {
-  const data = example(state);
-  let s = text(75, 28, 'LeWM descriptor', 'svg-small') + text(263, 28, 'TD-JEPA descriptor', 'svg-small') + text(465, 28, 'Ordinal evidence', 'svg-small') + text(628, 28, 'Token', 'svg-small');
-  for (let i = 0; i < 6; i++) {
-    const y = 58 + i * 37;
-    s+='<g data-linked-candidate="'+i+'">';
-    if (i === state.candidate) s += rect(15, y - 17, 726, 33, 'var(--purple-soft)', 'none');
-    s += tokenMark(i, 36, y);
-    for (let d = 0; d < 12; d++) {
-      s += rect(77 + d * 12, y - 10, 9, 21, 'var(--blue)', 'none', 2, `opacity="${.15 + descriptor(i, 0, d) * .8}"`);
-      s += rect(267 + d * 12, y - 10, 9, 21, 'var(--purple)', 'none', 2, `opacity="${.15 + descriptor(i, 1, d) * .8}"`);
+  const d=example(state), selected=state.candidate, names=['LeWM','TD-JEPA','JEPA-WM','DINO-WM'];
+  let s='';
+  ['Form goal-relative descriptors','Convert costs to ordinal evidence','Assemble and encode each token'].forEach((label,i)=>{
+    const x=16+i*247;
+    s+='<g data-evidence-step="'+i+'" role="button" tabindex="0" aria-label="'+label+'">';
+    s+=rect(x,5,235,36,'var(--surface)','var(--line)',8,'data-evidence-operation="'+i+'"');
+    s+=text(x+12,28,String(i+1),'svg-small svg-accent')+text(x+29,28,label,'svg-small');
+    s+='</g>';
+  });
+  s+=text(26,65,'Within each predictive geometry','svg-label');
+  for(let source=0;source<2;source++){
+    const y=81+source*100, color=source===0?'var(--blue)':'var(--purple)', values=evidenceVector(selected,source);
+    s+=rect(18,y,227,91,'var(--surface)','var(--line)',9);
+    s+=text(28,y+17,names[source],'svg-small')+text(231,y+17,'Candidate '+CANDIDATES[selected],'svg-tiny svg-accent','text-anchor="end"');
+    s+=text(29,y+37,'Future','svg-tiny')+text(29,y+57,'− Goal','svg-tiny')+text(29,y+78,'LN(Δ)','svg-tiny');
+    for(let j=0;j<8;j++){
+      const x=92+j*17;
+      s+=rect(x,y+26,12,13,color,'none',2,'opacity="'+(.22+.65*(values.future[j]+1.5)/3)+'"');
+      s+=rect(x,y+46,12,13,'var(--gold)','none',2,'opacity="'+(.3+.55*(values.goal[j]+.5))+'"');
+      s+='<rect data-evidence-difference="'+source+'" data-dimension="'+j+'" x="'+x+'" y="'+(y+26)+'" width="12" height="13" rx="2" fill="'+color+'"/>';
     }
-    for (let j = 0; j < state.sources; j++) {
-      const rank = Object.values(data.sourceRanks)[j][i];
-      s += rect(459 + j * 31, y - 10, 25, 21, 'var(--gold-fill)', 'none', 3);
-      s += text(471 + j * 31, y + 4, rank.toFixed(1), 'svg-tiny svg-gold', 'text-anchor="middle"');
-    }
-    s += line(590, y, 615, y, 'var(--line)', 'stroke-width="1.3"');
-    s += rect(628, y - 11, 94, 23, 'var(--purple-soft)', i === state.candidate ? 'var(--accent)' : 'var(--line)', 5);
-    s += text(675, y + 4, `${state.sources === 2 ? '386' : '388'} → 64`, 'svg-mono svg-accent', 'text-anchor="middle"');
+  }
+  s+=text(27,291,'dᵐᵢ = LN(ẑᵐᵢ,H − zᵐgoal)','svg-mono');
+  s+=text(27,308,'8 shown / 192 dimensions per model','svg-tiny');
+  s+=line(255,60,255,309);
+  s+=text(274,65,'Order within each model','svg-label');
+  const step=state.sources===2?117:59, x0=state.sources===2?279:272;
+  Object.entries(COSTS).slice(0,state.sources).forEach(([key,costs],source)=>{
+    const x=x0+source*step;
+    s+=text(x,88,names[source],'svg-small');
+    s+='<text x="'+x+'" y="105" class="svg-tiny" data-evidence-heading="'+source+'">cost</text>';
+    costs.forEach((cost,id)=>{
+      s+='<g data-evidence-rank="'+id+'" data-source-index="'+source+'" data-linked-candidate="'+id+'">';
+      s+=rect(x-4,-12,step-8,23,id===selected?'var(--purple-soft)':'var(--surface)','none',4);
+      s+=tokenMark(id,x+6,0,id===selected,7);
+      s+='<text x="'+(x+step-17)+'" y="4" class="svg-mono" text-anchor="end" data-evidence-value="'+source+'-'+id+'"></text></g>';
+    });
+  });
+  s+=text(274,282,'rᵐᵢ = (rank − 1) / (K − 1)','svg-mono');
+  s+=text(274,300,'Lower cost → earlier rank → smaller r','svg-tiny');
+  s+=line(513,60,513,309);
+  s+=text(533,65,'Token for candidate '+CANDIDATES[selected],'svg-label svg-accent');
+  s+=rect(528,80,213,193,'var(--surface)','var(--line)',10);
+  const parts=[['dᴸ · 192','var(--blue)'],['dᵀ · 192','var(--purple)'],[state.sources+' ranks','var(--gold)']];
+  parts.forEach(([label,color],i)=>{
+    s+='<g data-evidence-piece="'+i+'">';
+    s+='<rect data-piece-box="'+i+'" width="164" height="26" rx="5" fill="'+color+'" fill-opacity=".2" stroke="'+color+'"/>';
+    s+='<text data-piece-label="'+i+'" y="17" class="svg-small" text-anchor="middle">'+label+'</text></g>';
+  });
+  s+='<g id="evidence-encoder"><path d="M634 175V215" class="trace-line"/>';
+  s+=rect(548,220,176,32,'var(--purple-soft)','var(--purple)',7);
+  s+=text(636,240,'Shared encoder · '+(state.sources===2?'386':'388')+' → 64','svg-small svg-accent','text-anchor="middle"');
+  s+='</g>';
+  s+=text(535,292,'192 + 192 + '+state.sources+' = '+(state.sources===2?'386':'388'),'svg-mono');
+  s+=text(535,308,'Token segments shown schematically','svg-tiny');
+  s+='<g id="evidence-bank">';
+  for(let i=0;i<6;i++){
+    const x=31+i*122;
+    s+='<g data-linked-candidate="'+i+'" data-evidence-output="'+i+'">';
+    s+=rect(x,323,109,27,i===selected?'var(--purple-soft)':'var(--surface)',i===selected?'var(--purple)':'var(--line)',7);
+    s+=tokenMark(i,x+14,336,i===selected,8);
+    s+=text(x+59,340,'64D token','svg-small','text-anchor="middle"');
     s+='</g>';
   }
-  s += text(143, 302, '192 dimensions', 'svg-mono', 'text-anchor="middle"') + text(339, 302, '192 dimensions', 'svg-mono', 'text-anchor="middle"') + text(512, 302, `${state.sources} ranks`, 'svg-mono', 'text-anchor="middle"');
+  s+='</g>';
   return s;
 }
+function updateEvidence(svg) {
+  const phase=evidencePhase(phaseProgress), d=example(state);
+  const active=phaseProgress<.28?0:phaseProgress<.57?1:2;
+  svg.querySelectorAll('[data-evidence-operation]').forEach(n=>{
+    n.setAttribute('fill',Number(n.dataset.evidenceOperation)===active?'var(--purple-soft)':'var(--surface)');
+    n.setAttribute('stroke',Number(n.dataset.evidenceOperation)===active?'var(--purple)':'var(--line)');
+  });
+  for(let source=0;source<2;source++){
+    const values=evidenceVector(state.candidate,source), y=81+source*100;
+    svg.querySelectorAll('[data-evidence-difference="'+source+'"]').forEach(n=>{
+      const j=Number(n.dataset.dimension), normalized=values.normalized[j];
+      n.setAttribute('y',y+26+40*phase.difference);
+      n.setAttribute('opacity',String(.2+phase.difference*(.25+.45*Math.min(1,Math.abs(normalized)/1.7))));
+      n.setAttribute('fill',normalized>=0?(source===0?'var(--blue)':'var(--purple)'):'var(--peach)');
+    });
+  }
+  const entries=Object.entries(COSTS).slice(0,state.sources);
+  entries.forEach(([key,costs],source)=>{
+    const order=costs.map((value,id)=>({value,id})).sort((a,b)=>a.value-b.value).map(x=>x.id);
+    svg.querySelector('[data-evidence-heading="'+source+'"]').textContent=phase.sort<1?'cost ↓':'ordinal r ↓';
+    costs.forEach((value,id)=>{
+      const row=svg.querySelector('[data-evidence-rank="'+id+'"][data-source-index="'+source+'"]');
+      row.setAttribute('transform','translate(0 '+(125+(id+(order.indexOf(id)-id)*phase.sort)*24)+')');
+      svg.querySelector('[data-evidence-value="'+source+'-'+id+'"]').textContent=phase.sort<1?value.toFixed(2):d.sourceRanks[key][id].toFixed(1);
+    });
+  });
+  const finalX=[543,607,671], finalW=[62,62,54];
+  svg.querySelectorAll('[data-evidence-piece]').forEach(n=>{
+    const i=Number(n.dataset.evidencePiece), p=phase.pack;
+    n.setAttribute('transform','translate('+(550+(finalX[i]-550)*p)+' '+(99+i*40+(145-(99+i*40))*p)+')');
+    const w=164+(finalW[i]-164)*p;
+    svg.querySelector('[data-piece-box="'+i+'"]').setAttribute('width',w);
+    svg.querySelector('[data-piece-label="'+i+'"]').setAttribute('x',w/2);
+    n.style.opacity=String(.12+.88*(i<2?phase.difference:phase.sort));
+  });
+  svg.querySelector('#evidence-encoder').style.opacity=String(.1+.9*phase.encode);
+  svg.querySelectorAll('[data-evidence-output]').forEach(n=>{
+    const i=Number(n.dataset.evidenceOutput),p=Math.max(0,Math.min(1,(phase.encode-i*.045)/.775));
+    n.style.opacity=String(.08+.92*p);
+    n.setAttribute('transform','translate(0 '+(-14*(1-p))+')');
+  });
+}
+
 function relationsDetail() {
   const weights = attention(state.head, state.sources);
   let s = text(32, 28, 'Candidate tokens', 'svg-label') + text(375, 28, `Attention head ${state.head + 1}`, 'svg-label', 'text-anchor="middle"') + text(646, 28, 'Bounded update', 'svg-label', 'text-anchor="middle"');
@@ -312,6 +400,11 @@ function chapterCopy() {
     chapter.visual='Six schematic candidate trajectories';
     chapter.caption='Illustrative motion for the teaching example; switch to recorded PushT to view actual executions.';
   }
+  if(state.stage===1){
+    chapter.description='Subtract each model’s goal representation from its predicted future, then normalize the descriptor. Sort candidate costs within each source and convert rank to a shared ordinal scale. Concatenate these signals and encode each candidate token.';
+    chapter.caption='Click the three operations or scrub their progress. Blue/purple: source descriptors; peach: negative components; gold: ordinal evidence.';
+    chapter.fact='Descriptors are LayerNorm-normalized future–goal differences. Displayed vectors use the actual subtraction and normalization on synthetic values; costs and ranks are deterministic teaching data. Four sources add JEPA-WM and DINO-WM ranks while retaining the two 192D descriptors.';
+  }
   if(state.stage===1&&state.sources===4){
     chapter.formula='vᵢ = [dᵢᴸ ; dᵢᵀ ; rᵢᴸ ; rᵢᵀ ; rᵢᴶ ; rᵢᴰ]';
     chapter.fact='388-dimensional tokens. The four-geometry configuration has separately learned parameters and a JEPA-WM base.';
@@ -471,11 +564,7 @@ function updateAnimation() {
       if(ball){ball.setAttribute('cx',x+52+(bx-x-20-52)*smooth(p/.75));ball.setAttribute('cy',y+113+(by-y+20-113)*smooth(p/.75));}
     });
   } else if(state.stage===1){
-    // Reveal descriptor evidence before ordinal coordinates and token outputs.
-    [...svg.querySelectorAll('rect')].forEach(n=>{
-      const x=Number(n.getAttribute('x')),delay=x<430?0:x<590?.25:.5;
-      n.style.opacity=String(.16+.84*smooth((phaseProgress-delay)/.36));
-    });
+    updateEvidence(svg);
   } else if(state.stage===2){
     const head=svg.querySelector('#head-output');
     if(head)head.style.opacity=String(.12+.88*smooth((phaseProgress-.62)/.24));
@@ -577,6 +666,8 @@ function setTheme(theme){
   try{localStorage.setItem('djepa-theme',theme);}catch(_){}
 }
 document.addEventListener('click',event=>{
+  const evidenceOperation=event.target.closest('[data-evidence-step]');
+  if(evidenceOperation){stop();state.elapsed=[.20,.55,1][Number(evidenceOperation.dataset.evidenceStep)]*stageSeconds[1];updateAnimation();return;}
   const operation=event.target.closest('[data-lift-step]');
   if(operation){stop();state.elapsed=[.08,.24,.58,1][Number(operation.dataset.liftStep)]*stageSeconds[4];updateAnimation();return;}
   const milestone=event.target.closest('[data-jump-stage]');
@@ -600,7 +691,7 @@ function showMatrix(event){
   tip.textContent='Candidate '+CANDIDATES[Number(cell.dataset.row)]+' ← '+CANDIDATES[Number(cell.dataset.col)]+' · illustrative attention '+Number(cell.dataset.weight).toFixed(3);
 }
 $('#detail-visual').addEventListener('pointerover',showMatrix);
-$('#detail-visual').addEventListener('pointerdown',event=>{if(event.target.closest('[data-lift-step], [data-latent]'))stop();});
+$('#detail-visual').addEventListener('pointerdown',event=>{if(event.target.closest('[data-lift-step], [data-latent], [data-evidence-step]'))stop();});
 $('#detail-visual').addEventListener('focusin',showMatrix);
 $('#detail-visual').addEventListener('pointerleave',()=>{$('#matrix-tooltip').hidden=true;state.hoverCandidate=null;applyLinkedFocus();});
 $('#candidate-controls').addEventListener('pointerover',event=>{
@@ -621,6 +712,8 @@ $('#previous').onclick=()=>selectStage(state.stage-1);
 $('#next').onclick=()=>selectStage(state.stage+1);
 $('#tour-seek').max=totalDuration;
 const milestones=[
+  [1,.55,'Inspect ordinal evidence'],
+  [1,.95,'Inspect candidate-token assembly'],
   [2,.72,'Inspect candidate relations'],
   [3,.38,'Inspect the decision boundary'],
   [3,.94,'Read the gate decision'],
