@@ -128,13 +128,21 @@ stage. Training supervision opens in a dialog.
 - Hold the before-alignment button (pointer, Space or Enter) in the decision or
   lifting stage, then release to restore the exact progress and playback state.
 - Rotate the stage-01 radial view by dragging, its angle slider, or Left/Right
-  while the sphere is focused. View rotation does not change distances or outcomes.
+  while the space is focused. View rotation does not change distances or outcomes.
 - The first stage-01 operation automatically sweeps the camera, draws the two
   measured-radius rays in sequence, and reveals the candidate points. Selecting
   that operation replays its animation and pauses before physical execution.
   Reduced-motion preference suppresses the camera sweep. Numerical radii remain
   fixed throughout. The primary play button uses the project-page purple/peach/gold
   gradient; chapter navigation has larger, higher-contrast text.
+- The radial comparison sits in an open, depth-sorted purple point cloud with
+  sparse local links, a receding grid and ground projections. These 228 backdrop
+  points are deterministic spatial illustration, not exported embeddings,
+  candidate counts, affinities or success clusters. A/B remain the two separately
+  measured candidates. Thin radius arcs replace the old enclosing wire spheres;
+  traveling ray tips, gentle camera pitch and depth-dependent point opacity make
+  the geometry easier to follow. Reduced-motion preference fixes the camera and
+  backdrop positions while retaining the sequential distance readout.
 - Peripheral context strips, the top status line and below-canvas captions are
   removed from the visible workbench. Evidence identity and measurement notes
   remain available in the inspector. Candidate Trace controls remain visible for
@@ -183,6 +191,13 @@ Interaction concepts draw on
 [ViT-Explainer](https://vit-explainer.vercel.app/). Their model bundles, analytics
 and image assets are not redistributed. The implementation is original to this
 project and covered by the repository's Apache-2.0 license.
+
+The open point-cloud presentation also takes visual inspiration from the
+[TensorFlow Embedding Projector](https://www.tensorflow.org/tensorboard/tensorboard_projector_plugin)
+and the [three.js point-sprite example](https://threejs.org/examples/webgl_points_sprites.html).
+No code, images, textures or libraries from these references are redistributed.
+The stage uses original lightweight SVG projection, with no added 3D dependency
+or network asset request.
 
 Checks: `node --test tests/explainer-model.test.mjs` and
 `python3 scripts/check_site.py`. Preview using

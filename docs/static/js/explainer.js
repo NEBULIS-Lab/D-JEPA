@@ -480,7 +480,7 @@ function problemDetail() {
   s+=text(20,65,'LeWM · predicted future geometry','svg-label');
   s+=text(20,82,'Nearby goal distances, before execution','svg-tiny');
   s+='<g id="pair-orbit">'+latentMarkup(pair,pairYaw)+'</g>';
-  s+='<rect id="pair-orbit-hit" x="55" y="88" width="259" height="179" rx="30" fill="transparent" role="slider" tabindex="0" aria-label="Rotate latent-space view" aria-valuemin="-70" aria-valuemax="70" aria-valuenow="0"/>';
+  s+='<rect id="pair-orbit-hit" x="18" y="91" width="333" height="176" rx="12" fill="transparent" role="slider" tabindex="0" aria-label="Rotate latent-space view" aria-valuemin="-70" aria-valuemax="70" aria-valuenow="0"/>';
   pair.candidates.forEach((c,i)=>{
     const x=18+i*171,color=i===0?'var(--gold)':'var(--blue)';
     s+=rect(x,273,163,34,'var(--surface)','var(--line)',8);
@@ -520,7 +520,7 @@ function updateProblem(svg) {
   if(!pair||!record){updateDiagnostic(svg);return;}
   const phase=pairPhase(phaseProgress);
   const intro=latentIntro(phaseProgress);
-  if(phase.diagnostic<1)svg.querySelector('#pair-orbit').innerHTML=latentMarkup(pair,pairYaw+(reducedMotion.matches?0:intro.yawOffset),intro.t);
+  if(phase.diagnostic<1)svg.querySelector('#pair-orbit').innerHTML=latentMarkup(pair,pairYaw+(reducedMotion.matches?0:intro.yawOffset),intro.t,!reducedMotion.matches);
   updateScenes(svg,record,phase.motion);
   svg.querySelectorAll('[data-pair-operation]').forEach(n=>{
     const active=Number(n.dataset.pairOperation)===phase.step;
@@ -699,7 +699,7 @@ function chapterCopy() {
       title:'Close in latent distance. Different in execution.',
       description:'Two futures from the same LeWM space sit at nearby goal distances. The lower-distance candidate fails; the slightly farther one succeeds. Rotate the geometry, play both recorded actions, then connect the example to the measured ranking gap.',
       formula:'A: 0.2027  <  B: 0.2167  · RMS distance',
-      fact:'Start 176; candidate A = 79 (rank 1), B = 23 (rank 3) in the same 63-candidate pool. Native MSE costs are 0.04107749 and 0.04695161; radii are their square roots. Shells preserve this ratio; the opening angle comes from stored float16 latent directions. Display orientation is illustrative.',
+      fact:'Start 176; candidate A = 79 (rank 1), B = 23 (rank 3) in the same 63-candidate pool. Native MSE costs are 0.04107749 and 0.04695161; radial lengths are their square roots. The opening angle comes from stored float16 latent directions. The purple point cloud, its local links and ground grid are illustrative spatial context, not measured embeddings or learned clusters. A/B distances and recorded outcomes stay fixed as the camera rotates.',
       visual:'Nearby latent distances → different physical outcomes',
       caption:'Measured distances, recorded executions. Rotate the radial view; 3D orientation is illustrative. Aggregate evidence follows.',
     });
@@ -761,7 +761,7 @@ function options() {
   const panel=$('#stage-options');
   panel.innerHTML='';
   if(state.stage===0&&pair){
-    panel.innerHTML='<label class="lifting-control"><span>Rotate latent view <span>Drag sphere / ← →</span></span><input id="pair-view-angle" type="range" min="-1.22" max="1.22" step=".01" value="'+pairYaw+'" aria-label="Latent view angle"></label>';
+    panel.innerHTML='<label class="lifting-control"><span>Rotate latent view <span>Drag space / ← →</span></span><input id="pair-view-angle" type="range" min="-1.22" max="1.22" step=".01" value="'+pairYaw+'" aria-label="Latent view angle"></label>';
     $('#pair-view-angle').oninput=e=>{stop();if(phaseProgress>.8)state.elapsed=.15*stageSeconds[0];rotatePair(Number(e.target.value));};
   }
   if(state.stage===5){

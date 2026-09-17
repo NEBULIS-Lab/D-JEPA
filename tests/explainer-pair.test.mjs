@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { pairPhase, pairPoints, projectPoint, latentIntro } from '../docs/static/js/explainer-pair.mjs';
+import { pairPhase, pairPoints, projectPoint, latentIntro, latentBackdrop, latentMarkup } from '../docs/static/js/explainer-pair.mjs';
 const pair=JSON.parse(readFileSync(new URL('../docs/static/data/explainer-pair.json',import.meta.url)));
 const traces=JSON.parse(readFileSync(new URL('../docs/static/data/explainer-pusht.json',import.meta.url)));
 test('intro camera visibly sweeps and returns without modifying measured radii',()=>{
@@ -32,7 +32,28 @@ test('rotating the latent view retains native radii and the stored opening angle
 });
 test('execution completes before success/failure disclosure and aggregate diagnosis',()=>{
   assert.equal(pairPhase(0).motion,0);assert.equal(pairPhase(.2).motion,0);
+  assert.equal(pairPhase(.22).step,0);assert.equal(pairPhase(.221).step,1);
   assert.equal(pairPhase(.67).outcome,0);assert.equal(pairPhase(.68).motion,1);
   assert.equal(pairPhase(.76).outcome,1);assert.equal(pairPhase(.76).diagnostic,0);
   assert.equal(pairPhase(1).diagnostic,1);assert.equal(pairPhase(1).motion,1);
+});
+test('illustrative context is deterministic, separate from the measured pair and camera dependent',()=>{
+  const original=JSON.stringify(pair),cloud=latentBackdrop();
+  assert.equal(cloud.length,228);assert.deepEqual(cloud,latentBackdrop());
+  assert.ok(cloud.every(p=>p.point.length===3&&p.point.every(Number.isFinite)));
+  const first=latentMarkup(pair,-.25,.2),later=latentMarkup(pair,.4,.7);
+  assert.notEqual(first,later);
+  assert.equal((first.match(/data-latent-context=/g)||[]).length,228);
+  assert.equal((first.match(/data-pair-point=/g)||[]).length,2);
+  assert.match(first,/Illustrative latent-space context/);
+  assert.doesNotMatch(first,/NaN|Infinity/);
+  assert.equal(JSON.stringify(pair),original);
+});
+test('reduced motion holds cloud and camera positions while rays reveal',()=>{
+  const a=latentMarkup(pair,-.25,0,false),b=latentMarkup(pair,-.25,.6,false);
+  const dots=s=>s.match(/<circle data-latent-context[^>]+>/g);
+  assert.deepEqual(dots(a),dots(b));
+  const point=s=>s.match(/<circle data-pair-point[^>]+>/g);
+  assert.deepEqual(point(a),point(b));
+  assert.match(latentMarkup(pair,-.25,1),/stroke-dashoffset="0"/);
 });
