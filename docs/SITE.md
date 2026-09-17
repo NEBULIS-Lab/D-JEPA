@@ -84,6 +84,9 @@ Each video has a large, keyboard-accessible play overlay that
 hides during playback and returns on pause, alongside native video controls.
 The hero Paper button currently opens the public manuscript-source repository;
 replace that single URL with the arXiv record when it becomes available.
+Hero resource buttons use local SVGs: the existing D-JEPA mark for the project,
+Simple Icons v16 for arXiv and GitHub, and Hugging Face's official logo for the
+model and dataset. No icon is loaded from a CDN at runtime.
 
 Body paragraphs and long figure captions use justified alignment, with the
 last line left aligned; hero text, headings, short plot labels and metric cards

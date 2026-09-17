@@ -84,7 +84,13 @@ nav a { font-size: var(--text-small); color: var(--muted); text-decoration: none
 .hero-description { max-width: 660px; margin-inline: auto; font-size: var(--text-body); color: var(--muted); text-wrap: balance; }
 .hero-description span { display: block; }
 .resource-links { display: flex; flex-wrap: wrap; justify-content: center; gap: .65rem; margin: 1.8rem 0 2.1rem; }
-.button { display: inline-flex; gap: .9rem; align-items: center; padding: .65rem 1rem; border: 1px solid var(--line); border-radius: 2rem; text-decoration: none; color: var(--ink); background: var(--card); font-size: var(--text-small); font-weight: 600; }
+.button { display: inline-flex; gap: .55rem; align-items: center; padding: .65rem 1rem; border: 1px solid var(--line); border-radius: 2rem; text-decoration: none; color: var(--ink); background: var(--card); font-size: var(--text-small); font-weight: 600; }
+.button-icon { display: inline-block; flex: 0 0 auto; width: 1.05rem; height: 1.05rem; object-fit: contain; }
+.project-icon { width: 1.15rem; height: 1.15rem; }
+.huggingface-icon { width: 1.15rem; height: 1.08rem; }
+.mask-icon { background: currentColor; -webkit-mask: center / contain no-repeat; mask: center / contain no-repeat; }
+.github-icon { -webkit-mask-image: url('../images/icons/github.svg'); mask-image: url('../images/icons/github.svg'); }
+.arxiv-icon { -webkit-mask-image: url('../images/icons/arxiv.svg'); mask-image: url('../images/icons/arxiv.svg'); }
 .button:hover { border-color: var(--purple); transform: translateY(-1px); }
 .button.primary { background: var(--gradient); color: #39233D; border: 0; }
 .hero-rule { height: 3px; margin-top: 6rem; background: var(--gradient); border-radius: 10px; }

@@ -407,5 +407,26 @@
     "bytes": 486531,
     "source_identity": "sha256:8e46d38463d303db5a624cea15d20a6003b83ac4aa768b2a34d2a05eb4f60399",
     "transformation": "none; byte-identical author-provided hero logo; other branding unchanged"
+  },
+  {
+    "path": "static/images/icons/github.svg",
+    "sha256": "4a6b3318b5e73d259e32696463dd7fd2039250b067201866324ed95f4a04775d",
+    "bytes": 823,
+    "source": "https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/github.svg",
+    "transformation": "downloaded SVG; no path changes; trailing newline added"
+  },
+  {
+    "path": "static/images/icons/arxiv.svg",
+    "sha256": "bc9f818b1cb351b7b9ec63aa4bee3620d7bf15a23c86cea0ff2cac218eba2fd3",
+    "bytes": 1088,
+    "source": "https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/arxiv.svg",
+    "transformation": "downloaded SVG; no path changes; trailing newline added"
+  },
+  {
+    "path": "static/images/icons/huggingface.svg",
+    "sha256": "6d81ddf0b8f0f23853a62dbe9465afc8f9eb1a368ba83a4d16ebcf047a271d5f",
+    "bytes": 5258,
+    "source": "https://huggingface.co/front/assets/huggingface_logo.svg",
+    "transformation": "downloaded official SVG; byte content retained; trailing newline normalized"
   }
 ]
