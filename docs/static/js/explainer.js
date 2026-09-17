@@ -1,15 +1,16 @@
+import { liftingProgress, liftingStep, liftingGeometry, decisionProgress } from './explainer-motion.mjs';
 import { sampleState, sceneMarkup, updateScenes } from './explainer-scenes.mjs';
 import { CANDIDATES, COSTS, example, attention, descriptor, realizedPoint, transportPoint } from './explainer-model.mjs';
 
 const $ = selector => document.querySelector(selector);
 const $$ = selector => [...document.querySelectorAll(selector)];
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
-const state = { stage: 0, candidate: 0, sources: 2, bound: 0.2, head: 0, lifting: 'ordinal', progress: 1, playing: false, speed: 1, elapsed: 0, supervision: false, recordCandidate:2, replay:true };
-const stageSeconds = [8, 7, 8, 7, 8, 8];
+const state = { stage: 0, candidate: 0, sources: 2, bound: 0.2, head: 0, lifting: 'ordinal', progress: 1, playing: false, speed: 1, elapsed: 0, supervision: false, recordCandidate:2, replay:true, comparing:false, hoverCandidate:null };
+const stageSeconds = [8, 6, 9, 10, 12, 8];
 const totalDuration = stageSeconds.reduce((a,b)=>a+b,0);
 let record = null;
 let phaseProgress = 0;
-let lastStage = -1;
+let resumeAfterCompare = false;
 let currentContext = '';
 let previousTime = 0;
 let frame = 0;
@@ -49,6 +50,7 @@ function evidenceDetail() {
   let s = text(75, 28, 'LeWM descriptor', 'svg-small') + text(263, 28, 'TD-JEPA descriptor', 'svg-small') + text(465, 28, 'Ordinal evidence', 'svg-small') + text(628, 28, 'Token', 'svg-small');
   for (let i = 0; i < 6; i++) {
     const y = 58 + i * 37;
+    s+='<g data-linked-candidate="'+i+'">';
     if (i === state.candidate) s += rect(15, y - 17, 726, 33, 'var(--purple-soft)', 'none');
     s += tokenMark(i, 36, y);
     for (let d = 0; d < 12; d++) {
@@ -63,6 +65,7 @@ function evidenceDetail() {
     s += line(590, y, 615, y, 'var(--line)', 'stroke-width="1.3"');
     s += rect(628, y - 11, 94, 23, 'var(--purple-soft)', i === state.candidate ? 'var(--accent)' : 'var(--line)', 5);
     s += text(675, y + 4, `${state.sources === 2 ? '386' : '388'} → 64`, 'svg-mono svg-accent', 'text-anchor="middle"');
+    s+='</g>';
   }
   s += text(143, 302, '192 dimensions', 'svg-mono', 'text-anchor="middle"') + text(339, 302, '192 dimensions', 'svg-mono', 'text-anchor="middle"') + text(512, 302, `${state.sources} ranks`, 'svg-mono', 'text-anchor="middle"');
   return s;
@@ -137,37 +140,82 @@ function liftingDetail() {
       s += text(x, 281, `β ${fmt(p.beta)}`, 'svg-mono', 'text-anchor="middle"');
     });
     s += text(380, 310, 'Blue: original future   ·   Purple: transported future   ·   |β| ≤ 0.1', 'svg-small', 'text-anchor="middle"');
-  } else {
-    const cx = 215, cy = 164, scale = 96;
-    s += text(37, 27, 'Goal-relative future geometry', 'svg-label');
-    [1,2,3,4,5,6].forEach(rank => {
-      const r = Math.SQRT2 * rank / 7 * scale;
-      s += circle(cx, cy, r, 'none', 'stroke="var(--line)" stroke-dasharray="3 5"');
-    });
-    s += line(cx-8,cy,cx+8,cy,'var(--gold)','stroke-width="2"')+line(cx,cy-8,cx,cy+8,'var(--gold)','stroke-width="2"');
-    s += text(cx + 12, cy + 4, 'goal', 'svg-tiny svg-gold');
-    for (let i = 0; i < 6; i++) {
-      const from = realizedPoint(i, 1 + d.base[i] * 5), to = realizedPoint(i,d.ordinal[i]);
-      const x = cx + (from[0] * (1-state.progress) + to[0] * state.progress)*scale;
-      const y = cy + (from[1] * (1-state.progress) + to[1] * state.progress)*scale;
-      s += line(cx,cy,cx+to[0]*scale,cy+to[1]*scale,'var(--line)');
-      s += circle(cx+from[0]*scale,cy+from[1]*scale,4,'none','stroke="var(--blue)" opacity=".55"');
-      s += circle(x,y,i===d.winner?7:5,i===d.winner?'var(--accent)':'var(--blue)');
-      s += text(x+10,y-8,CANDIDATES[i],i===d.winner?'svg-label svg-accent':'svg-small');
-      if (i===state.candidate) s += circle(x,y,11,'none','stroke="var(--accent)" stroke-width="1.3"');
+  } else { return ordinalLiftingDetail(); }
+  return s;
+}
+
+function ordinalLiftingDetail() {
+  const d=example(state), geometry=liftingGeometry(d,state.progress), selected=geometry[state.candidate];
+  const phase=state.comparing?0:phaseProgress, active=liftingStep(phase);
+  const nearest=[...geometry].sort((a,b)=>a.cost-b.cost)[0].id;
+  const labels=['Read aligned rank','Set RMS radius','Rewrite terminal latent','Read native distance'];
+  let s='<defs><marker id="lift-arrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0 0L6 3L0 6Z" fill="var(--accent)"/></marker></defs>';
+  labels.forEach((label,i)=>{
+    const x=16+i*185;
+    s+='<g data-lift-step="'+i+'" role="button" tabindex="0" aria-label="'+(i+1)+'. '+label+'">';
+    s+=rect(x,5,171,38,i===active?'var(--purple-soft)':'var(--surface)',i===active?'var(--purple)':'var(--line)',9);
+    s+=text(x+11,28,String(i+1),i===active?'svg-small svg-accent':'svg-small')+text(x+29,28,label,'svg-small');
+    s+='</g>';
+    if(i<3)s+=text(x+177,28,'→','svg-tiny');
+  });
+  s+=text(27,78,'Aligned order π','svg-label');
+  d.finalOrder.forEach((id,index)=>{
+    const y=106+index*29,chosen=id===state.candidate;
+    s+='<g data-linked-candidate="'+id+'">';
+    s+=rect(19,y-16,161,29,chosen?'var(--purple-soft)':'var(--surface)','none',6);
+    s+=tokenMark(id,37,y-1,chosen,9);
+    s+=text(72,y+3,'rank '+(index+1),'svg-mono');
+    s+=text(166,y+3,(index+1)+'/7','svg-mono', 'text-anchor="end"');
+    s+='</g>';
+  });
+  s+=text(26,303,'ρᵢ = πᵢ / (K + 1)','svg-mono svg-accent');
+  s+=text(26,324,'K = 6 candidates','svg-small');
+  s+=text(26,346,'Same candidate identity','svg-tiny');
+  const cx=368,cy=187,scale=76;
+  s+=text(cx,78,'Same direction · new goal distance','svg-label','text-anchor="middle"');
+  [1,2,3,4,5,6].forEach(rank=>{s+=circle(cx,cy,Math.SQRT2*rank/7*scale,'none','stroke="var(--line)" stroke-dasharray="3 5"');});
+  s+=line(cx-6,cy,cx+6,cy,'var(--gold)','stroke-width="2"')+line(cx,cy-6,cx,cy+6,'var(--gold)','stroke-width="2"');
+  s+=text(cx-28,cy+18,'goal','svg-tiny svg-gold');
+  for(const g of geometry){
+    const i=g.id,from=realizedPoint(i,1+d.base[i]*5),to=realizedPoint(i,d.ordinal[i]);
+    const point=[from[0]+(to[0]-from[0])*state.progress,from[1]+(to[1]-from[1])*state.progress];
+    const x=cx+point[0]*scale,y=cy+point[1]*scale;
+    s+='<g data-linked-candidate="'+i+'" data-latent="'+i+'" data-candidate="'+i+'" role="button" tabindex="0" aria-label="Trace future '+CANDIDATES[i]+'">';
+    s+=line(cx,cy,cx+to[0]*scale,cy+to[1]*scale,i===state.candidate?'var(--purple)':'var(--line)','stroke-dasharray="3 4"');
+    s+=circle(cx+from[0]*scale,cy+from[1]*scale,4,'none','stroke="var(--blue)"');
+    s+=circle(cx+to[0]*scale,cy+to[1]*scale,7,'none','stroke="var(--purple)" opacity=".4"');
+    if(i===state.candidate){
+      s+=line(cx+from[0]*scale,cy+from[1]*scale,cx+to[0]*scale,cy+to[1]*scale,'var(--accent)','stroke-width="2" marker-end="url(#lift-arrow)"');
     }
-    s += line(414,49,414,291);
-    s += text(450,27,'Target rank','svg-small')+text(540,27,'Current radius','svg-small')+text(656,27,'Current cost','svg-small');
-    d.finalOrder.forEach((id,idx)=>{
-      const y=65+idx*35, rank=idx+1;
-      if(id===d.winner)s+=rect(446,y-16,293,29,'var(--purple-soft)','none');
-      s+=tokenMark(id,461,y,id===state.candidate,9)+text(497,y+4,rank,'svg-mono');
-      const radius=((1+d.base[id]*5)*(1-state.progress)+rank*state.progress)/7;
-      s+=text(577,y+4,fmt(radius),'svg-mono','text-anchor="middle"')+text(700,y+4,fmt(radius**2),'svg-mono','text-anchor="middle"');
-    });
-    s+=text(599,294,'native mean-squared distance = radius²','svg-small','text-anchor="middle"');
-    s+=text(215,313,'Open points: original · filled points: realized','svg-tiny','text-anchor="middle"');
+    s+=circle(x,y,i===state.candidate?6:4,i===state.candidate?'var(--accent)':'var(--blue)','data-lift-point="'+i+'"');
+    s+=text(x+9,y+(i===state.candidate?4:-8),CANDIDATES[i],i===state.candidate?'svg-label svg-accent':'svg-small');
+    s+='</g>';
   }
+  s+=text(cx,295,'Open: original · ring: target · filled: current','svg-tiny','text-anchor="middle"');
+  for(let step=0;step<5;step++){
+    const x=245+step*49;
+    s+=rect(x,314,39,21,step===4?'var(--purple-soft)':'var(--surface)',step===4?'var(--purple)':'var(--line)',5);
+    s+=text(x+19.5,328,'t'+(step+1),step===4?'svg-small svg-accent':'svg-small','text-anchor="middle"');
+    if(step<4)s+=text(x+43,328,'·','svg-tiny');
+  }
+  s+=text(cx,351,'t1–t4 retained · terminal t5 rewritten','svg-tiny','text-anchor="middle"');
+  s+=rect(553,66,190,242,'var(--surface)','var(--line)',10);
+  s+=text(567,93,'Candidate '+CANDIDATES[state.candidate],'svg-title svg-accent');
+  s+=text(567,121,'Aligned rank  π = '+selected.rank,'svg-mono');
+  s+=text(567,143,'Target  ρ = '+selected.rank+'/7 = '+fmt(selected.target),'svg-mono');
+  s+=line(566,155,730,155);
+  const rows=[['Original radius',selected.original],['Current radius',selected.radius],['Native cost',selected.cost]];
+  rows.forEach(([label,value],index)=>{
+    const y=181+index*25;
+    s+=text(567,y,label,'svg-small');
+    s+=text(730,y,fmt(value),'svg-mono svg-accent','text-anchor="end" data-lift-readout="'+index+'"');
+  });
+  s+=line(566,248,730,248);
+  s+=text(567,270,'Nearest future now','svg-small');
+  s+=text(724,289,CANDIDATES[nearest],'svg-title svg-accent','text-anchor="end" data-native-choice="true"');
+  s+=text(567,291,'arg min native distance','svg-tiny');
+  s+=text(647,329,'Native cost = RMS radius²','svg-small','text-anchor="middle"');
+  s+=text(647,348,'Planning interface retained','svg-tiny','text-anchor="middle"');
   return s;
 }
 
@@ -214,8 +262,8 @@ function movingDecision() {
     s+=tokenMark(id,49,y,id===state.candidate,10);
     s+=rect(70,y-6,Math.max(3,data.base[id]*90),12,id===data.baseWinner?'var(--gold)':'var(--blue)','none',3);
     s+=text(199,y+4,fmt(data.base[id]),'svg-mono','text-anchor="end"');
-    s+='<path data-rank-path="'+id+'" class="detail-line"/>';
-    s+='<g data-score-row="'+id+'">';
+    s+='<path data-rank-path="'+id+'" data-linked-candidate="'+id+'" class="detail-line"/>';
+    s+='<g data-score-row="'+id+'" data-linked-candidate="'+id+'">';
     s+=rect(544,-17,184,33,id===data.winner?'var(--purple-soft)':'var(--surface)','none',7);
     s+=tokenMark(id,561,0,id===state.candidate,10);
     s+='<rect data-aligned-bar="'+id+'" x="581" y="-6" width="4" height="12" rx="3" fill="'+(id===data.winner?'var(--purple)':'var(--blue)')+'"/>';
@@ -228,8 +276,8 @@ function movingDecision() {
   return s;
 }
 function contextStrip() {
-  const labels=['Action sequences','Future–goal evidence','Candidate relations','Aligned order','Future geometry','Selected action'];
-  const current=labels[state.stage],before=labels[state.stage-1]||'Observation + goal',after=labels[state.stage+1]||'Environment';
+  const labels=['Action sequences','Future–goal evidence','Candidate relations','Aligned order','Representation lifting','Native-distance selection'];
+  const current=labels[state.stage],before=labels[state.stage-1]||'Observation + goal',after=state.stage===4?(state.lifting==='ordinal'?'Native-distance planning':'Representation diagnostic'):(labels[state.stage+1]||'Environment');
   $('#architecture').innerHTML=text(12,26,before,'svg-small')+path('M174 22H240','detail-line')
     +rect(250,5,264,33,'var(--purple-soft)','none',16)
     +text(382,26,current,'svg-label svg-accent','text-anchor="middle"')
@@ -276,6 +324,12 @@ function chapterCopy() {
     chapter.description='The bounded update changes the closest alternatives. Watch the ranking reorder, then inspect whether the margin gate admits the relational winner.';
     chapter.caption='Drag the step progress to see score correction and reordering. Gold: base choice. Purple: aligned choice.';
   }
+  if(state.stage===4&&state.lifting==='ordinal'){
+    chapter.title='Turn the learned rank into a future latent.';
+    chapter.description='After relational selection, lifting places each terminal future at its rank-defined distance from the goal. Its direction and earlier future steps are retained; native distance reads out the aligned order.';
+    chapter.visual='Representation lifting · between aligned ranks and native-distance planning';
+    chapter.caption='Follow a candidate: rank → radius → terminal latent → native distance. Click a numbered operation to inspect it.';
+  }
   if(state.stage===4&&state.lifting==='transport'){
     chapter.title='Refine the future, step by step.';
     chapter.description='A time-conditioned network learns a bounded displacement between corresponding predictive futures. Action identity and future-step identity stay fixed.';
@@ -306,6 +360,37 @@ function options() {
   panel.insertAdjacentHTML('beforeend','<label class="lifting-control"><span>'+localLabel+' <output id="step-value" for="step-progress">0%</output></span><input id="step-progress" type="range" min="0" max="1" step=".005" value="0" aria-label="Current step progress"></label><button id="replay-step" class="quiet-button">Replay this step ↻</button>');
   $('#step-progress').oninput=e=>{stop();state.elapsed=Number(e.target.value)*stageSeconds[state.stage];updateAnimation();};
   $('#replay-step').onclick=()=>{stop();state.elapsed=0;play(true);};
+  if(state.stage===3||state.stage===4){
+    panel.insertAdjacentHTML('beforeend','<button id="compare-before" class="compare-button" aria-pressed="false">Hold to see before alignment</button>');
+    const compare=$('#compare-before');
+    compare.onpointerdown=e=>{if(e.button!==0)return;e.preventDefault();compare.setPointerCapture(e.pointerId);compareBefore(true);};
+    compare.onpointerup=()=>compareBefore(false);
+    compare.onpointercancel=()=>compareBefore(false);
+    compare.onlostpointercapture=()=>compareBefore(false);
+    compare.onkeydown=e=>{if((e.code==='Space'||e.key==='Enter')&&!e.repeat){e.preventDefault();compareBefore(true);}};
+    compare.onkeyup=e=>{if(e.code==='Space'||e.key==='Enter'){e.preventDefault();compareBefore(false);}};
+    compare.onblur=()=>compareBefore(false);
+  }
+}
+function compareBefore(active){
+  if(state.comparing===active)return;
+  if(active){resumeAfterCompare=state.playing;stop();}
+  state.comparing=active;
+  const button=$('#compare-before');
+  if(button){button.setAttribute('aria-pressed',String(active));button.textContent=active?'Before alignment · release to return':'Hold to see before alignment';}
+  updateAnimation();
+  if(!active&&resumeAfterCompare){resumeAfterCompare=false;play();}
+}
+function applyLinkedFocus(){
+  const id=state.hoverCandidate;
+  $$('#detail-visual [data-linked-candidate], #detail-visual [data-token]').forEach(n=>{
+    const value=Number(n.dataset.linkedCandidate??n.dataset.token);
+    n.classList.toggle('trace-muted',id!==null&&value!==id);
+    n.classList.toggle('trace-focused',id!==null&&value===id);
+  });
+  $$('#detail-visual .matrix-cell').forEach(n=>{
+    n.classList.toggle('trace-muted',id!==null&&Number(n.dataset.row)!==id&&Number(n.dataset.col)!==id);
+  });
 }
 function renderCandidateControls() {
   const panel=$('#candidate-controls');
@@ -369,7 +454,7 @@ function smooth(t){t=Math.max(0,Math.min(1,t));return t*t*(3-2*t);}
 function physicalProgress(){return smooth((phaseProgress-.08)/.8);}
 function updateAnimation() {
   phaseProgress=Math.min(1,state.elapsed/stageSeconds[state.stage]);
-  state.progress=smooth((phaseProgress-.12)/.74);
+  state.progress=state.comparing?0:state.stage===4?liftingProgress(phaseProgress):smooth((phaseProgress-.12)/.74);
   const svg=$('#detail-visual');
   if(isRecorded()&&record){
     const p=physicalProgress();
@@ -407,7 +492,7 @@ function updateAnimation() {
     });
   } else if(state.stage===3){
     const d=example(state),initial=[...CANDIDATES.keys()].sort((a,b)=>d.base[a]-d.base[b]);
-    const p=smooth((phaseProgress-.14)/.65);
+    const p=state.comparing?0:decisionProgress(phaseProgress,d);
     initial.forEach((id,i)=>{
       const from=61+i*39,to=61+d.finalOrder.indexOf(id)*39,y=from+(to-from)*p;
       const row=svg.querySelector('[data-score-row="'+id+'"]');
@@ -421,10 +506,22 @@ function updateAnimation() {
       svg.querySelector('[data-aligned-value="'+id+'"]').textContent=fmt(d.base[id]+d.delta[id]*p);
     });
     const node=svg.querySelector('#gate-message');
-    if(node)node.textContent=p<.995?'Apply the bounded correction, then evaluate the margin gate.':'Gate: '+fmt(d.advantage)+(d.admitted?' > ':' ≤ ')+fmt(d.threshold)+' → '+(d.admitted?'admit relational winner':'keep base winner');
+    if(node){
+      const scores=d.base.map((b,i)=>b+d.delta[i]*p);
+      const switched=d.winner!==d.baseWinner&&scores[d.winner]<scores[d.baseWinner];
+      node.textContent=state.comparing?'Before alignment · base winner '+CANDIDATES[d.baseWinner]
+        :p>=.995?'Gate: '+fmt(d.advantage)+(d.admitted?' > ':' ≤ ')+fmt(d.threshold)+' → '+(d.admitted?'admit '+CANDIDATES[d.winner]:'keep '+CANDIDATES[d.baseWinner])
+        :switched?'Boundary switch: '+CANDIDATES[d.winner]+' '+fmt(scores[d.winner])+' < '+CANDIDATES[d.baseWinner]+' '+fmt(scores[d.baseWinner])+' · inspect the two alternatives'
+        :'Base choice '+CANDIDATES[d.baseWinner]+' · apply the bounded correction';
+      node.classList.toggle('svg-accent',switched&&!state.comparing);
+    }
+    if(phaseProgress>=.30&&phaseProgress<.48&&!state.comparing){
+      svg.querySelectorAll('[data-score-row]').forEach(n=>n.classList.toggle('boundary-muted',![d.winner,d.baseWinner].includes(Number(n.dataset.scoreRow))));
+    }else svg.querySelectorAll('[data-score-row]').forEach(n=>n.classList.remove('boundary-muted'));
   } else if(state.stage===4){
     svg.innerHTML=liftingDetail();
   }
+  applyLinkedFocus();
   $('#step-progress').value=phaseProgress;
   $$('input[type=range]').forEach(input=>input.style.setProperty('--fill',100*(Number(input.value)-Number(input.min))/(Number(input.max)-Number(input.min))+'%'));
   $('#step-value').value=isRecorded()?(physicalProgress()*2.5).toFixed(2)+' s':Math.round(phaseProgress*100)+'%';
@@ -437,6 +534,7 @@ function updateAnimation() {
 }
 function selectStage(stage,manual=true) {
   if(manual)stop();
+  state.comparing=false;resumeAfterCompare=false;state.hoverCandidate=null;
   state.stage=Math.max(0,Math.min(5,stage));state.elapsed=0;state.progress=0;
   render(true);
   const tab=$('#chapters [data-stage="'+state.stage+'"]');
@@ -466,7 +564,7 @@ function play(stepOnly=false) {
   frame=requestAnimationFrame(tick);
 }
 function seek(seconds) {
-  stop();let index=0;
+  stop();state.comparing=false;resumeAfterCompare=false;let index=0;
   while(index<5&&seconds>=stageSeconds[index]){seconds-=stageSeconds[index];index++;}
   if(index!==state.stage){state.stage=index;state.elapsed=seconds;render(true);}
   else{state.elapsed=seconds;updateAnimation();}
@@ -479,6 +577,10 @@ function setTheme(theme){
   try{localStorage.setItem('djepa-theme',theme);}catch(_){}
 }
 document.addEventListener('click',event=>{
+  const operation=event.target.closest('[data-lift-step]');
+  if(operation){stop();state.elapsed=[.08,.24,.58,1][Number(operation.dataset.liftStep)]*stageSeconds[4];updateAnimation();return;}
+  const milestone=event.target.closest('[data-jump-stage]');
+  if(milestone){selectStage(Number(milestone.dataset.jumpStage));state.elapsed=Number(milestone.dataset.jumpPhase)*stageSeconds[state.stage];updateAnimation();return;}
   const stage=event.target.closest('#chapters [data-stage]');
   if(stage){selectStage(Number(stage.dataset.stage));return;}
   const candidate=event.target.closest('[data-candidate]');
@@ -492,13 +594,20 @@ document.addEventListener('click',event=>{
 });
 function showMatrix(event){
   const cell=event.target.closest('.matrix-cell'),tip=$('#matrix-tooltip');
-  if(!cell){tip.hidden=true;return;}
+  if(!cell){tip.hidden=true;state.hoverCandidate=null;applyLinkedFocus();return;}
   tip.hidden=false;
+  state.hoverCandidate=Number(cell.dataset.row);applyLinkedFocus();
   tip.textContent='Candidate '+CANDIDATES[Number(cell.dataset.row)]+' ← '+CANDIDATES[Number(cell.dataset.col)]+' · illustrative attention '+Number(cell.dataset.weight).toFixed(3);
 }
 $('#detail-visual').addEventListener('pointerover',showMatrix);
+$('#detail-visual').addEventListener('pointerdown',event=>{if(event.target.closest('[data-lift-step], [data-latent]'))stop();});
 $('#detail-visual').addEventListener('focusin',showMatrix);
-$('#detail-visual').addEventListener('pointerleave',()=>$('#matrix-tooltip').hidden=true);
+$('#detail-visual').addEventListener('pointerleave',()=>{$('#matrix-tooltip').hidden=true;state.hoverCandidate=null;applyLinkedFocus();});
+$('#candidate-controls').addEventListener('pointerover',event=>{
+  const target=event.target.closest('[data-candidate]');if(!target)return;
+  state.hoverCandidate=Number(target.dataset.candidate);applyLinkedFocus();
+});
+$('#candidate-controls').addEventListener('pointerleave',()=>{state.hoverCandidate=null;applyLinkedFocus();});
 document.addEventListener('keydown',event=>{
   const target=event.target;
   if((event.key==='Enter'||event.key===' ')&&target.matches('[role=button]')){event.preventDefault();target.dispatchEvent(new MouseEvent('click',{bubbles:true}));return;}
@@ -511,8 +620,19 @@ $('#play').onclick=()=>play();
 $('#previous').onclick=()=>selectStage(state.stage-1);
 $('#next').onclick=()=>selectStage(state.stage+1);
 $('#tour-seek').max=totalDuration;
+const milestones=[
+  [2,.72,'Inspect candidate relations'],
+  [3,.38,'Inspect the decision boundary'],
+  [3,.94,'Read the gate decision'],
+  [4,.58,'Inspect representation lifting'],
+  [4,1,'Read native-distance selection'],
+];
+$('.timeline').insertAdjacentHTML('beforeend','<div class="timeline-markers" aria-label="Key moments">'+milestones.map(([stage,phase,label])=>{
+  const time=stageSeconds.slice(0,stage).reduce((a,b)=>a+b,0)+stageSeconds[stage]*phase;
+  return '<button type="button" data-jump-stage="'+stage+'" data-jump-phase="'+phase+'" aria-label="'+label+'" title="'+label+'" style="left:'+100*time/totalDuration+'%"><span class="sr-only">'+label+'</span></button>';
+}).join('')+'</div>');
 $('#tour-seek').oninput=e=>seek(Number(e.target.value));
-$('#reset').onclick=()=>{stop();Object.assign(state,{stage:0,candidate:0,sources:2,bound:.2,head:0,lifting:'ordinal',progress:0,elapsed:0,recordCandidate:2,replay:true,speed:1});$('#strength').value=.2;$('#speed').value='1';render(true);};
+$('#reset').onclick=()=>{stop();Object.assign(state,{stage:0,candidate:0,sources:2,bound:.2,head:0,lifting:'ordinal',progress:0,elapsed:0,recordCandidate:2,replay:true,speed:1,comparing:false,hoverCandidate:null});$('#strength').value=.2;$('#speed').value='1';render(true);};
 $('#speed').onchange=e=>state.speed=Number(e.target.value);
 $('#strength').oninput=e=>{stop();state.bound=Number(e.target.value);state.elapsed=stageSeconds[state.stage];render(false);};
 $$('[data-sources]').forEach(b=>b.onclick=()=>{stop();state.sources=Number(b.dataset.sources);render(false);});

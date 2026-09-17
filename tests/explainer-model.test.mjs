@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { sampleState } from '../docs/static/js/explainer-scenes.mjs';
+import { liftingGeometry, liftingProgress, liftingStep, decisionProgress } from '../docs/static/js/explainer-motion.mjs';
 import { CANDIDATES, example, attention, realizedPoint, nativeCost, transportPoint } from '../docs/static/js/explainer-model.mjs';
 
 test('bounded corrections, zero-bound base recovery and gated rank identity', () => {
@@ -61,4 +62,28 @@ test('recorded replay interpolates periodic angles along the shorter arc', () =>
   const middle=sampleState(candidate,.5);
   assert.equal(middle[0],1);
   assert.ok(Math.abs(middle[4]-Math.PI*2)<1e-10);
+});
+
+test('lifting shows rank-to-radius conversion, retained direction and exact native order', () => {
+  for(const sources of [2,4]){
+    const d=example({sources});
+    const before=liftingGeometry(d,0),after=liftingGeometry(d,1);
+    assert.equal([...before].sort((a,b)=>a.cost-b.cost)[0].id,d.baseWinner);
+    assert.deepEqual([...after].sort((a,b)=>a.cost-b.cost).map(g=>g.id),d.finalOrder);
+    for(const g of after){assert.ok(Math.abs(g.radius-g.rank/7)<1e-12);assert.ok(Math.abs(g.cost-g.radius**2)<1e-12);}
+    for(let p=0;p<=1;p+=.05){
+      for(const g of liftingGeometry(d,p))assert.ok(g.radius>=Math.min(g.original,g.target)-1e-12&&g.radius<=Math.max(g.original,g.target)+1e-12);
+    }
+  }
+  assert.equal(liftingProgress(.24),0);assert.equal(liftingProgress(1),1);
+  assert.deepEqual([.08,.24,.58,1].map(liftingStep),[0,1,2,3]);
+});
+
+test('decision timing pauses just after the competing candidates cross', () => {
+  for(const sources of [2,4]){
+    const d=example({sources}),p=decisionProgress(.38,d);
+    assert.equal(p,decisionProgress(.46,d));
+    assert.ok(d.base[d.winner]+p*d.delta[d.winner]<d.base[d.baseWinner]+p*d.delta[d.baseWinner]);
+    assert.equal(decisionProgress(0,d),0);assert.equal(decisionProgress(1,d),1);
+  }
 });

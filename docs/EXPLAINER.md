@@ -24,6 +24,14 @@ Candidate identity is linked across the teaching diagrams. Recorded executions
 retain their original numeric candidate IDs. The recording and the six-candidate
 mechanism illustration are separate data contexts, explicitly labelled.
 
+The lifting stage is explicitly located between aligned ranks and native-distance
+planning. Its four clickable operations read the final rank, compute the RMS
+radius, rewrite the terminal future along its retained direction, and read the
+native distance. The trajectory strip distinguishes retained steps t1–t4 from
+the rewritten terminal t5. Original/current radius, current cost and nearest
+candidate update together; temporal transport retains its separate diagnostic
+identity.
+
 ## Recorded PushT case
 
 The replay exports existing start-176 trajectories for TD-JEPA (candidate 15),
@@ -68,6 +76,12 @@ stage. Training supervision opens in a dialog.
 - Trace candidates, inspect an attention head/cell, change source configuration
   and vary the schematic correction bound.
 - Switch representation mechanism and inspect intermediate native distances.
+- Hold the before-alignment button (pointer, Space or Enter) in the decision or
+  lifting stage, then release to restore the exact progress and playback state.
+- Jump to key moments via the timeline markers. The 53-second tour gives extra
+  time to ranking crossings and lifting, including a brief boundary-switch hold.
+- Hover a candidate to follow its evidence, rank path or latent point while
+  dimming unrelated entries. Matrix hover highlights its candidate row/column.
 - Arrow keys navigate stages; Space controls playback outside form controls.
 - Keyboard-accessible diagrams, a training dialog with Escape support and
   reduced-motion handling for decorative transitions. Playback is user-initiated
@@ -79,6 +93,8 @@ stage. Training supervision opens in a dialog.
 
 - `static/js/explainer.js`: stage rendering, controls and shared playback clock.
 - `static/js/explainer-model.mjs`: pure numerical teaching example.
+- `static/js/explainer-motion.mjs`: deterministic presentation timing and
+  rank-to-radius geometry, with endpoint and decision-boundary tests.
 - `static/js/explainer-scenes.mjs`: interpolation and SVG recorded-state replay.
 - `static/data/explainer-pusht.json`: compact recorded states and provenance.
 - `static/css/explainer.css`: responsive workbench and both themes.
