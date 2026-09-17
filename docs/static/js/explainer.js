@@ -1,3 +1,4 @@
+import { DIAGNOSTIC, problemPhase } from './explainer-problem.mjs';
 import { evidenceVector, evidencePhase } from './explainer-evidence.mjs';
 import { liftingProgress, liftingStep, liftingGeometry, decisionProgress } from './explainer-motion.mjs';
 import { sampleState, sceneMarkup, updateScenes } from './explainer-scenes.mjs';
@@ -10,6 +11,7 @@ const state = { stage: 0, candidate: 0, sources: 2, bound: 0.2, head: 0, lifting
 const stageSeconds = [8, 10, 9, 10, 12, 8];
 const totalDuration = stageSeconds.reduce((a,b)=>a+b,0);
 let record = null;
+let previewCandidate = 0;
 let phaseProgress = 0;
 let resumeAfterCompare = false;
 let currentContext = '';
@@ -307,6 +309,77 @@ function ordinalLiftingDetail() {
   return s;
 }
 
+function problemDetail() {
+  let s='';
+  ['One decision context','Zoom into the shortlist','Observe the ranking gap'].forEach((label,i)=>{
+    const x=16+i*247;
+    s+='<g data-problem-step="'+i+'" role="button" tabindex="0" aria-label="'+label+'">';
+    s+=rect(x,5,235,36,'var(--surface)','var(--line)',8,'data-problem-operation="'+i+'"');
+    s+=text(x+12,28,String(i+1),'svg-small svg-accent')+text(x+29,28,label,'svg-small')+'</g>';
+  });
+  s+=text(20,68,'Same observation + goal','svg-label');
+  if(record){
+    s+='<g id="problem-preview">'+sceneMarkup(record,previewCandidate,20,88,174,'problem')+'</g>';
+    s+=text(20,281,'Candidate '+record.candidates[previewCandidate].id+' · early recorded motion','svg-tiny');
+    s+='<text x="20" y="297" class="svg-tiny" id="problem-time">0.00 / 0.80 s preview</text>';
+  }else s+=text(20,165,'Recorded preview unavailable','svg-small');
+  s+=path('M202 175H222','detail-line');
+  s+=text(238,68,'All 63 candidates','svg-label');
+  for(let i=0;i<63;i++){
+    s+=rect(239+(i%9)*17,89+Math.floor(i/9)*17,12,12,i<4?'var(--gold)':'var(--blue)','none',3,'data-pool-tile="'+i+'"');
+  }
+  s+=text(239,221,'Predicted-distance order →','svg-tiny');
+  s+='<path id="problem-zoom" d="M239 82H302V106 M246 111L248 235 M294 111L378 235" fill="none" stroke="var(--gold)" stroke-width="1.3" stroke-dasharray="3 4"/>';
+  s+='<g id="problem-shortlist">';
+  for(let i=0;i<4;i++){
+    s+=rect(239+i*38,240,30,30,'var(--gold-fill)','var(--gold)',7);
+    s+=text(254+i*38,259,String(i+1),'svg-small svg-gold','text-anchor="middle"');
+  }
+  s+=text(239,290,'Top four · closest to selection','svg-tiny')+'</g>';
+  s+=line(411,60,411,297);
+  s+=text(433,68,'Within-start rank correlation','svg-label');
+  s+=text(505,101,'All 63','svg-small','text-anchor="middle"');
+  s+=text(701,101,'Top 4','svg-small svg-gold','text-anchor="middle"');
+  DIAGNOSTIC.forEach((row,i)=>{
+    const y=142+i*88;
+    s+=text(433,y-17,row.model,'svg-small');
+    s+=line(505,y,701,y,'var(--line)','stroke-width="2"');
+    s+=circle(505,y,24,'var(--surface)','stroke="var(--blue)"');
+    s+=text(505,y+5,row.all.toFixed(2),'svg-title','text-anchor="middle"');
+    s+='<g data-gap-reveal="'+i+'">';
+    s+=circle(701,y,24,'var(--gold-fill)','stroke="var(--gold)"');
+    s+=text(701,y+5,row.shortlist.toFixed(2),'svg-title svg-gold','text-anchor="middle"')+'</g>';
+    s+='<circle data-gap-pulse="'+i+'" cx="532" cy="'+y+'" r="3" fill="var(--gold)"/>';
+  });
+  s+=text(433,287,'96 starts · same scores and outcome labels','svg-tiny');
+  s+=rect(16,316,726,33,'var(--purple-soft)','none',9);
+  s+='<text id="problem-takeaway" x="379" y="337" class="svg-label svg-accent" text-anchor="middle"></text>';
+  return s;
+}
+function updateProblem(svg) {
+  const phase=problemPhase(phaseProgress);
+  if(record)updateScenes(svg.querySelector('#problem-preview'),record,phase.motion);
+  const time=svg.querySelector('#problem-time');
+  if(time)time.textContent=(phase.motion*2.5).toFixed(2)+' / 0.80 s preview';
+  svg.querySelectorAll('[data-problem-operation]').forEach(n=>{
+    const active=Number(n.dataset.problemOperation)===phase.step;
+    n.setAttribute('fill',active?'var(--purple-soft)':'var(--surface)');
+    n.setAttribute('stroke',active?'var(--purple)':'var(--line)');
+  });
+  svg.querySelectorAll('[data-pool-tile]').forEach(n=>n.setAttribute('opacity',Number(n.dataset.poolTile)<4?1:1-.88*phase.focus));
+  for(const id of ['problem-zoom','problem-shortlist'])svg.querySelector('#'+id).style.opacity=String(.12+.88*phase.focus);
+  svg.querySelectorAll('[data-gap-reveal]').forEach(n=>n.style.opacity=String(phase.reveal));
+  svg.querySelectorAll('[data-gap-pulse]').forEach(n=>{
+    n.setAttribute('cx',532+141*phase.reveal);
+    n.style.opacity=String(phase.reveal>0&&phase.reveal<1?1:0);
+  });
+  svg.querySelector('#problem-takeaway').textContent=[
+    'A plausible predicted future does not guarantee the best action.',
+    'The planner acts on a few close alternatives—not the average candidate.',
+    'Globally informative geometry can lose its order at the decision boundary.',
+  ][phase.step];
+}
+
 function recordedDetail() {
   if (!record) return text(380,170,'Loading recorded trajectories…','svg-label','text-anchor="middle"');
   let s='';
@@ -364,14 +437,14 @@ function movingDecision() {
   return s;
 }
 function contextStrip() {
-  const labels=['Action sequences','Future–goal evidence','Candidate relations','Aligned order','Representation lifting','Native-distance selection'];
+  const labels=['Decision-local prediction gap','Future–goal evidence','Candidate relations','Aligned order','Representation lifting','Native-distance selection'];
   const current=labels[state.stage],before=labels[state.stage-1]||'Observation + goal',after=state.stage===4?(state.lifting==='ordinal'?'Native-distance planning':'Representation diagnostic'):(labels[state.stage+1]||'Environment');
   $('#architecture').innerHTML=text(12,26,before,'svg-small')+path('M174 22H240','detail-line')
     +rect(250,5,264,33,'var(--purple-soft)','none',16)
     +text(382,26,current,'svg-label svg-accent','text-anchor="middle"')
     +path('M524 22H581','detail-line')+text(744,26,after,'svg-small','text-anchor="end"');
 }
-function isRecorded(){return (state.stage===0||state.stage===5)&&state.replay;}
+function isRecorded(){return state.stage===5&&state.replay;}
 function updateViewport(){
   const compact=matchMedia('(max-width:900px)').matches;
   $('#diagram-viewport').classList.toggle('recorded',isRecorded());
@@ -381,6 +454,16 @@ function updateViewport(){
 }
 function chapterCopy() {
   const chapter={...chapters[state.stage]};
+  if(state.stage===0){
+    Object.assign(chapter,{
+      kicker:'01 / THE OBSERVED PROBLEM', title:'Good global ranking. Weak local decisions.',
+      description:'Predictive geometry can organize a broad set of futures well, yet misorder the close alternatives that determine the next action. Zoom from the full candidate pool to the planner’s shortlist to see the gap.',
+      formula:'Global predictive order ≠ decision-local order',
+      fact:'Average within-start Spearman correlation on 96 matched PushT starts: LeWM 0.90 → 0.11; TD-JEPA 0.80 → 0.13, from all 63 candidates to the top four. Values are rounded as on the project page. The preview illustrates one recorded start; the statistics summarize the diagnostic cohort.',
+      visual:'The problem · global order versus decision-local order',
+      caption:'Measured correlations; schematic pool tiles. Early recorded motion supplies context; complete executions appear in 06.',
+    });
+  }
   if(isRecorded()){
     chapter.kicker=state.stage===0?'01 / POSSIBLE ACTIONS':'06 / RECORDED EXECUTION';
     chapter.title=state.stage===0?'One start. Three different futures.':'The choice changes the outcome.';
@@ -396,7 +479,7 @@ function chapterCopy() {
       chapter.formula='Candidate '+candidate.id+' · '+candidate.method;
       chapter.fact+=' Full-pool ranks for this candidate: LeWM '+candidate.ranks[0]+', TD-JEPA '+candidate.ranks[1]+', D-JEPA '+candidate.ranks[2]+'.';
     }
-  } else if(state.stage===0||state.stage===5){
+  } else if(state.stage===5){
     chapter.visual='Six schematic candidate trajectories';
     chapter.caption='Illustrative motion for the teaching example; switch to recorded PushT to view actual executions.';
   }
@@ -436,7 +519,7 @@ function chapterCopy() {
 function options() {
   const panel=$('#stage-options');
   panel.innerHTML='';
-  if(state.stage===0||state.stage===5){
+  if(state.stage===5){
     panel.innerHTML='<div class="segmented" role="group" aria-label="Scene source"><button data-replay="true" aria-pressed="'+state.replay+'">Recorded PushT</button><button data-replay="false" aria-pressed="'+!state.replay+'">Teaching example</button></div>';
   }
   if(state.stage===2){
@@ -487,9 +570,9 @@ function applyLinkedFocus(){
 }
 function renderCandidateControls() {
   const panel=$('#candidate-controls');
-  const context=isRecorded()?'recorded':'schematic';
+  const context=state.stage===0?'problem':isRecorded()?'recorded':'schematic';
   if(currentContext!==context){
-    panel.innerHTML='<span>Trace</span>'+(context==='recorded'&&record
+    panel.innerHTML=context==='problem'?'<span>Early motion</span>'+(record?record.candidates.map((c,i)=>'<button data-preview-candidate="'+i+'" aria-pressed="'+(i===previewCandidate)+'">Candidate '+c.id+'</button>').join(''):'Unavailable'):'<span>Trace</span>'+(context==='recorded'&&record
       ?record.candidates.map((c,i)=>'<button data-record-candidate="'+i+'" aria-label="Inspect '+c.method+' candidate '+c.id+'">'+c.method+'</button>').join('')
       :CANDIDATES.map((id,i)=>'<button data-candidate="'+i+'" aria-label="Trace candidate '+id+'">'+id+'</button>').join(''));
     currentContext=context;
@@ -499,7 +582,7 @@ function renderCandidateControls() {
 }
 function renderDiagram(transition=false) {
   const oldTokens=new Map([...$('#detail-visual').querySelectorAll('[data-token]')].map(n=>[n.dataset.token,n.getBoundingClientRect()]));
-  let renderer=state.stage===0||state.stage===5?(isRecorded()?recordedDetail:schematicScenes)
+  let renderer=state.stage===0?problemDetail:state.stage===5?(isRecorded()?recordedDetail:schematicScenes)
     :[null,evidenceDetail,relationsDetail,movingDecision,liftingDetail][state.stage];
   $('#detail-visual').innerHTML=renderer();
   updateViewport();
@@ -526,11 +609,12 @@ function render(transition=false) {
   $('#detail-description').textContent=c.description;$('#detail-formula').textContent=c.formula;
   $('#detail-fact').textContent=c.fact;$('#focus-label').textContent=c.visual;
   $('#visual-caption').textContent=c.caption;
-  $('#data-badge').textContent=isRecorded()?'RECORDED EXECUTION':'ILLUSTRATIVE COMPUTATION';
+  $('#data-badge').textContent=state.stage===0?'MEASURED DIAGNOSTIC':isRecorded()?'RECORDED EXECUTION':'ILLUSTRATIVE COMPUTATION';
   $('#detail-visual').setAttribute('aria-label',c.visual);
   $('#experiment-controls').hidden=isRecorded()||state.stage===0||state.stage===5||state.stage===4;
-  $('#supervision-toggle').hidden=isRecorded();
+  $('#supervision-toggle').hidden=isRecorded()||state.stage===0;
   $('#model-note').textContent=isRecorded()?'The reconstruction follows recorded positions and angles; interpolation only smooths playback.':state.sources===2?'Two 192-dimensional descriptors and two ranks form a 386-dimensional token.':'The four-source configuration uses 388 dimensions and its own learned parameters.';
+  if(state.stage===0)$('#model-note').textContent='The 63 tiles explain shortlist selection; they do not encode individual outcomes. The physical preview shows only the first 0.80 seconds of an existing 2.50-second recording.';
   $$('#chapters button').forEach(b=>{
     const i=Number(b.dataset.stage);
     b.classList.toggle('past',i<state.stage);
@@ -549,11 +633,13 @@ function updateAnimation() {
   phaseProgress=Math.min(1,state.elapsed/stageSeconds[state.stage]);
   state.progress=state.comparing?0:state.stage===4?liftingProgress(phaseProgress):smooth((phaseProgress-.12)/.74);
   const svg=$('#detail-visual');
-  if(isRecorded()&&record){
+  if(state.stage===0){
+    updateProblem(svg);
+  } else if(isRecorded()&&record){
     const p=physicalProgress();
     updateScenes(svg,record,p);
     $$('[data-outcome]').forEach(n=>n.setAttribute('opacity',p>=.999?1:0));
-  } else if(state.stage===0||state.stage===5){
+  } else if(state.stage===5){
     const p=physicalProgress(), endings=[[143,60,0],[103,89,-25],[134,69,8],[84,102,35],[168,91,60],[121,109,-50]];
     endings.forEach(([ex,ey,a],i)=>{
       const x=28+(i%3)*243,y=42+Math.floor(i/3)*152,move=smooth((p-.2)/.8);
@@ -666,6 +752,10 @@ function setTheme(theme){
   try{localStorage.setItem('djepa-theme',theme);}catch(_){}
 }
 document.addEventListener('click',event=>{
+  const problemOperation=event.target.closest('[data-problem-step]');
+  if(problemOperation){stop();state.elapsed=[.12,.5,1][Number(problemOperation.dataset.problemStep)]*stageSeconds[0];updateAnimation();return;}
+  const preview=event.target.closest('[data-preview-candidate]');
+  if(preview){previewCandidate=Number(preview.dataset.previewCandidate);currentContext='';render(false);return;}
   const evidenceOperation=event.target.closest('[data-evidence-step]');
   if(evidenceOperation){stop();state.elapsed=[.20,.55,1][Number(evidenceOperation.dataset.evidenceStep)]*stageSeconds[1];updateAnimation();return;}
   const operation=event.target.closest('[data-lift-step]');
@@ -691,7 +781,7 @@ function showMatrix(event){
   tip.textContent='Candidate '+CANDIDATES[Number(cell.dataset.row)]+' ← '+CANDIDATES[Number(cell.dataset.col)]+' · illustrative attention '+Number(cell.dataset.weight).toFixed(3);
 }
 $('#detail-visual').addEventListener('pointerover',showMatrix);
-$('#detail-visual').addEventListener('pointerdown',event=>{if(event.target.closest('[data-lift-step], [data-latent], [data-evidence-step]'))stop();});
+$('#detail-visual').addEventListener('pointerdown',event=>{if(event.target.closest('[data-lift-step], [data-latent], [data-evidence-step], [data-problem-step]'))stop();});
 $('#detail-visual').addEventListener('focusin',showMatrix);
 $('#detail-visual').addEventListener('pointerleave',()=>{$('#matrix-tooltip').hidden=true;state.hoverCandidate=null;applyLinkedFocus();});
 $('#candidate-controls').addEventListener('pointerover',event=>{

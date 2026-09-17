@@ -8,8 +8,14 @@ browser inference is required.
 
 ## Six stages
 
-1. **Candidate futures:** synchronized PushT executions from a common start,
-   or a separately labelled six-candidate teaching example.
+1. **The prediction gap:** a recorded early-motion preview supplies context;
+   a schematic 63-candidate pool narrows to four close alternatives, revealing
+   the measured decision-local ranking gap. Three clickable operations advance
+   the diagnosis. Average within-start Spearman correlations over 96 matched
+   starts fall from 0.90 to 0.11 for LeWM and 0.80 to 0.13 for TD-JEPA (rounded
+   values from the project-page diagnostic). Tiles represent candidate-set size,
+   not individual diagnostic samples. The preview is a separate recorded start,
+   capped at 0.80 seconds; method-labelled complete outcomes remain in stage 06.
 2. **Predictive evidence:** source-specific descriptors, ordinal evidence and
    candidate-token construction, revealed in computational order. Three clickable
    operations animate goal subtraction and LayerNorm, within-source cost sorting
@@ -97,6 +103,8 @@ stage. Training supervision opens in a dialog.
 ## Implementation and references
 
 - `static/js/explainer.js`: stage rendering, controls and shared playback clock.
+- `static/js/explainer-problem.mjs`: measured diagnostic endpoints and bounded
+  early-preview / shortlist-reveal timing; no interpolated statistics.
 - `static/js/explainer-model.mjs`: pure numerical teaching example.
 - `static/js/explainer-motion.mjs`: deterministic presentation timing and
   rank-to-radius geometry, with endpoint and decision-boundary tests.
