@@ -39,6 +39,38 @@ visual holds, mechanism selection and preserved task-preview timing.
 
 ## Six stages
 
+### Architecture locator
+
+**Locate in the world model** opens a shared architecture view inside the existing
+canvas. The encoders, action-conditioned predictor and future representations stay
+in consistent locations across four views: overview, predictor adaptation, ordinal
+realization and temporal transport. Moving highlights follow the computation;
+the original detailed animation returns when the locator closes. The light/dark
+themes, viewport height, source recordings and original audio remain unchanged.
+
+During narration the view opens at four sentence-aligned intervals:
+
+| Voiceover segment | Local audio time | Architectural focus |
+| --- | --- | --- |
+| 03 | 0–4.80 s | Observation and goal encoding, prediction, candidate futures. |
+| 05 | 13.86–20.50 s | Final TD-JEPA predictor block and projection; complementary native-distance proposal. |
+| 06 | 0–5.18 s | Original future, goal and aligned rank entering ordinal realization. |
+| 07 | 0–5.74 s | Matched predictive futures entering bounded temporal transport. |
+
+These intervals precede the corresponding detailed operations. Adaptation remains
+a separate proposal combined with the relational default; it is not drawn as a
+mandatory stage before relational alignment. Ordinal realization ends in native
+distance and the recovered aligned choice. Temporal transport ends in five refined
+future steps and retains its Reacher representation-study identity.
+
+The locator is also available for manual inspection during the silent tour.
+Opening it pauses playback; tabs select a view, and **Back to detail** or Escape
+returns to the detailed animation. Resuming narration restores the audio-specified
+view. Timing is stored in the existing narration manifest's `architecture` cues;
+`explainer-model-map.mjs` contains the diagrams, cue lookup and viewport controller.
+
+### Detailed operations
+
 1. **The prediction gap:** two recorded candidates from the same LeWM space have
    nearby predicted goal distances but opposing physical outcomes. A rotatable
    radial view leads into their full synchronized executions, then the measured

@@ -37,7 +37,15 @@
       <div id="focus-panel" class="stage-layout">
         <div class="stage-canvas">
           <svg id="architecture" class="context-strip" viewBox="0 0 760 42" role="img" aria-label="Active computation path"></svg>
-          <div id="diagram-viewport"><svg id="detail-visual" viewBox="0 0 760 360" role="img" aria-label="Selected stage detail"></svg><div id="matrix-tooltip" role="status" hidden></div></div>
+          <div id="diagram-viewport">
+            <svg id="detail-visual" viewBox="0 0 760 360" role="img" aria-label="Selected stage detail"></svg>
+            <section id="model-map" aria-label="Locate the operation inside D-JEPA" hidden>
+              <div class="model-map-toolbar"><div class="model-map-tabs" role="group" aria-label="Architecture view"><button data-map-mode="overview" aria-pressed="true">Overview</button><button data-map-mode="predictor" aria-pressed="false">Predictor adaptation</button><button data-map-mode="lifting" aria-pressed="false">Ordinal realization</button><button data-map-mode="transport" aria-pressed="false">Temporal transport</button></div><button id="model-map-close" aria-label="Return to detailed animation">Back to detail ↗</button></div>
+              <div class="model-map-heading"><h2 id="model-map-title"></h2><p id="model-map-note"></p></div>
+              <div class="model-map-canvas"><svg viewBox="0 0 830 375" role="img" aria-label="D-JEPA architecture and active module"></svg></div>
+            </section>
+            <div id="matrix-tooltip" role="status" hidden></div>
+          </div>
           <div id="candidate-controls" class="candidate-controls" aria-label="Trace a candidate"></div>
           <p id="visual-caption" class="visual-caption"></p>
         </div>
@@ -46,6 +54,7 @@
             <p id="detail-kicker" class="eyebrow"></p><h1 id="detail-title"></h1>
             <p id="detail-description"></p>
           </div>
+          <button id="model-map-toggle" class="model-map-toggle" aria-expanded="false" aria-controls="model-map" hidden>Locate in the world model <span aria-hidden="true">↗</span></button>
           <div id="detail-formula" class="formula"></div>
           <div id="stage-options" class="stage-options"></div>
           <div id="experiment-controls">

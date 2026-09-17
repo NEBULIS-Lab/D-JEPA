@@ -1,5 +1,6 @@
 import { relationMix } from './explainer-relations.mjs';
 import { createNarration } from './explainer-narration.mjs';
+import { createModelMap } from './explainer-model-map.mjs';
 import { VALIDATION_TASKS, validationFrame, syncValidationVideos, pauseValidationVideos, releaseValidationVideos } from './explainer-validation.mjs';
 import { pairPhase, latentMarkup, latentIntro, PAIR_INTRO_SECONDS, PAIR_STAGE_SECONDS, pairTimelinePhase, pairTimelineSeconds } from './explainer-pair.mjs';
 import { DIAGNOSTIC, problemPhase } from './explainer-problem.mjs';
@@ -15,6 +16,7 @@ const state = { stage: 0, candidate: 0, sources: 2, bound: 0.2, head: 0, lifting
 const stageSeconds = [PAIR_STAGE_SECONDS, 10, 9, 10, 12, 26];
 const totalDuration = stageSeconds.reduce((a,b)=>a+b,0);
 let narration=null,narrationMotion={running:false,rate:1};
+let modelMap=null;
 let record = null;
 let previewCandidate = 0;
 let pair = null;
@@ -895,6 +897,7 @@ function renderDiagram(transition=false) {
   }
 }
 function render(transition=false) {
+  modelMap?.update(state.stage);
   const c=chapterCopy();
   $('#candidate-controls').style.visibility='';
   document.documentElement.dataset.stage=state.stage;
@@ -1010,6 +1013,7 @@ function stop() {
 }
 function play(stepOnly=false,until=null) {
   narration?.exit();
+  modelMap?.close();
   if(state.playing){stop();return;}
   if(state.elapsed>=stageSeconds[state.stage]){
     if(stepOnly){state.elapsed=0;}else selectStage(state.stage===5?0:state.stage+1,false);
@@ -1174,16 +1178,18 @@ try {
   pair=data;
 } catch(error){console.warn(error.message);}
 const hash=location.hash.match(/^#stage-([1-6])$/);if(hash)state.stage=Number(hash[1])-1;
+modelMap=createModelMap({pause:()=>stop(),getStage:()=>state.stage,getLifting:()=>state.lifting});
 render();
 narration=createNarration({
   stop:()=>stop(),
   pause:()=>{narrationMotion.running=false;pauseValidationVideos();},
-  exit:()=>{$('#tour-seek').max=totalDuration;updateAnimation();$('#previous').disabled=state.stage===0;$('#next').disabled=state.stage===5;},
+  exit:()=>{modelMap.close();$('#tour-seek').max=totalDuration;updateAnimation();$('#previous').disabled=state.stage===0;$('#next').disabled=state.stage===5;},
   frame:(f,motion)=>{
     narrationMotion=motion;
     const changed=state.stage!==f.stage||state.sources!==f.sources||state.lifting!==f.lifting||state.candidate!==f.candidate||!state.replay;
     Object.assign(state,{stage:f.stage,elapsed:f.elapsed,sources:f.sources,lifting:f.lifting,candidate:f.candidate,bound:.2,replay:true,comparing:false,hoverCandidate:null});
     if(changed)render(false);else updateAnimation();
+    modelMap.frame(f.architecture);
     const explanation=$('#stage-options details');if(explanation)explanation.open=f.predictor;
   },
 });

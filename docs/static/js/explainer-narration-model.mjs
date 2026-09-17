@@ -1,4 +1,5 @@
 // Pure timing model: audio timestamps drive both captions and visual holds.
+import {modelMapCue} from './explainer-model-map.mjs';
 export function locateNarration(segments, seconds) {
   let remaining=Math.max(0,seconds);
   for(let index=0;index<segments.length;index++){
@@ -23,6 +24,6 @@ export function narrationFrame(segment,time) {
   const elapsed=left.elapsed+(right.elapsed-left.elapsed)*ratio;
   return {stage:segment.stage,elapsed,sources:left.sources||2,
     lifting:segment.lifting||'ordinal',candidate:0,
-    predictor:!!left.predictor,sentence,
+    predictor:!!left.predictor,sentence,architecture:modelMapCue(segment,t),
     rate:span>0?(right.elapsed-left.elapsed)/span:0};
 }

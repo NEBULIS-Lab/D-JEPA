@@ -168,6 +168,13 @@
           "end": 22.58
         }
       ],
+      "architecture": [
+        {
+          "start": 0,
+          "end": 4.8,
+          "mode": "overview"
+        }
+      ],
       "keyframes": [
         {
           "time": 0,
@@ -348,6 +355,13 @@
           "end": 27.38
         }
       ],
+      "architecture": [
+        {
+          "start": 13.86,
+          "end": 20.5,
+          "mode": "predictor"
+        }
+      ],
       "keyframes": [
         {
           "time": 0,
@@ -430,6 +444,13 @@
           "text": "Now watch the native-distance readout: the nearest future recovers the aligned choice, and the complete ordering follows automatically.",
           "start": 17.88,
           "end": 24.52
+        }
+      ],
+      "architecture": [
+        {
+          "start": 0,
+          "end": 5.18,
+          "mode": "lifting"
         }
       ],
       "keyframes": [
@@ -520,6 +541,13 @@
           "text": "The two mechanisms study how decision structure can be expressed through future latents, from exact ordinal geometry to learned temporal updates.",
           "start": 12.46,
           "end": 19.64
+        }
+      ],
+      "architecture": [
+        {
+          "start": 0,
+          "end": 5.74,
+          "mode": "transport"
         }
       ],
       "keyframes": [
