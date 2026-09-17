@@ -1,15 +1,24 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { pairPhase, pairPoints, projectPoint, latentIntro, latentBackdrop, latentMarkup } from '../docs/static/js/explainer-pair.mjs';
+import { pairPhase, pairPoints, projectPoint, latentIntro, latentBackdrop, latentMarkup, pairTimelinePhase, pairTimelineSeconds, PAIR_INTRO_SECONDS, PAIR_STAGE_SECONDS } from '../docs/static/js/explainer-pair.mjs';
 const pair=JSON.parse(readFileSync(new URL('../docs/static/data/explainer-pair.json',import.meta.url)));
 const traces=JSON.parse(readFileSync(new URL('../docs/static/data/explainer-pusht.json',import.meta.url)));
 test('intro camera visibly sweeps and returns without modifying measured radii',()=>{
   assert.equal(latentIntro(0).t,0);
-  assert.ok(latentIntro(.055).yawOffset>.6);
-  assert.ok(latentIntro(.165).yawOffset<-.6);
+  assert.ok(latentIntro(.055).yawOffset>.5);
+  assert.ok(latentIntro(.145).yawOffset<-.5);
   assert.ok(Math.abs(latentIntro(.22).yawOffset)<1e-12);
   assert.equal(latentIntro(1).t,1);
+  assert.equal(latentIntro(.20).t,1);
+});
+test('four-second comparison preserves subsequent execution and diagnosis durations',()=>{
+  assert.equal(PAIR_INTRO_SECONDS,4);
+  assert.ok(Math.abs(PAIR_STAGE_SECONDS-13.36)<1e-12);
+  assert.equal(pairTimelinePhase(4),.22);
+  for(const p of [0,.1,.22,.5,.68,.76,.82,1])assert.ok(Math.abs(pairTimelinePhase(pairTimelineSeconds(p))-p)<1e-12);
+  for(const [a,b] of [[.22,.68],[.68,.76],[.82,1]])assert.ok(Math.abs(pairTimelineSeconds(b)-pairTimelineSeconds(a)-(b-a)*12)<1e-12);
+  assert.ok(Math.abs(pairTimelineSeconds(1)-PAIR_STAGE_SECONDS)<1e-12);
 });
 test('same recorded start, opposing outcomes and authoritative score-to-radius identity',()=>{
   assert.equal(pair.start,traces.start);

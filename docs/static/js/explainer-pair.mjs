@@ -1,4 +1,18 @@
 // Orthographic, rotatable radial view. Numeric radii are independent of the camera.
+export const PAIR_INTRO_SECONDS=4;
+const ORIGINAL_INTRO_SECONDS=12*.22;
+export const PAIR_STAGE_SECONDS=12+PAIR_INTRO_SECONDS-ORIGINAL_INTRO_SECONDS;
+// Stretch only comparison; the recorded execution and diagnosis retain their
+// original wall-clock durations. The inverse also drives direct-operation jumps.
+export function pairTimelinePhase(seconds) {
+  return seconds<=PAIR_INTRO_SECONDS
+    ? Math.max(0,seconds)/PAIR_INTRO_SECONDS*.22
+    : Math.min(1,(seconds-PAIR_INTRO_SECONDS+ORIGINAL_INTRO_SECONDS)/12);
+}
+export function pairTimelineSeconds(phase) {
+  return phase<=.22?Math.max(0,phase)/.22*PAIR_INTRO_SECONDS
+    :Math.min(1,phase)*12+PAIR_INTRO_SECONDS-ORIGINAL_INTRO_SECONDS;
+}
 export function pairPhase(progress) {
   const smooth = x => { x=Math.max(0,Math.min(1,x));return x*x*(3-2*x); };
   return {
@@ -19,7 +33,8 @@ export function pairPoints(pair) {
   });
 }
 export function latentIntro(progress) {
-  const t=Math.max(0,Math.min(1,progress/.22));
+  const u=Math.max(0,Math.min(1,progress/(.22*.9)));
+  const t=u*u*(3-2*u); // Ease in/out, then hold the completed view for 0.4 s.
   return {t, yawOffset:.65*Math.sin(2*Math.PI*t)};
 }
 // Original illustrative backdrop, NOT exported embeddings, model neighborhoods,
@@ -62,7 +77,7 @@ export function latentMarkup(pair,yaw,intro=1,animate=true) {
   s+='<path d="'+curve([[-.34,floor,-.24],[.34,floor,-.24],[.34,floor,.24],[-.34,floor,.24]])+'Z" fill="var(--purple)" opacity=".025"/>';
   for(let k=-4;k<=4;k++){
     for(const points of [ [[k*.08,floor,-.24],[k*.08,floor,.24]], [[-.34,floor,k*.06],[.34,floor,k*.06]] ]){
-      s+='<path data-latent-grid d="'+curve(points)+'" stroke="var(--purple)" stroke-width=".6" opacity=".15" fill="none"/>';
+      s+='<path data-latent-grid d="'+curve(points)+'" stroke="var(--purple)" stroke-width=".6" opacity="'+(.15-Math.abs(k)*.018)+'" fill="none"/>';
     }
   }
   const projected=backdrop.map(a=>screen(a.point));
@@ -100,11 +115,13 @@ export function latentMarkup(pair,yaw,intro=1,animate=true) {
     s+='<g opacity="'+(.35+.65*reveal)+'">';
     s+='<circle cx="'+n(x)+'" cy="'+n(y)+'" r="'+n(10+5*Math.sin(Math.PI*reveal))+'" fill="'+colors[i]+'" opacity=".13"/>';
     s+='<circle data-pair-point="'+label+'" cx="'+n(x)+'" cy="'+n(y)+'" r="4.5" fill="'+colors[i]+'" stroke="var(--panel)" stroke-width="1.5"/>';
-    s+='<text x="'+n(x+(i===0?-12:12))+'" y="'+n(y-8)+'" text-anchor="'+(i===0?'end':'start')+'" class="svg-label" style="fill:'+colors[i]+'">'+label+'</text></g>';
+    s+='<text x="'+n(x+(i===0?-12:12))+'" y="'+n(y-8)+'" text-anchor="'+(i===0?'end':'start')+'" class="svg-label" style="fill:'+colors[i]+'" paint-order="stroke" stroke="var(--panel)" stroke-width="3" stroke-linejoin="round">'+label+'</text></g>';
   });
   const [gx,gy]=screen([0,floor,0]);
+  s+='<ellipse cx="'+n(gx)+'" cy="'+n(gy)+'" rx="7" ry="2.5" fill="var(--purple)" opacity=".18"/>';
   s+='<path d="M183 191L'+n(gx)+' '+n(gy)+'" stroke="var(--purple)" opacity=".35" stroke-dasharray="2 4"/>';
   s+='<circle cx="183" cy="191" r="11" fill="var(--purple)" opacity=".16"/><circle cx="183" cy="191" r="4" fill="var(--accent)" stroke="var(--panel)" stroke-width="1.5"/>';
+  s+='<circle cx="183" cy="191" r="7" fill="none" stroke="var(--accent)" stroke-width=".65" opacity=".4"/>';
   s+='<text x="183" y="210" class="svg-small svg-accent" text-anchor="middle" paint-order="stroke" stroke="var(--panel)" stroke-width="3">Goal</text>';
   return s+'</g>';
 }

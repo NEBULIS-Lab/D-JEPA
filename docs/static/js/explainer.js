@@ -1,6 +1,6 @@
 import { relationMix } from './explainer-relations.mjs';
 import { VALIDATION_TASKS, validationFrame, syncValidationVideos, pauseValidationVideos, releaseValidationVideos } from './explainer-validation.mjs';
-import { pairPhase, latentMarkup, latentIntro } from './explainer-pair.mjs';
+import { pairPhase, latentMarkup, latentIntro, PAIR_INTRO_SECONDS, PAIR_STAGE_SECONDS, pairTimelinePhase, pairTimelineSeconds } from './explainer-pair.mjs';
 import { DIAGNOSTIC, problemPhase } from './explainer-problem.mjs';
 import { evidenceVector, evidencePhase } from './explainer-evidence.mjs';
 import { liftingProgress, liftingStep, liftingGeometry, decisionProgress } from './explainer-motion.mjs';
@@ -11,7 +11,7 @@ const $ = selector => document.querySelector(selector);
 const $$ = selector => [...document.querySelectorAll(selector)];
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
 const state = { stage: 0, candidate: 0, sources: 2, bound: 0.2, head: 0, lifting: 'ordinal', progress: 1, playing: false, speed: 1, elapsed: 0, supervision: false, recordCandidate:2, replay:true, comparing:false, hoverCandidate:null };
-const stageSeconds = [12, 10, 9, 10, 12, 26];
+const stageSeconds = [PAIR_STAGE_SECONDS, 10, 9, 10, 12, 26];
 const totalDuration = stageSeconds.reduce((a,b)=>a+b,0);
 let record = null;
 let previewCandidate = 0;
@@ -556,8 +556,9 @@ function problemDetail() {
 }
 function updateProblem(svg) {
   if(!pair||!record){updateDiagnostic(svg);return;}
-  const phase=pairPhase(phaseProgress);
-  const intro=latentIntro(phaseProgress);
+  const pairProgress=pairTimelinePhase(state.elapsed);
+  const phase=pairPhase(pairProgress);
+  const intro=latentIntro(pairProgress);
   if(phase.diagnostic<1)svg.querySelector('#pair-orbit').innerHTML=latentMarkup(pair,pairYaw+(reducedMotion.matches?0:intro.yawOffset),intro.t,!reducedMotion.matches);
   updateScenes(svg,record,phase.motion);
   svg.querySelectorAll('[data-pair-operation]').forEach(n=>{
@@ -1047,8 +1048,8 @@ document.addEventListener('click',event=>{
   const problemOperation=event.target.closest('[data-problem-step]');
   if(problemOperation){
     stop();const operation=Number(problemOperation.dataset.problemStep);
-    if(pair&&operation===0){state.elapsed=0;updateAnimation();play(true,.22*stageSeconds[0]);return;}
-    state.elapsed=(pair?[.15,.76,1]:[.12,.5,1])[operation]*stageSeconds[0];updateAnimation();return;
+    if(pair&&operation===0){state.elapsed=0;updateAnimation();play(true,PAIR_INTRO_SECONDS);return;}
+    state.elapsed=pair?pairTimelineSeconds([.15,.76,1][operation]):[.12,.5,1][operation]*stageSeconds[0];updateAnimation();return;
   }
   const preview=event.target.closest('[data-preview-candidate]');
   if(preview){previewCandidate=Number(preview.dataset.previewCandidate);currentContext='';render(false);return;}

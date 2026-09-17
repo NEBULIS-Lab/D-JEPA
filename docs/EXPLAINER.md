@@ -143,6 +143,11 @@ stage. Training supervision opens in a dialog.
 - The first stage-01 operation automatically sweeps the camera, draws the two
   measured-radius rays in sequence, and reveals the candidate points. Selecting
   that operation replays its animation and pauses before physical execution.
+  Its comparison now takes 4.00 seconds (previously 2.64), with eased entry/exit
+  and a final 0.40-second settled view. The subsequent recorded-execution and
+  diagnostic intervals keep their previous durations. Edge-grid lines taper
+  gently, candidate letters have a background outline, and the goal has a small
+  anchor ring and ground projection.
   Reduced-motion preference suppresses the camera sweep. Numerical radii remain
   fixed throughout. The primary play button uses the project-page purple/peach/gold
   gradient; chapter navigation has larger, higher-contrast text.
@@ -158,7 +163,7 @@ stage. Training supervision opens in a dialog.
   removed from the visible workbench. Evidence identity and measurement notes
   remain available in the inspector. Candidate Trace controls remain visible for
   the computation stages; the stage-01 motion clock/reset strip is removed.
-- Jump to key moments via the timeline markers. The 79-second tour gives extra
+- Jump to key moments via the timeline markers. The approximately 80-second tour gives extra
   time to ranking crossings and lifting, including a brief boundary-switch hold.
 - Hover a candidate to follow its evidence, rank path or latent point while
   dimming unrelated entries. Matrix hover highlights its candidate row/column.
