@@ -1,3 +1,4 @@
+import { relationMix } from './explainer-relations.mjs';
 import { VALIDATION_TASKS, validationFrame, syncValidationVideos, pauseValidationVideos, releaseValidationVideos } from './explainer-validation.mjs';
 import { pairPhase, latentMarkup, latentIntro } from './explainer-pair.mjs';
 import { DIAGNOSTIC, problemPhase } from './explainer-problem.mjs';
@@ -165,35 +166,116 @@ function updateEvidence(svg) {
   });
 }
 
+
 function relationsDetail() {
-  const weights = attention(state.head, state.sources);
-  let s = text(32, 28, 'Candidate tokens', 'svg-label') + text(375, 28, `Attention head ${state.head + 1}`, 'svg-label', 'text-anchor="middle"') + text(646, 28, 'Bounded update', 'svg-label', 'text-anchor="middle"');
-  const x0 = 270, y0 = 63, cell = 31;
-  for (let i = 0; i < 6; i++) {
-    const y = 69 + i * 35;
-    s += tokenMark(i, 41, y, i === state.candidate, 12);
-    for (let j = 0; j < 8; j++) s += rect(64 + j * 9, y - 8, 6, 16, 'var(--purple)', 'none', 2, `opacity="${.2 + descriptor(i, 0, j) * .7}"`);
-    s += path(`M143 ${y}C199 ${y} 202 ${y0 + state.candidate * cell + 14} ${x0 - 19} ${y0 + state.candidate * cell + 14}`, 'attention-edge', `stroke-width="${weights[state.candidate][i] * 10}" opacity="${i === state.candidate ? .9 : .25}"`);
-    s += text(x0 - 14, y0 + i * cell + 18, CANDIDATES[i], 'svg-small', 'text-anchor="middle"');
-    s += text(x0 + i * cell + 14, y0 - 12, CANDIDATES[i], 'svg-small', 'text-anchor="middle"');
-    for (let j = 0; j < 6; j++) {
-      const value = weights[i][j];
-      s += `<g class="matrix-cell" tabindex="0" data-row="${i}" data-col="${j}" data-weight="${value}"><title>Illustrative attention ${CANDIDATES[i]} to ${CANDIDATES[j]}: ${fmt(value)}</title>`;
-      s += rect(x0 + j * cell, y0 + i * cell, 27, 27, 'var(--purple)', i === state.candidate ? 'var(--accent)' : 'none', 4, `opacity="${.2 + value * 1.5}"`);
-      if (i === state.candidate) s += text(x0 + j * cell + 13.5, y0 + i * cell + 17, value.toFixed(2), 'svg-tiny', 'text-anchor="middle"');
-      s += '</g>';
+  const weights=attention(state.head,state.sources),mix=relationMix(state.candidate,state.head,state.sources);
+  let s='';
+  ['Compare candidates','Aggregate evidence','Bound the update'].forEach((label,i)=>{
+    const x=16+i*247;
+    s+='<g data-relation-step="'+i+'" role="button" tabindex="0" aria-label="'+label+'">';
+    s+=rect(x,5,235,36,'var(--surface)','var(--line)',8,'data-relation-operation="'+i+'"');
+    s+=text(x+12,28,String(i+1),'svg-small svg-accent')+text(x+29,28,label,'svg-small')+'</g>';
+  });
+  s+=text(26,65,'Candidate tokens','svg-label');
+  s+=text(252,65,'Attention · head '+(state.head+1),'svg-label','text-anchor="middle"');
+  s+=text(438,65,'Evidence for '+CANDIDATES[state.candidate],'svg-label','text-anchor="middle"');
+  s+=text(650,65,'Bounded correction','svg-label','text-anchor="middle"');
+  const x0=174,y0=93,cell=27;
+  for(let i=0;i<6;i++){
+    const y=107+i*27;
+    s+='<g data-linked-candidate="'+i+'">';
+    s+=tokenMark(i,36,y,i===state.candidate,10);
+    for(let j=0;j<8;j++)s+=rect(53+j*9,y-7,6,14,'var(--purple)','none',2,'opacity="'+(.25+.7*descriptor(i,0,j))+'"');
+    s+=path('M127 '+y+'H150','detail-line','data-query-link="'+i+'"');
+    s+='</g>';
+    s+=text(x0-12,y+3,CANDIDATES[i],'svg-small','text-anchor="middle"');
+    s+=text(x0+i*cell+12,84,CANDIDATES[i],'svg-small','text-anchor="middle"');
+    for(let j=0;j<6;j++){
+      const value=weights[i][j],selected=i===state.candidate;
+      s+='<g class="matrix-cell" role="button" tabindex="0" data-row="'+i+'" data-col="'+j+'" data-weight="'+value+'" aria-label="Trace query '+CANDIDATES[i]+', source '+CANDIDATES[j]+'">';
+      s+=rect(x0+j*cell,y0+i*cell,24,24,'var(--purple)',selected?'var(--accent)':'none',4,'fill-opacity="'+(.12+value*1.8)+'"');
+      if(selected)s+=text(x0+j*cell+12,y0+i*cell+16,value.toFixed(2),'svg-tiny','text-anchor="middle"');
+      s+='</g>';
     }
+    const ey=103+i*29,w=mix.weights[i];
+    s+='<g data-linked-candidate="'+i+'" data-message-source="'+i+'">';
+    s+=tokenMark(i,368,ey,i===state.candidate,8);
+    s+=rect(384,ey-5,Math.max(2,w*95),10,'var(--purple)','none',3);
+    s+=text(448,ey+3,w.toFixed(2),'svg-tiny','text-anchor="end"');
+    s+='<path data-message-path="'+i+'" d="M457 '+ey+'C492 '+ey+' 492 114 548 114" fill="none" stroke="var(--purple)" stroke-width="'+(1+w*5)+'" stroke-opacity=".25"/>';
+    s+='<circle data-message-pulse="'+i+'" r="'+(2+w*6)+'" fill="var(--accent)"/>';
+    s+='</g>';
   }
-  s += '<g id="head-output">'+path('M467 156H522', 'trace-line');
-  s += rect(535, 83, 199, 167, 'var(--surface)', 'var(--line)', 12);
-  s += text(635, 116, 'Shared low-rank head', 'svg-small', 'text-anchor="middle"');
-  s += text(635, 150, '64 → 8 → 1', 'svg-title svg-accent', 'text-anchor="middle"');
-  s += text(635, 178, 'tanh · bound ε', 'svg-mono', 'text-anchor="middle"');
-  s += text(635, 219, `δ${CANDIDATES[state.candidate]} = ${fmt(example(state).delta[state.candidate])}`, 'svg-title svg-accent', 'text-anchor="middle"');
-  s += '</g>';
-  s += text(365, 285, 'Every candidate can exchange evidence with every other candidate.', 'svg-small', 'text-anchor="middle"');
+  s+=text(28,287,'Shared 64D tokens','svg-tiny');
+  s+=text(180,287,'Select a row to trace its query','svg-tiny');
+  s+=rect(554,79,186,62,'var(--surface)','var(--line)',9);
+  s+=text(647,97,'Σ αⱼvⱼ · head context','svg-small','text-anchor="middle"');
+  for(let j=0;j<8;j++){
+    s+='<rect data-mixed-cell="'+j+'" x="'+(568+j*20)+'" y="107" width="15" height="19" rx="3" fill="var(--purple)" fill-opacity=".08"/>';
+  }
+  s+='<path id="relation-head-link" d="M562 141V158" class="trace-line" pathLength="1"/>';
+  s+=text(647,153,'Combine heads · residual / FFN','svg-tiny','text-anchor="middle"');
+  s+='<g id="relation-head">';
+  s+=rect(554,160,186,66,'var(--purple-soft)','var(--purple)',9);
+  s+=text(647,181,'Shared low-rank head','svg-small','text-anchor="middle"');
+  s+=text(647,209,'64 → 8 → 1','svg-title svg-accent','text-anchor="middle"');
+  s+='</g>';
+  s+=text(647,246,'ε · tanh(·)','svg-mono','text-anchor="middle"');
+  s+=line(570,266,726,266,'var(--line)','stroke-width="4" stroke-linecap="round"');
+  s+=line(648,259,648,273,'var(--muted)');
+  s+='<path id="correction-segment" stroke="var(--purple)" stroke-width="4" stroke-linecap="round"/>';
+  s+='<circle id="correction-point" cy="266" r="5" fill="var(--accent)" stroke="var(--panel)" stroke-width="1.5"/>';
+  s+=text(570,287,'−'+state.bound.toFixed(2),'svg-tiny','text-anchor="middle"')+text(726,287,'+'+state.bound.toFixed(2),'svg-tiny','text-anchor="middle"');
+  s+='<text id="relation-delta" x="648" y="310" class="svg-label svg-accent" text-anchor="middle"></text>';
+  s+=rect(16,323,726,28,'var(--purple-soft)','none',8);
+  s+='<text id="relation-takeaway" x="379" y="341" class="svg-small svg-accent" text-anchor="middle"></text>';
   return s;
 }
+function updateRelations(svg) {
+  const mix=relationMix(state.candidate,state.head,state.sources,phaseProgress),p=mix.phase;
+  svg.querySelectorAll('[data-relation-operation]').forEach(n=>{
+    const active=Number(n.dataset.relationOperation)===p.step;
+    n.setAttribute('fill',active?'var(--purple-soft)':'var(--surface)');
+    n.setAttribute('stroke',active?'var(--purple)':'var(--line)');
+  });
+  svg.querySelectorAll('.matrix-cell').forEach(n=>{
+    const i=Number(n.dataset.row),reveal=smooth((phaseProgress-i*.027)/.16);
+    n.style.opacity=String((i===state.candidate?1:.45)*(.12+.88*reveal));
+  });
+  svg.querySelectorAll('[data-query-link]').forEach(n=>{
+    const selected=Number(n.dataset.queryLink)===state.candidate;
+    n.setAttribute('stroke',selected?'var(--accent)':'var(--line)');
+    n.setAttribute('stroke-width',selected?'2':'1');
+  });
+  mix.weights.forEach((w,i)=>{
+    const flow=p.messages[i],path=svg.querySelector('[data-message-path="'+i+'"]'),dot=svg.querySelector('[data-message-pulse="'+i+'"]');
+    path.style.strokeDasharray=path.getTotalLength();
+    path.style.strokeDashoffset=(1-flow)*path.getTotalLength();
+    path.setAttribute('stroke-opacity',String(.14+.4*flow));
+    const pos=path.getPointAtLength(flow*path.getTotalLength());
+    dot.setAttribute('cx',pos.x);dot.setAttribute('cy',pos.y);
+    dot.style.opacity=flow>0&&flow<1?'1':'0';
+  });
+  mix.mixed.forEach((value,j)=>{
+    const n=svg.querySelector('[data-mixed-cell="'+j+'"]');
+    n.setAttribute('fill',value<0?'var(--peach)':'var(--purple)');
+    n.setAttribute('fill-opacity',.12+.88*Math.abs(value));
+    n.setAttribute('data-value',value);
+  });
+  svg.querySelector('#relation-head').style.opacity=String(.12+.88*p.head);
+  svg.querySelector('#relation-head-link').style.strokeDasharray='1';
+  svg.querySelector('#relation-head-link').style.strokeDashoffset=1-p.head;
+  const delta=example(state).delta[state.candidate]*p.head,x=648+(state.bound?delta/state.bound:0)*78;
+  svg.querySelector('#correction-segment').setAttribute('d','M648 266H'+x);
+  svg.querySelector('#correction-point').setAttribute('cx',x);
+  svg.querySelector('#relation-delta').textContent='δ'+CANDIDATES[state.candidate]+' = '+(delta>0?'+':'')+fmt(delta);
+  svg.querySelector('#relation-takeaway').textContent=[
+    'Each candidate compares its evidence with the complete set.',
+    'Weighted messages gather context from the other possible futures.',
+    'A shared low-rank head turns contextual evidence into a bounded correction.',
+  ][p.step];
+}
+
 function decisionDetail() {
   const d = example(state);
   let s = text(65, 27, 'Candidate', 'svg-small') + text(183, 27, 'Base score b', 'svg-small') + text(373, 27, 'Correction δ', 'svg-small') + text(574, 27, 'Refined score s', 'svg-small');
@@ -651,7 +733,8 @@ function chapterCopy() {
     chapter.fact='388-dimensional tokens. The four-geometry configuration has separately learned parameters and a JEPA-WM base.';
   }
   if(state.stage===2){
-    chapter.description='Trace one candidate through set-wise attention. Inspect a matrix cell to see which alternative contributes evidence, then follow the bounded correction head.';
+    chapter.description='Compare a candidate with the complete set, watch weighted messages gather its context, then follow the shared low-rank head into a bounded correction. Select a matrix row or Trace candidate; change the attention head to inspect a different pattern.';
+    chapter.fact='Two Transformer layers, four attention heads and a shared rank-eight correction head. The diagram isolates one illustrative attention head and computes its weighted sum over eight displayed value components. Attention values and the bounded head output are teaching examples, not checkpoint activations; the head output is illustrated separately from this one-head sum.';
     chapter.caption='Schematic attention and correction outputs illustrate distinct operations; they are not recorded checkpoint activations.';
   }
   if(state.stage===3){
@@ -823,19 +906,7 @@ function updateAnimation() {
   } else if(state.stage===1){
     updateEvidence(svg);
   } else if(state.stage===2){
-    const head=svg.querySelector('#head-output');
-    if(head)head.style.opacity=String(.12+.88*smooth((phaseProgress-.62)/.24));
-    const edges=[...svg.querySelectorAll('.attention-edge')];
-    edges.forEach((n,i)=>{
-      const p=smooth((phaseProgress-.12-i*.035)/.32);
-      n.style.strokeDasharray=n.getTotalLength();
-      n.style.strokeDashoffset=(1-p)*n.getTotalLength();
-      n.style.animation='none';
-    });
-    [...svg.querySelectorAll('.matrix-cell')].forEach(n=>{
-      const row=Number(n.dataset.row),p=smooth((phaseProgress-.06-row*.065)/.3);
-      n.style.opacity=String(.2+.8*p);
-    });
+    updateRelations(svg);
   } else if(state.stage===3){
     const d=example(state),initial=[...CANDIDATES.keys()].sort((a,b)=>d.base[a]-d.base[b]);
     const p=state.comparing?0:decisionProgress(phaseProgress,d);
@@ -927,6 +998,10 @@ function setTheme(theme){
   try{localStorage.setItem('djepa-theme',theme);}catch(_){}
 }
 document.addEventListener('click',event=>{
+  const relation=event.target.closest('[data-relation-step]');
+  if(relation){stop();const i=Number(relation.dataset.relationStep);state.elapsed=[0,.3,.72][i]*stageSeconds[2];updateAnimation();play(true,[.3,.72,1][i]*stageSeconds[2]);return;}
+  const query=event.target.closest('.matrix-cell');
+  if(query){stop();state.candidate=Number(query.dataset.row);render(false);return;}
   const task=event.target.closest('[data-validation-open]');
   if(task){openValidationVideo(Number(task.dataset.validationOpen));return;}
   const jump=event.target.closest('[data-validation-jump]');

@@ -25,7 +25,15 @@ browser inference is required.
    the six-candidate 64D token bank. Four-source mode adds two rank coordinates,
    keeping the two 192D descriptors.
 3. **Relational alignment:** candidate-to-candidate attention, inspectable matrix
-   cells and the bounded correction head.
+   cells and the bounded correction head. Three independently replayable operations
+   reveal the comparison matrix, pass weighted messages into a query-specific
+   context, and animate the bounded correction. Select a matrix row or use Trace
+   to change the query, and switch heads to inspect different attention patterns.
+   Eight displayed value components are actually aggregated with the illustrative
+   normalized attention weights. The displayed head output remains a separate
+   teaching value, not a trained forward pass through the illustrated single head.
+   Multi-head combination, residual and feed-forward processing connect that
+   illustrative head context to the shared 64 → 8 → 1 correction head.
 4. **Decision rule:** base scores, bounded corrections, animated rank crossings
    and the calibrated margin gate.
 5. **Future representation:** ordinal realization or five-step temporal transport;
@@ -160,6 +168,8 @@ stage. Training supervision opens in a dialog.
   The wall shows excerpts; the modal opens the unchanged full published video.
   No physical-robot footage is substituted with simulated footage.
 - `static/js/explainer-model.mjs`: pure numerical teaching example.
+- `static/js/explainer-relations.mjs`: message timing and weighted aggregation of
+  the displayed illustrative value vectors, with normalization and summation tests.
 - `static/js/explainer-motion.mjs`: deterministic presentation timing and
   rank-to-radius geometry, with endpoint and decision-boundary tests.
 - `static/js/explainer-evidence.mjs`: illustrative vector subtraction, LayerNorm
