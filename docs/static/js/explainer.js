@@ -1,4 +1,5 @@
 import { relationMix } from './explainer-relations.mjs';
+import { createNarration } from './explainer-narration.mjs';
 import { VALIDATION_TASKS, validationFrame, syncValidationVideos, pauseValidationVideos, releaseValidationVideos } from './explainer-validation.mjs';
 import { pairPhase, latentMarkup, latentIntro, PAIR_INTRO_SECONDS, PAIR_STAGE_SECONDS, pairTimelinePhase, pairTimelineSeconds } from './explainer-pair.mjs';
 import { DIAGNOSTIC, problemPhase } from './explainer-problem.mjs';
@@ -13,6 +14,7 @@ const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
 const state = { stage: 0, candidate: 0, sources: 2, bound: 0.2, head: 0, lifting: 'ordinal', progress: 1, playing: false, speed: 1, elapsed: 0, supervision: false, recordCandidate:2, replay:true, comparing:false, hoverCandidate:null };
 const stageSeconds = [PAIR_STAGE_SECONDS, 10, 9, 10, 12, 26];
 const totalDuration = stageSeconds.reduce((a,b)=>a+b,0);
+let narration=null,narrationMotion={running:false,rate:1};
 let record = null;
 let previewCandidate = 0;
 let pair = null;
@@ -643,8 +645,8 @@ function updateValidation(svg) {
     n.querySelector('[data-validation-open]').setAttribute('tabindex',p>.95?'0':'-1');
   });
   if($('#diagram-viewport').classList.contains('validation-expanded')!==wall)updateViewport();
-  svg.dataset.playbackSpeed=state.speed;
-  syncValidationVideos(svg,state.elapsed,state.playing);
+  svg.dataset.playbackSpeed=narration?.active?Math.max(.0625,narrationMotion.rate):state.speed;
+  syncValidationVideos(svg,state.elapsed,state.playing||(narration?.active&&narrationMotion.running&&narrationMotion.rate>0));
   $('#focus-label').textContent=wall?'From one decision to cross-task validation':'PushT · synchronized physical replay';
   $('#data-badge').textContent=wall?'RECORDED EXECUTION EXCERPTS':'RECORDED EXECUTION';
   $('#detail-title').textContent=wall?'One principle. Different physical systems.':'The choice changes the outcome.';
@@ -998,6 +1000,8 @@ function selectStage(stage,manual=true) {
   tab.scrollIntoView({block:'nearest',inline:'nearest',behavior:'instant'});
 }
 function stop() {
+  narration?.pause();
+  queueMicrotask(()=>{if(narration?.active)narration.refreshControls();});
   pauseValidationVideos();
   document.querySelectorAll('[data-validation-video]').forEach(v=>v.dataset.wantsPlayback='false');
   state.playing=false;cancelAnimationFrame(frame);document.body.classList.remove('running');
@@ -1005,6 +1009,7 @@ function stop() {
   $('#play').setAttribute('aria-label','Play guided tour');
 }
 function play(stepOnly=false,until=null) {
+  narration?.exit();
   if(state.playing){stop();return;}
   if(state.elapsed>=stageSeconds[state.stage]){
     if(stepOnly){state.elapsed=0;}else selectStage(state.stage===5?0:state.stage+1,false);
@@ -1036,6 +1041,11 @@ function setTheme(theme){
   $('#site-icon').href='static/images/branding/jepa-icon-'+theme+'.svg';
   try{localStorage.setItem('djepa-theme',theme);}catch(_){}
 }
+document.addEventListener('click',event=>{
+  if(narration?.active&&event.target.closest('#chapters [data-stage],[data-candidate],[data-lifting],[data-replay],[data-relation-step],[data-problem-step],[data-evidence-step],[data-lift-step],.matrix-cell')){
+    narration.pause();queueMicrotask(()=>{if(narration?.active)narration.refreshControls();});
+  }
+},true);
 document.addEventListener('click',event=>{
   const relation=event.target.closest('[data-relation-step]');
   if(relation){stop();const i=Number(relation.dataset.relationStep);state.elapsed=[0,.3,.72][i]*stageSeconds[2];updateAnimation();play(true,[.3,.72,1][i]*stageSeconds[2]);return;}
@@ -1107,13 +1117,13 @@ document.addEventListener('keydown',event=>{
   const target=event.target;
   if((event.key==='Enter'||event.key===' ')&&target.matches('[role=button]')){event.preventDefault();target.dispatchEvent(new MouseEvent('click',{bubbles:true}));return;}
   if(target.closest('input,select,textarea,button,a,summary,dialog'))return;
-  if(event.key==='ArrowRight'){event.preventDefault();selectStage(state.stage+1);}
-  if(event.key==='ArrowLeft'){event.preventDefault();selectStage(state.stage-1);}
-  if(event.code==='Space'){event.preventDefault();play();}
+  if(event.key==='ArrowRight'){event.preventDefault();if(narration?.active)narration.step(1);else selectStage(state.stage+1);}
+  if(event.key==='ArrowLeft'){event.preventDefault();if(narration?.active)narration.step(-1);else selectStage(state.stage-1);}
+  if(event.code==='Space'){event.preventDefault();if(narration?.active)narration.toggle();else play();}
 });
 $('#play').onclick=()=>play();
-$('#previous').onclick=()=>selectStage(state.stage-1);
-$('#next').onclick=()=>selectStage(state.stage+1);
+$('#previous').onclick=()=>narration?.active?narration.step(-1):selectStage(state.stage-1);
+$('#next').onclick=()=>narration?.active?narration.step(1):selectStage(state.stage+1);
 $('#tour-seek').max=totalDuration;
 const milestones=[
   [1,.55,'Inspect ordinal evidence'],
@@ -1128,9 +1138,9 @@ $('.timeline').insertAdjacentHTML('beforeend','<div class="timeline-markers" ari
   const time=stageSeconds.slice(0,stage).reduce((a,b)=>a+b,0)+stageSeconds[stage]*phase;
   return '<button type="button" data-jump-stage="'+stage+'" data-jump-phase="'+phase+'" aria-label="'+label+'" title="'+label+'" style="left:'+100*time/totalDuration+'%"><span class="sr-only">'+label+'</span></button>';
 }).join('')+'</div>');
-$('#tour-seek').oninput=e=>seek(Number(e.target.value));
-$('#reset').onclick=()=>{stop();Object.assign(state,{stage:0,candidate:0,sources:2,bound:.2,head:0,lifting:'ordinal',progress:0,elapsed:0,recordCandidate:2,replay:true,speed:1,comparing:false,hoverCandidate:null});$('#strength').value=.2;$('#speed').value='1';render(true);};
-$('#speed').onchange=e=>state.speed=Number(e.target.value);
+$('#tour-seek').oninput=e=>narration?.active?narration.seek(Number(e.target.value)):seek(Number(e.target.value));
+$('#reset').onclick=()=>{narration?.exit();stop();Object.assign(state,{stage:0,candidate:0,sources:2,bound:.2,head:0,lifting:'ordinal',progress:0,elapsed:0,recordCandidate:2,replay:true,speed:1,comparing:false,hoverCandidate:null});$('#strength').value=.2;$('#speed').value='1';render(true);};
+$('#speed').onchange=e=>{state.speed=Number(e.target.value);narration?.setRate(state.speed);};
 $('#strength').oninput=e=>{stop();state.bound=Number(e.target.value);state.elapsed=stageSeconds[state.stage];render(false);};
 $$('[data-sources]').forEach(b=>b.onclick=()=>{stop();state.sources=Number(b.dataset.sources);render(false);});
 $('#theme-toggle').onclick=()=>setTheme(document.documentElement.dataset.theme==='dark'?'light':'dark');
@@ -1140,7 +1150,7 @@ $('#validation-dialog').onclose=()=>{$('#validation-full-video').pause();$('#val
 $('#close-supervision').onclick=()=>$('#supervision-panel').close();
 $('#supervision-panel').onclose=()=>$('#supervision-toggle').setAttribute('aria-expanded','false');
 $('#fullscreen').onclick=async()=>{
-  try{if(document.fullscreenElement)await document.exitFullscreen();else await $('#explorer').requestFullscreen();}
+  try{if(document.fullscreenElement)await document.exitFullscreen();else await (narration?.active?document.documentElement:$('#explorer')).requestFullscreen();}
   catch(_){$('#fullscreen').title='Fullscreen is not available in this browser.';}
 };
 document.addEventListener('fullscreenchange',()=>$('#fullscreen').setAttribute('aria-label',document.fullscreenElement?'Exit fullscreen':'Enter fullscreen'));
@@ -1165,3 +1175,15 @@ try {
 } catch(error){console.warn(error.message);}
 const hash=location.hash.match(/^#stage-([1-6])$/);if(hash)state.stage=Number(hash[1])-1;
 render();
+narration=createNarration({
+  stop:()=>stop(),
+  pause:()=>{narrationMotion.running=false;pauseValidationVideos();},
+  exit:()=>{$('#tour-seek').max=totalDuration;updateAnimation();$('#previous').disabled=state.stage===0;$('#next').disabled=state.stage===5;},
+  frame:(f,motion)=>{
+    narrationMotion=motion;
+    const changed=state.stage!==f.stage||state.sources!==f.sources||state.lifting!==f.lifting||state.candidate!==f.candidate||!state.replay;
+    Object.assign(state,{stage:f.stage,elapsed:f.elapsed,sources:f.sources,lifting:f.lifting,candidate:f.candidate,bound:.2,replay:true,comparing:false,hoverCandidate:null});
+    if(changed)render(false);else updateAnimation();
+    const explanation=$('#stage-options details');if(explanation)explanation.open=f.predictor;
+  },
+});

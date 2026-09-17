@@ -6,6 +6,37 @@ inspector and a shared playback timeline. It defaults to dark and shares the
 main site's saved light/dark preference. Assets are local; no model download or
 browser inference is required.
 
+## Narrated tour
+
+The purple **Narrated tour** button plays the authors' eight English voiceover
+segments with sentence-by-sentence subtitles in the header. It is separate from
+the gradient **Play tour** button, which retains the freely explorable silent
+animation. The header expands during narration while the workbench remains
+within the desktop viewport. The complete voiceover lasts **3 minutes 26 seconds**
+at its original speed and contains 36 sentence cues.
+
+Audio time drives both the subtitle and the visual frame. Transformations finish
+and hold where the explanation needs more time; the later recorded task previews
+retain their playback speed. **Sound / Muted** changes only audibility, so muted
+narration still advances the captions and animation. Pause, the timeline and the
+previous/next controls operate on narration while this mode is active. Changing
+a chapter or candidate pauses the voice; resuming restores its scripted scene.
+Play tour or the header's close control exits narrated mode. Space toggles the
+active mode, and browser-tab visibility changes pause playback.
+
+The audio files in `static/audio/narration/` are unchanged author-supplied MP3s.
+`static/data/explainer-narration.json` contains their hashes, actual durations,
+sentence boundaries and visual keyframes. Word timestamps were matched to the
+exact supplied script, then sentence boundaries and cue transitions checked;
+the segments were not divided into equal-duration subtitle chunks. Files load
+on demand, and the next segment preloads during playback. No external speech
+service, model download or browser transcription is involved.
+
+`explainer-narration-model.mjs` implements the pure time mapping;
+`explainer-narration.mjs` manages audio, captions and mode transitions. The
+narration tests check the source hashes, unique segments, sentence timing,
+visual holds, mechanism selection and preserved task-preview timing.
+
 ## Six stages
 
 1. **The prediction gap:** two recorded candidates from the same LeWM space have

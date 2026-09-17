@@ -1,0 +1,625 @@
+{
+  "version": 1,
+  "language": "en",
+  "alignment": "faster-whisper base.en CPU word timestamps matched to supplied script; reviewed sentence boundaries",
+  "segments": [
+    {
+      "id": 1,
+      "audio": "static/audio/narration/01_question.mp3",
+      "duration": 21.768,
+      "sha256": "aecddd5c7e931848bbdcadb75e32a0c6dc1b1a6b9ac1ef0b5a2dd317b714e0ae",
+      "stage": 0,
+      "lifting": "ordinal",
+      "sentences": [
+        {
+          "id": "01.01",
+          "text": "Predicting a plausible future is only part of the problem.",
+          "start": 0,
+          "end": 2.9
+        },
+        {
+          "id": "01.02",
+          "text": "A controller must choose which future to pursue.",
+          "start": 3.9,
+          "end": 6.24
+        },
+        {
+          "id": "01.03",
+          "text": "D-JEPA is a decision-aligned latent world model built on pretrained predictive models.",
+          "start": 7.38,
+          "end": 11.82
+        },
+        {
+          "id": "01.04",
+          "text": "Our starting point is simple: two predicted futures can have almost identical distances to the goal, yet lead to very different physical outcomes.",
+          "start": 13.06,
+          "end": 20.5
+        }
+      ],
+      "keyframes": [
+        {
+          "time": 0,
+          "elapsed": 0,
+          "sources": 2,
+          "predictor": false
+        },
+        {
+          "time": 4,
+          "elapsed": 4,
+          "sources": 2,
+          "predictor": false
+        },
+        {
+          "time": 21.768,
+          "elapsed": 4,
+          "sources": 2,
+          "predictor": false
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "audio": "static/audio/narration/02_prediction_gap.mp3",
+      "duration": 26.832,
+      "sha256": "aebab83444db3edf1ae0d95ec5eb359381a388ea57db0fcc4d3709dfb6af9f8e",
+      "stage": 0,
+      "lifting": "ordinal",
+      "sentences": [
+        {
+          "id": "02.01",
+          "text": "Watch these two actions from the same initial state.",
+          "start": 0,
+          "end": 2.72
+        },
+        {
+          "id": "02.02",
+          "text": "The closer predicted future fails, while the slightly farther one succeeds.",
+          "start": 3.76,
+          "end": 7.62
+        },
+        {
+          "id": "02.03",
+          "text": "This reflects a broader decision-local prediction gap.",
+          "start": 8.86,
+          "end": 11.66
+        },
+        {
+          "id": "02.04",
+          "text": "For LeWM, ranking correlation falls from point nine zero across all sixty-three candidates to point one one among the top four.",
+          "start": 12.7,
+          "end": 20.2
+        },
+        {
+          "id": "02.05",
+          "text": "Predictive geometry becomes least reliable precisely where the next action is selected.",
+          "start": 21.0,
+          "end": 25.68
+        }
+      ],
+      "keyframes": [
+        {
+          "time": 0,
+          "elapsed": 4,
+          "sources": 2,
+          "predictor": false
+        },
+        {
+          "time": 3.64,
+          "elapsed": 9.52,
+          "sources": 2,
+          "predictor": false
+        },
+        {
+          "time": 3.76,
+          "elapsed": 10.48,
+          "sources": 2,
+          "predictor": false
+        },
+        {
+          "time": 8.86,
+          "elapsed": 10.48,
+          "sources": 2,
+          "predictor": false
+        },
+        {
+          "time": 10.46,
+          "elapsed": 13.36,
+          "sources": 2,
+          "predictor": false
+        },
+        {
+          "time": 26.832,
+          "elapsed": 13.36,
+          "sources": 2,
+          "predictor": false
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "audio": "static/audio/narration/03_predictive_evidence.mp3",
+      "duration": 24.072,
+      "sha256": "84d1b66f9e7a8e135a75c1a3a1f0a291ec72576fc6d641ace16c04558b64b1a2",
+      "stage": 1,
+      "lifting": "ordinal",
+      "sentences": [
+        {
+          "id": "03.01",
+          "text": "D-JEPA starts with the futures already predicted for each candidate action.",
+          "start": 0,
+          "end": 3.82
+        },
+        {
+          "id": "03.02",
+          "text": "We describe each future relative to its goal, while keeping detailed features inside their original predictive space.",
+          "start": 4.92,
+          "end": 10.88
+        },
+        {
+          "id": "03.03",
+          "text": "We also convert model preferences into ranks, providing a shared comparison scale.",
+          "start": 11.68,
+          "end": 16.78
+        },
+        {
+          "id": "03.04",
+          "text": "This lets complementary predictive geometries contribute evidence to a common candidate representation.",
+          "start": 17.86,
+          "end": 22.58
+        }
+      ],
+      "keyframes": [
+        {
+          "time": 0,
+          "elapsed": 0,
+          "sources": 2,
+          "predictor": false
+        },
+        {
+          "time": 4.92,
+          "elapsed": 1.3,
+          "sources": 2,
+          "predictor": false
+        },
+        {
+          "time": 10.88,
+          "elapsed": 2.8,
+          "sources": 2,
+          "predictor": false
+        },
+        {
+          "time": 11.68,
+          "elapsed": 2.8,
+          "sources": 2,
+          "predictor": false
+        },
+        {
+          "time": 16.78,
+          "elapsed": 5.7,
+          "sources": 2,
+          "predictor": false
+        },
+        {
+          "time": 17.86,
+          "elapsed": 5.7,
+          "sources": 4,
+          "predictor": false
+        },
+        {
+          "time": 20.88,
+          "elapsed": 9,
+          "sources": 4,
+          "predictor": false
+        },
+        {
+          "time": 21.88,
+          "elapsed": 9,
+          "sources": 2,
+          "predictor": false
+        },
+        {
+          "time": 24.072,
+          "elapsed": 10,
+          "sources": 2,
+          "predictor": false
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "audio": "static/audio/narration/04_relational_alignment.mp3",
+      "duration": 27.936,
+      "sha256": "97be60921159b36c317f632d2f0cc450e3c5a8bf33e76d05b7f09322805a2808",
+      "stage": 2,
+      "lifting": "ordinal",
+      "sentences": [
+        {
+          "id": "04.01",
+          "text": "The core of D-JEPA is relational alignment.",
+          "start": 0,
+          "end": 2.32
+        },
+        {
+          "id": "04.02",
+          "text": "Each candidate attends to the full set, gathering evidence from the alternatives it competes against.",
+          "start": 3.34,
+          "end": 8.5
+        },
+        {
+          "id": "04.03",
+          "text": "We train these relations using executed candidate outcomes, with particular emphasis on the distinctions that determine action selection.",
+          "start": 9.12,
+          "end": 16.46
+        },
+        {
+          "id": "04.04",
+          "text": "Watch the weighted messages gather into a candidate-specific context.",
+          "start": 17.52,
+          "end": 20.98
+        },
+        {
+          "id": "04.05",
+          "text": "A shared correction head turns that context into a bounded adjustment to the predictive ordering.",
+          "start": 22.26,
+          "end": 26.8
+        }
+      ],
+      "keyframes": [
+        {
+          "time": 0,
+          "elapsed": 0,
+          "sources": 2,
+          "predictor": false
+        },
+        {
+          "time": 8.5,
+          "elapsed": 2.7,
+          "sources": 2,
+          "predictor": false
+        },
+        {
+          "time": 17.52,
+          "elapsed": 2.7,
+          "sources": 2,
+          "predictor": false
+        },
+        {
+          "time": 20.98,
+          "elapsed": 6.48,
+          "sources": 2,
+          "predictor": false
+        },
+        {
+          "time": 22.26,
+          "elapsed": 6.48,
+          "sources": 2,
+          "predictor": false
+        },
+        {
+          "time": 26.8,
+          "elapsed": 9,
+          "sources": 2,
+          "predictor": false
+        },
+        {
+          "time": 27.936,
+          "elapsed": 9,
+          "sources": 2,
+          "predictor": false
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "audio": "static/audio/narration/05_decision_rule.mp3",
+      "duration": 28.584,
+      "sha256": "eae01c476013b9ee492f6fe9c1191e50b47ecc92ae1e3c819a5bed498f26f535",
+      "stage": 3,
+      "lifting": "ordinal",
+      "sentences": [
+        {
+          "id": "05.01",
+          "text": "These adjustments concentrate on close alternatives near the decision boundary.",
+          "start": 0,
+          "end": 3.74
+        },
+        {
+          "id": "05.02",
+          "text": "As the scores change, the preferred action can change with them.",
+          "start": 4.96,
+          "end": 8.34
+        },
+        {
+          "id": "05.03",
+          "text": "A calibrated margin gate determines when to adopt the aligned choice.",
+          "start": 9.38,
+          "end": 12.76
+        },
+        {
+          "id": "05.04",
+          "text": "Restricted adaptation of the final predictor block and projection can also contribute a complementary proposal.",
+          "start": 13.86,
+          "end": 19.56
+        },
+        {
+          "id": "05.05",
+          "text": "Relational alignment remains the core decision rule, with adaptation and additional predictive geometries extending its evidence.",
+          "start": 20.62,
+          "end": 27.38
+        }
+      ],
+      "keyframes": [
+        {
+          "time": 0,
+          "elapsed": 0,
+          "sources": 2,
+          "predictor": false
+        },
+        {
+          "time": 4.96,
+          "elapsed": 3,
+          "sources": 2,
+          "predictor": false
+        },
+        {
+          "time": 8.34,
+          "elapsed": 4.8,
+          "sources": 2,
+          "predictor": false
+        },
+        {
+          "time": 9.38,
+          "elapsed": 4.8,
+          "sources": 2,
+          "predictor": false
+        },
+        {
+          "time": 12.76,
+          "elapsed": 10,
+          "sources": 2,
+          "predictor": false
+        },
+        {
+          "time": 13.86,
+          "elapsed": 10,
+          "sources": 2,
+          "predictor": true
+        },
+        {
+          "time": 28.584,
+          "elapsed": 10,
+          "sources": 2,
+          "predictor": true
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "audio": "static/audio/narration/06_ordinal_realization.mp3",
+      "duration": 25.92,
+      "sha256": "2fca0425fe10d0cb280532a6169ab620b45de53fd749b10a497a363498d36911",
+      "stage": 4,
+      "lifting": "ordinal",
+      "sentences": [
+        {
+          "id": "06.01",
+          "text": "Next, we write the learned ordering directly into future representations.",
+          "start": 0,
+          "end": 3.5
+        },
+        {
+          "id": "06.02",
+          "text": "First, read the aligned rank.",
+          "start": 5.3,
+          "end": 6.62
+        },
+        {
+          "id": "06.03",
+          "text": "Then convert that rank into a target distance from the goal.",
+          "start": 7.72,
+          "end": 10.4
+        },
+        {
+          "id": "06.04",
+          "text": "Move the terminal future to that distance, keeping its direction and earlier future steps unchanged.",
+          "start": 11.48,
+          "end": 16.4
+        },
+        {
+          "id": "06.05",
+          "text": "Now watch the native-distance readout: the nearest future recovers the aligned choice, and the complete ordering follows automatically.",
+          "start": 17.88,
+          "end": 24.52
+        }
+      ],
+      "keyframes": [
+        {
+          "time": 0,
+          "elapsed": 0,
+          "sources": 2,
+          "predictor": false
+        },
+        {
+          "time": 5.3,
+          "elapsed": 0,
+          "sources": 2,
+          "predictor": false
+        },
+        {
+          "time": 6.62,
+          "elapsed": 1.92,
+          "sources": 2,
+          "predictor": false
+        },
+        {
+          "time": 7.72,
+          "elapsed": 1.92,
+          "sources": 2,
+          "predictor": false
+        },
+        {
+          "time": 10.4,
+          "elapsed": 4.08,
+          "sources": 2,
+          "predictor": false
+        },
+        {
+          "time": 11.48,
+          "elapsed": 4.08,
+          "sources": 2,
+          "predictor": false
+        },
+        {
+          "time": 16.4,
+          "elapsed": 9.6,
+          "sources": 2,
+          "predictor": false
+        },
+        {
+          "time": 17.88,
+          "elapsed": 9.6,
+          "sources": 2,
+          "predictor": false
+        },
+        {
+          "time": 24.52,
+          "elapsed": 12,
+          "sources": 2,
+          "predictor": false
+        },
+        {
+          "time": 25.92,
+          "elapsed": 12,
+          "sources": 2,
+          "predictor": false
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "audio": "static/audio/narration/07_temporal_transport.mp3",
+      "duration": 20.904,
+      "sha256": "0f93fa76605f34261e938c77d8a49f6bf85c4320e619953946e01994a0a94886",
+      "stage": 4,
+      "lifting": "transport",
+      "sentences": [
+        {
+          "id": "07.01",
+          "text": "Our Reacher representation study explores a complementary route: bounded temporal transport.",
+          "start": 0,
+          "end": 5.1
+        },
+        {
+          "id": "07.02",
+          "text": "Here, learned residuals refine five corresponding future steps while preserving action identity.",
+          "start": 5.86,
+          "end": 11.36
+        },
+        {
+          "id": "07.03",
+          "text": "The two mechanisms study how decision structure can be expressed through future latents, from exact ordinal geometry to learned temporal updates.",
+          "start": 12.46,
+          "end": 19.64
+        }
+      ],
+      "keyframes": [
+        {
+          "time": 0,
+          "elapsed": 0,
+          "sources": 2,
+          "predictor": false
+        },
+        {
+          "time": 5.86,
+          "elapsed": 4.08,
+          "sources": 2,
+          "predictor": false
+        },
+        {
+          "time": 11.36,
+          "elapsed": 9.36,
+          "sources": 2,
+          "predictor": false
+        },
+        {
+          "time": 19.64,
+          "elapsed": 12,
+          "sources": 2,
+          "predictor": false
+        },
+        {
+          "time": 20.904,
+          "elapsed": 12,
+          "sources": 2,
+          "predictor": false
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "audio": "static/audio/narration/08_validation.mp3",
+      "duration": 30.48,
+      "sha256": "063b3aef3555afdfa8eae9b377864d2b6f66601bc8393d685b05a3d327ba210f",
+      "stage": 5,
+      "lifting": "ordinal",
+      "sentences": [
+        {
+          "id": "08.01",
+          "text": "Finally, the selected action is executed.",
+          "start": 0,
+          "end": 2.24
+        },
+        {
+          "id": "08.02",
+          "text": "The same starting state can now lead to a different physical future.",
+          "start": 3.58,
+          "end": 6.78
+        },
+        {
+          "id": "08.03",
+          "text": "Our evaluations span pushing, reaching, granular manipulation, bimanual tasks, physical robots, and autonomous driving.",
+          "start": 7.88,
+          "end": 16.06
+        },
+        {
+          "id": "08.04",
+          "text": "Success improves by about fifteen percentage points on RoboTwin and seventeen on physical robot tasks.",
+          "start": 17.2,
+          "end": 22.94
+        },
+        {
+          "id": "08.05",
+          "text": "D-JEPA connects predictive world modeling to control by learning the relations that make better decisions.",
+          "start": 24.16,
+          "end": 29.24
+        }
+      ],
+      "keyframes": [
+        {
+          "time": 0,
+          "elapsed": 0,
+          "sources": 2,
+          "predictor": false
+        },
+        {
+          "time": 8,
+          "elapsed": 8,
+          "sources": 2,
+          "predictor": false
+        },
+        {
+          "time": 26,
+          "elapsed": 26,
+          "sources": 2,
+          "predictor": false
+        },
+        {
+          "time": 30.48,
+          "elapsed": 26,
+          "sources": 2,
+          "predictor": false
+        }
+      ]
+    }
+  ]
+}
