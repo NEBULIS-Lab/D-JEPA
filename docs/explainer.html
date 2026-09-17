@@ -22,60 +22,58 @@
     <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to light theme" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="moon" d="M20 15.5A8.5 8.5 0 0 1 8.5 4 8.5 8.5 0 1 0 20 15.5Z"/><g class="sun"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></g></svg><span id="theme-label">Dark</span></button>
   </header>
   <main>
-    <section class="workbench wrap" id="explorer" aria-label="Interactive D-JEPA architecture">
-      <div class="toolbar">
-        <div class="player-controls">
-          <button class="play-button" id="play" type="button" aria-label="Play guided tour"><span id="play-symbol" aria-hidden="true">▶</span><span id="play-label">Play tour</span></button>
-          <button class="icon-button" id="previous" type="button" aria-label="Previous stage">←</button>
-          <button class="icon-button" id="next" type="button" aria-label="Next stage">→</button>
-          <button class="text-button" id="reset" type="button">Reset</button>
-          <label class="speed-label">Speed <select id="speed" aria-label="Tour playback speed"><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="1.5">1.5×</option><option value="2">2×</option></select></label>
-        </div>
-        <span class="toolbar-hint">Click a module. Trace a candidate.</span>
-      </div>
-      <nav class="chapter-tabs" aria-label="Method stages" id="chapters">
-        <button type="button" data-stage="0" aria-current="step"><span>01</span>Candidate futures</button>
-        <button type="button" data-stage="1"><span>02</span>Predictive evidence</button>
-        <button type="button" data-stage="2"><span>03</span>Relational alignment</button>
-        <button type="button" data-stage="3"><span>04</span>Decision rule</button>
-        <button type="button" data-stage="4"><span>05</span>Future representation</button>
-        <button type="button" data-stage="5"><span>06</span>Action selection</button>
+    <section id="explorer" class="workbench" aria-label="Interactive D-JEPA workbench">
+      <nav id="chapters" class="chapter-tabs" aria-label="Method stages">
+        <button type="button" data-stage="0" aria-current="step"><span>01</span>Candidate futures<i aria-hidden="true">→</i></button>
+        <button type="button" data-stage="1"><span>02</span>Predictive evidence<i aria-hidden="true">→</i></button>
+        <button type="button" data-stage="2"><span>03</span>Relational alignment<i aria-hidden="true">→</i></button>
+        <button type="button" data-stage="3"><span>04</span>Decision rule<i aria-hidden="true">→</i></button>
+        <button type="button" data-stage="4"><span>05</span>Future representation<i aria-hidden="true">→</i></button>
+        <button type="button" data-stage="5"><span>06</span>Action selection<i aria-hidden="true">→</i></button>
       </nav>
-      <div class="progress-track"><div id="tour-progress"></div></div>
-      <div class="architecture-scroll" tabindex="0" aria-label="Architecture overview; scroll horizontally on small screens">
-        <svg id="architecture" viewBox="0 0 1320 405" role="img" aria-labelledby="architecture-title architecture-description">
-          <title id="architecture-title">D-JEPA architecture</title><desc id="architecture-description">Six connected modules show how actions become predicted futures, candidate relations, aligned scores and future representations. Choose a stage using the buttons above.</desc>
-        </svg>
-      </div>
-      <div class="diagram-key"><span><i class="key-dot purple"></i>Decision alignment</span><span><i class="key-dot gold"></i>Pretrained ordering</span><span><i class="key-dot blue"></i>Predictive evidence</span><span class="key-note">Six candidates for illustration · schematic values</span></div>
-      <div class="focus-panel" id="focus-panel">
-        <article class="focus-copy" aria-live="polite" aria-atomic="true">
-          <p class="eyebrow" id="detail-kicker">01 / THE CANDIDATE SET</p>
-          <h2 id="detail-title">One scene. Several possible futures.</h2>
-          <p id="detail-description">Each action sequence produces a different predicted future. The planner must choose which one to execute from the same observation and goal.</p>
-          <div class="formula" id="detail-formula">Futureᵢ = F(context, actionᵢ)</div>
-          <p class="detail-fact" id="detail-fact">The relational operator processes the complete candidate set.</p>
-          <div id="stage-options" class="stage-options"></div>
-        </article>
-        <div class="focus-visual">
-          <div class="visual-heading"><span id="focus-label">Candidate trajectories</span><span class="small-tag">ILLUSTRATIVE</span></div>
-          <div class="detail-scroll" tabindex="0" aria-label="Stage detail; scroll horizontally on small screens"><svg id="detail-visual" viewBox="0 0 760 320" role="img" aria-label="Selected stage detail"></svg></div>
-          <span class="mobile-scroll-hint">Swipe the diagram to explore →</span>
-          <div class="candidate-controls" aria-label="Trace a candidate" id="candidate-controls"><span>Trace</span></div>
-          <p class="visual-caption" id="visual-caption">Choose a candidate to follow its evidence through the architecture.</p>
+      <div class="stage-topline"><span id="focus-label">A shared start. Different actions.</span><span id="data-badge" class="small-tag">RECORDED EXECUTION</span></div>
+      <div id="focus-panel" class="stage-layout">
+        <div class="stage-canvas">
+          <svg id="architecture" class="context-strip" viewBox="0 0 760 42" role="img" aria-label="Active computation path"></svg>
+          <div id="diagram-viewport"><svg id="detail-visual" viewBox="0 0 760 360" role="img" aria-label="Selected stage detail"></svg><div id="matrix-tooltip" role="status" hidden></div></div>
+          <div id="candidate-controls" class="candidate-controls" aria-label="Trace a candidate"></div>
+          <p id="visual-caption" class="visual-caption"></p>
         </div>
+        <aside class="inspector">
+          <div class="inspector-copy" aria-live="polite">
+            <p id="detail-kicker" class="eyebrow"></p><h1 id="detail-title"></h1>
+            <p id="detail-description"></p>
+          </div>
+          <div id="detail-formula" class="formula"></div>
+          <div id="stage-options" class="stage-options"></div>
+          <div id="experiment-controls">
+            <div class="source-control"><span>Predictive sources</span><div class="segmented" role="group" aria-label="Predictive source configuration"><button data-sources="2" aria-pressed="true">Two</button><button data-sources="4" aria-pressed="false">Four</button></div></div>
+            <label class="strength-control"><span>Correction bound <output id="strength-value" for="strength">0.20</output></span><input id="strength" type="range" min="0" max="0.2" step="0.005" value="0.2" aria-label="Illustrative correction bound"></label>
+            <div class="selection-readout"><span>Base <b id="base-choice">B</b></span><span>→</span><span>Aligned <b id="aligned-choice">A</b></span></div>
+          </div>
+          <details class="technical-note"><summary>Inside this step <span>+</span></summary><p id="detail-fact"></p><p id="model-note"></p></details>
+          <button id="supervision-toggle" class="quiet-button" aria-expanded="false" aria-controls="supervision-panel">Training supervision ↗</button>
+        </aside>
       </div>
-      <div class="experiment-controls">
-        <div class="control-group"><span class="control-label" id="source-label">Predictive sources</span><div class="segmented" role="group" aria-labelledby="source-label"><button type="button" data-sources="2" aria-pressed="true">Two</button><button type="button" data-sources="4" aria-pressed="false">Four</button></div></div>
-        <label class="strength-control"><span class="control-label">Correction bound <output id="strength-value" for="strength">0.20</output></span><input id="strength" type="range" min="0" max="0.2" step="0.005" value="0.2" aria-label="Illustrative correction bound"></label>
-        <div class="selection-readout"><span>Base choice <b id="base-choice">B</b></span><span class="readout-arrow">→</span><span>Aligned choice <b id="aligned-choice">A</b></span></div>
-        <button class="text-button" id="supervision-toggle" type="button" aria-pressed="false">Show training supervision</button>
+      <div class="playback">
+        <button id="play" class="play-button" aria-label="Play guided tour"><span id="play-symbol">▶</span><span id="play-label">Play tour</span></button>
+        <button id="previous" class="icon-button" aria-label="Previous stage">←</button>
+        <button id="next" class="icon-button" aria-label="Next stage">→</button>
+        <div class="timeline"><div class="timeline-meta"><span id="timeline-label">Candidate futures</span><output id="tour-time">00:00 / 00:46</output></div><input id="tour-seek" type="range" min="0" max="46" step=".02" value="0" aria-label="Guided tour timeline"></div>
+        <label class="speed-label"><span class="sr-only">Playback speed</span><select id="speed" aria-label="Tour playback speed"><option value=".5">0.5×</option><option value="1" selected>1×</option><option value="1.5">1.5×</option><option value="2">2×</option></select></label>
+        <button id="reset" class="quiet-button">Reset</button>
+        <button id="fullscreen" class="icon-button" aria-label="Enter fullscreen">⛶</button>
       </div>
-      <div class="supervision-strip" id="supervision-panel" hidden><div><span class="small-tag">DURING TRAINING</span><h3>Executed outcomes teach the relations.</h3><p>Successful candidates receive more decision mass. Local pairs sharpen the boundary; a correction penalty keeps the update bounded.</p></div><div class="loss-equation">L = L<sub>success</sub> + λ<sub>local</sub>L<sub>local</sub> + λ<sub>trust</sub>‖δ‖²</div><p class="supervision-labels">Illustrative outcomes: <b>A · success</b><b>C · success</b><span>B, D, E, F · failure</span></p></div>
-      <p class="model-note" id="model-note">Dual-geometry model: two 192-dimensional descriptors and two ordinal coordinates form each 386-dimensional token.</p>
-      <noscript><p class="no-script">The interactive tour needs JavaScript. Visit the project page for the method and recorded experiments.</p></noscript>
+      <dialog id="supervision-panel">
+        <button id="close-supervision" class="dialog-close" aria-label="Close training explanation">×</button>
+        <p class="eyebrow">LEARNING FROM EXECUTED OUTCOMES</p><h2>Teach the relations that determine the action.</h2>
+        <div class="training-flow"><span>Candidate futures</span><i>→</i><span>Executed outcomes</span><i>→</i><span>Relational alignment</span></div>
+        <p>Successful candidates receive decision mass. Local success–failure pairs sharpen the action boundary; the correction penalty keeps the update localized.</p>
+        <div class="formula">L = L<sub>success</sub> + λ<sub>local</sub>L<sub>local</sub> + λ<sub>trust</sub>‖δ‖²</div>
+        <p class="dialog-note">Outcomes supervise training. At selection time, the operator consumes predictive evidence.</p>
+      </dialog>
+      <noscript>Enable JavaScript to explore the model, or return to the <a href="index.html">project page</a>.</noscript>
     </section>
-
   </main>
 </body>
 </html>

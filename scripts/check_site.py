@@ -69,9 +69,16 @@ def check():
         elif url.fragment and url.fragment not in explainer.ids:
             raise ValueError(f'unknown explainer section: {link}')
     required_controls = {'architecture', 'detail-visual', 'play', 'theme-toggle',
-                         'strength', 'supervision-toggle', 'candidate-controls'}
+                         'strength', 'supervision-toggle', 'candidate-controls',
+                         'tour-seek', 'fullscreen', 'diagram-viewport'}
     if not required_controls <= explainer.ids:
         raise ValueError('explainer is missing required interactive controls')
+    replay = json.loads((SITE/'static/data/explainer-pusht.json').read_text())
+    if len(replay['candidates']) != 3 or replay['duration'] != 2.5:
+        raise ValueError('explainer replay is incomplete')
+    for candidate in replay['candidates']:
+        if len(candidate['states']) != 126 or candidate['times'][-1] != replay['duration']:
+            raise ValueError('explainer replay must retain the complete recorded horizon')
     content = json.loads((SITE/'site-content.json').read_text())
     for name, figure in content['figures'].items():
         if name not in page.slots:
