@@ -410,8 +410,8 @@
     {
       "id": 6,
       "audio": "static/audio/narration/06_ordinal_realization.mp3",
-      "duration": 25.92,
-      "sha256": "2fca0425fe10d0cb280532a6169ab620b45de53fd749b10a497a363498d36911",
+      "duration": 26.16,
+      "sha256": "3e4b18cb836525ff32f9b533ccb8afe9438c8b6ad83910c8c26496304f7220b1",
       "stage": 4,
       "lifting": "ordinal",
       "sentences": [
@@ -509,7 +509,7 @@
           "predictor": false
         },
         {
-          "time": 25.92,
+          "time": 26.16,
           "elapsed": 12,
           "sources": 2,
           "predictor": false

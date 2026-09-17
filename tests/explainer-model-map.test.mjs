@@ -4,7 +4,7 @@ import {readFileSync} from 'node:fs';
 import {modelMapCue,modelMapMarkup} from '../docs/static/js/explainer-model-map.mjs';
 const segments=JSON.parse(readFileSync(new URL('../docs/static/data/explainer-narration.json',import.meta.url))).segments;
 test('architecture cues precede detail and preserve every recording duration',()=>{
-  assert.equal(segments.reduce((n,s)=>n+s.duration,0),206.496);
+  assert.equal(Math.round(segments.reduce((n,s)=>n+s.duration,0)*1000),206736);
   const cues=segments.flatMap(s=>(s.architecture||[]).map(c=>({s,c})));
   assert.deepEqual(cues.map(({c})=>c.mode),['overview','predictor','lifting','transport']);
   for(const {s,c} of cues){
