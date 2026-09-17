@@ -27,18 +27,18 @@
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="topbar">
     <a class="wordmark" href="#home" aria-label="D-JEPA home">D-JEPA<span class="brand-dot"></span></a>
-    <nav aria-label="Sections"><a href="#problem">Why</a><a href="#method">Method</a><a href="#results">Results</a><a href="#demonstrations">Demos</a><a href="#reproduce">Reproduce</a></nav>
+    <nav aria-label="Sections"><a href="#demonstrations">Demos</a><a href="#problem">Why</a><a href="#method">Method</a><a href="#results">Results</a><a href="#reproduce">Reproduce</a></nav>
     <button id="theme-toggle" type="button" aria-label="Switch color theme">Theme</button>
   </header>
   <main id="main">
     <section class="hero container" id="home">
-      <p class="hero-statement">Predictive geometry describes futures. D-JEPA learns which relations among those futures produce better actions.</p>
+      <p class="hero-statement">D-JEPA aligns predicted futures with better actions.</p>
       <div class="hero-logo">
         <img class="logo-light" src="static/images/branding/jepa-full-logo-light.svg" width="600" height="152" alt="D-JEPA">
         <img class="logo-dark" src="static/images/branding/jepa-full-logo-dark.svg" width="600" height="152" alt="D-JEPA">
       </div>
       <h1>A Decision-Aligned <span class="gradient-text">Latent World Model</span></h1>
-      <p class="hero-description">Built on pretrained predictive models, D-JEPA aligns candidate futures where actions are selected, integrates complementary predictive geometries through ordinal evidence, and writes the aligned structure back into future representations.</p>
+      <p class="hero-description">D-JEPA learns decision-relevant relations across pretrained predictive models and realizes them in future representations.</p>
       <div class="resource-links">
         <a class="button primary" href="https://nebulis-lab.com/D-JEPA">Project website <span aria-hidden="true">↗</span></a>
         <a class="button" href="https://huggingface.co/Shuaijun/D-JEPA">Model repository <span aria-hidden="true">↗</span></a>
@@ -48,105 +48,21 @@
       <div class="hero-rule" aria-hidden="true"></div>
     </section>
 
-    <section class="container section" id="problem">
-      <div class="section-heading"><span class="section-number">01 / THE QUESTION</span><h2>A predicted future is useful<br>when it helps choose the action.</h2></div>
-      <div class="problem-grid">
-        <div class="problem-copy"><p>Predictive geometry and decision quality are not the same thing. The distance that makes a future look promising need not rank the candidate actions by their physical outcomes.</p></div>
-        <div class="insight"><span class="eyebrow">Our starting point</span><p>Learn the decision-relevant relations <em>between</em> candidate futures, then use those relations to align action selection.</p><p class="small">The decision boundary is a learning target—not just a property inherited from pretraining.</p></div>
-      </div>
-      <figure class="diagnostic-evidence"><a href="static/images/decision_local_ranking.svg"><img src="static/images/decision_local_ranking.svg" width="792" height="432" loading="lazy" alt="LeWM and TD-JEPA rank correlation weakens as candidate shortlists narrow"></a><figcaption><b>Where prediction meets action selection.</b> Ranking weakens within the small shortlists closest to execution. The diagnostic distinguishes average within-start correlations from pooled correlations over the same 96 starts.</figcaption></figure>
-      <div class="artwork-placeholder" data-figure="motivation" role="img" aria-label="Motivation illustration: author artwork pending"><span class="placeholder-label">MOTIVATION ILLUSTRATION</span><p>Predictive geometry → candidate ordering → physical outcome</p><span class="small">Author-drawn illustration forthcoming</span></div>
-    </section>
-
-    <section class="section tinted" id="method">
-      <div class="container">
-        <div class="section-heading"><span class="section-number">02 / THE FRAMEWORK</span><h2>From future prediction<br>to decision-aligned representation.</h2></div>
-        <div class="artwork-placeholder overview-slot" data-figure="overview" role="img" aria-label="Overview diagram: author artwork pending"><span class="placeholder-label">FRAMEWORK OVERVIEW</span><p>Predictive models · Relational alignment · Future representation</p><span class="small">Reserved for the final hand-drawn overview</span></div>
-        <div class="method-grid">
-          <article class="method-card"><span class="module-index">01</span><h3>Decision alignment</h3><p>Learn bounded, set-wise corrections from future–goal descriptors and ordinal structure. Restricted predictor adaptation offers a complementary source of decision evidence.</p><a href="https://github.com/NEBULIS-Lab/D-JEPA/tree/main/src/djepa/models">Explore the modules ↗</a></article>
-          <article class="method-card"><span class="module-index">02</span><h3>Multiple predictive geometries</h3><p>Combine relational evidence from complementary predictors in one alignment framework, extending beyond a single predictive distance.</p><a href="https://github.com/NEBULIS-Lab/D-JEPA/blob/main/docs/PROTOCOLS.md">Read the protocols ↗</a></article>
-          <article class="method-card"><span class="module-index">03</span><h3>Representation realization</h3><p>Encode a learned decision ordering in JEPA-compatible goal-distance geometry, and learn bounded, same-action updates across future time steps.</p><a href="https://huggingface.co/Shuaijun/D-JEPA">Explore checkpoints ↗</a></article>
-        </div>
-        <details class="protocol-note"><summary>Two complementary representation mechanisms</summary><p>PushT exact realization preserves earlier futures and encodes terminal ordering while retaining its embedded predictive and relational computation. Reacher learns same-action five-step future updates; its reported physical decisions use the relational selector. These experiments establish complementary mechanisms and do not imply a newly evaluated combined checkpoint or single-backbone distillation.</p></details>
-        <div class="detail-artwork-grid">
-          <div class="artwork-placeholder compact" data-figure="alignment" role="img" aria-label="Decision alignment detail: author artwork pending"><span class="placeholder-label">ALIGNMENT DETAIL</span><span class="small">Author artwork forthcoming</span></div>
-          <div class="artwork-placeholder compact" data-figure="representation" role="img" aria-label="Representation detail: author artwork pending"><span class="placeholder-label">REPRESENTATION DETAIL</span><span class="small">Author artwork forthcoming</span></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="container section" id="results">
-      <div class="section-heading"><span class="section-number">03 / RESULTS</span><h2>Better future relations.<br>Better executed decisions.</h2><p>Matched candidate sets isolate the quality of action selection across simulation, foundation models, autonomous driving and physical manipulation.</p></div>
-      <div class="metric-strip">
-        <article><span class="metric-label">PUSHT · SUCCESS</span><strong class="metric-value"><span>83.59</span><span class="metric-arrow" aria-label="to">→</span><span>87.89%</span></strong><p><b>+4.30 pp</b> over LeWM<br><span class="muted">Independent decision-boundary evaluation</span></p></article>
-        <article><span class="metric-label">ROBOTWIN · SUCCESS</span><strong class="metric-value"><span>61.72</span><span class="metric-arrow" aria-label="to">→</span><span>76.76%</span></strong><p><b>+15.04 pp</b> over native VLA selection<br><span class="muted">Four language-conditioned tasks</span></p></article>
-        <article><span class="metric-label">REAL ROBOT · MEAN SUCCESS RATE</span><strong class="metric-value"><span>64.0</span><span class="metric-arrow" aria-label="to">→</span><span>81.0%</span></strong><p><b>+17.0 pp</b> over V-JEPA 2-AC<br><span class="muted">PushT and two-cube stacking</span></p></article>
-        <article><span class="metric-label">DRIVING · PDMS</span><strong class="metric-value"><span>57.36</span><span class="metric-arrow" aria-label="to">→</span><span>95.34</span></strong><p><b>+37.98</b> over Drive-JEPA ranking<br><span class="muted">Seven difficult scenes</span></p></article>
-      </div>
-      <div class="table-scroll" tabindex="0" role="region" aria-label="Completed experiment results">
-        <table><caption>Core action-selection results</caption><thead><tr><th scope="col">Task</th><th scope="col">Evaluation</th><th scope="col">Matched reference</th><th scope="col">D-JEPA</th><th scope="col">Gain</th></tr></thead><tbody>
-          <tr class="ours-row"><th scope="row">PushT</th><td>Success · 256 starts</td><td>LeWM · 83.59%</td><td><strong>87.89%</strong></td><td><strong>+4.30 pp</strong></td></tr>
-          <tr class="ours-row"><th scope="row">DMC-Reacher</th><td>Success · 128 starts</td><td>LeWM · 86.72%</td><td><strong>93.75%</strong></td><td><strong>+7.03 pp</strong></td></tr>
-          <tr class="ours-row"><th scope="row">Granular</th><td>Strict attainment · 64 starts</td><td>DINO-WM · 7.81%</td><td><strong>18.75%</strong></td><td><strong>+10.94 pp</strong></td></tr>
-        </tbody><tfoot><tr><td colspan="5">Each task retains its own evaluation population and success criterion. Granular reports attainment at the stricter Chamfer-distance threshold (0.12).</td></tr></tfoot></table>
-      </div>
-      <div class="table-scroll" tabindex="0" role="region" aria-label="Cross-domain and generalization results">
-        <table><caption>Cross-domain and generalization evidence</caption><thead><tr><th scope="col">Setting</th><th scope="col">Metric / scale</th><th scope="col">Matched reference</th><th scope="col">D-JEPA</th><th scope="col">Gain</th></tr></thead><tbody>
-          <tr class="ours-row"><th scope="row">Held-out PushObj shapes</th><td>Success · 300 starts</td><td>Calibrated fusion · 44.67%</td><td><strong>53.67%</strong></td><td><strong>+9.00 pp</strong></td></tr>
-          <tr class="ours-row"><th scope="row">Appearance changes</th><td>Mean success · 7 conditions</td><td>Calibrated fusion · 62.86%</td><td><strong>73.14%</strong></td><td><strong>+10.29 pp</strong></td></tr>
-          <tr class="ours-row"><th scope="row">RoboTwin</th><td>Success rate · 4 tasks</td><td>Native VLA · 61.72%</td><td><strong>76.76%</strong></td><td><strong>+15.04 pp</strong></td></tr>
-          <tr class="ours-row"><th scope="row">Physical PiPER</th><td>Mean success rate · 2 tasks</td><td>V-JEPA 2-AC · 64.0%</td><td><strong>81.0%</strong></td><td><strong>+17.0 pp</strong></td></tr>
-          <tr class="ours-row"><th scope="row">Autonomous driving</th><td>Mean PDMS · 7 scenes</td><td>Drive-JEPA · 57.36</td><td><strong>95.34</strong></td><td><strong>+37.98</strong></td></tr>
-        </tbody><tfoot><tr><td colspan="5">Appearance changes are evaluated on 50 new base starts per condition; RoboTwin uses 128 starts per task and PiPER 50 paired trials per task. PiPER success is averaged equally across its two tasks. Driving reports mean PDMS over seven difficult scenes.</td></tr></tfoot></table>
-      </div>
-      <p class="small">Each row retains its own task metric and evaluation population. Full counts, paired outcomes and task-specific costs remain available in the paper and the <a href="https://huggingface.co/datasets/Shuaijun/D-JEPA-Dataset">decision-supervision dataset</a>.</p>
-      <div class="figure-strip">
-        <figure><a href="static/images/pusht_independent_success.svg"><img src="static/images/pusht_independent_success.svg" width="336" height="336" loading="lazy" alt="PushT independent 256-start success by method"></a><figcaption>PushT · independent 256</figcaption></figure>
-        <figure><a href="static/images/reacher_formal_success.svg"><img src="static/images/reacher_formal_success.svg" width="336" height="336" loading="lazy" alt="Reacher formal success by method"></a><figcaption>Reacher · independent 128</figcaption></figure>
-        <figure><a href="static/images/granular_threshold_success.svg"><img src="static/images/granular_threshold_success.svg" width="336" height="336" loading="lazy" alt="Granular success across distance thresholds"></a><figcaption>Granular · thresholds</figcaption></figure>
-        <figure><a href="static/images/granular_paired_cost.svg"><img src="static/images/granular_paired_cost.svg" width="336" height="336" loading="lazy" alt="Paired DINO-WM and D-JEPA Granular costs on the same starts"></a><figcaption>Granular · paired cost</figcaption></figure>
-      </div>
-      <p class="small">TD denotes TD-JEPA; Ours denotes D-JEPA. Bars show success with 95% intervals, the curve varies the Granular success threshold, and each scatter point is one paired start. Click a panel to open the vector figure.</p>
-      <h3 class="result-subheading">Transfer under geometric and visual change</h3>
-      <div class="figure-strip">
-        <figure><a href="static/images/held_out_shape_success.svg"><img src="static/images/held_out_shape_success.svg" width="336" height="336" loading="lazy" alt="Success on unseen I, small T and square shapes"></a><figcaption>Held-out shapes · success</figcaption></figure>
-        <figure><a href="static/images/appearance_success.svg"><img src="static/images/appearance_success.svg" width="336" height="336" loading="lazy" alt="Success across seven visual conditions"></a><figcaption>Appearance changes · success</figcaption></figure>
-        <figure><a href="static/images/held_out_shape_pairs.svg"><img src="static/images/held_out_shape_pairs.svg" width="336" height="336" loading="lazy" alt="Paired gains and losses on each held-out shape"></a><figcaption>Held-out shapes · paired outcomes</figcaption></figure>
-        <figure><a href="static/images/appearance_pairs.svg"><img src="static/images/appearance_pairs.svg" width="336" height="336" loading="lazy" alt="Net gains under each visual condition"></a><figcaption>Appearance changes · net gains</figcaption></figure>
-      </div>
-      <p class="small">N: native selection; F: calibrated fusion; D: D-JEPA. Paired gains and losses compare D-JEPA with calibrated fusion on identical starts.</p>
-      <h3 class="result-subheading">Contributions to decision alignment</h3>
-      <div class="figure-strip">
-        <figure><a href="static/images/alignment_ablation.svg"><img src="static/images/alignment_ablation.svg" width="336" height="336" loading="lazy" alt="Independent PushT success with plasticity, relational alignment and calibrated composition"></a><figcaption>Decision mechanisms · success</figcaption></figure>
-        <figure><a href="static/images/predictive_source_ablation.svg"><img src="static/images/predictive_source_ablation.svg" width="336" height="336" loading="lazy" alt="Matched single-source and dual-source predictive evidence"></a><figcaption>Predictive evidence · source ablation</figcaption></figure>
-        <figure><a href="static/images/multiple_predictive_geometries.svg"><img src="static/images/multiple_predictive_geometries.svg" width="336" height="336" loading="lazy" alt="Success rates and intervals for multiple predictive geometries"></a><figcaption>Multiple geometries · success</figcaption></figure>
-        <figure><a href="static/images/deployment_latency.svg"><img src="static/images/deployment_latency.svg" width="336" height="336" loading="lazy" alt="Median per-start inference latency of the three deployment configurations"></a><figcaption>Deployment · inference latency</figcaption></figure>
-      </div>
-      <p class="small">The module and latency panels use the independent 256-start PushT population; Combined denotes calibrated composition. Source and multi-geometry ablations use the separate 128-start mechanism evaluation; Low and High denote the 95% interval bounds.</p>
-      <div class="table-scroll" tabindex="0" role="region" aria-label="Decision mechanisms and native-distance deployment">
-        <table><caption>Decision mechanisms and native-distance deployment</caption><thead><tr><th scope="col">Configuration</th><th scope="col">Decision readout</th><th scope="col">Success</th><th scope="col">Median inference</th></tr></thead><tbody>
-          <tr class="reference-row"><th scope="row">Relational alignment</th><td>Relational score</td><td>87.11%</td><td>35.03 ms</td></tr>
-          <tr class="ours-row"><th scope="row">Calibrated composition</th><td>Gated composition</td><td><strong>87.89%</strong></td><td>52.16 ms</td></tr>
-          <tr><th scope="row">Ordinal realization</th><td>Native goal distance</td><td>87.11%</td><td><strong>34.02 ms</strong></td></tr>
-        </tbody><tfoot><tr><td colspan="4">Independent PushT evaluation, 256 starts. Ordinal realization recovers 100% of relational action choices and candidate ranks through native goal distance. Timing includes the predictive and relational computation, measured per start.</td></tr></tfoot></table>
-      </div>
-      <h3 class="result-subheading">Decision structure in future representations</h3>
-      <div class="figure-strip">
-        <figure><a href="static/images/candidate_budget.svg"><img src="static/images/candidate_budget.svg" width="336" height="336" loading="lazy" alt="Success across shared candidate budgets"></a><figcaption>Candidate availability</figcaption></figure>
-        <figure><a href="static/images/ordinal_recovery.svg"><img src="static/images/ordinal_recovery.svg" width="336" height="336" loading="lazy" alt="Recovery of relational ranks through native distance"></a><figcaption>Exact ordinal recovery</figcaption></figure>
-        <figure><a href="static/images/latent_geometry.svg"><img src="static/images/latent_geometry.svg" width="336" height="336" loading="lazy" alt="Shared projection of future representations before and after realization"></a><figcaption>Future–goal geometry</figcaption></figure>
-        <figure><a href="static/images/temporal_transport.svg"><img src="static/images/temporal_transport.svg" width="336" height="336" loading="lazy" alt="Learned same-action residual coefficients across five future steps"></a><figcaption>Same-action temporal transport</figcaption></figure>
-      </div>
-      <p class="small">The first three panels show PushT candidate-budget and ordinal-realization analyses; the final panel shows the separate Reacher five-step representation diagnostic. Budget bands span the minimum and maximum over 16 shared subset seeds.</p>
-      <div class="evidence-pair">
-        <figure><a href="static/images/foundation_robotwin.png"><img src="static/images/foundation_robotwin.png" loading="lazy" alt="Matched RoboTwin baseline failure and D-JEPA grasp success"></a><figcaption><b>RoboTwin.</b> The same observation and candidate set produce different executed outcomes.</figcaption></figure>
-        <figure><a href="static/images/foundation_driving.png"><img src="static/images/foundation_driving.png" loading="lazy" alt="Matched driving candidates selected by Drive-JEPA and D-JEPA"></a><figcaption><b>Autonomous driving.</b> Camera frames are shared logged observations; bird’s-eye views show the alternative simulated ego trajectories against logged traffic.</figcaption></figure>
-      </div>
-    </section>
-
     <section class="section tinted" id="demonstrations">
       <div class="container">
-        <div class="section-heading"><span class="section-number">04 / IN MOTION</span><h2>Same start. Same goal.<br>A different choice of action.</h2><p>Curated baseline-failure / D-JEPA-success examples. These illustrate gains; aggregate results include gains, losses and ties.</p></div>
+        <div class="section-heading"><span class="section-number">01 / IN MOTION</span><h2>Same start. Same goal. A different choice of action.</h2><p>Matched executions across manipulation and driving, with Cube included as saturated-task coverage. Select a task or scene to watch.</p></div>
+        <div class="demo-tabs" role="tablist" aria-label="Choose an execution comparison">
+          <button type="button" id="tab-pusht" role="tab" data-demo="pusht" aria-controls="demo-pusht" aria-selected="true" tabindex="0">PushT</button>
+          <button type="button" id="tab-reacher" role="tab" data-demo="reacher" aria-controls="demo-reacher" aria-selected="false" tabindex="-1">Reacher</button>
+          <button type="button" id="tab-granular" role="tab" data-demo="granular" aria-controls="demo-granular" aria-selected="false" tabindex="-1">Granular</button>
+          <button type="button" id="tab-robotwin" role="tab" data-demo="robotwin" aria-controls="demo-robotwin" aria-selected="false" tabindex="-1">Robotic grasping</button>
+          <button type="button" id="tab-driving" role="tab" data-demo="driving" aria-controls="demo-driving" aria-selected="false" tabindex="-1">Driving · clearance</button>
+          <button type="button" id="tab-driving-comfort" role="tab" data-demo="driving-comfort" aria-controls="demo-driving-comfort" aria-selected="false" tabindex="-1">Driving · comfort</button>
+          <button type="button" id="tab-driving-progress" role="tab" data-demo="driving-progress" aria-controls="demo-driving-progress" aria-selected="false" tabindex="-1">Driving · progress</button>
+          <button type="button" id="tab-shape" role="tab" data-demo="shape" aria-controls="demo-shape" aria-selected="false" tabindex="-1">Unseen shapes</button>
+          <button type="button" id="tab-appearance" role="tab" data-demo="appearance" aria-controls="demo-appearance" aria-selected="false" tabindex="-1">Visual changes</button>
+          <button type="button" id="tab-cube" role="tab" data-demo="cube" aria-controls="demo-cube" aria-selected="false" tabindex="-1">Cube</button>
+        </div>
         <div class="demo-grid">
           <article class="demo-panel" id="demo-pusht">
             <div class="demo-heading"><h3>PushT</h3><span>TD-JEPA / D-JEPA</span></div>
@@ -190,13 +106,121 @@
             <p class="small">Object-colour change after task-local fitting, evaluated on a fresh start.</p>
             <a href="static/images/appearance-timeline.png">View the timeline ↗</a>
           </article>
+          <article class="demo-panel" id="demo-driving-comfort">
+            <div class="demo-heading"><h3>Driving · turning comfort</h3><span>Drive-JEPA / D-JEPA</span></div>
+            <video controls playsinline preload="none" poster="static/images/poster-driving-comfort.jpg" aria-label="Driving · turning comfort execution comparison"><source src="static/videos/driving-comfort.mp4" type="video/mp4">Your browser does not support embedded video.</video>
+            <p class="small">The appendix turning case: D-JEPA satisfies the comfort criterion; both candidates satisfy the collision and TTC criteria.</p><a href="static/images/driving-comfort-timeline.png">View the timeline ↗</a>
+          </article>
+          <article class="demo-panel" id="demo-driving-progress">
+            <div class="demo-heading"><h3>Driving · progress</h3><span>Drive-JEPA / D-JEPA</span></div>
+            <video controls playsinline preload="none" poster="static/images/poster-driving-progress.jpg" aria-label="Driving · progress execution comparison"><source src="static/videos/driving-progress.mp4" type="video/mp4">Your browser does not support embedded video.</video>
+            <p class="small">The appendix progress case: D-JEPA travels farther through the same traffic scene. Logged camera context accompanies paired simulated trajectories.</p><a href="static/images/driving-progress-timeline.png">View the timeline ↗</a>
+          </article>
+          <article class="demo-panel" id="demo-cube">
+            <div class="demo-heading"><h3>Cube · task coverage</h3><span>LeWM / TD-JEPA</span></div>
+            <video controls playsinline preload="none" poster="static/images/poster-cube.jpg" aria-label="Cube · task coverage execution comparison"><source src="static/videos/cube.mp4" type="video/mp4">Your browser does not support embedded video.</video>
+            <p class="small">Both predictive baselines succeed. This saturated-task example documents coverage; it is not a D-JEPA comparison.</p><a href="static/images/cube_task_coverage.png">View the timeline ↗</a>
+          </article>
         </div>
       </div>
     </section>
 
+    <section class="container section" id="problem">
+      <div class="section-heading"><span class="section-number">02 / THE QUESTION</span><h2>A predicted future is useful when it helps choose the action.</h2></div>
+      <div class="problem-grid">
+        <div class="problem-copy"><p>Predictive geometry and decision quality are not the same thing. A model can organize most futures correctly yet misorder the few alternatives that determine its next action. On PushT, ranking weakens sharply among the top four candidates. This local gap makes the relations between competing futures a direct target for learning from executed outcomes.</p></div>
+        <div class="insight"><span class="eyebrow">Our starting point</span><p>Learn the decision-relevant relations <em>between</em> candidate futures, then use those relations to align action selection.</p><p class="small">The decision boundary is a learning target—not just a property inherited from pretraining.</p></div>
+      </div>
+      <figure class="diagnostic-evidence"><a href="static/images/decision_local_ranking.svg"><img src="static/images/decision_local_ranking.svg" width="792" height="432" loading="lazy" alt="LeWM and TD-JEPA rank correlation weakens as candidate shortlists narrow"></a><figcaption><b>Where prediction meets action selection.</b> Across 96 matched starts, within-start rank correlation falls from 0.90 to 0.11 for LeWM and from 0.80 to 0.13 for TD-JEPA as the comparison narrows from all 63 candidates to the top four. Pooled correlations summarize the same decisions across starts. The contrast isolates the decision-local prediction gap: globally informative geometry can lose its ordering precisely where the planner chooses an action. Each column uses the same predictive scores and executed outcome labels.</figcaption></figure>
+      <div class="artwork-placeholder" data-figure="motivation" role="img" aria-label="Motivation illustration: author artwork pending"><span class="placeholder-label">MOTIVATION ILLUSTRATION</span><p>Predictive geometry → candidate ordering → physical outcome</p><span class="small">Author-drawn illustration forthcoming</span></div>
+    </section>
+
+    <section class="section tinted" id="method">
+      <div class="container">
+        <div class="section-heading"><span class="section-number">03 / THE FRAMEWORK</span><h2>From future prediction to decision-aligned representation.</h2></div>
+        <div class="artwork-placeholder overview-slot" data-figure="overview" role="img" aria-label="Overview diagram: author artwork pending"><span class="placeholder-label">FRAMEWORK OVERVIEW</span><p>Predictive models · Relational alignment · Future representation</p><span class="small">Reserved for the final hand-drawn overview</span></div>
+        <div class="method-grid">
+          <article class="method-card"><span class="module-index">01</span><h3>Decision alignment</h3><p>Learn bounded, set-wise corrections from future–goal descriptors and ordinal structure. Restricted predictor adaptation offers a complementary source of decision evidence.</p><a href="https://github.com/NEBULIS-Lab/D-JEPA/tree/main/src/djepa/models">Explore the modules ↗</a></article>
+          <article class="method-card"><span class="module-index">02</span><h3>Multiple predictive geometries</h3><p>Combine relational evidence from complementary predictors in one alignment framework, extending beyond a single predictive distance.</p><a href="https://github.com/NEBULIS-Lab/D-JEPA/blob/main/docs/PROTOCOLS.md">Read the protocols ↗</a></article>
+          <article class="method-card"><span class="module-index">03</span><h3>Representation realization</h3><p>Encode a learned decision ordering in JEPA-compatible goal-distance geometry, and learn bounded, same-action updates across future time steps.</p><a href="https://huggingface.co/Shuaijun/D-JEPA">Explore checkpoints ↗</a></article>
+        </div>
+        <details class="protocol-note"><summary>Two complementary representation mechanisms</summary><p>PushT exact realization preserves earlier futures and encodes terminal ordering while retaining its embedded predictive and relational computation. Reacher learns same-action five-step future updates; its reported physical decisions use the relational selector. These experiments establish complementary mechanisms and do not imply a newly evaluated combined checkpoint or single-backbone distillation.</p></details>
+        <div class="detail-artwork-grid">
+          <div class="artwork-placeholder compact" data-figure="alignment" role="img" aria-label="Decision alignment detail: author artwork pending"><span class="placeholder-label">ALIGNMENT DETAIL</span><span class="small">Author artwork forthcoming</span></div>
+          <div class="artwork-placeholder compact" data-figure="representation" role="img" aria-label="Representation detail: author artwork pending"><span class="placeholder-label">REPRESENTATION DETAIL</span><span class="small">Author artwork forthcoming</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="container section" id="results">
+      <div class="section-heading"><span class="section-number">04 / RESULTS</span><h2>Better future relations. Better executed decisions.</h2><p>Matched candidate sets isolate the quality of action selection across simulation, foundation models, autonomous driving and physical manipulation.</p></div>
+      <div class="metric-strip">
+        <article><span class="metric-label">PUSHT · SUCCESS</span><strong class="metric-value"><span>83.59</span><span class="metric-arrow" aria-label="to">→</span><span>87.89%</span></strong><p><b>+4.30 pp</b> over LeWM<br><span class="muted">Independent decision-boundary evaluation</span></p></article>
+        <article><span class="metric-label">ROBOTWIN · SUCCESS</span><strong class="metric-value"><span>61.72</span><span class="metric-arrow" aria-label="to">→</span><span>76.76%</span></strong><p><b>+15.04 pp</b> over native VLA selection<br><span class="muted">Four language-conditioned tasks</span></p></article>
+        <article><span class="metric-label">REAL ROBOT · MEAN SUCCESS RATE</span><strong class="metric-value"><span>64.0</span><span class="metric-arrow" aria-label="to">→</span><span>81.0%</span></strong><p><b>+17.0 pp</b> over V-JEPA 2-AC<br><span class="muted">PushT and two-cube stacking</span></p></article>
+        <article><span class="metric-label">DRIVING · PDMS</span><strong class="metric-value"><span>57.36</span><span class="metric-arrow" aria-label="to">→</span><span>95.34</span></strong><p><b>+37.98</b> over Drive-JEPA ranking<br><span class="muted">Seven difficult scenes</span></p></article>
+      </div>
+      <div class="table-scroll" tabindex="0" role="region" aria-label="Completed experiment results">
+        <table><caption>Core action-selection results</caption><thead><tr><th scope="col">Task</th><th scope="col">Evaluation</th><th scope="col">Matched reference</th><th scope="col">D-JEPA</th><th scope="col">Gain</th></tr></thead><tbody>
+          <tr class="ours-row"><th scope="row">PushT</th><td>Success · 256 starts</td><td>LeWM · 83.59%</td><td><strong>87.89%</strong></td><td><strong>+4.30 pp</strong></td></tr>
+          <tr class="ours-row"><th scope="row">DMC-Reacher</th><td>Success · 128 starts</td><td>LeWM · 86.72%</td><td><strong>93.75%</strong></td><td><strong>+7.03 pp</strong></td></tr>
+          <tr class="ours-row"><th scope="row">Granular</th><td>Strict attainment · 64 starts</td><td>DINO-WM · 7.81%</td><td><strong>18.75%</strong></td><td><strong>+10.94 pp</strong></td></tr>
+        </tbody><tfoot><tr><td colspan="5">Each task retains its own evaluation population and success criterion. Granular reports attainment at the stricter Chamfer-distance threshold (0.12).</td></tr></tfoot></table>
+      </div>
+      <div class="table-scroll" tabindex="0" role="region" aria-label="Cross-domain and generalization results">
+        <table><caption>Cross-domain and generalization evidence</caption><thead><tr><th scope="col">Setting</th><th scope="col">Metric / scale</th><th scope="col">Matched reference</th><th scope="col">D-JEPA</th><th scope="col">Gain</th></tr></thead><tbody>
+          <tr class="ours-row"><th scope="row">Held-out PushObj shapes</th><td>Success · 300 starts</td><td>Calibrated fusion · 44.67%</td><td><strong>53.67%</strong></td><td><strong>+9.00 pp</strong></td></tr>
+          <tr class="ours-row"><th scope="row">Appearance changes</th><td>Mean success · 7 conditions</td><td>Calibrated fusion · 62.86%</td><td><strong>73.14%</strong></td><td><strong>+10.29 pp</strong></td></tr>
+          <tr class="ours-row"><th scope="row">RoboTwin</th><td>Success rate · 4 tasks</td><td>Native VLA · 61.72%</td><td><strong>76.76%</strong></td><td><strong>+15.04 pp</strong></td></tr>
+          <tr class="ours-row"><th scope="row">Physical PiPER</th><td>Mean success rate · 2 tasks</td><td>V-JEPA 2-AC · 64.0%</td><td><strong>81.0%</strong></td><td><strong>+17.0 pp</strong></td></tr>
+          <tr class="ours-row"><th scope="row">Autonomous driving</th><td>Mean PDMS · 7 scenes</td><td>Drive-JEPA · 57.36</td><td><strong>95.34</strong></td><td><strong>+37.98</strong></td></tr>
+        </tbody><tfoot><tr><td colspan="5">Appearance changes are evaluated on 50 new base starts per condition; RoboTwin uses 128 starts per task and PiPER 50 paired trials per task. PiPER success is averaged equally across its two tasks. Driving reports mean PDMS over seven difficult scenes.</td></tr></tfoot></table>
+      </div>
+      <p class="small">Each row retains its own task metric and evaluation population. Full counts, paired outcomes and task-specific costs remain available in the paper and the <a href="https://huggingface.co/datasets/Shuaijun/D-JEPA-Dataset">decision-supervision dataset</a>.</p>
+      <h3 class="result-subheading">Results and analyses</h3>
+      <div class="figure-strip">
+        <figure><a href="static/images/pusht_independent_success.svg"><img src="static/images/pusht_independent_success.svg" width="336" height="336" loading="lazy" alt="PushT independent 256-start success by method"></a><figcaption>PushT · independent 256</figcaption></figure>
+        <figure><a href="static/images/reacher_formal_success.svg"><img src="static/images/reacher_formal_success.svg" width="336" height="336" loading="lazy" alt="Reacher formal success by method"></a><figcaption>Reacher · independent 128</figcaption></figure>
+        <figure><a href="static/images/granular_threshold_success.svg"><img src="static/images/granular_threshold_success.svg" width="336" height="336" loading="lazy" alt="Granular success across distance thresholds"></a><figcaption>Granular · thresholds</figcaption></figure>
+        <figure><a href="static/images/granular_paired_cost.svg"><img src="static/images/granular_paired_cost.svg" width="336" height="336" loading="lazy" alt="Paired DINO-WM and D-JEPA Granular costs on the same starts"></a><figcaption>Granular · paired cost</figcaption></figure>
+        <figure><a href="static/images/held_out_shape_success.svg"><img src="static/images/held_out_shape_success.svg" width="336" height="336" loading="lazy" alt="Success on unseen I, small T and square shapes"></a><figcaption>Held-out shapes · success</figcaption></figure>
+        <figure><a href="static/images/appearance_success.svg"><img src="static/images/appearance_success.svg" width="336" height="336" loading="lazy" alt="Success across seven visual conditions"></a><figcaption>Appearance changes · success</figcaption></figure>
+        <figure><a href="static/images/held_out_shape_pairs.svg"><img src="static/images/held_out_shape_pairs.svg" width="336" height="336" loading="lazy" alt="Paired gains and losses on each held-out shape"></a><figcaption>Held-out shapes · paired outcomes</figcaption></figure>
+        <figure><a href="static/images/appearance_pairs.svg"><img src="static/images/appearance_pairs.svg" width="336" height="336" loading="lazy" alt="Net gains under each visual condition"></a><figcaption>Appearance changes · net gains</figcaption></figure>
+        <figure><a href="static/images/alignment_ablation.svg"><img src="static/images/alignment_ablation.svg" width="336" height="336" loading="lazy" alt="Independent PushT success with plasticity, relational alignment and calibrated composition"></a><figcaption>Decision mechanisms · success</figcaption></figure>
+        <figure><a href="static/images/multiple_predictive_geometries.svg"><img src="static/images/multiple_predictive_geometries.svg" width="336" height="336" loading="lazy" alt="Success rates and intervals for multiple predictive geometries"></a><figcaption>Multiple geometries · success</figcaption></figure>
+        <figure><a href="static/images/deployment_latency.svg"><img src="static/images/deployment_latency.svg" width="336" height="336" loading="lazy" alt="Median per-start inference latency of the three deployment configurations"></a><figcaption>Deployment · inference latency</figcaption></figure>
+        <figure><a href="static/images/candidate_budget.svg"><img src="static/images/candidate_budget.svg" width="336" height="336" loading="lazy" alt="Success across shared candidate budgets"></a><figcaption>Candidate availability</figcaption></figure>
+        <figure><a href="static/images/ordinal_recovery.svg"><img src="static/images/ordinal_recovery.svg" width="336" height="336" loading="lazy" alt="Recovery of relational ranks through native distance"></a><figcaption>Exact ordinal recovery</figcaption></figure>
+        <figure><a href="static/images/latent_geometry.svg"><img src="static/images/latent_geometry.svg" width="336" height="336" loading="lazy" alt="Shared projection of future representations before and after realization"></a><figcaption>Future–goal geometry</figcaption></figure>
+        <figure><a href="static/images/temporal_transport.svg"><img src="static/images/temporal_transport.svg" width="336" height="336" loading="lazy" alt="Learned same-action residual coefficients across five future steps"></a><figcaption>Same-action temporal transport</figcaption></figure>
+      </div>
+      <p class="small figure-notes">Click any panel for the full-size vector figure. TD: TD-JEPA; Ours / D: D-JEPA; N: native selection; F: calibrated fusion. Success panels show 95% intervals; paired panels retain gains and losses. Multi-geometry results use 128 mechanism-evaluation starts; PushT deployment and decision ablations use 256 confirmation starts. Budget bands span 16 subset seeds; temporal transport is the Reacher five-step diagnostic.</p>
+
+
+      <div class="table-scroll" tabindex="0" role="region" aria-label="Decision mechanisms and native-distance deployment">
+        <table><caption>Decision mechanisms and native-distance deployment</caption><thead><tr><th scope="col">Configuration</th><th scope="col">Decision readout</th><th scope="col">Success</th><th scope="col">Median inference</th></tr></thead><tbody>
+          <tr class="reference-row"><th scope="row">Relational alignment</th><td>Relational score</td><td>87.11%</td><td>35.03 ms</td></tr>
+          <tr class="ours-row"><th scope="row">Calibrated composition</th><td>Gated composition</td><td><strong>87.89%</strong></td><td>52.16 ms</td></tr>
+          <tr><th scope="row">Ordinal realization</th><td>Native goal distance</td><td>87.11%</td><td><strong>34.02 ms</strong></td></tr>
+        </tbody><tfoot><tr><td colspan="4">Independent PushT evaluation, 256 starts. Ordinal realization recovers 100% of relational action choices and candidate ranks through native goal distance. Timing includes the predictive and relational computation, measured per start.</td></tr></tfoot></table>
+      </div>
+
+      <div class="evidence-pair">
+        <figure><a href="static/images/foundation_robotwin.png"><img src="static/images/foundation_robotwin.png" loading="lazy" alt="Matched RoboTwin baseline failure and D-JEPA grasp success"></a><figcaption><b>RoboTwin.</b> The same observation and candidate set produce different executed outcomes.</figcaption></figure>
+        <figure><a href="static/images/foundation_driving.png"><img src="static/images/foundation_driving.png" loading="lazy" alt="Matched driving candidates selected by Drive-JEPA and D-JEPA"></a><figcaption><b>Autonomous driving.</b> Camera frames are shared logged observations; bird’s-eye views show the alternative simulated ego trajectories against logged traffic.</figcaption></figure>
+      </div>
+      <div class="coverage-plates">
+        <figure><a href="static/images/seven_visual_conditions.png"><img src="static/images/seven_visual_conditions.png" loading="lazy" alt="The same context and goal under seven visual conditions"></a><figcaption><b>Seven visual conditions.</b> Clean, blur, salt-and-pepper noise, darkening, object colour, goal-marker colour and pusher colour share the same physical start and goal. These are the model’s recorded inputs.</figcaption></figure>
+        <figure><a href="static/images/cube_task_coverage.png"><img src="static/images/cube_task_coverage.png" loading="lazy" alt="LeWM and TD-JEPA both complete the Cube task from the same start"></a><figcaption><b>Cube task coverage.</b> Both LeWM and TD-JEPA attain the goal despite selecting different actions. Success is near saturation across the task screen, leaving little headroom for binary success to distinguish action selection.</figcaption></figure>
+      </div>
+    </section>
+
+
+
     <section class="container section" id="reproduce">
-      <div class="section-heading"><span class="section-number">05 / BUILD ON D-JEPA</span><h2>From a checkpoint<br>to a reproducible decision.</h2></div>
-      <div class="reproduce-grid"><div><p class="lead">Task-specific checkpoints, decision supervision and a compact evaluation package.</p><p>Task interfaces: <a href="https://github.com/NEBULIS-Lab/D-JEPA/blob/main/docs/ROBOTICS.md">robotic manipulation</a> · <a href="https://github.com/NEBULIS-Lab/D-JEPA/blob/main/docs/DRIVING.md">autonomous driving</a> · <a href="https://github.com/NEBULIS-Lab/D-JEPA/blob/main/real_robot/README.md">physical-robot workflows</a>. Each guide describes inputs, training and evaluation commands, and environment dependencies.</p><a class="text-link" href="https://github.com/NEBULIS-Lab/D-JEPA/blob/main/docs/REPRODUCING.md">Full reproduction guide ↗</a></div><div class="code-card"><div class="code-heading"><span>Run from the repository root</span><button type="button" id="copy-command">Copy</button></div><pre><code id="reproduce-command">pip install -e '.[download]'
+      <div class="section-heading"><span class="section-number">05 / BUILD ON D-JEPA</span><h2>From a checkpoint to a reproducible decision.</h2></div>
+      <div class="reproduce-grid"><div><p class="lead">Task-specific checkpoints, decision supervision and a compact evaluation package.</p><p>Task interfaces: <a href="https://github.com/NEBULIS-Lab/D-JEPA/blob/main/docs/ROBOTICS.md">robotic manipulation</a> · <a href="https://github.com/NEBULIS-Lab/D-JEPA/blob/main/docs/DRIVING.md">autonomous driving</a> · <a href="https://github.com/NEBULIS-Lab/D-JEPA/blob/main/real_robot/README.md">physical-robot workflows</a>. Each guide describes inputs, training and evaluation commands, and environment dependencies.</p><a class="button reproduction-button" href="https://github.com/NEBULIS-Lab/D-JEPA/blob/main/docs/REPRODUCING.md">Full reproduction guide ↗</a></div><div class="code-card"><div class="code-heading"><span>Run from the repository root</span><button type="button" id="copy-command">Copy</button></div><pre><code id="reproduce-command">pip install -e '.[download]'
 python scripts/download_artifacts.py --profile pusht-relational --dataset
 python -m zipfile -e data/D-JEPA-supervision-v1.zip data
 bash scripts/reproduce.sh</code></pre><span id="copy-status" role="status" class="small"></span></div></div>

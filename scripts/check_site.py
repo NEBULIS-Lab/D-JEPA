@@ -38,8 +38,11 @@ class Page(HTMLParser):
 def check():
     page = Page()
     page.feed((SITE/'index.html').read_text())
-    if len(page.videos) != 7 or page.tabs:
-        raise ValueError('gallery must expose seven videos directly, without task tabs')
+    if len(page.videos) != 10 or len(page.tabs) != 10:
+        raise ValueError('gallery needs ten videos and ten matching task/scene tabs')
+    for tab in page.tabs:
+        if tab.get('aria-controls') not in page.ids:
+            raise ValueError('task tab has no associated panel')
     for video in page.videos:
         if not video.get('poster') or video.get('preload') != 'none' or 'controls' not in video:
             raise ValueError('videos need posters, playback controls and no eager preload')
@@ -70,7 +73,7 @@ def check():
     for master in (ROOT/'assets/branding').glob('*.svg'):
         if master.read_bytes() != (SITE/'static/images/branding'/master.name).read_bytes():
             raise ValueError(f'brand copy differs: {master.name}')
-    print('PASS: local links, sections, artwork, media hashes, logos and directly visible video markup')
+    print('PASS: local links, sections, artwork, media hashes, logos and ten video tabs')
 
 
 if __name__ == '__main__':

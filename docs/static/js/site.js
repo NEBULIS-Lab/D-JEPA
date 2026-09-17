@@ -18,7 +18,34 @@ systemTheme.addEventListener('change', event => {
   setTheme(event.matches ? 'dark' : 'light');
 });
 
-// Every comparison is visible; playback starts only when requested.
+// Task tabs progressively enhance the gallery; all clips remain available without JS.
+const demoTabs = [...document.querySelectorAll('.demo-tabs [role="tab"]')];
+function selectDemo(tab, focus = false) {
+  demoTabs.forEach(item => {
+    const selected = item === tab;
+    item.setAttribute('aria-selected', String(selected));
+    item.tabIndex = selected ? 0 : -1;
+    const panel = document.getElementById(item.getAttribute('aria-controls'));
+    panel.classList.toggle('is-active', selected);
+    panel.setAttribute('role', 'tabpanel');
+    panel.setAttribute('aria-labelledby', item.id);
+    if (!selected) panel.querySelector('video').pause();
+  });
+  if (focus) tab.focus();
+}
+if (demoTabs.length) {
+  selectDemo(demoTabs[0]);
+  document.documentElement.classList.add('tabs-enabled');
+  demoTabs.forEach((tab, index) => {
+    tab.addEventListener('click', () => selectDemo(tab));
+    tab.addEventListener('keydown', event => {
+      const keys = { ArrowRight: (index + 1) % demoTabs.length, ArrowLeft: (index - 1 + demoTabs.length) % demoTabs.length, Home: 0, End: demoTabs.length - 1 };
+      if (event.key in keys) { event.preventDefault(); selectDemo(demoTabs[keys[event.key]], true); }
+    });
+  });
+}
+
+// Playback starts only when requested, and only one clip plays at a time.
 document.querySelectorAll('video').forEach(video => {
   video.addEventListener('play', () => {
     document.querySelectorAll('video').forEach(other => {

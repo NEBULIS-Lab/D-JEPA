@@ -22,9 +22,10 @@ Existing Markdown documents remain technical documentation, not page sections.
 The overview, motivation and two detail slots are intentionally marked as
 awaiting author artwork. JavaScript replaces a slot only after its actual image
 loads. Missing artwork never produces a broken-image rectangle. Main content
-and all seven video panels remain readable without JavaScript. Comparisons are
-displayed directly in a responsive grid, with no task-selection tabs. Video
-playback is user-initiated; starting one clip pauses the others.
+and all ten video panels remain readable without JavaScript. With JavaScript,
+accessible task/scene buttons show one comparison at a time; arrow keys, Home
+and End navigate the tabs. Playback is user-initiated and switching tabs pauses
+the previous clip. The gallery precedes the diagnostic and numerical results.
 
 ## Palette and media
 
@@ -40,11 +41,11 @@ If a master changes, update its site copy and `ASSET_MANIFEST.json` together.
 
 Published comparison clips are selected paired examples, not a random sample.
 They retain their declared execution horizons and recorded stopping points. Numerical
-figures and videos are byte-identical copies from the checked visual library.
-The page now uses the manuscript's 16 quantitative SVG panels and baseline-only
+figures retain their checked source measurements and geometry.
+The page uses 15 manuscript quantitative SVG panels and the baseline-only
 ranking diagnostic. Numeric panels have common data-area alignment, restrained
 bar hatching and preserved source values. Row-label positions and axis-title
-baselines are aligned within each four-panel group. Desktop rows contain four equal square
+baselines retain their original alignment. Desktop rows contain five equal square
 panels; narrower screens use two. Method colours, uncertainty definitions and
 evaluation populations match the manuscript, including the separate independent
 and mechanism evaluations. Table notes are enclosed in `tfoot` with a closing rule.
@@ -52,9 +53,13 @@ and mechanism evaluations. Table notes are enclosed in `tfoot` with a closing ru
 RoboTwin and driving use byte-identical copies of the current manuscript PNGs,
 with the original experimental frames and bird's-eye geometry retained. Provenance,
 transformations and hashes are recorded in `ASSET_MANIFEST.json`. The gallery
-includes PushT, Reacher, Granular manipulation, bimanual grasping, driving,
-unseen object geometry and changed object appearance. Newly added clips are
-byte-identical copies. The three original core-task clips have header-only
+includes PushT, Reacher, Granular manipulation, bimanual grasping, three driving
+scenes, unseen object geometry, changed object appearance and Cube coverage.
+The two appendix driving videos compose saved camera observations with the same
+simulated candidates as the paper, at 1x playback. Cube shows LeWM and TD-JEPA
+both succeeding; it is task coverage, not a D-JEPA comparison. A seven-condition
+observed-input plate and an eight-timepoint Cube plate accompany the results.
+The three original core-task clips have header-only
 terminology updates to TD-JEPA and DINO-WM, retaining every frame and the original
 dimensions and frame rate. Their linked timelines have label-only updates with
 byte-identical scene pixels. Source hashes and transformations are recorded;

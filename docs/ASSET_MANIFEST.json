@@ -317,5 +317,75 @@
     "bytes": 33278,
     "source": "static/videos/appearance.mp4",
     "transformation": "decoded frame at 0.4 s; proportional resize up to 1200 px wide; JPEG quality 3; no retouching"
+  },
+  {
+    "path": "static/images/cube_task_coverage.png",
+    "sha256": "60b634d4cc55281034632321268d0e942ee470b5f033f07821724609339ed7c3",
+    "bytes": 738184,
+    "source_identity": "sha256:60b634d4cc55281034632321268d0e942ee470b5f033f07821724609339ed7c3",
+    "transformation": "Source cells retained; Arial-compatible vector-label composition"
+  },
+  {
+    "path": "static/images/seven_visual_conditions.png",
+    "sha256": "271ca0a9dd05ffb6717cc629d8eba5cfa1ebd17adb9d99bb0c3f2be18eedb8ab",
+    "bytes": 121399,
+    "source_identity": "sha256:271ca0a9dd05ffb6717cc629d8eba5cfa1ebd17adb9d99bb0c3f2be18eedb8ab",
+    "transformation": "Source cells retained; Arial-compatible vector-label composition"
+  },
+  {
+    "path": "static/videos/driving-comfort.mp4",
+    "sha256": "3ad16dc294d6047e81a912e61112e262a311cdeddb694e12de7adc81cfa6c4e7",
+    "bytes": 645118,
+    "source_identity": "sha256:3ad16dc294d6047e81a912e61112e262a311cdeddb694e12de7adc81cfa6c4e7",
+    "transformation": "Saved appendix candidate identities and simulated states; shared logged camera; no new evaluation"
+  },
+  {
+    "path": "static/images/driving-comfort-timeline.png",
+    "sha256": "9c97c13698efc4401d9a7927846d1820ebd673d9973671c8beface9e016ab634",
+    "bytes": 2037372,
+    "source_identity": "sha256:9c97c13698efc4401d9a7927846d1820ebd673d9973671c8beface9e016ab634",
+    "transformation": "Unchanged approved appendix plate"
+  },
+  {
+    "path": "static/videos/driving-progress.mp4",
+    "sha256": "de4b07f2f02f4d367b6b582c68be01637ee8bd2e5e44be6c6ea934e838134e94",
+    "bytes": 536844,
+    "source_identity": "sha256:de4b07f2f02f4d367b6b582c68be01637ee8bd2e5e44be6c6ea934e838134e94",
+    "transformation": "Saved appendix candidate identities and simulated states; shared logged camera; no new evaluation"
+  },
+  {
+    "path": "static/images/driving-progress-timeline.png",
+    "sha256": "a661873528e9f741d7f87c90ae44ebe1c3a929c3b505357532170def7f236339",
+    "bytes": 1502409,
+    "source_identity": "sha256:a661873528e9f741d7f87c90ae44ebe1c3a929c3b505357532170def7f236339",
+    "transformation": "Unchanged approved appendix plate"
+  },
+  {
+    "path": "static/videos/cube.mp4",
+    "sha256": "5020fac96894d30af33d50e7608432ba503a7ca3bf31c6244c5b960b9effc6a8",
+    "bytes": 608254,
+    "source_identity": "sha256:5020fac96894d30af33d50e7608432ba503a7ca3bf31c6244c5b960b9effc6a8",
+    "transformation": "Original Cube paired rollout; header terminology only; no D-JEPA result"
+  },
+  {
+    "path": "static/images/poster-cube.jpg",
+    "sha256": "6a35934d2c14397af5bb8d16b49ddc68c16de3789b5bbe19599d012d51368a7f",
+    "bytes": 43988,
+    "source_identity": "sha256:6a35934d2c14397af5bb8d16b49ddc68c16de3789b5bbe19599d012d51368a7f",
+    "transformation": "Decoded frame at 0.4 s; proportional resize; no scene edits"
+  },
+  {
+    "path": "static/images/poster-driving-comfort.jpg",
+    "sha256": "454fba8fcac734bbdb06632d94cee8aa98caa307ba97f96e0b7fe97d2bf2a280",
+    "bytes": 47913,
+    "source_identity": "sha256:454fba8fcac734bbdb06632d94cee8aa98caa307ba97f96e0b7fe97d2bf2a280",
+    "transformation": "Decoded frame at 0.4 s; proportional resize; no scene edits"
+  },
+  {
+    "path": "static/images/poster-driving-progress.jpg",
+    "sha256": "28d0d00db7ef95713972576997b83c01b49c1f3f621bfac35f70a34e1ab52f5a",
+    "bytes": 46203,
+    "source_identity": "sha256:28d0d00db7ef95713972576997b83c01b49c1f3f621bfac35f70a34e1ab52f5a",
+    "transformation": "Decoded frame at 0.4 s; proportional resize; no scene edits"
   }
 ]
