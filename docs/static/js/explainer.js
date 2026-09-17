@@ -1,3 +1,4 @@
+import { pairPhase, latentMarkup } from './explainer-pair.mjs';
 import { DIAGNOSTIC, problemPhase } from './explainer-problem.mjs';
 import { evidenceVector, evidencePhase } from './explainer-evidence.mjs';
 import { liftingProgress, liftingStep, liftingGeometry, decisionProgress } from './explainer-motion.mjs';
@@ -8,10 +9,13 @@ const $ = selector => document.querySelector(selector);
 const $$ = selector => [...document.querySelectorAll(selector)];
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
 const state = { stage: 0, candidate: 0, sources: 2, bound: 0.2, head: 0, lifting: 'ordinal', progress: 1, playing: false, speed: 1, elapsed: 0, supervision: false, recordCandidate:2, replay:true, comparing:false, hoverCandidate:null };
-const stageSeconds = [8, 10, 9, 10, 12, 8];
+const stageSeconds = [12, 10, 9, 10, 12, 8];
 const totalDuration = stageSeconds.reduce((a,b)=>a+b,0);
 let record = null;
 let previewCandidate = 0;
+let pair = null;
+let pairYaw = -.25;
+let orbitDrag = null;
 let phaseProgress = 0;
 let resumeAfterCompare = false;
 let currentContext = '';
@@ -309,7 +313,7 @@ function ordinalLiftingDetail() {
   return s;
 }
 
-function problemDetail() {
+function diagnosticDetail() {
   let s='';
   ['One decision context','Zoom into the shortlist','Observe the ranking gap'].forEach((label,i)=>{
     const x=16+i*247;
@@ -356,7 +360,7 @@ function problemDetail() {
   s+='<text id="problem-takeaway" x="379" y="337" class="svg-label svg-accent" text-anchor="middle"></text>';
   return s;
 }
-function updateProblem(svg) {
+function updateDiagnostic(svg) {
   const phase=problemPhase(phaseProgress);
   if(record)updateScenes(svg.querySelector('#problem-preview'),record,phase.motion);
   const time=svg.querySelector('#problem-time');
@@ -378,6 +382,87 @@ function updateProblem(svg) {
     'The planner acts on a few close alternatives—not the average candidate.',
     'Globally informative geometry can lose its order at the decision boundary.',
   ][phase.step];
+}
+
+
+function problemDetail() {
+  if(!pair||!record)return diagnosticDetail();
+  let s='';
+  ['Compare latent distances','Execute both candidates','Connect to the diagnosis'].forEach((label,i)=>{
+    const x=16+i*247;
+    s+='<g data-problem-step="'+i+'" role="button" tabindex="0" aria-label="'+label+'">';
+    s+=rect(x,5,235,36,'var(--surface)','var(--line)',8,'data-pair-operation="'+i+'"');
+    s+=text(x+12,28,String(i+1),'svg-small svg-accent')+text(x+29,28,label,'svg-small')+'</g>';
+  });
+  s+='<g id="pair-geometry">';
+  s+=text(20,65,'LeWM · predicted future geometry','svg-label');
+  s+=text(20,82,'Nearby goal distances, before execution','svg-tiny');
+  s+='<g id="pair-orbit">'+latentMarkup(pair,pairYaw)+'</g>';
+  s+='<rect id="pair-orbit-hit" x="55" y="88" width="259" height="179" rx="30" fill="transparent" role="slider" tabindex="0" aria-label="Rotate latent-space view" aria-valuemin="-70" aria-valuemax="70" aria-valuenow="0"/>';
+  pair.candidates.forEach((c,i)=>{
+    const x=18+i*171,color=i===0?'var(--gold)':'var(--blue)';
+    s+=rect(x,273,163,34,'var(--surface)','var(--line)',8);
+    s+=circle(x+13,290,3,color);
+    s+=text(x+24,294,c.label+' · distance '+c.rms_distance.toFixed(4),'svg-small');
+  });
+  s+='</g><g id="pair-diagnostic" opacity="0">';
+  s+=text(20,70,'The same issue at population scale','svg-label');
+  s+=text(20,89,'96 starts · within-start Spearman correlation','svg-tiny');
+  s+=text(142,120,'All 63','svg-small','text-anchor="middle"');
+  s+=text(285,120,'Top 4','svg-small svg-gold','text-anchor="middle"');
+  DIAGNOSTIC.forEach((row,i)=>{
+    const y=161+i*81;
+    s+=text(23,y+4,row.model,'svg-small')+line(164,y,263,y);
+    for(const [x,value,color] of [[142,row.all,'var(--blue)'],[285,row.shortlist,'var(--gold)']]){
+      s+=circle(x,y,23,'var(--surface)','stroke="'+color+'"');
+      s+=text(x,y+5,value.toFixed(2),'svg-title','text-anchor="middle"');
+    }
+  });
+  s+=text(23,290,'Strong global order → weak decision-local order','svg-small');
+  s+='</g>'+line(363,57,363,308);
+  s+=text(387,65,'Same start + goal · recorded execution','svg-label');
+  pair.candidates.forEach((c,i)=>{
+    const x=386+i*185,idx=record.candidates.findIndex(r=>r.id===c.id),color=i===0?'var(--gold)':'var(--blue)';
+    s+=circle(x+5,86,3,color)+text(x+14,90,'Candidate '+c.label+' · ID '+c.id,'svg-small');
+    s+=sceneMarkup(record,idx,x,102,171,'pair');
+    s+=text(x+85,288,'Cost '+c.cost.toFixed(5)+' · rank '+c.rank,'svg-small','text-anchor="middle"');
+    s+='<g data-pair-outcome="'+i+'" opacity="0">';
+    s+=circle(x+40,303,3,c.success?'#8EAD7D':'#C96E66');
+    s+=text(x+50,307,c.success?'Goal reached':'Goal not reached','svg-small')+'</g>';
+  });
+  s+=rect(16,321,726,30,'var(--purple-soft)','none',8);
+  s+='<text id="pair-takeaway" x="379" y="341" class="svg-label svg-accent" text-anchor="middle"></text>';
+  return s;
+}
+function updateProblem(svg) {
+  if(!pair||!record){updateDiagnostic(svg);return;}
+  const phase=pairPhase(phaseProgress);
+  updateScenes(svg,record,phase.motion);
+  svg.querySelectorAll('[data-pair-operation]').forEach(n=>{
+    const active=Number(n.dataset.pairOperation)===phase.step;
+    n.setAttribute('fill',active?'var(--purple-soft)':'var(--surface)');
+    n.setAttribute('stroke',active?'var(--purple)':'var(--line)');
+  });
+  svg.querySelector('#pair-geometry').style.opacity=String(1-phase.diagnostic);
+  svg.querySelector('#pair-geometry').style.pointerEvents=phase.diagnostic>.5?'none':'';
+  svg.querySelector('#pair-diagnostic').style.opacity=String(phase.diagnostic);
+  $('#data-badge').textContent=phase.diagnostic>.5?'MEASURED DIAGNOSTIC':'RECORDED PAIR + RADIAL VIEW';
+  const hit=svg.querySelector('#pair-orbit-hit');
+  hit.setAttribute('tabindex',phase.diagnostic>.5?'-1':'0');
+  hit.setAttribute('aria-valuenow',Math.round(pairYaw*180/Math.PI));
+  hit.setAttribute('aria-valuetext',Math.round(pairYaw*180/Math.PI)+' degrees');
+  svg.querySelectorAll('[data-pair-outcome]').forEach(n=>n.style.opacity=String(phase.outcome));
+  svg.querySelector('#pair-takeaway').textContent=phase.diagnostic>.5
+    ?'Global prediction quality does not settle the local action choice.'
+    :phase.outcome>.5?'The closer predicted future fails. The slightly farther one succeeds.'
+    :phase.motion>0?'Same initial state. Two stored action sequences. Different physical futures.'
+    :'Similar goal distances do not guarantee similar physical outcomes.';
+}
+function rotatePair(yaw) {
+  pairYaw=Math.max(-1.22,Math.min(1.22,yaw));
+  const orbit=$('#pair-orbit');if(orbit)orbit.innerHTML=latentMarkup(pair,pairYaw);
+  const slider=$('#pair-view-angle');if(slider)slider.value=pairYaw;
+  updateAnimation();
 }
 
 function recordedDetail() {
@@ -464,6 +549,16 @@ function chapterCopy() {
       caption:'Measured correlations; schematic pool tiles. Early recorded motion supplies context; complete executions appear in 06.',
     });
   }
+  if(state.stage===0&&pair){
+    Object.assign(chapter,{
+      title:'Close in latent distance. Different in execution.',
+      description:'Two futures from the same LeWM space sit at nearby goal distances. The lower-distance candidate fails; the slightly farther one succeeds. Rotate the geometry, play both recorded actions, then connect the example to the measured ranking gap.',
+      formula:'A: 0.2027  <  B: 0.2167  · RMS distance',
+      fact:'Start 176; candidate A = 79 (rank 1), B = 23 (rank 3) in the same 63-candidate pool. Native MSE costs are 0.04107749 and 0.04695161; radii are their square roots. Shells preserve this ratio; the opening angle comes from stored float16 latent directions. Display orientation is illustrative.',
+      visual:'Nearby latent distances → different physical outcomes',
+      caption:'Measured distances, recorded executions. Rotate the radial view; 3D orientation is illustrative. Aggregate evidence follows.',
+    });
+  }
   if(isRecorded()){
     chapter.kicker=state.stage===0?'01 / POSSIBLE ACTIONS':'06 / RECORDED EXECUTION';
     chapter.title=state.stage===0?'One start. Three different futures.':'The choice changes the outcome.';
@@ -519,6 +614,10 @@ function chapterCopy() {
 function options() {
   const panel=$('#stage-options');
   panel.innerHTML='';
+  if(state.stage===0&&pair){
+    panel.innerHTML='<label class="lifting-control"><span>Rotate latent view <span>Drag sphere / ← →</span></span><input id="pair-view-angle" type="range" min="-1.22" max="1.22" step=".01" value="'+pairYaw+'" aria-label="Latent view angle"></label>';
+    $('#pair-view-angle').oninput=e=>{stop();if(phaseProgress>.8)state.elapsed=.15*stageSeconds[0];rotatePair(Number(e.target.value));};
+  }
   if(state.stage===5){
     panel.innerHTML='<div class="segmented" role="group" aria-label="Scene source"><button data-replay="true" aria-pressed="'+state.replay+'">Recorded PushT</button><button data-replay="false" aria-pressed="'+!state.replay+'">Teaching example</button></div>';
   }
@@ -571,6 +670,11 @@ function applyLinkedFocus(){
 function renderCandidateControls() {
   const panel=$('#candidate-controls');
   const context=state.stage===0?'problem':isRecorded()?'recorded':'schematic';
+  if(context==='problem'&&pair){
+    panel.innerHTML='<span id="pair-clock">Recorded motion · 0.00 / 2.50 s</span><button id="pair-reset-view" type="button">Reset view ↺</button>';
+    $('#pair-reset-view').onclick=()=>{stop();state.elapsed=.15*stageSeconds[0];rotatePair(-.25);};
+    currentContext=context;return;
+  }
   if(currentContext!==context){
     panel.innerHTML=context==='problem'?'<span>Early motion</span>'+(record?record.candidates.map((c,i)=>'<button data-preview-candidate="'+i+'" aria-pressed="'+(i===previewCandidate)+'">Candidate '+c.id+'</button>').join(''):'Unavailable'):'<span>Trace</span>'+(context==='recorded'&&record
       ?record.candidates.map((c,i)=>'<button data-record-candidate="'+i+'" aria-label="Inspect '+c.method+' candidate '+c.id+'">'+c.method+'</button>').join('')
@@ -614,7 +718,8 @@ function render(transition=false) {
   $('#experiment-controls').hidden=isRecorded()||state.stage===0||state.stage===5||state.stage===4;
   $('#supervision-toggle').hidden=isRecorded()||state.stage===0;
   $('#model-note').textContent=isRecorded()?'The reconstruction follows recorded positions and angles; interpolation only smooths playback.':state.sources===2?'Two 192-dimensional descriptors and two ranks form a 386-dimensional token.':'The four-source configuration uses 388 dimensions and its own learned parameters.';
-  if(state.stage===0)$('#model-note').textContent='The 63 tiles explain shortlist selection; they do not encode individual outcomes. The physical preview shows only the first 0.80 seconds of an existing 2.50-second recording.';
+  if(state.stage===0&&pair)$('#model-note').textContent='A curated pair from the same model and pool. Geometry uses recorded native costs and stored latent directions; physical motion covers the original 25-action, 2.50-second horizon.';
+  else if(state.stage===0)$('#model-note').textContent='The 63 tiles explain shortlist selection; they do not encode individual outcomes. The physical preview shows only the first 0.80 seconds of an existing 2.50-second recording.';
   $$('#chapters button').forEach(b=>{
     const i=Number(b.dataset.stage);
     b.classList.toggle('past',i<state.stage);
@@ -699,11 +804,12 @@ function updateAnimation() {
   applyLinkedFocus();
   $('#step-progress').value=phaseProgress;
   $$('input[type=range]').forEach(input=>input.style.setProperty('--fill',100*(Number(input.value)-Number(input.min))/(Number(input.max)-Number(input.min))+'%'));
+  if(state.stage===0&&pair){const p=pairPhase(phaseProgress);$('#pair-clock').textContent='Recorded motion · '+(p.motion*2.5).toFixed(2)+' / 2.50 s';}
   $('#step-value').value=isRecorded()?(physicalProgress()*2.5).toFixed(2)+' s':Math.round(phaseProgress*100)+'%';
   const seconds=stageSeconds.slice(0,state.stage).reduce((a,b)=>a+b,0)+state.elapsed;
   $('#tour-seek').value=seconds;
   $('#tour-seek').style.setProperty('--fill',100*seconds/totalDuration+'%');
-  const stamp=t=>'00:'+String(Math.floor(t)).padStart(2,'0');
+  const stamp=t=>String(Math.floor(t/60)).padStart(2,'0')+':'+String(Math.floor(t)%60).padStart(2,'0');
   $('#tour-time').value=stamp(seconds)+' / '+stamp(totalDuration);
   $('#timeline-label').textContent=state.playing?'Playing · '+$('#chapters [aria-current]').textContent.replace('→','').trim():'Drag to explore · '+(isRecorded()?'recorded motion':'computation');
 }
@@ -753,7 +859,7 @@ function setTheme(theme){
 }
 document.addEventListener('click',event=>{
   const problemOperation=event.target.closest('[data-problem-step]');
-  if(problemOperation){stop();state.elapsed=[.12,.5,1][Number(problemOperation.dataset.problemStep)]*stageSeconds[0];updateAnimation();return;}
+  if(problemOperation){stop();state.elapsed=(pair?[.15,.76,1]:[.12,.5,1])[Number(problemOperation.dataset.problemStep)]*stageSeconds[0];updateAnimation();return;}
   const preview=event.target.closest('[data-preview-candidate]');
   if(preview){previewCandidate=Number(preview.dataset.previewCandidate);currentContext='';render(false);return;}
   const evidenceOperation=event.target.closest('[data-evidence-step]');
@@ -772,6 +878,23 @@ document.addEventListener('click',event=>{
   if(replay){stop();state.replay=replay.dataset.replay==='true';state.elapsed=0;currentContext='';render(true);return;}
   const lifting=event.target.closest('[data-lifting]');
   if(lifting){stop();state.lifting=lifting.dataset.lifting;state.elapsed=0;render(true);return;}
+});
+
+$('#detail-visual').addEventListener('pointerdown',event=>{
+  if(!event.target.closest('#pair-orbit-hit'))return;
+  event.preventDefault();stop();
+  orbitDrag={x:event.clientX,yaw:pairYaw,pointerId:event.pointerId};
+  $('#detail-visual').setPointerCapture(event.pointerId);
+});
+$('#detail-visual').addEventListener('pointermove',event=>{
+  if(orbitDrag)rotatePair(orbitDrag.yaw+(event.clientX-orbitDrag.x)*.008);
+});
+for(const name of ['pointerup','pointercancel','lostpointercapture'])
+  $('#detail-visual').addEventListener(name,()=>{orbitDrag=null;});
+$('#detail-visual').addEventListener('keydown',event=>{
+  if(event.target.id==='pair-orbit-hit'&&['ArrowLeft','ArrowRight'].includes(event.key)){
+    event.preventDefault();event.stopPropagation();stop();rotatePair(pairYaw+(event.key==='ArrowLeft'?-.08:.08));
+  }
 });
 function showMatrix(event){
   const cell=event.target.closest('.matrix-cell'),tip=$('#matrix-tooltip');
@@ -840,5 +963,12 @@ try {
 } catch(error) {
   state.replay=false;console.warn(error.message);
 }
+try {
+  const response=await fetch('static/data/explainer-pair.json');
+  if(!response.ok)throw Error('Pair data unavailable');
+  const data=await response.json();
+  if(!record||data.start!==record.start||data.candidates.some(c=>!record.candidates.some(r=>r.id===c.id&&r.success===c.success&&r.sha256===c.trace_sha256)))throw Error('Pair / trace identity mismatch');
+  pair=data;
+} catch(error){console.warn(error.message);}
 const hash=location.hash.match(/^#stage-([1-6])$/);if(hash)state.stage=Number(hash[1])-1;
 render();

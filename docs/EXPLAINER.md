@@ -8,14 +8,15 @@ browser inference is required.
 
 ## Six stages
 
-1. **The prediction gap:** a recorded early-motion preview supplies context;
-   a schematic 63-candidate pool narrows to four close alternatives, revealing
-   the measured decision-local ranking gap. Three clickable operations advance
-   the diagnosis. Average within-start Spearman correlations over 96 matched
-   starts fall from 0.90 to 0.11 for LeWM and 0.80 to 0.13 for TD-JEPA (rounded
-   values from the project-page diagnostic). Tiles represent candidate-set size,
-   not individual diagnostic samples. The preview is a separate recorded start,
-   capped at 0.80 seconds; method-labelled complete outcomes remain in stage 06.
+1. **The prediction gap:** two recorded candidates from the same LeWM space have
+   nearby predicted goal distances but opposing physical outcomes. A rotatable
+   radial view leads into their full synchronized executions, then the measured
+   population-level diagnosis. Three clickable operations advance this sequence.
+   Average within-start Spearman correlations over 96 matched starts fall from
+   0.90 to 0.11 for LeWM and 0.80 to 0.13 for TD-JEPA (all 63 candidates → top four;
+   rounded values from the project-page diagnostic). The single curated pair and
+   the aggregate diagnostic have distinct evidence identities. Stage 06 retains
+   its original three-method replay unchanged.
 2. **Predictive evidence:** source-specific descriptors, ordinal evidence and
    candidate-token construction, revealed in computational order. Three clickable
    operations animate goal subtraction and LayerNorm, within-source cost sorting
@@ -63,6 +64,28 @@ This case illustrates different executed choices; it is not an aggregate
 success-rate estimate. The physical scenes are recorded state reconstructions,
 not decoded JEPA predictions.
 
+Stage 01 uses candidates **A = 79** and **B = 23** from this same recording.
+Their original LeWM MSE costs are 0.04107749 and 0.04695161 (pool ranks 1 and 3).
+The radial view uses the square roots, 0.20267583 and 0.21668319, as RMS distances.
+A fails and B succeeds after the original 25 actions. Outcomes are revealed only
+after the 2.50-second recorded horizon completes. Shell radii retain their ratio
+under camera rotation; the opening angle is recovered from the stored float16
+goal-relative latents. Camera orientation is illustrative, not a learned 3D
+embedding. Projected screen lengths vary with the view; numeric radii remain fixed.
+
+`static/data/explainer-pair.json` records scores, metric definition, candidate IDs,
+outcomes, trace hashes and source dataset keys. Re-export from an existing case
+and its corresponding compact pool:
+
+```bash
+python scripts/export_explainer_pair.py /path/to/recorded/case \
+  /path/to/compact_pool.h5 docs/static/data/explainer-pair.json
+```
+
+This CPU export verifies cost/outcome agreement with the case, checks latent MSE
+within float16 storage tolerance, and preserves the original replay data. If pair
+metadata is unavailable, stage 01 falls back to the earlier aggregate diagnostic.
+
 ## Teaching data and method identity
 
 The six-candidate costs, descriptors, attention, correction outputs and transport
@@ -89,7 +112,9 @@ stage. Training supervision opens in a dialog.
 - Switch representation mechanism and inspect intermediate native distances.
 - Hold the before-alignment button (pointer, Space or Enter) in the decision or
   lifting stage, then release to restore the exact progress and playback state.
-- Jump to key moments via the timeline markers. The 57-second tour gives extra
+- Rotate the stage-01 radial view by dragging, its angle slider, or Left/Right
+  while the sphere is focused. View rotation does not change distances or outcomes.
+- Jump to key moments via the timeline markers. The 61-second tour gives extra
   time to ranking crossings and lifting, including a brief boundary-switch hold.
 - Hover a candidate to follow its evidence, rank path or latent point while
   dimming unrelated entries. Matrix hover highlights its candidate row/column.
@@ -104,7 +129,9 @@ stage. Training supervision opens in a dialog.
 
 - `static/js/explainer.js`: stage rendering, controls and shared playback clock.
 - `static/js/explainer-problem.mjs`: measured diagnostic endpoints and bounded
-  early-preview / shortlist-reveal timing; no interpolated statistics.
+  fallback shortlist-reveal timing; no interpolated statistics.
+- `static/js/explainer-pair.mjs`: radial 3D projection and paired-replay timing.
+- `static/data/explainer-pair.json`: verified latent costs, radii and pair provenance.
 - `static/js/explainer-model.mjs`: pure numerical teaching example.
 - `static/js/explainer-motion.mjs`: deterministic presentation timing and
   rank-to-radius geometry, with endpoint and decision-boundary tests.

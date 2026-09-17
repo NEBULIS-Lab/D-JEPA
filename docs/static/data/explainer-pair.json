@@ -1,0 +1,43 @@
+{
+  "start": 176,
+  "model": "LeWM",
+  "latent_dimension": 192,
+  "metric": "mean squared terminal future-to-goal distance",
+  "radius": "sqrt(native cost), i.e. RMS distance",
+  "candidates": [
+    {
+      "label": "A",
+      "id": 79,
+      "cost": 0.04107749089598656,
+      "rms_distance": 0.20267582711311816,
+      "rank": 1,
+      "success": false,
+      "trace_file": "candidate_79_trace.npz",
+      "trace_sha256": "1c00be384c537d5a3b2cd0640d8f9b5e83d08e5211ddbfe3c5bfffba9aa1e4c2"
+    },
+    {
+      "label": "B",
+      "id": 23,
+      "cost": 0.04695160686969757,
+      "rms_distance": 0.2166831947099211,
+      "rank": 3,
+      "success": true,
+      "trace_file": "candidate_23_trace.npz",
+      "trace_sha256": "cae141f9a74b802cb487dcd93056f9b3aa449f3d5bad882ef50c355722604185"
+    }
+  ],
+  "angle_rad": 1.1067393018683758,
+  "geometry_note": "Radii use original predicted costs. The opening angle is reconstructed from stored float16 goal-relative latents. Camera orientation is illustrative; screen distances are projections.",
+  "source": {
+    "case_file": "case.json",
+    "case_sha256": "5369d97236b0374c08eec370daf23ce336f762c910c8f52cf75099703646415a",
+    "pool_file": "compact_pool.h5",
+    "start_index": 176,
+    "score_key": "lewm/predicted_cost",
+    "future_key": "lewm/predicted_z",
+    "goal_key": "lewm/goal_z",
+    "candidate_key": "source_candidate_id",
+    "outcome_key": "success"
+  },
+  "selection": "Curated opposing-outcome pair within the same model, start and candidate pool; not an aggregate estimate."
+}
