@@ -27,7 +27,7 @@
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="topbar">
     <a class="wordmark" href="#home" aria-label="D-JEPA home">D-JEPA<span class="brand-dot"></span></a>
-    <nav aria-label="Sections"><a href="#demonstrations">Demos</a><a href="#problem">Why</a><a href="#method">Method</a><a href="#results">Results</a><a href="#reproduce">Reproduce</a></nav>
+    <nav aria-label="Sections"><a href="#demonstrations">Demos</a><a href="#problem">Why</a><a href="#method">Method</a><a href="explainer.html">Explainer</a><a href="#results">Results</a><a href="#reproduce">Reproduce</a></nav>
     <button id="theme-toggle" type="button" aria-label="Switch to light mode" aria-pressed="true"><span class="theme-track" aria-hidden="true"><svg class="theme-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg><svg class="theme-moon" viewBox="0 0 24 24"><path d="M19.5 15.4A8.5 8.5 0 0 1 8.6 4.5a8.5 8.5 0 1 0 10.9 10.9Z"/></svg></span><span class="theme-label">Dark</span></button>
   </header>
   <main id="main">
@@ -48,6 +48,7 @@
       </div>
       <p class="hero-description"><span>D-JEPA learns decision-relevant relations across pretrained</span> <span>predictive models and realizes them in future representations.</span></p>
       <div class="resource-links">
+        <a class="button" href="explainer.html"><svg class="button-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m10 8 6 4-6 4Z" fill="currentColor" stroke="none"/></svg>Interactive explainer <span aria-hidden="true">↗</span></a>
         <a class="button primary" href="https://nebulis-lab.com/D-JEPA"><img class="button-icon project-icon" src="static/images/branding/jepa-icon-light.svg" alt="" aria-hidden="true">Project website <span aria-hidden="true">↗</span></a>
         <a class="button" href="https://github.com/NEBULIS-Lab/shuaijun-ICLR27-D-JEPA-paper" title="Paper source; arXiv link forthcoming"><span class="button-icon mask-icon arxiv-icon" aria-hidden="true"></span>Paper <span aria-hidden="true">↗</span></a>
         <a class="button" href="https://huggingface.co/Shuaijun/D-JEPA"><img class="button-icon huggingface-icon" src="static/images/icons/huggingface.svg" alt="" aria-hidden="true">Model repository <span aria-hidden="true">↗</span></a>
@@ -147,6 +148,7 @@
     <section class="section tinted" id="method">
       <div class="container">
         <div class="section-heading"><span class="section-number">03 / THE FRAMEWORK</span><h2>From future prediction to decision-aligned representation.</h2></div>
+        <a class="explainer-entry" href="explainer.html"><span class="explainer-entry-play" aria-hidden="true">▶</span><span><strong>Go inside D-JEPA</strong><span>Trace candidate futures through relational alignment and into decision-aligned representations.</span></span><span class="explainer-entry-arrow" aria-hidden="true">↗</span></a>
         <div class="artwork-placeholder overview-slot" data-figure="overview" role="img" aria-label="Overview diagram: author artwork pending"><span class="placeholder-label">FRAMEWORK OVERVIEW</span><p>Predictive models · Relational alignment · Future representation</p><span class="small">Reserved for the final hand-drawn overview</span></div>
         <div class="method-grid">
           <article class="method-card"><span class="module-index">01</span><h3>Decision alignment</h3><p>Learn bounded, set-wise corrections from future–goal descriptors and ordinal structure. Restricted predictor adaptation offers a complementary source of decision evidence.</p><a href="https://github.com/NEBULIS-Lab/D-JEPA/tree/main/src/djepa/models">Explore the modules ↗</a></article>

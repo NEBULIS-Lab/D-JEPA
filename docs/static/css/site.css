@@ -121,6 +121,12 @@ nav a { font-size: var(--text-small); color: var(--muted); text-decoration: none
 .method-card p { color: var(--muted); }
 .method-card a { font-size: var(--text-small); }
 .module-index { display: block; color: var(--link); margin-bottom: 1.2rem; font-weight: 750; }
+.explainer-entry { display: flex; align-items: center; gap: 1.2rem; border: 1px solid var(--line); border-radius: 16px; padding: 1.3rem 1.5rem; margin-bottom: 2rem; background: var(--card); text-decoration: none; }
+.explainer-entry:hover { border-color: var(--purple); }
+.explainer-entry-play { display: grid; place-items: center; flex: 0 0 42px; height: 42px; border-radius: 50%; color: var(--link); background: var(--table-ours); font-size: 15px; }
+.explainer-entry strong { display: block; font-size: 1rem; color: var(--link); margin-bottom: .25rem; }
+.explainer-entry > span:nth-child(2) > span { display: block; font-size: .875rem; color: var(--muted); }
+.explainer-entry-arrow { font-size: 24px; color: var(--link); margin-left: auto; }
 .method-card:nth-child(2) { border-top: 3px solid var(--peach); }
 .method-card:nth-child(1) { border-top: 3px solid var(--purple); }
 .method-card:nth-child(3) { border-top: 3px solid var(--gold); }

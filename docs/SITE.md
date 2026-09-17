@@ -1,5 +1,10 @@
 # Project website maintenance
 
+The standalone [interactive method explainer](explainer.html) is linked from
+the header, resource buttons and method section. It supports the site's two
+themes, a six-stage guided tour and inspectable SVG diagrams. Implementation,
+illustrative-data conventions and controls are documented in [EXPLAINER.md](EXPLAINER.md).
+
 `index.html` is a static project page inspired by the section-based layout of
 NEBULIS Lab's BRACE page. Content, CSS and JavaScript are specific to D-JEPA;
 BRACE experiments, publication metadata, scripts and third-party bundles are

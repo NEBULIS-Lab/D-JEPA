@@ -56,6 +56,22 @@ def check():
                 raise ValueError(f'nonportable or missing site asset: {link}')
         elif url.fragment and url.fragment not in page.ids:
             raise ValueError(f'unknown section: {link}')
+    explainer = Page()
+    explainer.feed((SITE/'explainer.html').read_text())
+    for link in explainer.links:
+        url = urlsplit(link)
+        if url.scheme or url.netloc:
+            continue
+        if url.path:
+            path = (SITE/unquote(url.path)).resolve()
+            if SITE.resolve() not in path.parents or not path.is_file():
+                raise ValueError(f'missing explainer link or asset: {link}')
+        elif url.fragment and url.fragment not in explainer.ids:
+            raise ValueError(f'unknown explainer section: {link}')
+    required_controls = {'architecture', 'detail-visual', 'play', 'theme-toggle',
+                         'strength', 'supervision-toggle', 'candidate-controls'}
+    if not required_controls <= explainer.ids:
+        raise ValueError('explainer is missing required interactive controls')
     content = json.loads((SITE/'site-content.json').read_text())
     for name, figure in content['figures'].items():
         if name not in page.slots:
@@ -73,7 +89,7 @@ def check():
     for master in (ROOT/'assets/branding').glob('*.svg'):
         if master.read_bytes() != (SITE/'static/images/branding'/master.name).read_bytes():
             raise ValueError(f'brand copy differs: {master.name}')
-    print('PASS: local links, sections, artwork, media hashes, logos and ten video tabs')
+    print('PASS: project/explainer links, controls, artwork, media hashes, logos and ten video tabs')
 
 
 if __name__ == '__main__':
