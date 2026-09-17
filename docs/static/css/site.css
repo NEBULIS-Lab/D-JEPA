@@ -75,6 +75,12 @@ nav a { font-size: var(--text-small); color: var(--muted); text-decoration: none
   :root[data-theme="dark"] .gradient-text { background-image: var(--gradient); }
 }
 .hero-statement { max-width: 900px; margin: 0 auto 2rem; font-size: var(--text-large); line-height: 1.55; font-weight: 550; color: var(--link); text-wrap: balance; }
+.hero-authors { max-width: 860px; margin: -.15rem auto .7rem; display: flex; flex-wrap: wrap; justify-content: center; column-gap: 1.35rem; row-gap: .25rem; font-size: var(--text-body); font-weight: 600; line-height: 1.45; }
+.hero-authors span { white-space: nowrap; }
+.hero-authors sup, .hero-affiliations sup { position: relative; top: -.15em; margin-left: .08em; font-size: .68em; color: var(--link); }
+.hero-affiliations { margin: 0 auto 1.45rem; max-width: 820px; color: var(--muted); font-size: var(--text-small); line-height: 1.55; }
+.hero-affiliations p { margin: 0; text-align: center; }
+.hero-affiliations a { color: var(--muted); }
 .hero-description { max-width: 660px; margin-inline: auto; font-size: var(--text-body); color: var(--muted); text-wrap: balance; }
 .hero-description span { display: block; }
 .resource-links { display: flex; flex-wrap: wrap; justify-content: center; gap: .65rem; margin: 1.8rem 0 2.1rem; }

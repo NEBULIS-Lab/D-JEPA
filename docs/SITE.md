@@ -73,7 +73,9 @@ preferences. Updating these local files does not deploy the website.
 
 The hero alone uses the author-provided `d-jepa-full-logo2-light.svg` and
 `d-jepa-full-logo2-dark.svg`; existing logo masters and other placements are
-unchanged. Gallery, diagnostic, coverage plates and the five-column results
+unchanged. The title area lists all seven authors, their three affiliations and
+the corresponding-author email; the same authors are exposed as structured
+`ScholarlyArticle` metadata. Gallery, diagnostic, coverage plates and the five-column results
 grid share the main content width. The header/footer share a lavender surface;
 the reproduction section has a separate background. Theme switching uses a
 sun/moon control. First visits default to dark, independent of the operating
