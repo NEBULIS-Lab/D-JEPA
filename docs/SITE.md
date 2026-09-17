@@ -76,7 +76,9 @@ The hero alone uses the author-provided `d-jepa-full-logo2-light.svg` and
 unchanged. Gallery, diagnostic, coverage plates and the five-column results
 grid share the main content width. The header/footer share a lavender surface;
 the reproduction section has a separate background. Theme switching uses a
-sun/moon control. Each video has a large, keyboard-accessible play overlay that
+sun/moon control. First visits default to dark, independent of the operating
+system theme; a saved manual choice takes precedence on later visits.
+Each video has a large, keyboard-accessible play overlay that
 hides during playback and returns on pause, alongside native video controls.
 
 The page has no final-paper download, final citation or venue badge. Add them

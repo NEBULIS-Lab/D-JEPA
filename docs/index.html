@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,14 +11,14 @@
   <meta property="og:image" content="static/images/branding/jepa-full-logo-light.svg">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://nebulis-lab.com/D-JEPA">
-  <link rel="icon" type="image/svg+xml" href="static/images/branding/jepa-icon-light.svg" id="site-icon">
+  <link rel="icon" type="image/svg+xml" href="static/images/branding/jepa-icon-dark.svg" id="site-icon">
   <link rel="stylesheet" href="static/css/site.css">
   <title>D-JEPA: A Decision-Aligned Latent World Model</title>
   <script>
     try {
       const saved = localStorage.getItem('djepa-theme');
-      document.documentElement.dataset.theme = saved || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-    } catch (_) { document.documentElement.dataset.theme = 'light'; }
+      document.documentElement.dataset.theme = saved === 'light' ? 'light' : 'dark';
+    } catch (_) { document.documentElement.dataset.theme = 'dark'; }
   </script>
   <script defer src="static/js/site.js"></script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"ScholarlyArticle","name":"D-JEPA: A Decision-Aligned Latent World Model","url":"https://nebulis-lab.com/D-JEPA","codeRepository":"https://github.com/NEBULIS-Lab/D-JEPA","description":"D-JEPA learns decision-relevant relations among predicted futures and realizes them in JEPA-compatible representations."}</script>
@@ -28,7 +28,7 @@
   <header class="topbar">
     <a class="wordmark" href="#home" aria-label="D-JEPA home">D-JEPA<span class="brand-dot"></span></a>
     <nav aria-label="Sections"><a href="#demonstrations">Demos</a><a href="#problem">Why</a><a href="#method">Method</a><a href="#results">Results</a><a href="#reproduce">Reproduce</a></nav>
-    <button id="theme-toggle" type="button" aria-label="Switch color theme" aria-pressed="false"><span class="theme-track" aria-hidden="true"><svg class="theme-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg><svg class="theme-moon" viewBox="0 0 24 24"><path d="M19.5 15.4A8.5 8.5 0 0 1 8.6 4.5a8.5 8.5 0 1 0 10.9 10.9Z"/></svg></span><span class="theme-label">Light</span></button>
+    <button id="theme-toggle" type="button" aria-label="Switch to light mode" aria-pressed="true"><span class="theme-track" aria-hidden="true"><svg class="theme-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg><svg class="theme-moon" viewBox="0 0 24 24"><path d="M19.5 15.4A8.5 8.5 0 0 1 8.6 4.5a8.5 8.5 0 1 0 10.9 10.9Z"/></svg></span><span class="theme-label">Dark</span></button>
   </header>
   <main id="main">
     <section class="hero container" id="home">

@@ -1,6 +1,5 @@
 /* No analytics or external runtime dependencies. */
 const themeButton = document.querySelector('#theme-toggle');
-const systemTheme = matchMedia('(prefers-color-scheme: dark)');
 function setTheme(theme) {
   document.documentElement.dataset.theme = theme;
   themeButton.querySelector('.theme-label').textContent = theme === 'dark' ? 'Dark' : 'Light';
@@ -8,15 +7,11 @@ function setTheme(theme) {
   themeButton.setAttribute('aria-label', `Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`);
   document.querySelector('#site-icon').href = `static/images/branding/jepa-icon-${theme}.svg`;
 }
-setTheme(document.documentElement.dataset.theme || 'light');
+setTheme(document.documentElement.dataset.theme || 'dark');
 themeButton.addEventListener('click', () => {
   const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
   setTheme(next);
   try { localStorage.setItem('djepa-theme', next); } catch (_) { /* Session-only preference. */ }
-});
-systemTheme.addEventListener('change', event => {
-  try { if (localStorage.getItem('djepa-theme')) return; } catch (_) { /* Follow system. */ }
-  setTheme(event.matches ? 'dark' : 'light');
 });
 
 // Task tabs progressively enhance the gallery; all clips remain available without JS.
