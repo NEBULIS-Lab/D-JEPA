@@ -35,7 +35,12 @@ export function pairPoints(pair) {
 export function latentIntro(progress) {
   const u=Math.max(0,Math.min(1,progress/(.22*.9)));
   const t=u*u*(3-2*u); // Ease in/out, then hold the completed view for 0.4 s.
-  return {t, yawOffset:.65*Math.sin(2*Math.PI*t)};
+  return {t, yawOffset:.85*t}; // One continuous direction; retain the final view.
+}
+// An illustrative open wave field, independent of the measured A/B geometry.
+export function latentWaveHeight(x,z,phase=0) {
+  return -.105+.043*Math.sin(11*x+5*z-phase*1.8)
+    +.021*Math.cos(13*z-3*x+phase*1.2);
 }
 // Original illustrative backdrop, NOT exported embeddings, model neighborhoods,
 // candidate counts, or success clusters. The measured A/B points are separate.
@@ -67,19 +72,28 @@ export function latentMarkup(pair,yaw,intro=1,animate=true) {
   const screen=point=>{const p=projectPoint(point,yaw,pitch);return [cx+p[0]*scale,cy-p[1]*scale,p[2]];};
   const n=x=>x.toFixed(2);
   const curve=points=>points.map((p,i)=>{const [x,y]=screen(p);return (i?'L':'M')+n(x)+' '+n(y);}).join(' ');
-  const colors=['var(--gold)','var(--blue)'];
+  const colors=['var(--pair-a)','var(--pair-b)'];
+  const labels=['var(--pair-a-label)','var(--pair-b-label)'];
   let s='<defs><clipPath id="latent-field-clip"><rect x="18" y="91" width="333" height="176" rx="12"/></clipPath>';
-  s+='<radialGradient id="latent-field-glow"><stop stop-color="var(--purple)" stop-opacity=".12"/><stop offset="1" stop-color="var(--purple)" stop-opacity="0"/></radialGradient></defs>';
+  s+='<radialGradient id="latent-field-glow"><stop stop-color="var(--purple)" stop-opacity=".12"/><stop offset="1" stop-color="var(--purple)" stop-opacity="0"/></radialGradient>';
+  s+='<radialGradient id="latent-wave-fade"><stop offset="0" stop-color="white"/><stop offset=".55" stop-color="white" stop-opacity=".9"/><stop offset="1" stop-color="white" stop-opacity="0"/></radialGradient>';
+  s+='<mask id="latent-wave-mask" maskUnits="userSpaceOnUse" x="18" y="91" width="333" height="176"><ellipse cx="183" cy="205" rx="170" ry="75" fill="url(#latent-wave-fade)"/></mask></defs>';
   s+='<g clip-path="url(#latent-field-clip)" aria-label="Illustrative latent-space context; A and B show measured goal distances">';
   s+='<ellipse cx="183" cy="187" rx="162" ry="84" fill="url(#latent-field-glow)"/>';
-  // A receding, open reference plane replaces the enclosing planetary shells.
-  const floor=-.105;
-  s+='<path d="'+curve([[-.34,floor,-.24],[.34,floor,-.24],[.34,floor,.24],[-.34,floor,.24]])+'Z" fill="var(--purple)" opacity=".025"/>';
-  for(let k=-4;k<=4;k++){
-    for(const points of [ [[k*.08,floor,-.24],[k*.08,floor,.24]], [[-.34,floor,k*.06],[.34,floor,k*.06]] ]){
-      s+='<path data-latent-grid d="'+curve(points)+'" stroke="var(--purple)" stroke-width=".6" opacity="'+(.15-Math.abs(k)*.018)+'" fill="none"/>';
+  // Extend well beyond the viewport and fade, so no finite rectangular rim appears.
+  const wavePhase=animate?t:0;
+  const floorAt=(x,z)=>latentWaveHeight(x,z,wavePhase);
+  s+='<g mask="url(#latent-wave-mask)">';
+  for(let k=-12;k<=12;k++){
+    for(let direction=0;direction<2;direction++){
+      const points=Array.from({length:49},(_,j)=>{
+        const u=-.84+j*.035,x=direction?u:k*.07,z=direction?k*.07:u;
+        return [x,floorAt(x,z),z];
+      });
+      s+='<path data-latent-grid d="'+curve(points)+'" stroke="var(--accent)" stroke-width=".7" opacity=".29" fill="none"/>';
     }
   }
+  s+='</g>';
   const projected=backdrop.map(a=>screen(a.point));
   for(const [i,j] of backdropEdges){
     const a=projected[i],b=projected[j];
@@ -103,8 +117,9 @@ export function latentMarkup(pair,yaw,intro=1,animate=true) {
     s+='<path d="'+curve(arc)+'" stroke="'+colors[i]+'" stroke-width="1" opacity="'+(.15+.25*t)+'" stroke-dasharray="2 4" fill="none"/>';
   });
   pairPoints(pair).forEach((p,i)=>{
-    const [x,y]=screen(p),[fx,fy]=screen([p[0],floor,p[2]]),label=pair.candidates[i].label;
+    const [x,y]=screen(p),[fx,fy]=screen([p[0],floorAt(p[0],p[2]),p[2]]),label=pair.candidates[i].label;
     const reveal=Math.max(0,Math.min(1,(t-i*.22)/.45));
+    const glow=Math.max(0,Math.min(1,(t-i*.12)/.82));
     s+='<path d="M'+n(fx)+' '+n(fy)+'L'+n(x)+' '+n(y)+'" stroke="'+colors[i]+'" opacity=".22" stroke-dasharray="2 4" fill="none"/>';
     s+='<ellipse cx="'+n(fx)+'" cy="'+n(fy)+'" rx="6" ry="2.5" fill="'+colors[i]+'" opacity=".2"/>';
     s+='<path d="M183 191L'+n(x)+' '+n(y)+'" stroke="'+colors[i]+'" stroke-width="7" opacity="'+(.065*reveal)+'" fill="none"/>';
@@ -112,12 +127,16 @@ export function latentMarkup(pair,yaw,intro=1,animate=true) {
     if(reveal>0&&reveal<1){
       s+='<circle cx="'+n(cx+(x-cx)*reveal)+'" cy="'+n(cy+(y-cy)*reveal)+'" r="3" fill="'+colors[i]+'"/>';
     }
-    s+='<g opacity="'+(.35+.65*reveal)+'">';
-    s+='<circle cx="'+n(x)+'" cy="'+n(y)+'" r="'+n(10+5*Math.sin(Math.PI*reveal))+'" fill="'+colors[i]+'" opacity=".13"/>';
-    s+='<circle data-pair-point="'+label+'" cx="'+n(x)+'" cy="'+n(y)+'" r="4.5" fill="'+colors[i]+'" stroke="var(--panel)" stroke-width="1.5"/>';
-    s+='<text x="'+n(x+(i===0?-12:12))+'" y="'+n(y-8)+'" text-anchor="'+(i===0?'end':'start')+'" class="svg-label" style="fill:'+colors[i]+'" paint-order="stroke" stroke="var(--panel)" stroke-width="3" stroke-linejoin="round">'+label+'</text></g>';
+    s+='<g data-pair-beacon="'+label+'" opacity="'+(.45+.55*glow)+'">';
+    for(const [radius,opacity] of [[18,.035],[13,.07],[8,.17]]){
+      s+='<circle cx="'+n(x)+'" cy="'+n(y)+'" r="'+n(radius*(.8+.2*glow))+'" fill="'+colors[i]+'" opacity="'+n(opacity*(.3+.7*glow))+'"/>';
+    }
+    s+='<circle cx="'+n(x)+'" cy="'+n(y)+'" r="6.5" fill="none" stroke="'+labels[i]+'" stroke-width=".65" opacity="'+n(.2+.5*glow)+'"/>';
+    s+='<circle data-pair-point="'+label+'" cx="'+n(x)+'" cy="'+n(y)+'" r="4.7" fill="'+colors[i]+'" stroke="'+labels[i]+'" stroke-width=".8"/>';
+    s+='<circle cx="'+n(x-1)+'" cy="'+n(y-1.2)+'" r="1.6" fill="white" opacity="'+n(.25+.65*glow)+'"/>';
+    s+='<text x="'+n(x+(i===0?-12:12))+'" y="'+n(y-8)+'" text-anchor="'+(i===0?'end':'start')+'" class="svg-label" style="fill:'+labels[i]+'" paint-order="stroke" stroke="var(--panel)" stroke-width="3" stroke-linejoin="round">'+label+'</text></g>';
   });
-  const [gx,gy]=screen([0,floor,0]);
+  const [gx,gy]=screen([0,floorAt(0,0),0]);
   s+='<ellipse cx="'+n(gx)+'" cy="'+n(gy)+'" rx="7" ry="2.5" fill="var(--purple)" opacity=".18"/>';
   s+='<path d="M183 191L'+n(gx)+' '+n(gy)+'" stroke="var(--purple)" opacity=".35" stroke-dasharray="2 4"/>';
   s+='<circle cx="183" cy="191" r="11" fill="var(--purple)" opacity=".16"/><circle cx="183" cy="191" r="4" fill="var(--accent)" stroke="var(--panel)" stroke-width="1.5"/>';

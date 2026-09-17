@@ -522,7 +522,7 @@ function problemDetail() {
   s+='<g id="pair-orbit">'+latentMarkup(pair,pairYaw)+'</g>';
   s+='<rect id="pair-orbit-hit" x="18" y="91" width="333" height="176" rx="12" fill="transparent" role="slider" tabindex="0" aria-label="Rotate latent-space view" aria-valuemin="-70" aria-valuemax="70" aria-valuenow="0"/>';
   pair.candidates.forEach((c,i)=>{
-    const x=18+i*171,color=i===0?'var(--gold)':'var(--blue)';
+    const x=18+i*171,color=i===0?'var(--pair-a)':'var(--pair-b)';
     s+=rect(x,273,163,34,'var(--surface)','var(--line)',8);
     s+=circle(x+13,290,3,color);
     s+=text(x+24,294,c.label+' · distance '+c.rms_distance.toFixed(4),'svg-small');
@@ -544,7 +544,7 @@ function problemDetail() {
   s+='</g>'+line(363,57,363,308);
   s+=text(387,65,'Same start + goal · recorded execution','svg-label');
   pair.candidates.forEach((c,i)=>{
-    const x=386+i*185,idx=record.candidates.findIndex(r=>r.id===c.id),color=i===0?'var(--gold)':'var(--blue)';
+    const x=386+i*185,idx=record.candidates.findIndex(r=>r.id===c.id),color=i===0?'var(--pair-a)':'var(--pair-b)';
     s+=circle(x+5,86,3,color)+text(x+14,90,'Candidate '+c.label+' · ID '+c.id,'svg-small');
     s+=sceneMarkup(record,idx,x,102,171,'pair');
     s+=text(x+85,288,'Cost '+c.cost.toFixed(5)+' · rank '+c.rank,'svg-small','text-anchor="middle"');

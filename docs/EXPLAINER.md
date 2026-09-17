@@ -171,25 +171,32 @@ stage. Training supervision opens in a dialog.
   lifting stage, then release to restore the exact progress and playback state.
 - Rotate the stage-01 radial view by dragging, its angle slider, or Left/Right
   while the space is focused. View rotation does not change distances or outcomes.
-- The first stage-01 operation automatically sweeps the camera, draws the two
+- The first stage-01 operation turns the camera in one direction, draws the two
   measured-radius rays in sequence, and reveals the candidate points. Selecting
   that operation replays its animation and pauses before physical execution.
   Its comparison now takes 4.00 seconds (previously 2.64), with eased entry/exit
   and a final 0.40-second settled view. The subsequent recorded-execution and
-  diagnostic intervals keep their previous durations. Edge-grid lines taper
-  gently, candidate letters have a background outline, and the goal has a small
+  diagnostic intervals keep their previous durations. The final camera angle
+  holds rather than reversing. Wave-grid lines taper gently toward the viewport
+  edges, candidate letters have a background outline, and the goal has a small
   anchor ring and ground projection.
   Reduced-motion preference suppresses the camera sweep. Numerical radii remain
   fixed throughout. The primary play button uses the project-page purple/peach/gold
   gradient; chapter navigation has larger, higher-contrast text.
 - The radial comparison sits in an open, depth-sorted purple point cloud with
-  sparse local links, a receding grid and ground projections. These 228 backdrop
+  sparse local links, a gently undulating open grid and ground projections.
+  The mesh extends beyond the viewport with a soft edge fade; bright gold/blue
+  candidate beacons gradually illuminate without changing their measured radii.
+  These 228 backdrop
   points are deterministic spatial illustration, not exported embeddings,
   candidate counts, affinities or success clusters. A/B remain the two separately
   measured candidates. Thin radius arcs replace the old enclosing wire spheres;
   traveling ray tips, gentle camera pitch and depth-dependent point opacity make
   the geometry easier to follow. Reduced-motion preference fixes the camera and
   backdrop positions while retaining the sequential distance readout.
+- Inspector titles use a quieter 19–24 px hierarchy. Narration subtitles use
+  17 px on desktop and 15 px on mobile, with theme gold (#FFDB67) in dark mode
+  and a darker golden tone for readable contrast in light mode.
 - Peripheral context strips, the top status line and below-canvas captions are
   removed from the visible workbench. Evidence identity and measurement notes
   remain available in the inspector. Candidate Trace controls remain visible for

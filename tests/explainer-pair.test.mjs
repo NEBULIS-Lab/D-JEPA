@@ -1,16 +1,25 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { pairPhase, pairPoints, projectPoint, latentIntro, latentBackdrop, latentMarkup, pairTimelinePhase, pairTimelineSeconds, PAIR_INTRO_SECONDS, PAIR_STAGE_SECONDS } from '../docs/static/js/explainer-pair.mjs';
+import { pairPhase, pairPoints, projectPoint, latentIntro, latentWaveHeight, latentBackdrop, latentMarkup, pairTimelinePhase, pairTimelineSeconds, PAIR_INTRO_SECONDS, PAIR_STAGE_SECONDS } from '../docs/static/js/explainer-pair.mjs';
 const pair=JSON.parse(readFileSync(new URL('../docs/static/data/explainer-pair.json',import.meta.url)));
 const traces=JSON.parse(readFileSync(new URL('../docs/static/data/explainer-pusht.json',import.meta.url)));
-test('intro camera visibly sweeps and returns without modifying measured radii',()=>{
+test('intro camera turns in one direction, then holds without reversing',()=>{
   assert.equal(latentIntro(0).t,0);
-  assert.ok(latentIntro(.055).yawOffset>.5);
-  assert.ok(latentIntro(.145).yawOffset<-.5);
-  assert.ok(Math.abs(latentIntro(.22).yawOffset)<1e-12);
+  const angles=Array.from({length:101},(_,i)=>latentIntro(i/100).yawOffset);
+  assert.ok(angles.every((angle,i)=>i===0||angle>=angles[i-1]));
+  assert.equal(angles[0],0);assert.equal(angles.at(-1),.85);
   assert.equal(latentIntro(1).t,1);
   assert.equal(latentIntro(.20).t,1);
+});
+test('the open wave grid has depth and clear lines; point beacons brighten gradually',()=>{
+  assert.notEqual(latentWaveHeight(0,0),latentWaveHeight(.1,.2));
+  assert.notEqual(latentWaveHeight(0,0,0),latentWaveHeight(0,0,1));
+  const initial=latentMarkup(pair,-.25,0),final=latentMarkup(pair,.6,1);
+  assert.equal((final.match(/data-latent-grid/g)||[]).length,50);
+  assert.match(final,/latent-wave-mask/);assert.match(final,/stroke-width=".7" opacity=".29"/);
+  const brightness=s=>[...s.matchAll(/data-pair-beacon="[AB]" opacity="([^"]+)"/g)].map(m=>Number(m[1]));
+  assert.ok(brightness(final).every((v,i)=>v>brightness(initial)[i]));
 });
 test('four-second comparison preserves subsequent execution and diagnosis durations',()=>{
   assert.equal(PAIR_INTRO_SECONDS,4);
