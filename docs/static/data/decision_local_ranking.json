@@ -1,0 +1,206 @@
+{
+  "claim": "Predicted goal-distance preference can conflict with execution; shortlist ranking loses fidelity.",
+  "archetype": "quantitative grid",
+  "backend": "Python / Matplotlib Agg",
+  "canvas_inches": [
+    6.4,
+    1.85
+  ],
+  "font": "Arial-compatible Liberation Sans",
+  "minimum_display_font_pt": 5.8,
+  "populations": {
+    "a": "One curated recorded LeWM pair, confirmation start 176",
+    "bcd": "All 96 audit starts, 63 non-expert candidates per start"
+  },
+  "definitions": {
+    "gap": "(d_success - d_failure)/(d_success + d_failure), minimum predicted RMS distance in each outcome group",
+    "pair_error": "Mean across mixed-outcome starts of success/failure pair fraction with failure assigned strictly lower predicted cost; ties are not inversions",
+    "spearman": "Predicted vs realized latent goal costs, not binary-success correlation",
+    "b_summary": "All points, median and interquartile interval; no inferential CI",
+    "c_counts": "LeWM 96/96/34 and TD-JEPA 96/95/29 eligible starts at K=63/16/4"
+  },
+  "margin_summary": [
+    {
+      "model": "LeWM",
+      "starts": 96,
+      "failed_preferred": 8,
+      "median": -0.25085547911050055,
+      "q25": -0.40510211683017644,
+      "q75": -0.09497428552944047
+    },
+    {
+      "model": "TD-JEPA",
+      "starts": 96,
+      "failed_preferred": 8,
+      "median": -0.10664919736956605,
+      "q25": -0.24454043753077043,
+      "q75": -0.04535328037486606
+    }
+  ],
+  "pair_error_summary": [
+    {
+      "model": "LeWM",
+      "candidates": 63,
+      "mixed_starts": 96,
+      "mean_inversion_percent": 3.9540800490853076
+    },
+    {
+      "model": "LeWM",
+      "candidates": 16,
+      "mixed_starts": 96,
+      "mean_inversion_percent": 20.442315569268697
+    },
+    {
+      "model": "LeWM",
+      "candidates": 4,
+      "mixed_starts": 34,
+      "mean_inversion_percent": 49.019607843137244
+    },
+    {
+      "model": "TD-JEPA",
+      "candidates": 63,
+      "mixed_starts": 96,
+      "mean_inversion_percent": 3.8731391910488404
+    },
+    {
+      "model": "TD-JEPA",
+      "candidates": 16,
+      "mixed_starts": 95,
+      "mean_inversion_percent": 19.43618552500131
+    },
+    {
+      "model": "TD-JEPA",
+      "candidates": 4,
+      "mixed_starts": 29,
+      "mean_inversion_percent": 38.2183908045977
+    }
+  ],
+  "marks": [
+    {
+      "model": "LeWM",
+      "metric": "within_start_spearman_mean",
+      "scope": "all_deployable",
+      "value": 0.8952911529944317
+    },
+    {
+      "model": "LeWM",
+      "metric": "pooled_spearman",
+      "scope": "all_deployable",
+      "value": 0.9306370736300524
+    },
+    {
+      "model": "LeWM",
+      "metric": "within_start_spearman_mean",
+      "scope": "top_16",
+      "value": 0.6209847683206887
+    },
+    {
+      "model": "LeWM",
+      "metric": "pooled_spearman",
+      "scope": "top_16",
+      "value": 0.7740274669080177
+    },
+    {
+      "model": "LeWM",
+      "metric": "within_start_spearman_mean",
+      "scope": "top_4",
+      "value": 0.10833333333333332
+    },
+    {
+      "model": "LeWM",
+      "metric": "pooled_spearman",
+      "scope": "top_4",
+      "value": 0.5194680830885929
+    },
+    {
+      "model": "TD-JEPA",
+      "metric": "within_start_spearman_mean",
+      "scope": "all_deployable",
+      "value": 0.7982641658789958
+    },
+    {
+      "model": "TD-JEPA",
+      "metric": "pooled_spearman",
+      "scope": "all_deployable",
+      "value": 0.8498181061917158
+    },
+    {
+      "model": "TD-JEPA",
+      "metric": "within_start_spearman_mean",
+      "scope": "top_16",
+      "value": 0.560215315597642
+    },
+    {
+      "model": "TD-JEPA",
+      "metric": "pooled_spearman",
+      "scope": "top_16",
+      "value": 0.6825967452498853
+    },
+    {
+      "model": "TD-JEPA",
+      "metric": "within_start_spearman_mean",
+      "scope": "top_4",
+      "value": 0.12621070589600872
+    },
+    {
+      "model": "TD-JEPA",
+      "metric": "pooled_spearman",
+      "scope": "top_4",
+      "value": 0.35736371379965925
+    }
+  ],
+  "sources": [
+    {
+      "id": "e7_lewm_pusht_backbone_cost_tail.json",
+      "sha256": "e298af363f9a41c183bce765f8ef53247809eb301a38b9f11b10238d80ee39e4"
+    },
+    {
+      "id": "lewm/audit_pool_arrays",
+      "predicted_cost_sha256": "1dcb4ec492c85d458540cea0d1577f007dfd208aa3bec8d046dbeeac9e7aa562",
+      "realized_cost_sha256": "5a450d7818ccbac3bc7aa74b17823a411574fad8090bb297ec6aa9305a8b48b1",
+      "success_sha256": "f113a9f7ccf0032c467f08e062bf12d5312db0492bc68fff67a99a204281895b",
+      "start_identity_sha256": "8b93ab8dd520e94124526c4ded8c2ec4a36594819182c316ea2cea1cdb9ae70d",
+      "shape": [
+        96,
+        63
+      ]
+    },
+    {
+      "id": "e7_tdjepa_pusht_backbone_cost_tail.json",
+      "sha256": "078fc065388dd2cc5700ad66f7d6fcef225ebfa7d93e911e8a49e3de4ac9920c"
+    },
+    {
+      "id": "tdjepa/audit_pool_arrays",
+      "predicted_cost_sha256": "8d25f5ac1fcbabc89c95fb5799573ac759b39715c7301006d8c878572e46cab6",
+      "realized_cost_sha256": "5dbc55b4912f6f7837604dab87f96a4bfdf081363f15d47ca37a4bfaab5126c2",
+      "success_sha256": "f113a9f7ccf0032c467f08e062bf12d5312db0492bc68fff67a99a204281895b",
+      "start_identity_sha256": "8b93ab8dd520e94124526c4ded8c2ec4a36594819182c316ea2cea1cdb9ae70d",
+      "shape": [
+        96,
+        63
+      ]
+    },
+    {
+      "id": "explainer-pair.json",
+      "sha256": "fe733499514c500e177b654fb65838ac9f3b10297b0cb5ae923cd4a927ec3418"
+    }
+  ],
+  "drawing_code_sha256": "52e11db2d20e771aed0717a7620492e7f88ebdf13053dea2e1e540ac05636ff8",
+  "files": [
+    {
+      "file": "decision_local_ranking.pdf",
+      "sha256": "a69c09bd250a6bd87e7e2180aa18278fb8086eb66945830e1299fe900a095713",
+      "bytes": 36277
+    },
+    {
+      "file": "decision_local_ranking.svg",
+      "sha256": "f8da7dc4a8f82460d09d8e570c8a48d23d25756e2d6b9bc17ec88107623eaea2",
+      "bytes": 60520
+    },
+    {
+      "file": "decision_local_ranking.png",
+      "sha256": "f3b5331f1725501317c2b5a775c5d56e56e701bde7ec3c88ea54ba92d2911bfa",
+      "bytes": 276496
+    }
+  ]
+}

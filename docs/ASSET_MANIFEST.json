@@ -204,14 +204,6 @@
     "transformation": "none; byte-identical current manuscript figure"
   },
   {
-    "path": "static/images/decision_local_ranking.svg",
-    "sha256": "7c8a67b3ca62d6e7d3488cea1ef6f623ac8d9aac9831269278e747f970c24584",
-    "source_identity": "sha256:7c8a67b3ca62d6e7d3488cea1ef6f623ac8d9aac9831269278e747f970c24584",
-    "evidence": "Current manuscript case or diagnostic; original experimental frames and data preserved.",
-    "bytes": 8508,
-    "transformation": "none; byte-identical current manuscript figure"
-  },
-  {
     "path": "static/images/foundation_robotwin.png",
     "sha256": "ab7a83ee2a8492e3256f25fecf4ddc0951b79c8b32ea5c015082b31770ebe206",
     "source_identity": "sha256:ab7a83ee2a8492e3256f25fecf4ddc0951b79c8b32ea5c015082b31770ebe206",
@@ -428,5 +420,21 @@
     "bytes": 5258,
     "source": "https://huggingface.co/front/assets/huggingface_logo.svg",
     "transformation": "downloaded official SVG; byte content retained; trailing newline normalized"
+  },
+  {
+    "path": "static/images/decision_local_ranking.svg",
+    "sha256": "f8da7dc4a8f82460d09d8e570c8a48d23d25756e2d6b9bc17ec88107623eaea2",
+    "bytes": 60520,
+    "source_identity": "sha256:f8da7dc4a8f82460d09d8e570c8a48d23d25756e2d6b9bc17ec88107623eaea2",
+    "transformation": "Byte-identical current Figure 2 export.",
+    "evidence": "Recorded distance conflict; 96-start audit margins and pair inversions; original correlation coefficients unchanged."
+  },
+  {
+    "path": "static/data/decision_local_ranking.json",
+    "sha256": "ad0a38efaf27658bd2d75a565ee824422af1b937a6bd96909ef845274533f102",
+    "bytes": 6020,
+    "source_identity": "sha256:ad0a38efaf27658bd2d75a565ee824422af1b937a6bd96909ef845274533f102",
+    "transformation": "Byte-identical current Figure 2 export.",
+    "evidence": "Recorded distance conflict; 96-start audit margins and pair inversions; original correlation coefficients unchanged."
   }
 ]

@@ -107,6 +107,9 @@ nav a { font-size: var(--text-small); color: var(--muted); text-decoration: none
 .diagnostic-evidence > a { display: block; border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
 .diagnostic-evidence figcaption { font-size: .95rem; line-height: 1.8; padding: 0; text-wrap: pretty; }
 .diagnostic-evidence img { width: 100%; background: #FFFFFF; border-radius: 16px; }
+.diagnostic-evidence--wide { display: block; }
+.diagnostic-evidence--wide > a { width: 100%; max-width: none; }
+.diagnostic-evidence--wide figcaption { margin-top: 1.25rem; font-size: var(--text-body); line-height: 1.7; }
 .insight { border: 1px solid var(--line); border-left: 3px solid var(--champagne); background: var(--surface); }
 .insight .eyebrow { margin-bottom: .6rem; }
 .insight p:last-child { margin-bottom: 0; }
