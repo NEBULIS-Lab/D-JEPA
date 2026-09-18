@@ -6,6 +6,17 @@ inspector and a shared playback timeline. It defaults to dark and shares the
 main site's saved light/dark preference. Assets are local; no model download or
 browser inference is required.
 
+The project-page invitation points to the interactive explainer; an anchored
+hint then points to Narrated tour. Both use the current theme, respect reduced
+motion, and disappear when either playback mode starts. Dismissal is remembered
+for the current browser-tab session, with no tracking or external dependency.
+
+Stage 06 keeps all five additional task windows absent from the rendered layout
+until the PushT replay and shrink transition finish. Visibility is applied directly
+to both the SVG container and its embedded video layer, avoiding premature poster
+display in browsers that composite HTML video separately from SVG opacity.
+Seeking backwards and re-entering the stage restore the same hidden state.
+
 ## Narrated tour
 
 The purple **Narrated tour** button plays the authors' eight English voiceover

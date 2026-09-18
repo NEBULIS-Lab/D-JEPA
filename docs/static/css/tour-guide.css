@@ -1,0 +1,27 @@
+/* Small, anchored invitations; no modal, dependency or tracking. */
+.guide-anchor { position: relative; display: inline-flex; flex: 0 0 auto; }
+.resource-links { align-items: flex-start; }
+.guide-anchor--entry { margin-bottom: 54px; }
+.tour-guide { position: absolute; z-index: 12; width: max-content; max-width: 228px; padding: 10px 32px 10px 13px; border: 1px solid #c395da; border-radius: 14px; background: #fbf5ff; color: #523063; box-shadow: 0 6px 22px #643b8218; text-align: left; font: 12px/1.4 Arial, sans-serif; white-space: normal; animation: guide-arrive .6s ease-out both; }
+.tour-guide[hidden] { display: none !important; }
+[data-theme="dark"] .tour-guide { background: #302338; border-color: #a87db9; color: #f4dcff; box-shadow: 0 6px 22px #0003; }
+.tour-guide::before { content: ""; position: absolute; width: 8px; height: 8px; background: inherit; border-top: 1px solid #c395da; border-left: 1px solid #c395da; }
+[data-theme="dark"] .tour-guide::before { border-color: #a87db9; }
+.tour-guide--entry { top: calc(100% + 12px); left: 0; }
+.tour-guide--entry::before { top: -5px; left: 29px; transform: rotate(45deg); }
+.tour-guide--narration { bottom: calc(100% + 14px); left: 0; }
+.tour-guide--narration::before { bottom: -5px; left: 29px; transform: rotate(225deg); }
+.guide-heading { display: flex; align-items: center; gap: 8px; font-weight: 600; letter-spacing: .01em; }
+.guide-copy { display: block; margin-top: 2px; font-size: 11px; opacity: .82; }
+.guide-signal { display: inline-flex; align-items: center; gap: 3px; height: 13px; color: #9954ac; }
+[data-theme="dark"] .guide-signal { color: #ffdb67; }
+.guide-signal i { display: block; width: 3px; height: 7px; border-radius: 3px; background: currentColor; animation: guide-wave 2.4s ease-in-out infinite; }
+.guide-signal i:nth-child(2) { animation-delay: .18s; height: 12px; }
+.guide-signal i:nth-child(3) { animation-delay: .36s; }
+.guide-dismiss { position: absolute; top: 3px; right: 3px; display: grid; place-items: center; width: 25px; height: 25px; min-width: 0; padding: 0; border: 0; border-radius: 50%; background: transparent; color: inherit; font: 17px Arial, sans-serif; cursor: pointer; opacity: .65; }
+.guide-dismiss:hover, .guide-dismiss:focus-visible { opacity: 1; background: #a45aa81c; }
+.guide-target { animation: guide-halo 3s ease-in-out 3; }
+@keyframes guide-halo { 0%,100% { box-shadow: 0 0 0 0 #b57ccb00; } 45% { box-shadow: 0 0 0 5px #b57ccb27; } }
+@keyframes guide-wave { 0%,65%,100% { transform: scaleY(.6); opacity: .6; } 25% { transform: scaleY(1); opacity: 1; } }
+@keyframes guide-arrive { from { opacity: .8; translate: 0 5px; } to { opacity: 1; translate: 0 0; } }
+@media (prefers-reduced-motion: reduce) { .tour-guide, .guide-signal i, .guide-target { animation: none; } }

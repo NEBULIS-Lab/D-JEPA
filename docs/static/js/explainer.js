@@ -1,7 +1,7 @@
 import { relationMix } from './explainer-relations.mjs';
 import { createNarration } from './explainer-narration.mjs';
 import { createModelMap } from './explainer-model-map.mjs';
-import { VALIDATION_TASKS, validationFrame, syncValidationVideos, pauseValidationVideos, releaseValidationVideos } from './explainer-validation.mjs';
+import { VALIDATION_TASKS, validationFrame, setValidationVisibility, syncValidationVideos, pauseValidationVideos, releaseValidationVideos } from './explainer-validation.mjs';
 import { pairPhase, latentMarkup, latentIntro, PAIR_INTRO_SECONDS, PAIR_STAGE_SECONDS, pairTimelinePhase, pairTimelineSeconds } from './explainer-pair.mjs';
 import { DIAGNOSTIC, problemPhase } from './explainer-problem.mjs';
 import { evidenceVector, evidencePhase } from './explainer-evidence.mjs';
@@ -624,11 +624,11 @@ function validationDetail() {
   s+='</g>';
   VALIDATION_TASKS.forEach((task,i)=>{
     const slot=i+1,x=16+(slot%3)*246,y=49+Math.floor(slot/3)*153;
-    s+='<g data-validation-card="'+i+'" opacity="0" style="pointer-events:none">';
+    s+='<g data-validation-card="'+i+'" opacity="0" style="display:none;visibility:hidden;pointer-events:none" aria-hidden="true">';
     s+=rect(x,y,236,136,'var(--surface)','var(--line)',10);
     s+=text(x+12,y+18,task.title,'svg-label');
-    s+='<foreignObject x="'+(x+6)+'" y="'+(y+25)+'" width="224" height="89"><div xmlns="http://www.w3.org/1999/xhtml" class="validation-media">';
-    s+='<video data-validation-video="'+i+'" data-src="static/videos/explainer-wall/'+task.id+'.mp4" muted="" playsinline="" preload="none" poster="static/videos/explainer-wall/'+task.id+'.jpg" aria-label="'+task.detail+'"></video></div></foreignObject>';
+    s+='<foreignObject style="display:none;visibility:hidden" x="'+(x+6)+'" y="'+(y+25)+'" width="224" height="89"><div xmlns="http://www.w3.org/1999/xhtml" class="validation-media">';
+    s+='<video style="display:none;visibility:hidden;opacity:0" data-validation-video="'+i+'" data-src="static/videos/explainer-wall/'+task.id+'.mp4" muted="" playsinline="" preload="none" poster="static/videos/explainer-wall/'+task.id+'.jpg" aria-label="'+task.detail+'"></video></div></foreignObject>';
     s+=text(x+12,y+125,task.id==='driving'?'Context + compared trajectories':'Baseline left · D-JEPA right','svg-tiny');
     s+=text(x+224,y+125,'Open ↗','svg-tiny svg-accent','text-anchor="end"');
     s+='<rect data-validation-open="'+i+'" class="validation-hit" x="'+x+'" y="'+y+'" width="236" height="136" rx="10" fill="transparent" role="button" tabindex="-1" aria-label="Open full '+task.title+' video"/>';
@@ -642,7 +642,7 @@ function updateValidation(svg) {
   for(const id of ['validation-heading','validation-pusht-frame'])svg.querySelector('#'+id).style.opacity=String(smooth((state.elapsed-9.6)/.5));
   svg.querySelectorAll('[data-validation-card]').forEach(n=>{
     const i=Number(n.dataset.validationCard),p=f.tasks[i].reveal;
-    n.style.opacity=String(p);n.style.pointerEvents=p>.95?'auto':'none';
+    setValidationVisibility(n,p);
     n.setAttribute('transform','translate(0 '+(22*(1-p))+') scale(1)');
     n.querySelector('[data-validation-open]').setAttribute('tabindex',p>.95?'0':'-1');
   });

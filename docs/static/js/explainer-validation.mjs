@@ -20,6 +20,21 @@ export function validationFrame(seconds) {
 }
 
 // Videos share the tour clock. Hidden windows never keep playing in the background.
+export function setValidationVisibility(card, reveal) {
+  const visible = reveal > 0;
+  // Video/poster compositing inside SVG foreignObject can escape a parent's
+  // opacity on some browsers. Gate the actual media layer as well as the SVG.
+  card.style.display = visible ? '' : 'none';
+  card.style.visibility = visible ? 'visible' : 'hidden';
+  card.style.opacity = String(reveal);
+  card.style.pointerEvents = reveal > .95 ? 'auto' : 'none';
+  card.setAttribute('aria-hidden', String(!visible));
+  for (const node of card.querySelectorAll('foreignObject, [data-validation-video]')) {
+    node.style.display = visible ? '' : 'none';
+    node.style.visibility = visible ? 'visible' : 'hidden';
+    node.style.opacity = String(reveal);
+  }
+}
 const pending=new WeakSet();
 export function pauseValidationVideos(root=document) {
   root.querySelectorAll('[data-validation-video]').forEach(v=>v.pause());

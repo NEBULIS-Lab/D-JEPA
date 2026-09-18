@@ -24,7 +24,7 @@
   <a href="https://example.com" title="Video link placeholder"><img src="https://img.shields.io/badge/Video-YouTube-F6C17F?style=flat&amp;logo=youtube&amp;logoColor=white&amp;labelColor=494150" alt="Video on YouTube (link forthcoming)"></a>
 </p>
 
-<p align="center"><sub>Paper and video links are placeholders; final links are forthcoming.</sub></p>
+<p align="center"><sub>Checkpoints and the decision-supervision dataset are available on Hugging Face. Paper and video links are placeholders; final links are forthcoming.</sub></p>
 
 <p align="center">
   <a href="#overview">Overview</a> &nbsp;·&nbsp;

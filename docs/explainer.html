@@ -10,6 +10,8 @@
   <link rel="canonical" href="https://nebulis-lab.com/D-JEPA/explainer.html">
   <link rel="icon" type="image/svg+xml" href="static/images/branding/jepa-icon-dark.svg" id="site-icon">
   <link rel="stylesheet" href="static/css/explainer.css">
+  <link rel="stylesheet" href="static/css/tour-guide.css">
+  <script defer src="static/js/tour-guide.js"></script>
   <title>Inside D-JEPA · An interactive explainer</title>
   <script>try { document.documentElement.dataset.theme = localStorage.getItem('djepa-theme') === 'light' ? 'light' : 'dark'; } catch (_) {}</script>
   <script type="module" src="static/js/explainer.js"></script>
@@ -68,7 +70,14 @@
       </div>
       <div class="playback">
         <button id="play" class="play-button" aria-label="Play guided tour"><span id="play-symbol">▶</span><span id="play-label">Play tour</span></button>
-        <button id="narration-play" class="narration-button" type="button" aria-label="Play narrated tour" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 14v-3a8 8 0 0 1 16 0v3M4 12H3v7h4v-7Zm16 0h1v7h-4v-7Z"/></svg><span id="narration-play-label">Narrated tour</span></button>
+        <div class="guide-anchor">
+          <button id="narration-play" class="narration-button" type="button" aria-label="Play narrated tour" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 14v-3a8 8 0 0 1 16 0v3M4 12H3v7h4v-7Zm16 0h1v7h-4v-7Z"/></svg><span id="narration-play-label">Narrated tour</span></button>
+          <div class="tour-guide tour-guide--narration" data-tour-guide data-guide-target="narration-play" hidden>
+            <span class="guide-heading"><span class="guide-signal" aria-hidden="true"><i></i><i></i><i></i></span>Start with the story</span>
+            <span class="guide-copy">Voice + captions · 3 min</span>
+            <button class="guide-dismiss" data-guide-dismiss type="button" aria-label="Dismiss narrated tour hint">×</button>
+          </div>
+        </div>
         <button id="narration-mute" class="narration-mute" type="button" aria-label="Mute narration" aria-pressed="false" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4ZM17 8a6 6 0 0 1 0 8M20 5a10 10 0 0 1 0 14"/></svg><span id="narration-mute-label">Sound</span></button>
         <button id="previous" class="icon-button" aria-label="Previous stage">←</button>
         <button id="next" class="icon-button" aria-label="Next stage">→</button>
