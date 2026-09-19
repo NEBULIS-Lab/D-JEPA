@@ -21,10 +21,7 @@
   <a href="https://github.com/NEBULIS-Lab/D-JEPA"><img src="https://img.shields.io/badge/GitHub-Code-777083?style=flat&amp;logo=github&amp;logoColor=white&amp;labelColor=494150" alt="Code repository"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-Apache--2.0-A45AA8?style=flat&amp;labelColor=494150" alt="License: Apache-2.0"></a>
   <a href="https://example.com" title="Paper link placeholder"><img src="https://img.shields.io/badge/Paper-arXiv-ECA896?style=flat&amp;logo=arxiv&amp;logoColor=white&amp;labelColor=494150" alt="Paper on arXiv (link forthcoming)"></a>
-  <a href="https://example.com" title="Video link placeholder"><img src="https://img.shields.io/badge/Video-YouTube-F6C17F?style=flat&amp;logo=youtube&amp;logoColor=white&amp;labelColor=494150" alt="Video on YouTube (link forthcoming)"></a>
 </p>
-
-<p align="center"><sub>Checkpoints and the decision-supervision dataset are available on Hugging Face. Paper and video links are placeholders; final links are forthcoming.</sub></p>
 
 <p align="center">
   <a href="#overview">Overview</a> &nbsp;·&nbsp;
