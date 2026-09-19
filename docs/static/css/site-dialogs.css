@@ -1,5 +1,11 @@
 /* Page-local evidence viewers share the homepage theme. */
-.diagnostic-panel-labels{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1%;text-align:center;font-size:13px;line-height:1.4;color:var(--muted);margin:-6px 0 16px}
+.diagnostic-plot-frame{border:1px solid var(--line);border-radius:20px;background:#fff;padding:24px 20px 26px}
+.diagnostic-panel-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;width:92%;max-width:1040px;margin-inline:auto;align-items:start}
+.diagnostic-panel{min-width:0;margin:0}
+.diagnostic-panel>a{display:block;width:100%;border:0;border-radius:0}
+.diagnostic-panel img{display:block;width:100%;height:auto;border-radius:0}
+.diagnostic-evidence .diagnostic-panel>figcaption{margin:18px 0 0;padding:0 2px;font-size:16px;font-weight:500;line-height:1.45;text-align:center;text-align-last:center;text-wrap:balance;hyphens:none;color:#3D3840}
+@media(max-width:680px){.diagnostic-plot-frame{padding:18px 12px 22px}.diagnostic-panel-grid{grid-template-columns:repeat(2,minmax(0,1fr));width:100%;gap:26px 12px}.diagnostic-evidence .diagnostic-panel>figcaption{margin-top:14px}}
 .evidence-dialog{width:min(1180px,calc(100vw - 40px));max-height:90dvh;padding:0;border:1px solid var(--line);border-radius:22px;background:var(--card);color:var(--ink);box-shadow:0 24px 90px #0006;overflow:auto}
 .evidence-dialog::backdrop{background:#100a18b8;backdrop-filter:blur(9px)}
 .evidence-dialog[open]{animation:evidence-enter .2s ease-out}

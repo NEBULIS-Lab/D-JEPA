@@ -430,6 +430,38 @@
     "evidence": "Recorded distance conflict; 96-start audit margins and pair inversions; original correlation coefficients unchanged."
   },
   {
+    "path": "static/images/decision_local_ranking_a.svg",
+    "sha256": "0a79d4812f3b42cbf2d49d6b1891cb6ae719a9366294ba53bbb2441b286e8b74",
+    "bytes": 5829,
+    "source_identity": "sha256:0a79d4812f3b42cbf2d49d6b1891cb6ae719a9366294ba53bbb2441b286e8b74",
+    "transformation": "Byte-identical current Figure 2 export.",
+    "evidence": "Recorded distance conflict; 96-start audit margins and pair inversions; original correlation coefficients unchanged."
+  },
+  {
+    "path": "static/images/decision_local_ranking_b.svg",
+    "sha256": "81053ca5562969178b0ebeba54056bf2f9425e7caf1ba02d4d0b65b3ae978a09",
+    "bytes": 37169,
+    "source_identity": "sha256:81053ca5562969178b0ebeba54056bf2f9425e7caf1ba02d4d0b65b3ae978a09",
+    "transformation": "Byte-identical current Figure 2 export.",
+    "evidence": "Recorded distance conflict; 96-start audit margins and pair inversions; original correlation coefficients unchanged."
+  },
+  {
+    "path": "static/images/decision_local_ranking_c.svg",
+    "sha256": "03ccaf0e647c1564073a8495560657af990994012ecddae53d4a2a1f8210e53d",
+    "bytes": 8806,
+    "source_identity": "sha256:03ccaf0e647c1564073a8495560657af990994012ecddae53d4a2a1f8210e53d",
+    "transformation": "Byte-identical current Figure 2 export.",
+    "evidence": "Recorded distance conflict; 96-start audit margins and pair inversions; original correlation coefficients unchanged."
+  },
+  {
+    "path": "static/images/decision_local_ranking_d.svg",
+    "sha256": "15d80273ee295527f30f752d40156b5cceec86ee09a0ad73b6326f33b704773c",
+    "bytes": 8793,
+    "source_identity": "sha256:15d80273ee295527f30f752d40156b5cceec86ee09a0ad73b6326f33b704773c",
+    "transformation": "Byte-identical current Figure 2 export.",
+    "evidence": "Recorded distance conflict; 96-start audit margins and pair inversions; original correlation coefficients unchanged."
+  },
+  {
     "path": "static/data/decision_local_ranking.json",
     "sha256": "a0edb533593f3c520557e1b7357d458fcdd227a6bcab5a69f44b6bdfb0b880cb",
     "bytes": 8142,
