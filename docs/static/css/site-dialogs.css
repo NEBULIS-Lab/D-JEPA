@@ -1,0 +1,27 @@
+/* Page-local evidence viewers share the homepage theme. */
+.diagnostic-panel-labels{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1%;text-align:center;font-size:13px;line-height:1.4;color:var(--muted);margin:-6px 0 16px}
+.evidence-dialog{width:min(1180px,calc(100vw - 40px));max-height:90dvh;padding:0;border:1px solid var(--line);border-radius:22px;background:var(--card);color:var(--ink);box-shadow:0 24px 90px #0006;overflow:auto}
+.evidence-dialog::backdrop{background:#100a18b8;backdrop-filter:blur(9px)}
+.evidence-dialog[open]{animation:evidence-enter .2s ease-out}
+.evidence-dialog header{position:sticky;top:0;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:20px 24px;border-bottom:1px solid var(--line);background:var(--card)}
+.evidence-dialog h2{font-size:21px;line-height:1.35;margin:0;letter-spacing:-.4px}
+.evidence-close{display:grid;place-items:center;width:38px;height:38px;flex-shrink:0;border:1px solid var(--line);border-radius:50%;background:var(--surface);color:var(--ink);font:26px/1 Arial,sans-serif;cursor:pointer}
+.evidence-close:hover{border-color:var(--purple);color:var(--link)}
+.evidence-body{padding:24px}
+.evidence-body>img{display:block;width:100%;height:auto;max-height:72dvh;object-fit:contain;border-radius:12px;background:white}
+.evidence-body>p{max-width:none;color:var(--muted);font-size:15px;line-height:1.65;margin:0 0 20px}
+.evidence-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.evidence-card{padding:20px;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+.evidence-card h3{font-size:16px;margin:0 0 10px;font-weight:600;color:var(--link)}
+.evidence-card p{font-size:14px;line-height:1.7;margin:0;text-align:left;color:var(--ink)}
+.evidence-card small{display:block;margin-top:12px;color:var(--muted);font-size:13px;line-height:1.6}
+.evidence-provenance{margin-top:20px;border-top:1px solid var(--line);padding-top:16px;font-size:14px}
+.evidence-provenance summary{cursor:pointer;color:var(--link)}
+.evidence-provenance li{padding:10px 0;list-style:none;border-bottom:1px solid var(--line);overflow-wrap:anywhere}
+.evidence-provenance ul{padding:0}
+.evidence-provenance code{display:block;font-size:12px;color:var(--muted);overflow-wrap:anywhere}
+.evidence-provenance a{font-size:14px}
+html:has(.evidence-dialog[open]){overflow:hidden}
+@keyframes evidence-enter{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:600px){.evidence-dialog{width:calc(100vw - 20px);border-radius:16px}.evidence-dialog header,.evidence-body{padding:16px}.evidence-dialog h2{font-size:18px}.evidence-grid{grid-template-columns:1fr}.evidence-card{padding:16px}}
+@media(prefers-reduced-motion:reduce){.evidence-dialog[open]{animation:none}}

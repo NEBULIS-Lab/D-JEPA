@@ -19,7 +19,7 @@
 <body>
   <a class="skip-link" href="#explorer">Skip to interactive diagram</a>
   <header class="explainer-header">
-    <a class="brand" href="index.html" aria-label="Back to the D-JEPA project"><img class="logo-dark" src="static/images/branding/jepa-icon-dark.svg" width="30" height="30" alt=""><img class="logo-light" src="static/images/branding/jepa-icon-light.svg" width="30" height="30" alt=""><b>D-JEPA</b><span class="header-divider"></span><span>Inside the model</span></a>
+    <a class="brand" href="index.html" aria-label="Back to the D-JEPA project"><img class="logo-dark" src="static/images/branding/jepa-icon-dark.svg" width="30" height="30" alt=""><img class="logo-light" src="static/images/branding/jepa-icon-light.svg" width="30" height="30" alt=""><b>D-JEPA</b></a>
     <div id="narration-caption" class="narration-caption" hidden><p id="narration-subtitle"></p><p id="narration-status" role="status"></p></div>
     <button id="narration-exit" class="narration-exit" type="button" aria-label="Exit narrated tour" title="Exit narration" hidden>×</button>
     <nav aria-label="Page navigation"><a href="index.html">Project <span aria-hidden="true">↗</span></a></nav>
@@ -28,12 +28,12 @@
   <main>
     <section id="explorer" class="workbench" aria-label="Interactive D-JEPA workbench">
       <nav id="chapters" class="chapter-tabs" aria-label="Method stages">
-        <button type="button" data-stage="0" aria-current="step"><span>01</span>The prediction gap<i aria-hidden="true">→</i></button>
-        <button type="button" data-stage="1"><span>02</span>Predictive evidence<i aria-hidden="true">→</i></button>
-        <button type="button" data-stage="2"><span>03</span>Relational alignment<i aria-hidden="true">→</i></button>
-        <button type="button" data-stage="3"><span>04</span>Decision rule<i aria-hidden="true">→</i></button>
-        <button type="button" data-stage="4"><span>05</span>Representation lifting<i aria-hidden="true">→</i></button>
-        <button type="button" data-stage="5"><span>06</span>Action selection<i aria-hidden="true">→</i></button>
+        <button type="button" data-stage="0" aria-current="step"><span>01</span><strong class="chapter-label">The prediction gap</strong><i aria-hidden="true">→</i></button>
+        <button type="button" data-stage="1"><span>02</span><strong class="chapter-label">Predictive evidence</strong><i aria-hidden="true">→</i></button>
+        <button type="button" data-stage="2"><span>03</span><strong class="chapter-label">Relational alignment</strong><i aria-hidden="true">→</i></button>
+        <button type="button" data-stage="3"><span>04</span><strong class="chapter-label">Decision rule</strong><i aria-hidden="true">→</i></button>
+        <button type="button" data-stage="4"><span>05</span><strong class="chapter-label">Representation lifting</strong><i aria-hidden="true">→</i></button>
+        <button type="button" data-stage="5"><span>06</span><strong class="chapter-label">Action selection</strong><i aria-hidden="true">→</i></button>
       </nav>
       <div class="stage-topline"><span id="focus-label">A shared start. Different actions.</span><span id="data-badge" class="small-tag">RECORDED EXECUTION</span></div>
       <div id="focus-panel" class="stage-layout">
@@ -53,7 +53,7 @@
         </div>
         <aside class="inspector">
           <div class="inspector-copy" aria-live="polite">
-            <p id="detail-kicker" class="eyebrow"></p><h1 id="detail-title"></h1>
+            <h1 id="detail-title"></h1>
             <p id="detail-description"></p>
           </div>
           <button id="model-map-toggle" class="model-map-toggle" aria-expanded="false" aria-controls="model-map" hidden>Locate in the world model <span aria-hidden="true">↗</span></button>
@@ -64,7 +64,7 @@
             <label class="strength-control"><span>Correction bound <output id="strength-value" for="strength">0.20</output></span><input id="strength" type="range" min="0" max="0.2" step="0.005" value="0.2" aria-label="Illustrative correction bound"></label>
             <div class="selection-readout"><span>Base <b id="base-choice">B</b></span><span>→</span><span>Aligned <b id="aligned-choice">A</b></span></div>
           </div>
-          <details class="technical-note"><summary>Inside this step <span>+</span></summary><p id="detail-fact"></p><p id="model-note"></p></details>
+          <details class="technical-note"><summary>Details <span>+</span></summary><p id="detail-fact"></p><p id="model-note"></p></details>
           <button id="supervision-toggle" class="quiet-button" aria-expanded="false" aria-controls="supervision-panel">Training supervision ↗</button>
         </aside>
       </div>
@@ -81,7 +81,7 @@
         <button id="narration-mute" class="narration-mute" type="button" aria-label="Mute narration" aria-pressed="false" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4ZM17 8a6 6 0 0 1 0 8M20 5a10 10 0 0 1 0 14"/></svg><span id="narration-mute-label">Sound</span></button>
         <button id="previous" class="icon-button" aria-label="Previous stage">←</button>
         <button id="next" class="icon-button" aria-label="Next stage">→</button>
-        <div class="timeline"><div class="timeline-meta"><span id="timeline-label">Candidate futures</span><output id="tour-time">00:00 / 01:20</output></div><input id="tour-seek" type="range" min="0" max="80.36" step=".02" value="0" aria-label="Guided tour timeline"></div>
+        <div class="timeline"><div class="timeline-meta"><span id="timeline-label" hidden aria-hidden="true"></span><output id="tour-time">00:00 / 01:20</output></div><input id="tour-seek" type="range" min="0" max="80.36" step=".02" value="0" aria-label="Guided tour timeline"></div>
         <label class="speed-label"><span class="sr-only">Playback speed</span><select id="speed" aria-label="Tour playback speed"><option value=".5">0.5×</option><option value="1" selected>1×</option><option value="1.5">1.5×</option><option value="2">2×</option></select></label>
         <button id="reset" class="quiet-button">Reset</button>
         <button id="fullscreen" class="icon-button" aria-label="Enter fullscreen">⛶</button>

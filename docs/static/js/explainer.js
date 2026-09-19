@@ -901,7 +901,7 @@ function render(transition=false) {
   const c=chapterCopy();
   $('#candidate-controls').style.visibility='';
   document.documentElement.dataset.stage=state.stage;
-  $('#detail-kicker').textContent=c.kicker;$('#detail-title').textContent=c.title;
+  $('#detail-title').textContent=c.title;
   $('#detail-description').textContent=c.description;$('#detail-formula').textContent=c.formula;
   $('#detail-fact').textContent=c.fact;$('#focus-label').textContent=c.visual;
   $('#visual-caption').textContent=c.caption;

@@ -423,17 +423,17 @@
   },
   {
     "path": "static/images/decision_local_ranking.svg",
-    "sha256": "f8da7dc4a8f82460d09d8e570c8a48d23d25756e2d6b9bc17ec88107623eaea2",
-    "bytes": 60520,
-    "source_identity": "sha256:f8da7dc4a8f82460d09d8e570c8a48d23d25756e2d6b9bc17ec88107623eaea2",
+    "sha256": "1c53d3b31feb30f3187655dc3d35016ca509544cbd0abaa4b81af672eb782f25",
+    "bytes": 57292,
+    "source_identity": "sha256:1c53d3b31feb30f3187655dc3d35016ca509544cbd0abaa4b81af672eb782f25",
     "transformation": "Byte-identical current Figure 2 export.",
     "evidence": "Recorded distance conflict; 96-start audit margins and pair inversions; original correlation coefficients unchanged."
   },
   {
     "path": "static/data/decision_local_ranking.json",
-    "sha256": "ad0a38efaf27658bd2d75a565ee824422af1b937a6bd96909ef845274533f102",
-    "bytes": 6020,
-    "source_identity": "sha256:ad0a38efaf27658bd2d75a565ee824422af1b937a6bd96909ef845274533f102",
+    "sha256": "a0edb533593f3c520557e1b7357d458fcdd227a6bcab5a69f44b6bdfb0b880cb",
+    "bytes": 8142,
+    "source_identity": "sha256:a0edb533593f3c520557e1b7357d458fcdd227a6bcab5a69f44b6bdfb0b880cb",
     "transformation": "Byte-identical current Figure 2 export.",
     "evidence": "Recorded distance conflict; 96-start audit margins and pair inversions; original correlation coefficients unchanged."
   }

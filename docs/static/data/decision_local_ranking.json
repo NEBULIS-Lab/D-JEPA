@@ -4,10 +4,15 @@
   "backend": "Python / Matplotlib Agg",
   "canvas_inches": [
     6.4,
-    1.85
+    1.65
   ],
+  "component_canvas_inches": [
+    1.6,
+    1.65
+  ],
+  "panel_labels": "External LaTeX subcaptions; no labels or explanatory microcopy embedded in artwork",
   "font": "Arial-compatible Liberation Sans",
-  "minimum_display_font_pt": 5.8,
+  "minimum_display_font_pt": 6.6,
   "populations": {
     "a": "One curated recorded LeWM pair, confirmation start 176",
     "bcd": "All 96 audit starts, 63 non-expert candidates per start"
@@ -185,22 +190,82 @@
       "sha256": "fe733499514c500e177b654fb65838ac9f3b10297b0cb5ae923cd4a927ec3418"
     }
   ],
-  "drawing_code_sha256": "52e11db2d20e771aed0717a7620492e7f88ebdf13053dea2e1e540ac05636ff8",
+  "drawing_code_sha256": "ef7b5a16b45f186dd46ff01e807d889988dda47316aaba9e478191737aa61122",
   "files": [
     {
       "file": "decision_local_ranking.pdf",
-      "sha256": "a69c09bd250a6bd87e7e2180aa18278fb8086eb66945830e1299fe900a095713",
-      "bytes": 36277
+      "sha256": "766629511431dc6e358477a243c481e0f9f73704fb9cb0b09fb13e277c4e71e9",
+      "bytes": 25083
     },
     {
       "file": "decision_local_ranking.svg",
-      "sha256": "f8da7dc4a8f82460d09d8e570c8a48d23d25756e2d6b9bc17ec88107623eaea2",
-      "bytes": 60520
+      "sha256": "1c53d3b31feb30f3187655dc3d35016ca509544cbd0abaa4b81af672eb782f25",
+      "bytes": 57292
     },
     {
       "file": "decision_local_ranking.png",
-      "sha256": "f3b5331f1725501317c2b5a775c5d56e56e701bde7ec3c88ea54ba92d2911bfa",
-      "bytes": 276496
+      "sha256": "1f036a5a02ff911fc12dcd04d226c0483d2c349de007de7588504b1d71c992ee",
+      "bytes": 190610
+    },
+    {
+      "file": "decision_local_ranking_a.pdf",
+      "sha256": "b8a3358ebb087416ccf62a6517729fb190df1e86fba7b97073905ad604c62085",
+      "bytes": 8857
+    },
+    {
+      "file": "decision_local_ranking_a.svg",
+      "sha256": "0a79d4812f3b42cbf2d49d6b1891cb6ae719a9366294ba53bbb2441b286e8b74",
+      "bytes": 5829
+    },
+    {
+      "file": "decision_local_ranking_a.png",
+      "sha256": "af14b3c0fb3844ad11fc18724d2b4001f6871e4959ccaccdffe43b188b3b5278",
+      "bytes": 25374
+    },
+    {
+      "file": "decision_local_ranking_b.pdf",
+      "sha256": "d3c3d16c43e21644a1151415a646d8a9b9f38b6c8f89e0c651536f2e98476399",
+      "bytes": 13062
+    },
+    {
+      "file": "decision_local_ranking_b.svg",
+      "sha256": "81053ca5562969178b0ebeba54056bf2f9425e7caf1ba02d4d0b65b3ae978a09",
+      "bytes": 37169
+    },
+    {
+      "file": "decision_local_ranking_b.png",
+      "sha256": "c0feb978253cc947d12978ac46f1864c865c3eecb6700da470a15bae078fcb87",
+      "bytes": 62227
+    },
+    {
+      "file": "decision_local_ranking_c.pdf",
+      "sha256": "dd9f1c92534d95c48fdf5a9a7a9f9e93a49b2e1b19bf8af40f0664b8b141b1e7",
+      "bytes": 10693
+    },
+    {
+      "file": "decision_local_ranking_c.svg",
+      "sha256": "03ccaf0e647c1564073a8495560657af990994012ecddae53d4a2a1f8210e53d",
+      "bytes": 8806
+    },
+    {
+      "file": "decision_local_ranking_c.png",
+      "sha256": "38daccc542e93cfc213eed106a31caf1f237904f697b7b6fd12641b2ac6c62b0",
+      "bytes": 37889
+    },
+    {
+      "file": "decision_local_ranking_d.pdf",
+      "sha256": "81759165c8f2cff5b782fdeb547e9ee0d3a1449cfd2a2e6f2801fe114fb4562e",
+      "bytes": 17255
+    },
+    {
+      "file": "decision_local_ranking_d.svg",
+      "sha256": "15d80273ee295527f30f752d40156b5cceec86ee09a0ad73b6326f33b704773c",
+      "bytes": 8793
+    },
+    {
+      "file": "decision_local_ranking_d.png",
+      "sha256": "307399497662efb3b962e873ac4a4fed36367bf5c5ed5aaa2722207d708c38f7",
+      "bytes": 64279
     }
   ]
 }
