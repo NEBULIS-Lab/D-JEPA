@@ -176,7 +176,7 @@
     <section class="container section" id="results">
       <div class="section-heading"><span class="section-number">04 / RESULTS</span><h2>Better future relations. Better executed decisions.</h2><p>Matched candidate sets isolate the quality of action selection across simulation, foundation models, autonomous driving and physical manipulation.</p></div>
       <div class="metric-strip">
-        <article><span class="metric-label">PUSHT · SUCCESS</span><strong class="metric-value"><span>83.59</span><span class="metric-arrow" aria-label="to">→</span><span>87.89%</span></strong><p><b>+4.30 pp</b> over LeWM<br><span class="muted">Independent decision-boundary evaluation</span></p></article>
+        <article><span class="metric-label">PUSHT · SUCCESS</span><strong class="metric-value"><span>83.59</span><span class="metric-arrow" aria-label="to">→</span><span>87.89%</span></strong><p><b>+4.30 pp</b> over LeWM<br><span class="muted">PushT confirmation evaluation</span></p></article>
         <article><span class="metric-label">ROBOTWIN · SUCCESS</span><strong class="metric-value"><span>61.72</span><span class="metric-arrow" aria-label="to">→</span><span>76.76%</span></strong><p><b>+15.04 pp</b> over native VLA selection<br><span class="muted">Four language-conditioned tasks</span></p></article>
         <article><span class="metric-label">REAL ROBOT · MEAN SUCCESS RATE</span><strong class="metric-value"><span>64.0</span><span class="metric-arrow" aria-label="to">→</span><span>81.0%</span></strong><p><b>+17.0 pp</b> over V-JEPA 2-AC<br><span class="muted">PushT and two-cube stacking</span></p></article>
         <article><span class="metric-label">DRIVING · PDMS</span><strong class="metric-value"><span>57.36</span><span class="metric-arrow" aria-label="to">→</span><span>95.34</span></strong><p><b>+37.98</b> over Drive-JEPA ranking<br><span class="muted">Seven difficult scenes</span></p></article>
@@ -200,7 +200,7 @@
       <p class="small">Each row retains its own task metric and evaluation population. Full counts, paired outcomes and task-specific costs remain available in the paper and the <a href="https://huggingface.co/datasets/Shuaijun/D-JEPA-Dataset">decision-supervision dataset</a>.</p>
       <h3 class="result-subheading">Results and analyses</h3>
       <div class="figure-strip">
-        <figure><a href="static/images/pusht_independent_success.svg"><img src="static/images/pusht_independent_success.svg" width="336" height="336" loading="lazy" alt="PushT independent 256-start success by method"></a><figcaption>PushT · independent 256</figcaption></figure>
+        <figure><a href="static/images/pusht_independent_success.svg"><img src="static/images/pusht_independent_success.svg" width="336" height="336" loading="lazy" alt="PushT confirmation success over 256 starts"></a><figcaption>PushT · confirmation 256</figcaption></figure>
         <figure><a href="static/images/reacher_formal_success.svg"><img src="static/images/reacher_formal_success.svg" width="336" height="336" loading="lazy" alt="Reacher formal success by method"></a><figcaption>Reacher · independent 128</figcaption></figure>
         <figure><a href="static/images/granular_threshold_success.svg"><img src="static/images/granular_threshold_success.svg" width="336" height="336" loading="lazy" alt="Granular success across distance thresholds"></a><figcaption>Granular · thresholds</figcaption></figure>
         <figure><a href="static/images/granular_paired_cost.svg"><img src="static/images/granular_paired_cost.svg" width="336" height="336" loading="lazy" alt="Paired DINO-WM and D-JEPA Granular costs on the same starts"></a><figcaption>Granular · paired cost</figcaption></figure>
@@ -208,7 +208,7 @@
         <figure><a href="static/images/appearance_success.svg"><img src="static/images/appearance_success.svg" width="336" height="336" loading="lazy" alt="Success across seven visual conditions"></a><figcaption>Appearance changes · success</figcaption></figure>
         <figure><a href="static/images/held_out_shape_pairs.svg"><img src="static/images/held_out_shape_pairs.svg" width="336" height="336" loading="lazy" alt="Paired gains and losses on each held-out shape"></a><figcaption>Held-out shapes · paired outcomes</figcaption></figure>
         <figure><a href="static/images/appearance_pairs.svg"><img src="static/images/appearance_pairs.svg" width="336" height="336" loading="lazy" alt="Net gains under each visual condition"></a><figcaption>Appearance changes · net gains</figcaption></figure>
-        <figure><a href="static/images/alignment_ablation.svg"><img src="static/images/alignment_ablation.svg" width="336" height="336" loading="lazy" alt="Independent PushT success with plasticity, relational alignment and calibrated composition"></a><figcaption>Decision mechanisms · success</figcaption></figure>
+        <figure><a href="static/images/alignment_ablation.svg"><img src="static/images/alignment_ablation.svg" width="336" height="336" loading="lazy" alt="PushT confirmation success with plasticity, relational alignment and calibrated composition"></a><figcaption>Decision mechanisms · success</figcaption></figure>
         <figure><a href="static/images/multiple_predictive_geometries.svg"><img src="static/images/multiple_predictive_geometries.svg" width="336" height="336" loading="lazy" alt="Success rates and intervals for multiple predictive geometries"></a><figcaption>Multiple geometries · success</figcaption></figure>
         <figure><a href="static/images/deployment_latency.svg"><img src="static/images/deployment_latency.svg" width="336" height="336" loading="lazy" alt="Median per-start inference latency of the three deployment configurations"></a><figcaption>Deployment · inference latency</figcaption></figure>
         <figure><a href="static/images/candidate_budget.svg"><img src="static/images/candidate_budget.svg" width="336" height="336" loading="lazy" alt="Success across shared candidate budgets"></a><figcaption>Candidate availability</figcaption></figure>
@@ -224,7 +224,7 @@
           <tr class="reference-row"><th scope="row">Relational alignment</th><td>Relational score</td><td>87.11%</td><td>35.03 ms</td></tr>
           <tr class="ours-row"><th scope="row">Calibrated composition</th><td>Gated composition</td><td><strong>87.89%</strong></td><td>52.16 ms</td></tr>
           <tr><th scope="row">Ordinal realization</th><td>Native goal distance</td><td>87.11%</td><td><strong>34.02 ms</strong></td></tr>
-        </tbody><tfoot><tr><td colspan="4">Independent PushT evaluation, 256 starts. Ordinal realization recovers 100% of relational action choices and candidate ranks through native goal distance. Timing includes the predictive and relational computation, measured per start.</td></tr></tfoot></table>
+        </tbody><tfoot><tr><td colspan="4">PushT confirmation evaluation, 256 starts. Interface verification: native goal distance recovers 100% of relational action choices and candidate ranks after ordinal realization. Timing includes the predictive and relational computation, measured per start.</td></tr></tfoot></table>
       </div>
 
       <div class="evidence-pair">
