@@ -34,8 +34,8 @@
   }
   .problem-copy, .insight, .method-card { padding: 20px; }
   .problem-grid, .method-grid, .reproduce-grid, .evidence-pair { min-width: 0; gap: 16px; }
-  .demo-tabs { flex-wrap: nowrap; overflow-x: auto; gap: 8px; padding: 4px 2px 10px; margin-bottom: 10px; scroll-snap-type: x proximity; }
-  .demo-tabs button { flex: 0 0 auto; min-height: 44px; white-space: nowrap; scroll-snap-align: start; }
+  .demo-tabs { flex-wrap: wrap; overflow: visible; gap: 8px; padding: 4px 2px 10px; margin-bottom: 10px; scroll-snap-type: none; }
+  .demo-tabs button { flex: 0 0 auto; max-width: 100%; min-height: 44px; white-space: normal; }
   .demo-panel { padding: 14px; border-radius: 16px; }
   .demo-panel video { max-height: 55svh; object-fit: contain; }
   .demo-panel > a { display: inline-flex; min-height: 44px; align-items: center; }

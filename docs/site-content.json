@@ -2,9 +2,8 @@
   "project": "D-JEPA",
   "website": "https://nebulis-lab.com/D-JEPA",
   "figures": {
-    "motivation": {"src": null, "alt": "The mismatch between predictive geometry and physical action outcomes", "status": "awaiting_author_artwork"},
-    "overview": {"src": null, "alt": "D-JEPA framework overview", "status": "awaiting_author_artwork"},
-    "alignment": {"src": null, "alt": "Decision alignment and predictive adaptation", "status": "awaiting_author_artwork"},
-    "representation": {"src": null, "alt": "Decision-aligned future representation", "status": "awaiting_author_artwork"}
+    "overview": {"src": "static/images/paper-artwork/overview.webp", "pdf": "static/images/paper-artwork/overview.pdf", "alt": "D-JEPA framework overview", "status": "ready"},
+    "alignment": {"src": "static/images/paper-artwork/alignment.webp", "pdf": "static/images/paper-artwork/alignment.pdf", "alt": "Decision alignment and predictive adaptation", "status": "ready"},
+    "representation": {"src": "static/images/paper-artwork/representation.webp", "pdf": "static/images/paper-artwork/representation.pdf", "alt": "Decision-aligned future representation", "status": "ready"}
   }
 }

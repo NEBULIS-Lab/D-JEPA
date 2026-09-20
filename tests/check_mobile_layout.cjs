@@ -2,6 +2,7 @@
  * Record desktop baselines before editing: node tests/check_mobile_layout.cjs --record
  * Then run without --record. Baselines stay outside the repository in /tmp.
  * Catches desktop visual changes, inaccessible touch controls and page overflow.
+ * --artwork-update permits intentional homepage artwork changes only.
  */
 const {chromium}=require('playwright');
 const fs=require('node:fs'),path=require('node:path'),http=require('node:http'),assert=require('node:assert/strict');
@@ -9,6 +10,7 @@ const root=path.resolve(__dirname,'../docs');
 const out=process.env.LAYOUT_BASELINE_DIR||'/tmp/djepa-mobile-layout';
 fs.mkdirSync(out,{recursive:true});
 const record=process.argv.includes('--record'),failures=[];
+const artworkUpdate=process.argv.includes('--artwork-update');
 const types={'.html':'text/html','.css':'text/css','.js':'text/javascript','.mjs':'text/javascript','.json':'application/json','.svg':'image/svg+xml','.png':'image/png','.mp4':'video/mp4','.mp3':'audio/mpeg','.pdf':'application/pdf'};
 const server=http.createServer((req,res)=>{
   const file=path.resolve(root,'.'+decodeURIComponent(new URL(req.url,'http://localhost').pathname));
@@ -38,7 +40,7 @@ function check(ok,message){if(!ok)failures.push(message);}
     await page.evaluate(async()=>{document.querySelectorAll('img').forEach(x=>x.loading='eager');await document.fonts.ready;await Promise.all([...document.images].map(x=>x.decode().catch(()=>{})));document.querySelectorAll('video').forEach(v=>v.pause());});
     const shot=await page.screenshot({fullPage:true,animations:'disabled',mask:route==='index'?[page.locator('video')]:[]});
     const file=path.join(out,`${route}-${theme}-${width}.png`);
-    if(record)fs.writeFileSync(file,shot);else{
+    if(record)fs.writeFileSync(file,shot);else if(!(artworkUpdate&&route==='index')){
       const equal=fs.existsSync(file)&&fs.readFileSync(file).equals(shot);
       check(equal,`Desktop screenshot changed: ${route}/${theme}/${width}`);
       if(!equal)fs.writeFileSync(file.replace('.png','-after.png'),shot);
@@ -52,6 +54,18 @@ function check(ok,message){if(!ok)failures.push(message);}
     page.on('pageerror',e=>errors.push(e.message));
     await page.goto(base+'/index.html');
     await page.waitForFunction(()=>document.documentElement.classList.contains('tabs-enabled'));
+    check(await page.locator('.paper-artwork img').count()===3,'Three final paper drawings are not embedded');
+    if(await page.locator('.paper-artwork img').count()===3){
+      await page.locator('.paper-artwork img').evaluateAll(async xs=>{for(const x of xs){x.loading='eager';await x.decode();}});
+      check(await page.locator('.paper-artwork img').evaluateAll(xs=>xs.every(x=>x.naturalWidth>=2500)), 'Artwork previews are not high resolution');
+      check(await page.locator('.paper-artwork a').evaluateAll(xs=>xs.length===3&&xs.every(x=>x.href.endsWith('.pdf'))),'Original artwork PDF links missing');
+    }
+    check(await page.locator('.demo-tabs').evaluate(x=>x.scrollWidth<=x.clientWidth),'Phone video tabs still require sideways scrolling');
+    for(const tab of await page.locator('.demo-tabs button').all()){
+      await tab.click();
+      check(await tab.getAttribute('aria-selected')==='true','A video task tab cannot be selected');
+    }
+    await page.locator('.demo-tabs button').first().click();
     check(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),`Homepage overflow ${width}`);
     check(await page.locator('.problem-copy p').evaluate(x=>getComputedStyle(x).textAlign!=='justify'),`Phone prose remains justified ${width}`);
     check(await page.locator('.topbar nav a').evaluateAll(xs=>xs.every(x=>x.getBoundingClientRect().height>=44)),`Header touch targets below 44px ${width}`);
@@ -65,6 +79,13 @@ function check(ok,message){if(!ok)failures.push(message);}
     await page.locator('.evidence-close').click();
     if(width===390&&theme==='dark'){
       await page.evaluate(()=>scrollTo(0,0));await page.screenshot({path:path.join(out,`mobile-home-${record?'before':'after'}.png`)});
+      // Viewport screenshots preserve touch/orientation emulation between pages.
+      await page.locator('.demo-tabs').scrollIntoViewIfNeeded();
+      await page.screenshot({path:path.join(out,'mobile-video-tasks.png')});
+      if(await page.locator('.paper-artwork').count()===3){
+        await page.locator('[data-figure="alignment"]').scrollIntoViewIfNeeded();
+        await page.screenshot({path:path.join(out,'mobile-paper-artwork.png')});
+      }
     }
     await page.goto(base+'/explainer.html');
     await page.waitForFunction(()=>document.querySelector('#detail-visual')?.childElementCount>0);
@@ -100,5 +121,5 @@ function check(ok,message){if(!ok)failures.push(message);}
  }finally{await browser.close();server.close();}
  fs.writeFileSync(path.join(out,record?'baseline-report.json':'report.json'),JSON.stringify({failures},null,2));
  assert.equal(failures.length,0,failures.join('\n'));
- console.log('PASS: unchanged desktop screenshots; phone portrait layout, controls, dialogs and tours.');
+ console.log('PASS: '+(artworkUpdate?'paper artwork and unchanged desktop explainer':'unchanged desktop screenshots')+'; phone portrait layout, controls, dialogs and tours.');
 })().catch(e=>{console.error(e.message);server.close();process.exitCode=1;});

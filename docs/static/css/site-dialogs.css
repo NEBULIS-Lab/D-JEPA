@@ -31,3 +31,12 @@ html:has(.evidence-dialog[open]){overflow:hidden}
 @keyframes evidence-enter{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 @media(max-width:600px){.evidence-dialog{width:calc(100vw - 20px);border-radius:16px}.evidence-dialog header,.evidence-body{padding:16px}.evidence-dialog h2{font-size:18px}.evidence-grid{grid-template-columns:1fr}.evidence-card{padding:16px}}
 @media(prefers-reduced-motion:reduce){.evidence-dialog[open]{animation:none}}
+
+/* Final author-drawn paper figures; preserve their original white canvas. */
+.paper-artwork{margin:28px 0;overflow:hidden;border:1px solid var(--line);border-radius:18px;background:var(--card)}
+.paper-artwork>a{display:block;background:#fff;line-height:0}
+.paper-artwork img{display:block;width:100%;height:auto;border-radius:0;background:#fff}
+.paper-artwork figcaption{padding:16px 20px;margin:0;font-size:14px;line-height:1.65;color:var(--muted);text-align:left;text-align-last:auto}
+.paper-artwork figcaption strong{color:var(--ink);font-weight:600}
+.paper-artwork figcaption span{display:block;margin-top:4px;color:var(--link);font-size:13px}
+.paper-artwork>a:focus-visible{outline:3px solid var(--link);outline-offset:-3px}

@@ -99,7 +99,7 @@ document.querySelector('#copy-command').addEventListener('click', async () => {
   } catch (_) { status.textContent = 'Select the command text to copy it manually.'; }
 });
 
-// Author-requested artwork slots remain visible until actual files are supplied.
+// Static paper artwork keeps its accessible caption and original-PDF link.
 fetch('site-content.json').then(response => {
   if (!response.ok) throw new Error('Content unavailable');
   return response.json();
@@ -107,7 +107,7 @@ fetch('site-content.json').then(response => {
   for (const [name, figure] of Object.entries(content.figures)) {
     if (!figure.src) continue;
     const slot = document.querySelector(`[data-figure="${name}"]`);
-    if (!slot) continue;
+    if (!slot || slot.classList.contains('paper-artwork')) continue;
     const image = new Image();
     image.alt = figure.alt;
     image.onload = () => {
@@ -118,4 +118,4 @@ fetch('site-content.json').then(response => {
     };
     image.src = figure.src;
   }
-}).catch(() => { /* Static content, links and explicit artwork placeholders still work. */ });
+}).catch(() => { /* Static figures and original-PDF links remain available. */ });
