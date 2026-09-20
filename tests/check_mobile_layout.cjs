@@ -61,6 +61,16 @@ function check(ok,message){if(!ok)failures.push(message);}
       check(await page.locator('.paper-artwork a').evaluateAll(xs=>xs.length===3&&xs.every(x=>x.href.endsWith('.pdf'))),'Original artwork PDF links missing');
     }
     check(await page.locator('.demo-tabs').evaluate(x=>x.scrollWidth<=x.clientWidth),'Phone video tabs still require sideways scrolling');
+    for(const table of await page.locator('.table-scroll').all()){
+      const fit=await table.evaluate(box=>{
+        const bounds=box.getBoundingClientRect();
+        return box.scrollWidth<=box.clientWidth+1&&[...box.querySelectorAll('th,td')].every(cell=>{
+          const rect=cell.getBoundingClientRect();
+          return rect.width>0&&rect.left>=bounds.left&&rect.right<=bounds.right+1&&cell.scrollWidth<=cell.clientWidth+1;
+        });
+      });
+      check(fit,`Phone results table requires scrolling or clips cells ${width}: ${await table.getAttribute('aria-label')}`);
+    }
     for(const tab of await page.locator('.demo-tabs button').all()){
       await tab.click();
       check(await tab.getAttribute('aria-selected')==='true','A video task tab cannot be selected');
@@ -82,6 +92,8 @@ function check(ok,message){if(!ok)failures.push(message);}
       // Viewport screenshots preserve touch/orientation emulation between pages.
       await page.locator('.demo-tabs').scrollIntoViewIfNeeded();
       await page.screenshot({path:path.join(out,'mobile-video-tasks.png')});
+      await page.locator('.table-scroll').first().scrollIntoViewIfNeeded();
+      await page.screenshot({path:path.join(out,'mobile-results-tables.png')});
       if(await page.locator('.paper-artwork').count()===3){
         await page.locator('[data-figure="alignment"]').scrollIntoViewIfNeeded();
         await page.screenshot({path:path.join(out,'mobile-paper-artwork.png')});

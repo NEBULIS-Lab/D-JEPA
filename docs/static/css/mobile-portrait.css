@@ -47,7 +47,12 @@
   .metric-value { font-size: 28px; }
   .figure-strip { gap: 24px 16px; }
   .figure-strip figcaption { line-height: 1.5; }
-  .table-scroll { max-width: 100%; overscroll-behavior-x: contain; }
+  .table-scroll { max-width: 100%; overflow: visible; }
+  .table-scroll table { min-width: 0; width: 100%; table-layout: auto; font-size: clamp(10px, 2.8vw, 13px); line-height: 1.4; }
+  .table-scroll caption { padding: 10px 8px; border-radius: 11px 11px 0 0; font-size: clamp(12px, 3.2vw, 14px); }
+  .table-scroll th, .table-scroll td { padding: 9px clamp(4px, 1.2vw, 8px); white-space: normal; overflow-wrap: anywhere; vertical-align: middle; }
+  .table-scroll tbody td strong { white-space: nowrap; }
+  .table-scroll tfoot td { font-size: inherit; line-height: 1.5; border-radius: 0 0 11px 11px; }
   .explainer-entry { padding: 16px; gap: 12px; }
   .explainer-entry-arrow { font-size: 20px; }
   .code-heading { padding: 8px 12px; gap: 8px; }
