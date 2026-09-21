@@ -77,7 +77,7 @@ function check(ok,message){if(!ok)failures.push(message);}
     }
     await page.locator('.demo-tabs button').first().click();
     check(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),`Homepage overflow ${width}`);
-    check(await page.locator('.problem-copy p').evaluate(x=>getComputedStyle(x).textAlign!=='justify'),`Phone prose remains justified ${width}`);
+    check(await page.locator('.problem-copy p').evaluate(x=>getComputedStyle(x).textAlign==='justify'),`Phone prose is not justified ${width}`);
     check(await page.locator('.topbar nav a').evaluateAll(xs=>xs.every(x=>x.getBoundingClientRect().height>=44)),`Header touch targets below 44px ${width}`);
     if(await page.locator('.hero-authors').count())check(await page.locator('.hero-authors').evaluate(x=>x.scrollWidth<=x.clientWidth),`Authors require sideways scroll ${width}`);
     await page.getByText('Metric definitions and source identities').click();
@@ -105,7 +105,7 @@ function check(ok,message){if(!ok)failures.push(message);}
     for(let i=0;i<6;i++){
       await page.locator(`button[data-stage="${i}"]`).click();
       check(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),`Explainer page overflow ${width}/stage ${i}`);
-      check(await page.locator('#detail-description').evaluate(x=>getComputedStyle(x).textAlign!=='justify'),`Inspector remains justified ${width}`);
+      check(await page.locator('#detail-description').evaluate(x=>getComputedStyle(x).textAlign==='justify'),`Inspector is not justified ${width}`);
       const canvas=await page.locator('#diagram-viewport').boundingBox();
       check(canvas.width<=width&&canvas.height>=200,`Unusable diagram viewport ${width}/stage ${i}`);
     }

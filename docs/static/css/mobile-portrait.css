@@ -29,8 +29,10 @@
   .section-heading > p, .problem-grid p, .method-card p, .protocol-note p,
   .diagnostic-evidence figcaption, .evidence-pair figcaption, .coverage-plates figcaption,
   .figure-notes, .reproduce-grid p, .demo-panel > p,
+  .paper-artwork figcaption, .evidence-card p,
   .inspector-copy #detail-description, .technical-note p {
-    text-align: left; text-align-last: auto; hyphens: none;
+    text-align: justify; text-align-last: start; text-justify: inter-word;
+    hyphens: auto; overflow-wrap: break-word; text-wrap: wrap;
   }
   .problem-copy, .insight, .method-card { padding: 20px; }
   .problem-grid, .method-grid, .reproduce-grid, .evidence-pair { min-width: 0; gap: 16px; }
