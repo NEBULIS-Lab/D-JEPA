@@ -54,11 +54,11 @@ function check(ok,message){if(!ok)failures.push(message);}
     page.on('pageerror',e=>errors.push(e.message));
     await page.goto(base+'/index.html');
     await page.waitForFunction(()=>document.documentElement.classList.contains('tabs-enabled'));
-    check(await page.locator('.paper-artwork img').count()===3,'Three final paper drawings are not embedded');
-    if(await page.locator('.paper-artwork img').count()===3){
+    check(await page.locator('.paper-artwork img').count()===4,'Four main-text paper drawings are not embedded');
+    if(await page.locator('.paper-artwork img').count()===4){
       await page.locator('.paper-artwork img').evaluateAll(async xs=>{for(const x of xs){x.loading='eager';await x.decode();}});
       check(await page.locator('.paper-artwork img').evaluateAll(xs=>xs.every(x=>x.naturalWidth>=2500)), 'Artwork previews are not high resolution');
-      check(await page.locator('.paper-artwork a').evaluateAll(xs=>xs.length===3&&xs.every(x=>x.href.endsWith('.pdf'))),'Original artwork PDF links missing');
+      check(await page.locator('.paper-artwork a').evaluateAll(xs=>xs.length===4&&xs.every(x=>x.href.endsWith('.pdf'))),'Original artwork PDF links missing');
     }
     check(await page.locator('.demo-tabs').evaluate(x=>x.scrollWidth<=x.clientWidth),'Phone video tabs still require sideways scrolling');
     for(const table of await page.locator('.table-scroll').all()){
@@ -94,7 +94,7 @@ function check(ok,message){if(!ok)failures.push(message);}
       await page.screenshot({path:path.join(out,'mobile-video-tasks.png')});
       await page.locator('.table-scroll').first().scrollIntoViewIfNeeded();
       await page.screenshot({path:path.join(out,'mobile-results-tables.png')});
-      if(await page.locator('.paper-artwork').count()===3){
+      if(await page.locator('.paper-artwork').count()===4){
         await page.locator('[data-figure="alignment"]').scrollIntoViewIfNeeded();
         await page.screenshot({path:path.join(out,'mobile-paper-artwork.png')});
       }

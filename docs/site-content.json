@@ -4,6 +4,7 @@
   "figures": {
     "overview": {"src": "static/images/paper-artwork/overview.webp", "pdf": "static/images/paper-artwork/overview.pdf", "alt": "D-JEPA framework overview", "status": "ready"},
     "alignment": {"src": "static/images/paper-artwork/alignment.webp", "pdf": "static/images/paper-artwork/alignment.pdf", "alt": "Decision alignment and predictive adaptation", "status": "ready"},
-    "representation": {"src": "static/images/paper-artwork/representation.webp", "pdf": "static/images/paper-artwork/representation.pdf", "alt": "Decision-aligned future representation", "status": "ready"}
+    "composition": {"src": "static/images/paper-artwork/composition.webp", "pdf": "static/images/paper-artwork/composition.pdf", "alt": "Multi-geometry alignment and calibrated composition", "status": "ready"},
+    "representation": {"src": "static/images/paper-artwork/representation.webp", "pdf": "static/images/paper-artwork/representation.pdf", "alt": "Temporal transport and ordinal realization architecture", "status": "ready"}
   }
 }
