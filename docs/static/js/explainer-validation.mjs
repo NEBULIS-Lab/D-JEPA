@@ -14,7 +14,9 @@ export function validationFrame(seconds) {
     shrink:ease((seconds-8)/1.8),
     tasks:VALIDATION_TASKS.map((task,i)=>{
       const entry=9.85+i*.38, reveal=ease((seconds-entry)/.8);
-      return {reveal, time:Math.max(0,Math.min(task.duration-.04,seconds-entry-.8)), running:seconds>entry+.8&&seconds<entry+.8+task.duration-.04};
+      const t=clamp((seconds-entry)/.8),settle=1-(1-t)**4;
+      return {reveal,offsetY:16*(1-settle),scale:.985+.015*settle,
+        time:Math.max(0,Math.min(task.duration-.04,seconds-entry-.8)), running:seconds>entry+.8&&seconds<entry+.8+task.duration-.04};
     }),
   };
 }

@@ -2,6 +2,23 @@
 const clamp = x => Math.max(0, Math.min(1, x));
 const ease = x => { const t=clamp(x); return t*t*(3-2*t); };
 
+// A short, clock-driven handoff between adjacent views of the same teaching candidate.
+export function canCarryCandidate(from, to, running) {
+  return running && from>=1 && from<=3 && to===from+1;
+}
+export function candidateCarryFrame(from, to, seconds) {
+  const t=clamp(seconds/.68),p=t*t*t*(t*(t*6-15)+10);
+  return {x:from.x+(to.x-from.x)*p,y:from.y+(to.y-from.y)*p,
+    halo: t>0&&t<1 ? Math.sin(Math.PI*t)**2 : 0,done:t===1};
+}
+
+export function liftingCues(phase) {
+  const arrival=clamp((phase-.78)/.10);
+  return {target:ease((phase-.16)/.18),move:liftingProgress(phase),
+    arrival:arrival>0&&arrival<1?Math.sin(Math.PI*arrival)**2:0,
+    read:ease((phase-.80)/.20)};
+}
+
 export function liftingProgress(phase) {
   return ease((phase-.34)/.44);
 }

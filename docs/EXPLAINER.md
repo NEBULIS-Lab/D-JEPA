@@ -194,6 +194,20 @@ stage. Training supervision opens in a dialog.
 
 ## Playback and accessibility
 
+- Adjacent teaching stages carry the selected candidate from the previous output
+  into the next input over 0.68 seconds, retaining its label and colour while the
+  surrounding view settles. This handoff uses the shared playback clock, freezes
+  on pause and clears on manual scrubbing. Recorded candidates and the teaching
+  example are never joined by this effect. Reduced motion omits the handoff.
+- In the relation view, each message travels first, then contributes to the
+  displayed context. A finite arrival ring marks the handoff; the final weighted
+  sum, bounded correction and operation intervals are unchanged.
+- Ordinal lifting previews its target before movement, briefly accents the
+  selected point's arrival, and then scans native distance. These visual cues
+  do not change any radius, action choice or narration timestamp.
+- The task wall retains its original reveal and video times, adding only a small
+  centre-anchored settling motion. Windows remain completely hidden before their
+  entrance, including after backward seeks.
 - Play/pause, previous/next, speed, reset and fullscreen.
 - Scrub the whole tour or just the current step; replay a step without advancing.
 - Trace candidates, inspect an attention head/cell, change source configuration
@@ -296,9 +310,20 @@ No code, images, textures or libraries from these references are redistributed.
 The stage uses original lightweight SVG projection, with no added 3D dependency
 or network asset request.
 
+The motion refinement also draws on the object-continuity principle described
+in [OneTake](https://github.com/feitangyuan/onetake). Its implementation and assets
+are not copied or included. The refinements retain this page's existing playback
+clock, narration and recorded demonstrations rather than adding a film framework.
+
 Checks: `node --test tests/explainer-model.test.mjs` and
 `python3 scripts/check_site.py`. Preview using
 `bash scripts/preview_site.sh 8000`, then open `/explainer.html`.
+
+Run all animation unit checks with `node --test tests/explainer*.test.mjs`.
+With Playwright installed, `node tests/check_explainer_motion.cjs` checks carries,
+pause/scrub behavior, reversible geometry, both themes, portrait layout and hidden
+media in a CPU-rendered browser. Add `--narrated` for a complete normal-speed
+eight-segment playback; set `EXPLAINER_SHOTS` to save inspection screenshots.
 
 Rebuild the task-wall previews with `python scripts/build_explainer_wall_media.py`
 (requires `imageio-ffmpeg`). The five preview videos total under 1 MB, retain the

@@ -5,7 +5,7 @@ import { VALIDATION_TASKS, validationFrame, setValidationVisibility, syncValidat
 import { pairPhase, latentMarkup, latentIntro, PAIR_INTRO_SECONDS, PAIR_STAGE_SECONDS, pairTimelinePhase, pairTimelineSeconds } from './explainer-pair.mjs';
 import { DIAGNOSTIC, problemPhase } from './explainer-problem.mjs';
 import { evidenceVector, evidencePhase } from './explainer-evidence.mjs';
-import { liftingProgress, liftingStep, liftingGeometry, decisionProgress } from './explainer-motion.mjs';
+import { liftingProgress, liftingStep, liftingGeometry, decisionProgress, liftingCues, candidateCarryFrame, canCarryCandidate } from './explainer-motion.mjs';
 import { sampleState, sceneMarkup, updateScenes } from './explainer-scenes.mjs';
 import { CANDIDATES, COSTS, example, attention, descriptor, realizedPoint, transportPoint } from './explainer-model.mjs';
 
@@ -28,6 +28,9 @@ let currentContext = '';
 let previousTime = 0;
 let frame = 0;
 let slideFrame = 0;
+let candidateCarry = null;
+let renderedStage = -1;
+let renderedSources = 2;
 
 const fmt = (n, digits = 3) => n.toFixed(digits);
 const escapeText = text => String(text).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;');
@@ -208,6 +211,7 @@ function relationsDetail() {
     s+=text(448,ey+3,w.toFixed(2),'svg-tiny','text-anchor="end"');
     s+='<path data-message-path="'+i+'" d="M457 '+ey+'C492 '+ey+' 492 114 548 114" fill="none" stroke="var(--purple)" stroke-width="'+(1+w*5)+'" stroke-opacity=".25"/>';
     s+='<circle data-message-pulse="'+i+'" r="'+(2+w*6)+'" fill="var(--accent)"/>';
+    s+='<circle data-message-arrival="'+i+'" cx="548" cy="114" r="5" fill="none" stroke="var(--accent)" stroke-width="1.4" opacity="0"/>';
     s+='</g>';
   }
   s+=text(28,287,'Shared 64D tokens','svg-tiny');
@@ -231,6 +235,7 @@ function relationsDetail() {
   s+='<circle id="correction-point" cy="266" r="5" fill="var(--accent)" stroke="var(--panel)" stroke-width="1.5"/>';
   s+=text(570,287,'−'+state.bound.toFixed(2),'svg-tiny','text-anchor="middle"')+text(726,287,'+'+state.bound.toFixed(2),'svg-tiny','text-anchor="middle"');
   s+='<text id="relation-delta" x="648" y="310" class="svg-label svg-accent" text-anchor="middle"></text>';
+  s+=tokenMark(state.candidate,725,307,true,8);
   s+=rect(16,323,726,28,'var(--purple-soft)','none',8);
   s+='<text id="relation-takeaway" x="379" y="341" class="svg-small svg-accent" text-anchor="middle"></text>';
   return s;
@@ -252,13 +257,16 @@ function updateRelations(svg) {
     n.setAttribute('stroke-width',selected?'2':'1');
   });
   mix.weights.forEach((w,i)=>{
-    const flow=p.messages[i],path=svg.querySelector('[data-message-path="'+i+'"]'),dot=svg.querySelector('[data-message-pulse="'+i+'"]');
+    const flow=p.travel[i],path=svg.querySelector('[data-message-path="'+i+'"]'),dot=svg.querySelector('[data-message-pulse="'+i+'"]');
     path.style.strokeDasharray=path.getTotalLength();
     path.style.strokeDashoffset=(1-flow)*path.getTotalLength();
     path.setAttribute('stroke-opacity',String(.14+.4*flow));
     const pos=path.getPointAtLength(flow*path.getTotalLength());
     dot.setAttribute('cx',pos.x);dot.setAttribute('cy',pos.y);
     dot.style.opacity=flow>0&&flow<1?'1':'0';
+    const arrival=svg.querySelector('[data-message-arrival="'+i+'"]');
+    arrival.setAttribute('r',5+6*p.messages[i]);
+    arrival.style.opacity=reducedMotion.matches?'0':String(.55*p.arrivals[i]);
   });
   mix.mixed.forEach((value,j)=>{
     const n=svg.querySelector('[data-mixed-cell="'+j+'"]');
@@ -338,7 +346,7 @@ function liftingDetail() {
 function ordinalLiftingDetail() {
   const d=example(state), geometry=liftingGeometry(d,state.progress), selected=geometry[state.candidate];
   const phase=state.comparing?0:phaseProgress,active=liftingStep(phase);
-  const convert=smooth((phase-.16)/.18),read=smooth((phase-.80)/.20);
+  const cues=liftingCues(phase),convert=cues.target,read=cues.read;
   const nearest=[...geometry].sort((a,b)=>a.cost-b.cost)[0].id;
   const labels=['Read aligned rank','Set RMS radius','Rewrite terminal latent','Read native distance'];
   let s='';
@@ -384,8 +392,11 @@ function ordinalLiftingDetail() {
     s+='<g data-linked-candidate="'+i+'" data-latent="'+i+'" data-candidate="'+i+'" role="button" tabindex="0" aria-label="Trace future '+CANDIDATES[i]+'">';
     s+=line(cx,cy,cx+to[0]*scale,cy+to[1]*scale,chosen?'var(--purple)':'var(--line)','stroke-dasharray="2 4" opacity=".65"');
     s+=circle(cx+from[0]*scale,cy+from[1]*scale,4,'none','stroke="var(--blue)" opacity=".75"');
-    s+=circle(cx+to[0]*scale,cy+to[1]*scale,6.5,'none','stroke="var(--purple)" opacity="'+(.25+.5*convert)+'"');
+    s+=circle(cx+to[0]*scale,cy+to[1]*scale,6.5,'none','stroke="var(--purple)" opacity="'+(.75*convert)+'"');
     if(chosen){
+      // The target exists before the point moves; a single landing cue settles
+      // before the native-distance scan. Every cue follows the shared clock.
+      s+=circle(cx+to[0]*scale,cy+to[1]*scale,9+5*cues.arrival,'none','stroke="var(--gold)" stroke-width="1.3" opacity="'+(reducedMotion.matches?0:.7*cues.arrival)+'" data-lift-landing="true"');
       s+=line(cx,cy,x,y,'var(--purple)','stroke-width="1.5"');
       s+=line(cx+from[0]*scale,cy+from[1]*scale,x,y,'var(--accent)','stroke-width="3" opacity=".45"');
       if(state.progress>0&&state.progress<1){
@@ -394,7 +405,7 @@ function ordinalLiftingDetail() {
           s+=circle(cx+(from[0]+(to[0]-from[0])*p)*scale,cy+(from[1]+(to[1]-from[1])*p)*scale,4-tail*.65,'var(--purple)','opacity="'+(.4-tail*.08)+'"');
         }
       }
-      s+=circle(x,y,10,'var(--purple)','opacity=".14"');
+      s+=circle(x,y,10,'var(--purple)','opacity="'+(.14+.08*Math.sin(Math.PI*state.progress))+'"');
     }
     s+=circle(x,y,chosen?5.5:3.5,chosen?'var(--accent)':'var(--blue)','stroke="var(--panel)" stroke-width="1.2" data-lift-point="'+i+'"');
     s+=text(x+9,y+(chosen?4:-8),CANDIDATES[i],chosen?'svg-label svg-accent':'svg-small');
@@ -643,7 +654,9 @@ function updateValidation(svg) {
   svg.querySelectorAll('[data-validation-card]').forEach(n=>{
     const i=Number(n.dataset.validationCard),p=f.tasks[i].reveal;
     setValidationVisibility(n,p);
-    n.setAttribute('transform','translate(0 '+(22*(1-p))+') scale(1)');
+    const slot=i+1,cx=134+(slot%3)*246,cy=117+Math.floor(slot/3)*153;
+    const scale=reducedMotion.matches?1:f.tasks[i].scale,offset=reducedMotion.matches?0:f.tasks[i].offsetY;
+    n.setAttribute('transform','translate('+(cx*(1-scale))+' '+(cy*(1-scale)+offset)+') scale('+scale+')');
     n.querySelector('[data-validation-open]').setAttribute('tabindex',p>.95?'0':'-1');
   });
   if($('#diagram-viewport').classList.contains('validation-expanded')!==wall)updateViewport();
@@ -823,7 +836,7 @@ function options() {
   if(state.stage===5&&state.replay)panel.insertAdjacentHTML('beforeend','<button data-validation-jump="0">Replay PushT</button><button data-validation-jump="12.4">Explore all tasks ↗</button>');
   const localLabel=isRecorded()?'Scene progress':state.stage===4?'Transformation':'Step progress';
   panel.insertAdjacentHTML('beforeend','<label class="lifting-control"><span>'+localLabel+' <output id="step-value" for="step-progress">0%</output></span><input id="step-progress" type="range" min="0" max="1" step=".005" value="0" aria-label="Current step progress"></label><button id="replay-step" class="quiet-button">Replay this step ↻</button>');
-  $('#step-progress').oninput=e=>{stop();state.elapsed=Number(e.target.value)*stageSeconds[state.stage];updateAnimation();};
+  $('#step-progress').oninput=e=>{stop();candidateCarry=null;state.elapsed=Number(e.target.value)*stageSeconds[state.stage];updateAnimation();};
   $('#replay-step').onclick=()=>{stop();state.elapsed=0;play(true);};
   if(state.stage===3||state.stage===4){
     panel.insertAdjacentHTML('beforeend','<button id="compare-before" class="compare-button" aria-pressed="false">Hold to see before alignment</button>');
@@ -874,27 +887,44 @@ function renderCandidateControls() {
   $$('#candidate-controls [data-candidate]').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.candidate)===state.candidate)));
 }
 function renderDiagram(transition=false) {
-  releaseValidationVideos($('#detail-visual'));
-  const oldTokens=new Map([...$('#detail-visual').querySelectorAll('[data-token]')].map(n=>[n.dataset.token,n.getBoundingClientRect()]));
+  const svg=$('#detail-visual');
+  const running=state.playing||(narration?.active&&narrationMotion.running);
+  const eligible=!reducedMotion.matches&&renderedSources===state.sources&&canCarryCandidate(renderedStage,state.stage,running);
+  const oldToken=eligible?[...svg.querySelectorAll('[data-token="'+state.candidate+'"]')].at(-1):null;
+  const oldBounds=oldToken?.getBoundingClientRect();
+  candidateCarry=null;
+  releaseValidationVideos(svg);
   let renderer=state.stage===0?problemDetail:state.stage===5?(isRecorded()?validationDetail:schematicScenes)
     :[null,evidenceDetail,relationsDetail,movingDecision,liftingDetail][state.stage];
-  $('#detail-visual').innerHTML=renderer();
+  svg.innerHTML='<g data-scene-content="true">'+renderer()+'</g>';
   updateViewport();
-  if(transition&&!reducedMotion.matches){
-    $('#detail-visual').getAnimations().forEach(a=>a.cancel());
-    $('#detail-visual').animate([{opacity:.1,transform:'translateY(9px)'},{opacity:1,transform:'translateY(0)'}],{duration:420,easing:'ease-out'});
-  }
   $('#matrix-tooltip').hidden=true;
   updateAnimation();
-  if(transition&&!reducedMotion.matches){
-    const scale=$('#detail-visual').getScreenCTM().a;
-    const seen=new Set();
-    $$('#detail-visual [data-token]').forEach(node=>{
-      const key=node.dataset.token,from=oldTokens.get(key);if(!from||seen.has(key))return;seen.add(key);
-      const to=node.getBoundingClientRect();
-      node.animate([{transform:'translate('+((from.x-to.x)/scale)+'px,'+((from.y-to.y)/scale)+'px)'},{transform:'translate(0,0)'}],{duration:600,easing:'cubic-bezier(.2,.7,.25,1)'});
-    });
+  const target=svg.querySelector('[data-token="'+state.candidate+'"]');
+  if(oldBounds&&target){
+    const inverse=svg.getScreenCTM().inverse(),targetBounds=target.getBoundingClientRect();
+    const local=b=>new DOMPoint(b.x+b.width/2,b.y+b.height/2).matrixTransform(inverse);
+    candidateCarry={id:state.candidate,from:local(oldBounds),to:local(targetBounds),start:state.elapsed};
+    updateCandidateCarry();
   }
+  renderedStage=state.stage;renderedSources=state.sources;
+}
+function updateCandidateCarry(){
+  const svg=$('#detail-visual'),content=svg.querySelector('[data-scene-content]');
+  svg.querySelector('[data-carry-overlay]')?.remove();
+  if(content)content.style.opacity='1';
+  svg.querySelectorAll('[data-token]').forEach(n=>n.style.removeProperty('visibility'));
+  const target=candidateCarry?svg.querySelector('[data-token="'+candidateCarry.id+'"]'):null;
+  if(!candidateCarry)return;
+  if(reducedMotion.matches||candidateCarry.id!==state.candidate){candidateCarry=null;return;}
+  const f=candidateCarryFrame(candidateCarry.from,candidateCarry.to,state.elapsed-candidateCarry.start);
+  if(f.done)return;
+  if(target)target.style.visibility='hidden';
+  if(content)content.style.opacity=String(.72+.28*smooth((state.elapsed-candidateCarry.start)/.68));
+  svg.insertAdjacentHTML('beforeend','<g data-carry-overlay="true" aria-hidden="true" pointer-events="none">'
+    +circle(f.x,f.y,13+3*f.halo,'var(--purple)','opacity="'+(.1+.12*f.halo)+'"')
+    +circle(f.x,f.y,9,'var(--purple-soft)','stroke="var(--accent)" stroke-width="1.4"')
+    +text(f.x,f.y+3.5,CANDIDATES[candidateCarry.id],'svg-small svg-accent','text-anchor="middle"')+'</g>');
 }
 function render(transition=false) {
   modelMap?.update(state.stage);
@@ -980,9 +1010,10 @@ function updateAnimation() {
       svg.querySelectorAll('[data-score-row]').forEach(n=>n.classList.toggle('boundary-muted',![d.winner,d.baseWinner].includes(Number(n.dataset.scoreRow))));
     }else svg.querySelectorAll('[data-score-row]').forEach(n=>n.classList.remove('boundary-muted'));
   } else if(state.stage===4){
-    svg.innerHTML=liftingDetail();
+    svg.querySelector('[data-scene-content]').innerHTML=liftingDetail();
   }
   applyLinkedFocus();
+  updateCandidateCarry();
   $('#step-progress').value=phaseProgress;
   $$('input[type=range]').forEach(input=>input.style.setProperty('--fill',100*(Number(input.value)-Number(input.min))/(Number(input.max)-Number(input.min))+'%'));
   $('#step-value').value=isRecorded()?(state.elapsed>8?'Cross-task view':(physicalProgress()*2.5).toFixed(2)+' s'):Math.round(phaseProgress*100)+'%';
@@ -1033,7 +1064,7 @@ function play(stepOnly=false,until=null) {
   frame=requestAnimationFrame(tick);
 }
 function seek(seconds) {
-  stop();state.comparing=false;resumeAfterCompare=false;let index=0;
+  stop();candidateCarry=null;state.comparing=false;resumeAfterCompare=false;let index=0;
   while(index<5&&seconds>=stageSeconds[index]){seconds-=stageSeconds[index];index++;}
   if(index!==state.stage){state.stage=index;state.elapsed=seconds;render(true);}
   else{state.elapsed=seconds;updateAnimation();}
