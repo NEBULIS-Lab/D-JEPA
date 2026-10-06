@@ -37,6 +37,23 @@ async function fresh(browser,base,theme,mobile=false,reducedMotion='no-preferenc
  try{
   for(const theme of ['dark','light']){
    const {context,page}=await fresh(browser,base,theme);
+   for(const [phase,name] of [[.12,'pair-intro'],[.29,'pair-distance'],[.55,'pair-execution'],[.78,'pair-outcome'],[1,'pair-diagnosis']]){
+    await progress(page,phase);await shot(page,theme+'-'+name);
+   }
+   await progress(page,.55);
+   assert.ok(await page.locator('[data-pair-result-border]').evaluateAll(ns=>ns.every(n=>Number(n.getAttribute('opacity'))===0)),'result accents must wait for the full recorded execution');
+   const pairPaused=await page.locator('#detail-visual').innerHTML();
+   await page.waitForTimeout(150);assert.equal(await page.locator('#detail-visual').innerHTML(),pairPaused);
+   await progress(page,.78);
+   assert.deepEqual(await page.locator('[data-pair-outcome]').allTextContents(),['Goal not reached','Goal reached']);
+   assert.ok(await page.locator('[data-pair-result-border]').evaluateAll(ns=>ns.every(n=>Number(n.getAttribute('opacity'))===1)));
+   const distanceValues=await page.locator('[data-pair-distance]').allTextContents();
+   const railLengths=await page.locator('[data-distance-rail]').evaluateAll(ns=>ns.map(n=>Number(n.getAttribute('x2'))-Number(n.getAttribute('x1'))));
+   const pairData=JSON.parse(fs.readFileSync(path.join(root,'static/data/explainer-pair.json')));
+   assert.ok(Math.abs(railLengths[0]/railLengths[1]-pairData.candidates[0].rms_distance/pairData.candidates[1].rms_distance)<1e-10,'distance rails use one common scale');
+   await progress(page,.55);assert.equal(await page.locator('#detail-visual').innerHTML(),pairPaused,'rewind restores the pair presentation exactly');
+   await page.locator('#pair-view-angle').fill('0.6');
+   assert.deepEqual(await page.locator('[data-pair-distance]').allTextContents(),distanceValues,'camera rotation cannot change distance labels');
    await page.locator('#chapters [data-stage="1"]').click();
    for(const [phase,name] of [[.15,'descriptors'],[.48,'ranks'],[.70,'assembly'],[1,'tokens']]){
     await progress(page,phase);await shot(page,theme+'-'+name);
@@ -81,13 +98,25 @@ async function fresh(browser,base,theme,mobile=false,reducedMotion='no-preferenc
    await page.locator('[data-lifting="transport"]').click();await progress(page,.6);await shot(page,theme+'-transport');
    await page.locator('#chapters [data-stage="5"]').click();await progress(page,0);
    assert.ok(await page.locator('[data-validation-card]').evaluateAll(ns=>ns.every(n=>getComputedStyle(n).display==='none')));
+   for(const [seconds,name] of [[7.6,'execution-end'],[8.9,'shrinking'],[10.25,'unfolding']]){
+    await progress(page,seconds/26);await shot(page,theme+'-'+name);
+   }
+   await progress(page,8.9/26);const origin=await page.locator('#validation-origin').getAttribute('transform');
+   await progress(page,18/26);await progress(page,8.9/26);
+   assert.equal(await page.locator('#validation-origin').getAttribute('transform'),origin);
    await progress(page,12/26);await page.waitForTimeout(1200);await shot(page,theme+'-wall');
+   await page.locator('[data-validation-open="0"]').hover();
+   assert.ok(await page.locator('[data-validation-card="0"] [data-validation-edge]').evaluate(n=>Number(getComputedStyle(n).opacity)>.85));
+   await page.locator('[data-validation-open="0"]').click();
+   assert.equal(await page.locator('#validation-dialog').evaluate(n=>n.open),true);
+   assert.match(await page.locator('#validation-full-video').getAttribute('src'),/videos\/reacher\.mp4$/);
+   await page.keyboard.press('Escape');assert.equal(await page.locator('#validation-dialog').evaluate(n=>n.open),false);
    await progress(page,0);
    assert.ok(await page.locator('[data-validation-video]').evaluateAll(ns=>ns.every(n=>getComputedStyle(n).display==='none'&&n.paused)));
    assert.ok(await page.locator('.playback').evaluate(n=>n.getBoundingClientRect().bottom<=innerHeight+1));
    await context.close();
    const mobile=await fresh(browser,base,theme,true);
-   for(const stage of [1,2,4,5]){
+   for(const stage of [0,1,2,4,5]){
     await mobile.page.locator('#chapters [data-stage="'+stage+'"]').click();await progress(mobile.page,.6);
     assert.ok(await mobile.page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'phone must not overflow horizontally');
     await shot(mobile.page,theme+'-phone-'+stage);
@@ -95,6 +124,12 @@ async function fresh(browser,base,theme,mobile=false,reducedMotion='no-preferenc
    await mobile.context.close();
   }
   const reduced=await fresh(browser,base,'dark',false,'reduce');
+  await progress(reduced.page,.12);
+  const reducedPoints=await reduced.page.locator('[data-pair-point]').evaluateAll(ns=>ns.map(n=>[n.getAttribute('cx'),n.getAttribute('cy')]));
+  await progress(reduced.page,.29);
+  assert.deepEqual(await reduced.page.locator('[data-pair-point]').evaluateAll(ns=>ns.map(n=>[n.getAttribute('cx'),n.getAttribute('cy')])),reducedPoints);
+  await reduced.page.locator('#chapters [data-stage="5"]').click();await progress(reduced.page,10.25/26);
+  assert.ok(await reduced.page.locator('[data-validation-card]').evaluateAll(ns=>ns.every(n=>Number(n.style.getPropertyValue('--arrival-strength'))===0)));
   await reduced.page.locator('#chapters [data-stage="1"]').click();await progress(reduced.page,.985);await reduced.page.locator('#play').click();
   await reduced.page.waitForFunction(()=>document.documentElement.dataset.stage==='2');
   assert.equal(await reduced.page.locator('[data-carry-overlay]').count(),0);await reduced.context.close();

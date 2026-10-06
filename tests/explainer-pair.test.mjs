@@ -1,9 +1,29 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
+import * as presentation from '../docs/static/js/explainer-pair.mjs';
 import { pairPhase, pairPoints, projectPoint, latentIntro, latentWaveHeight, latentBackdrop, latentMarkup, pairTimelinePhase, pairTimelineSeconds, PAIR_INTRO_SECONDS, PAIR_STAGE_SECONDS } from '../docs/static/js/explainer-pair.mjs';
 const pair=JSON.parse(readFileSync(new URL('../docs/static/data/explainer-pair.json',import.meta.url)));
 const traces=JSON.parse(readFileSync(new URL('../docs/static/data/explainer-pusht.json',import.meta.url)));
+test('pair presentation reveals distance before execution and outcome only after completion',()=>{
+  assert.equal(typeof presentation.pairPresentation,'function');
+  const frame=presentation.pairPresentation;
+  assert.equal(frame(0).distanceReveal,0);
+  assert.equal(frame(.22).distanceReveal,1);
+  assert.equal(frame(0).geometryFocus,1);
+  assert.ok(frame(0).executionFocus<frame(.5).executionFocus);
+  assert.equal(frame(.5).executionFocus,1);
+  assert.equal(frame(.67).outcome,0);
+  assert.equal(frame(.76).outcome,1);
+  assert.equal(frame(.82).diagnosticReveal,0);
+  assert.equal(frame(1).diagnosticReveal,1);
+  const paused=frame(.37);frame(.98);assert.deepEqual(frame(.37),paused);
+  for(let p=0;p<=1;p+=.01){
+    const f=frame(p);
+    assert.ok(f.geometryFocus>=.8&&f.geometryFocus<=1);
+    assert.ok(f.executionFocus>=.8&&f.executionFocus<=1);
+  }
+});
 test('intro camera turns in one direction, then holds without reversing',()=>{
   assert.equal(latentIntro(0).t,0);
   const angles=Array.from({length:101},(_,i)=>latentIntro(i/100).yawOffset);

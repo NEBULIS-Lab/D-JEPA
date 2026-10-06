@@ -2,7 +2,7 @@ import { relationMix } from './explainer-relations.mjs';
 import { createNarration } from './explainer-narration.mjs';
 import { createModelMap } from './explainer-model-map.mjs';
 import { VALIDATION_TASKS, validationFrame, setValidationVisibility, syncValidationVideos, pauseValidationVideos, releaseValidationVideos } from './explainer-validation.mjs';
-import { pairPhase, latentMarkup, latentIntro, PAIR_INTRO_SECONDS, PAIR_STAGE_SECONDS, pairTimelinePhase, pairTimelineSeconds } from './explainer-pair.mjs';
+import { pairPhase, pairPresentation, latentMarkup, latentIntro, PAIR_INTRO_SECONDS, PAIR_STAGE_SECONDS, pairTimelinePhase, pairTimelineSeconds } from './explainer-pair.mjs';
 import { DIAGNOSTIC, problemPhase } from './explainer-problem.mjs';
 import { evidenceVector, evidencePhase } from './explainer-evidence.mjs';
 import { liftingProgress, liftingStep, liftingGeometry, decisionProgress, liftingCues, candidateCarryFrame, canCarryCandidate, computationFocus, latentPlanePoint, tokenAssemblyFrame } from './explainer-motion.mjs';
@@ -583,13 +583,18 @@ function problemDetail() {
   s+='<g id="pair-geometry">';
   s+=text(20,65,'LeWM · predicted future geometry','svg-label');
   s+=text(20,82,'Nearby goal distances, before execution','svg-tiny');
+  s+=depthPanel(18,91,333,176,'var(--line)',12);
   s+='<g id="pair-orbit">'+latentMarkup(pair,pairYaw)+'</g>';
   s+='<rect id="pair-orbit-hit" x="18" y="91" width="333" height="176" rx="12" fill="transparent" role="slider" tabindex="0" aria-label="Rotate latent-space view" aria-valuemin="-70" aria-valuemax="70" aria-valuenow="0"/>';
   pair.candidates.forEach((c,i)=>{
-    const x=18+i*171,color=i===0?'var(--pair-a)':'var(--pair-b)';
-    s+=rect(x,273,163,34,'var(--surface)','var(--line)',8);
-    s+=circle(x+13,290,3,color);
-    s+=text(x+24,294,c.label+' · distance '+c.rms_distance.toFixed(4),'svg-small');
+    const x=18+i*171,color=i===0?'var(--pair-a)':'var(--pair-b)',ink=i===0?'var(--pair-a-label)':'var(--pair-b-label)';
+    const range=Math.ceil(Math.max(...pair.candidates.map(c=>c.rms_distance))*10)/10;
+    s+=depthPanel(x,273,163,37,'var(--line)',8);
+    s+=rect(x+9,279,20,17,color,'none',5);
+    s+=text(x+19,291,c.label,'svg-small','text-anchor="middle" style="fill:#252030;font-weight:600"');
+    s+=text(x+36,291,'distance '+c.rms_distance.toFixed(4),'svg-small','style="fill:'+ink+'" data-pair-distance="'+i+'"');
+    s+=line(x+11,303,x+152,303,'var(--line)','stroke-width="2.5" stroke-linecap="round"');
+    s+=line(x+11,303,x+11+141*c.rms_distance/range,303,color,'stroke-width="2.5" stroke-linecap="round" pathLength="1" stroke-dasharray="1" data-distance-rail="'+i+'"');
   });
   s+='</g><g id="pair-diagnostic" opacity="0">';
   s+=text(20,70,'The same issue at population scale','svg-label');
@@ -598,24 +603,36 @@ function problemDetail() {
   s+=text(285,120,'Top 4','svg-small svg-gold','text-anchor="middle"');
   DIAGNOSTIC.forEach((row,i)=>{
     const y=161+i*81;
-    s+=text(23,y+4,row.model,'svg-small')+line(159,y,268,y);
+    s+=depthPanel(18,y-28,330,65,'var(--line)',10);
+    s+=text(29,y+4,row.model,'svg-small');
+    s+=path('M164 '+y+'H261m-5 -4 5 4-5 4','detail-line','data-diagnostic-ink="true" pathLength="1" stroke-dasharray="1" stroke-linecap="round"');
     for(const [x,value,color] of [[142,row.all,'var(--blue)'],[285,row.shortlist,'var(--gold)']]){
       s+=circle(x,y,16,'var(--surface)','stroke="'+color+'"');
       s+=text(x,y+4,value.toFixed(2),'svg-label','text-anchor="middle"');
+      s+=line(x-27,y+24,x+27,y+24,'var(--line)','stroke-width="3" stroke-linecap="round"');
+      s+=line(x-27,y+24,x-27+54*value,y+24,color,'stroke-width="3" stroke-linecap="round" pathLength="1" stroke-dasharray="1" data-diagnostic-ink="true"');
     }
   });
   s+=text(23,290,'Strong global order → weak decision-local order','svg-small');
-  s+='</g>'+line(363,57,363,308);
+  s+='</g>'+line(366,57,366,308);
+  s+='<g id="pair-execution">';
   s+=text(387,65,'Same start + goal · recorded execution','svg-label');
   pair.candidates.forEach((c,i)=>{
     const x=386+i*185,idx=record.candidates.findIndex(r=>r.id===c.id),color=i===0?'var(--pair-a)':'var(--pair-b)';
-    s+=circle(x+5,86,3,color)+text(x+14,90,'Candidate '+c.label+' · ID '+c.id,'svg-small');
+    s+=rect(x,77,20,17,color,'none',5);
+    s+=text(x+10,89,c.label,'svg-small','text-anchor="middle" style="fill:#252030;font-weight:600"');
+    s+=text(x+28,89,'Candidate '+c.id,'svg-small');
+    s+=depthPanel(x-2,100,175,175,'var(--line)',11);
     s+=sceneMarkup(record,idx,x,102,171,'pair');
+    s+=line(x+12,102,x+159,102,color,'stroke-width="2" stroke-linecap="round" opacity=".8"');
+    s+=rect(x,102,171,171,'none',c.success?'#8EAD7D':'#C96E66',10,'stroke-width="1.6" data-pair-result-border="'+i+'" opacity="0"');
     s+=text(x+85,288,'Cost '+c.cost.toFixed(5)+' · rank '+c.rank,'svg-small','text-anchor="middle"');
     s+='<g data-pair-outcome="'+i+'" opacity="0">';
+    s+=rect(x+23,295,126,17,'var(--surface)','none',6);
     s+=circle(x+40,303,3,c.success?'#8EAD7D':'#C96E66');
     s+=text(x+50,307,c.success?'Goal reached':'Goal not reached','svg-small')+'</g>';
   });
+  s+='</g>';
   s+=rect(16,321,726,30,'var(--purple-soft)','none',8);
   s+='<text id="pair-takeaway" x="379" y="341" class="svg-label svg-accent" text-anchor="middle"></text>';
   return s;
@@ -625,6 +642,7 @@ function updateProblem(svg) {
   const pairProgress=pairTimelinePhase(state.elapsed);
   const phase=pairPhase(pairProgress);
   const intro=latentIntro(pairProgress);
+  const presentation=pairPresentation(pairProgress);
   if(phase.diagnostic<1)svg.querySelector('#pair-orbit').innerHTML=latentMarkup(pair,pairYaw+(reducedMotion.matches?0:intro.yawOffset),intro.t,!reducedMotion.matches);
   updateScenes(svg,record,phase.motion);
   svg.querySelectorAll('[data-pair-operation]').forEach(n=>{
@@ -632,9 +650,13 @@ function updateProblem(svg) {
     n.setAttribute('fill',active?'var(--purple-soft)':'var(--surface)');
     n.setAttribute('stroke',active?'var(--purple)':'var(--line)');
   });
-  svg.querySelector('#pair-geometry').style.opacity=String(1-phase.diagnostic);
+  svg.querySelector('#pair-geometry').style.opacity=String((1-phase.diagnostic)*presentation.geometryFocus);
   svg.querySelector('#pair-geometry').style.pointerEvents=phase.diagnostic>.5?'none':'';
   svg.querySelector('#pair-diagnostic').style.opacity=String(phase.diagnostic);
+  svg.querySelector('#pair-execution').style.opacity=String(presentation.executionFocus);
+  svg.querySelectorAll('[data-distance-rail]').forEach(n=>n.setAttribute('stroke-dashoffset',1-presentation.distanceReveal));
+  svg.querySelectorAll('[data-diagnostic-ink]').forEach(n=>n.setAttribute('stroke-dashoffset',1-presentation.diagnosticReveal));
+  svg.querySelectorAll('[data-pair-result-border]').forEach(n=>n.setAttribute('opacity',presentation.outcome));
   $('#data-badge').textContent=phase.diagnostic>.5?'MEASURED DIAGNOSTIC':'RECORDED PAIR + RADIAL VIEW';
   const hit=svg.querySelector('#pair-orbit-hit');
   hit.setAttribute('tabindex',phase.diagnostic>.5?'-1':'0');
@@ -661,6 +683,7 @@ function recordedDetail() {
     const x=20+i*248, size=224, selected=i===state.recordCandidate;
     s+='<g data-record-panel="'+i+'">';
     s+=text(x+112,24,candidate.method,selected?'svg-title svg-accent':'svg-title','text-anchor="middle"');
+    s+=depthPanel(x-2,41,size+4,size+4,'var(--line)',11);
     s+=sceneMarkup(record,i,x,43,size,'stage'+state.stage);
     s+=rect(x,43,size,size,'none',selected?'var(--purple)':'var(--line)',10,'stroke-width="'+(selected?2:1)+'"');
     s+=text(x+10,288,'Candidate '+candidate.id,'svg-small');
@@ -678,7 +701,7 @@ function recordedDetail() {
 
 function validationDetail() {
   let s='<g id="validation-pusht-frame" opacity="0">';
-  s+=rect(16,49,236,136,'var(--surface)','var(--line)',10);
+  s+=depthPanel(16,49,236,136,'var(--line)',10);
   s+=text(28,67,'PushT','svg-label')+text(240,67,'Latent control','svg-tiny','text-anchor="end"');
   s+='</g><g id="validation-origin">'+recordedDetail()+'</g>';
   s+='<g id="validation-heading" opacity="0">';
@@ -687,7 +710,8 @@ function validationDetail() {
   VALIDATION_TASKS.forEach((task,i)=>{
     const slot=i+1,x=16+(slot%3)*246,y=49+Math.floor(slot/3)*153;
     s+='<g data-validation-card="'+i+'" opacity="0" style="display:none;visibility:hidden;pointer-events:none" aria-hidden="true">';
-    s+=rect(x,y,236,136,'var(--surface)','var(--line)',10);
+    s+=depthPanel(x,y,236,136,'var(--line)',10);
+    s+=rect(x,y,236,136,'none','var(--purple)',10,'data-validation-edge="true" stroke-width="1.2"');
     s+=text(x+12,y+18,task.title,'svg-label');
     s+='<foreignObject style="display:none;visibility:hidden" x="'+(x+6)+'" y="'+(y+25)+'" width="224" height="89"><div xmlns="http://www.w3.org/1999/xhtml" class="validation-media">';
     s+='<video style="display:none;visibility:hidden;opacity:0" data-validation-video="'+i+'" data-src="static/videos/explainer-wall/'+task.id+'.mp4" muted="" playsinline="" preload="none" poster="static/videos/explainer-wall/'+task.id+'.jpg" aria-label="'+task.detail+'"></video></div></foreignObject>';
@@ -700,7 +724,8 @@ function validationDetail() {
 }
 function updateValidation(svg) {
   const f=validationFrame(state.elapsed),wall=f.shrink>0;
-  svg.querySelector('#validation-origin').setAttribute('transform','translate('+(20*f.shrink)+' '+(70*f.shrink)+') scale('+(1-.7*f.shrink)+')');
+  const y=reducedMotion.matches?70*f.shrink:f.origin.y;
+  svg.querySelector('#validation-origin').setAttribute('transform','translate('+f.origin.x+' '+y+') scale('+f.origin.scale+')');
   for(const id of ['validation-heading','validation-pusht-frame'])svg.querySelector('#'+id).style.opacity=String(smooth((state.elapsed-9.6)/.5));
   svg.querySelectorAll('[data-validation-card]').forEach(n=>{
     const i=Number(n.dataset.validationCard),p=f.tasks[i].reveal;
@@ -708,6 +733,7 @@ function updateValidation(svg) {
     const slot=i+1,cx=134+(slot%3)*246,cy=117+Math.floor(slot/3)*153;
     const scale=reducedMotion.matches?1:f.tasks[i].scale,offset=reducedMotion.matches?0:f.tasks[i].offsetY;
     n.setAttribute('transform','translate('+(cx*(1-scale))+' '+(cy*(1-scale)+offset)+') scale('+scale+')');
+    n.style.setProperty('--arrival-strength',reducedMotion.matches?0:f.tasks[i].arrival);
     n.querySelector('[data-validation-open]').setAttribute('tabindex',p>.95?'0':'-1');
   });
   if($('#diagram-viewport').classList.contains('validation-expanded')!==wall)updateViewport();

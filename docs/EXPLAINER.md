@@ -17,6 +17,19 @@ to both the SVG container and its embedded video layer, avoiding premature poste
 display in browsers that composite HTML video separately from SVG opacity.
 Seeking backwards and re-entering the stage restore the same hidden state.
 
+The opening pair uses the same A/B colour keys in its latent points, distance
+readouts and execution windows. The distance rails share a common zero origin
+and scale; their lengths come from the recorded RMS distances. Outcome borders
+appear only after both action sequences finish. The subsequent diagnostic keeps
+its measured values fixed while revealing the comparison marks. Surface ribbons
+and shaded points are presentation effects, separate from the measured geometry.
+
+The final PushT window follows a shallow arc into its task-wall slot. Other task
+cards briefly accent their edges as they settle, then remain still and inspectable.
+The clips retain their original aspect ratios, playback times and click-to-open
+full comparisons. Reduced-motion mode omits the extra arc and edge pulse. All
+presentation states derive from the shared clock and support backward seeking.
+
 ## Narrated tour
 
 The purple **Narrated tour** button plays the authors' eight English voiceover

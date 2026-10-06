@@ -22,6 +22,18 @@ export function pairPhase(progress) {
     step: progress<=.22?0:progress<.82?1:2,
   };
 }
+// Presentation follows the existing evidence clock; no outcome is disclosed early.
+export function pairPresentation(progress) {
+  const ease=x=>{x=Math.max(0,Math.min(1,x));return x*x*(3-2*x);};
+  const phase=pairPhase(progress),handoff=ease((progress-.2)/.1);
+  return {
+    distanceReveal:latentIntro(progress).t,
+    geometryFocus:1-.16*handoff,
+    executionFocus:.84+.16*handoff,
+    outcome:phase.outcome,
+    diagnosticReveal:phase.diagnostic,
+  };
+}
 export function projectPoint(point, yaw, pitch=.35) {
   const [x,y,z]=point, a=x*Math.cos(yaw)+z*Math.sin(yaw), b=-x*Math.sin(yaw)+z*Math.cos(yaw);
   return [a,y*Math.cos(pitch)-b*Math.sin(pitch),y*Math.sin(pitch)+b*Math.cos(pitch)];
@@ -77,13 +89,24 @@ export function latentMarkup(pair,yaw,intro=1,animate=true) {
   let s='<defs><clipPath id="latent-field-clip"><rect x="18" y="91" width="333" height="176" rx="12"/></clipPath>';
   s+='<radialGradient id="latent-field-glow"><stop stop-color="var(--purple)" stop-opacity=".12"/><stop offset="1" stop-color="var(--purple)" stop-opacity="0"/></radialGradient>';
   s+='<radialGradient id="latent-wave-fade"><stop offset="0" stop-color="white"/><stop offset=".55" stop-color="white" stop-opacity=".9"/><stop offset="1" stop-color="white" stop-opacity="0"/></radialGradient>';
-  s+='<mask id="latent-wave-mask" maskUnits="userSpaceOnUse" x="18" y="91" width="333" height="176"><ellipse cx="183" cy="205" rx="170" ry="75" fill="url(#latent-wave-fade)"/></mask></defs>';
+  s+='<mask id="latent-wave-mask" maskUnits="userSpaceOnUse" x="18" y="91" width="333" height="176"><ellipse cx="183" cy="205" rx="170" ry="75" fill="url(#latent-wave-fade)"/></mask>';
+  colors.forEach((color,i)=>{
+    s+='<radialGradient id="pair-bead-'+i+'" cx=".28" cy=".22" r=".8"><stop stop-color="white"/><stop offset=".32" stop-color="'+color+'"/><stop offset="1" stop-color="'+labels[i]+'"/></radialGradient>';
+  });
+  s+='</defs>';
   s+='<g clip-path="url(#latent-field-clip)" aria-label="Illustrative latent-space context; A and B show measured goal distances">';
   s+='<ellipse cx="183" cy="187" rx="162" ry="84" fill="url(#latent-field-glow)"/>';
   // Extend well beyond the viewport and fade, so no finite rectangular rim appears.
   const wavePhase=animate?t:0;
   const floorAt=(x,z)=>latentWaveHeight(x,z,wavePhase);
   s+='<g mask="url(#latent-wave-mask)">';
+  // Three translucent strips give the illustrative field a surface, without
+  // changing the measured radii or implying a learned success manifold.
+  for(const z of [-.28,0,.28]){
+    const front=Array.from({length:49},(_,j)=>{const x=-.84+j*.035;return [x,floorAt(x,z),z];});
+    const back=Array.from({length:49},(_,j)=>{const x=.84-j*.035;return [x,floorAt(x,z+.07),z+.07];});
+    s+='<path d="'+curve([...front,...back])+'Z" fill="var(--accent)" opacity=".045"/>';
+  }
   for(let k=-12;k<=12;k++){
     for(let direction=0;direction<2;direction++){
       const points=Array.from({length:49},(_,j)=>{
@@ -132,7 +155,7 @@ export function latentMarkup(pair,yaw,intro=1,animate=true) {
       s+='<circle cx="'+n(x)+'" cy="'+n(y)+'" r="'+n(radius*(.8+.2*glow))+'" fill="'+colors[i]+'" opacity="'+n(opacity*(.3+.7*glow))+'"/>';
     }
     s+='<circle cx="'+n(x)+'" cy="'+n(y)+'" r="6.5" fill="none" stroke="'+labels[i]+'" stroke-width=".65" opacity="'+n(.2+.5*glow)+'"/>';
-    s+='<circle data-pair-point="'+label+'" cx="'+n(x)+'" cy="'+n(y)+'" r="4.7" fill="'+colors[i]+'" stroke="'+labels[i]+'" stroke-width=".8"/>';
+    s+='<circle data-pair-point="'+label+'" cx="'+n(x)+'" cy="'+n(y)+'" r="4.7" fill="url(#pair-bead-'+i+')" stroke="'+labels[i]+'" stroke-width=".8"/>';
     s+='<circle cx="'+n(x-1)+'" cy="'+n(y-1.2)+'" r="1.6" fill="white" opacity="'+n(.25+.65*glow)+'"/>';
     s+='<text x="'+n(x+(i===0?-12:12))+'" y="'+n(y-8)+'" text-anchor="'+(i===0?'end':'start')+'" class="svg-label" style="fill:'+labels[i]+'" paint-order="stroke" stroke="var(--panel)" stroke-width="3" stroke-linejoin="round">'+label+'</text></g>';
   });
