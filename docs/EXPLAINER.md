@@ -194,6 +194,18 @@ stage. Training supervision opens in a dialog.
 
 ## Playback and accessibility
 
+- Computational views use shallow, theme-aware material depth with front-facing
+  labels. In the evidence, relation and ordinal-lifting stages, emphasis follows
+  the active operation while retaining readable context. The selected attention
+  row lifts slightly from its plate; reduced motion suppresses that movement.
+- Descriptor pieces narrow, move into separate horizontal lanes, and then join
+  into the token. Their readable faces do not overlap during assembly. This
+  happens within the original packing interval, with unchanged vector values.
+- The ordinal-lifting view uses a fixed oblique projection of the illustrative
+  two-dimensional plane. Original locations remain as dashed reference markers,
+  target locations as outlines, and current futures as solid beads. All RMS radii
+  and native costs are calculated before this display projection; the projection
+  neither changes the selected action nor represents new measured embeddings.
 - Adjacent teaching stages carry the selected candidate from the previous output
   into the next input over 0.68 seconds, retaining its label and colour while the
   surrounding view settles. This handoff uses the shared playback clock, freezes
@@ -314,6 +326,12 @@ The motion refinement also draws on the object-continuity principle described
 in [OneTake](https://github.com/feitangyuan/onetake). Its implementation and assets
 are not copied or included. The refinements retain this page's existing playback
 clock, narration and recorded demonstrations rather than adding a film framework.
+
+The composition-first approach also draws on ChatCut's public
+[motion-graphics guidance](https://github.com/ChatCut-Inc/agent-plugin/blob/main/codex/skills/create-motion-graphics/SKILL.md):
+design a readable settled frame, direct attention to the current operation, and
+inspect intermediate states as well as endpoints. No ChatCut code, templates,
+media or service dependencies are included.
 
 Checks: `node --test tests/explainer-model.test.mjs` and
 `python3 scripts/check_site.py`. Preview using

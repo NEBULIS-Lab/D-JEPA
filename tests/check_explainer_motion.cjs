@@ -37,6 +37,15 @@ async function fresh(browser,base,theme,mobile=false,reducedMotion='no-preferenc
  try{
   for(const theme of ['dark','light']){
    const {context,page}=await fresh(browser,base,theme);
+   await page.locator('#chapters [data-stage="1"]').click();
+   for(const [phase,name] of [[.15,'descriptors'],[.48,'ranks'],[.70,'assembly'],[1,'tokens']]){
+    await progress(page,phase);await shot(page,theme+'-'+name);
+    const focus=await page.locator('[data-computation-zone]').evaluateAll(ns=>ns.map(n=>Number(n.style.opacity)));
+    assert.ok(focus.every(v=>v>=.6&&v<=1));
+    assert.equal(focus[phase<.28?0:phase<.57?1:2],1);
+   }
+   await page.locator('[data-sources="4"]').click();await progress(page,.7);await shot(page,theme+'-four-sources');
+   await page.locator('[data-sources="2"]').click();
    // A natural chapter boundary must carry the selected teaching candidate,
    // freeze on pause, then disappear completely when the viewer scrubs.
    await page.locator('#chapters [data-stage="1"]').click();await progress(page,.985);await page.locator('#play').click();
@@ -52,11 +61,24 @@ async function fresh(browser,base,theme,mobile=false,reducedMotion='no-preferenc
    // Rewinding recovers identical computed geometry, not an accumulated tween state.
    await progress(page,.9);await progress(page,.46);
    assert.equal(await page.locator('#detail-visual').innerHTML(),frozenScene);
+   await page.locator('.matrix-cell[data-row="3"][data-col="1"]').click();
+   assert.equal(await page.locator('#candidate-controls [data-candidate="3"]').getAttribute('aria-pressed'),'true');
+   await page.locator('#candidate-controls [data-candidate="0"]').click();
+   await progress(page,.96);await shot(page,theme+'-correction');
+   await page.locator('#chapters [data-stage="3"]').click();await progress(page,.9);await shot(page,theme+'-decision');
    await page.locator('#chapters [data-stage="4"]').click();
    await progress(page,.3);const before=await page.locator('[data-lift-point="0"]').getAttribute('cx');
    await progress(page,.55);assert.notEqual(await page.locator('[data-lift-point="0"]').getAttribute('cx'),before);
    await shot(page,theme+'-lifting');await progress(page,.79);await shot(page,theme+'-landing');
    await progress(page,1);await shot(page,theme+'-realized');
+   const finalCosts=await page.locator('[data-native-cost]').allTextContents();
+   assert.deepEqual(finalCosts,['0.020','0.082','0.184','0.327','0.510','0.735']);
+   await page.locator('#candidate-controls [data-candidate="4"]').click();
+   assert.deepEqual(await page.locator('[data-native-cost]').allTextContents(),finalCosts,'presentation selection must not change native costs');
+   const compare=page.locator('#compare-before');await compare.focus();await page.keyboard.down('Space');
+   assert.notDeepEqual(await page.locator('[data-native-cost]').allTextContents(),finalCosts);
+   await page.keyboard.up('Space');assert.deepEqual(await page.locator('[data-native-cost]').allTextContents(),finalCosts);
+   await page.locator('[data-lifting="transport"]').click();await progress(page,.6);await shot(page,theme+'-transport');
    await page.locator('#chapters [data-stage="5"]').click();await progress(page,0);
    assert.ok(await page.locator('[data-validation-card]').evaluateAll(ns=>ns.every(n=>getComputedStyle(n).display==='none')));
    await progress(page,12/26);await page.waitForTimeout(1200);await shot(page,theme+'-wall');
@@ -65,7 +87,7 @@ async function fresh(browser,base,theme,mobile=false,reducedMotion='no-preferenc
    assert.ok(await page.locator('.playback').evaluate(n=>n.getBoundingClientRect().bottom<=innerHeight+1));
    await context.close();
    const mobile=await fresh(browser,base,theme,true);
-   for(const stage of [2,4,5]){
+   for(const stage of [1,2,4,5]){
     await mobile.page.locator('#chapters [data-stage="'+stage+'"]').click();await progress(mobile.page,.6);
     assert.ok(await mobile.page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'phone must not overflow horizontally');
     await shot(mobile.page,theme+'-phone-'+stage);

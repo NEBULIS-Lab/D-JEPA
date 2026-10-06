@@ -2,6 +2,27 @@
 const clamp = x => Math.max(0, Math.min(1, x));
 const ease = x => { const t=clamp(x); return t*t*(3-2*t); };
 
+// Narrow, spread into separate lanes, then join: labels never cross each other.
+export function tokenAssemblyFrame(index, progress) {
+  const x=[543,607,671][index],width=[62,62,54][index],y=99+index*40;
+  return {x:550+(x-550)*ease((progress-.18)/.38),
+    y:y+(145-y)*ease((progress-.58)/.42),width:164+(width-164)*ease(progress/.28)};
+}
+
+// Presentation emphasis only; computational timing and values remain unchanged.
+export function computationFocus(stage, phase) {
+  const boundaries=stage===1?[.28,.57]:stage===2?[.30,.72]:[.26,.80];
+  const first=ease((phase-boundaries[0]+.035)/.07);
+  const second=ease((phase-boundaries[1]+.035)/.07);
+  return [1-.24*first,.76+.24*first-.24*second,.76+.24*second];
+}
+
+// A fixed orthographic tilt of the illustrative plane, not an embedding or metric.
+export function latentPlanePoint([x,y]) {
+  const c=Math.cos(-.22),s=Math.sin(-.22);
+  return [358+96*(c*x-s*y),191+96*.68*(s*x+c*y)];
+}
+
 // A short, clock-driven handoff between adjacent views of the same teaching candidate.
 export function canCarryCandidate(from, to, running) {
   return running && from>=1 && from<=3 && to===from+1;

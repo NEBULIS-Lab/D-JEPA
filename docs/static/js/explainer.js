@@ -5,7 +5,7 @@ import { VALIDATION_TASKS, validationFrame, setValidationVisibility, syncValidat
 import { pairPhase, latentMarkup, latentIntro, PAIR_INTRO_SECONDS, PAIR_STAGE_SECONDS, pairTimelinePhase, pairTimelineSeconds } from './explainer-pair.mjs';
 import { DIAGNOSTIC, problemPhase } from './explainer-problem.mjs';
 import { evidenceVector, evidencePhase } from './explainer-evidence.mjs';
-import { liftingProgress, liftingStep, liftingGeometry, decisionProgress, liftingCues, candidateCarryFrame, canCarryCandidate } from './explainer-motion.mjs';
+import { liftingProgress, liftingStep, liftingGeometry, decisionProgress, liftingCues, candidateCarryFrame, canCarryCandidate, computationFocus, latentPlanePoint, tokenAssemblyFrame } from './explainer-motion.mjs';
 import { sampleState, sceneMarkup, updateScenes } from './explainer-scenes.mjs';
 import { CANDIDATES, COSTS, example, attention, descriptor, realizedPoint, transportPoint } from './explainer-model.mjs';
 
@@ -39,6 +39,10 @@ const rect = (x, y, w, h, fill = 'var(--panel)', stroke = 'var(--line)', radius 
 const line = (x1, y1, x2, y2, stroke = 'var(--line)', extra = '') => `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${stroke}" ${extra}/>`;
 const circle = (cx, cy, r, fill = 'var(--accent)', extra = '') => `<circle cx="${cx}" cy="${cy}" r="${r}" fill="${fill}" ${extra}/>`;
 const path = (d, cls = 'detail-line', extra = '') => `<path d="${d}" class="${cls}" ${extra}/>`;
+const visualDefs = '<defs><linearGradient id="panel-depth" x1="0" y1="0" x2=".8" y2="1"><stop stop-color="var(--depth-top)"/><stop offset="1" stop-color="var(--surface)"/></linearGradient><radialGradient id="latent-bead" cx=".3" cy=".2" r=".8"><stop stop-color="var(--bead-light)"/><stop offset=".38" stop-color="var(--accent)"/><stop offset="1" stop-color="var(--purple)"/></radialGradient></defs>';
+const depthPanel = (x,y,w,h,accent='var(--line)',radius=9) =>
+  rect(x+3,y+5,w,h,'var(--depth-side)','none',radius)+rect(x,y,w,h,'url(#panel-depth)',accent,radius)
+  +line(x+radius,y+1,x+w-radius,y+1,'var(--depth-edge)','stroke-linecap="round"');
 const tokenMark = (i, x, y, selected = i === state.candidate, size = 11) => '<g data-token="'+i+'">' + circle(x, y, size, selected ? 'var(--purple-soft)' : 'var(--panel)', `stroke="${selected ? 'var(--accent)' : 'var(--line)'}"`) + text(x, y + 3.5, CANDIDATES[i], selected ? 'svg-small svg-accent' : 'svg-small', 'text-anchor="middle"') + '</g>';
 const candidateHit = (i, x, y, w, h, contents) => `<g class="candidate-mark" data-candidate="${i}" role="button" tabindex="0" aria-label="Trace candidate ${CANDIDATES[i]}"><rect class="candidate-hit" x="${x}" y="${y}" width="${w}" height="${h}" fill="transparent" rx="5"/>${contents}</g>`;
 
@@ -72,10 +76,11 @@ function evidenceDetail() {
     s+=text(x+12,28,String(i+1),'svg-small svg-accent')+text(x+29,28,label,'svg-small');
     s+='</g>';
   });
+  s+='<g data-computation-zone="0">';
   s+=text(26,65,'Within each predictive geometry','svg-label');
   for(let source=0;source<2;source++){
     const y=81+source*100, color=source===0?'var(--blue)':'var(--purple)', values=evidenceVector(selected,source);
-    s+=rect(18,y,227,91,'var(--surface)','var(--line)',9);
+    s+=depthPanel(18,y,227,91);
     s+=text(28,y+17,names[source],'svg-small')+text(231,y+17,'Candidate '+CANDIDATES[selected],'svg-tiny svg-accent','text-anchor="end"');
     s+=text(29,y+37,'Future','svg-tiny')+text(29,y+57,'− Goal','svg-tiny')+text(29,y+78,'LN(Δ)','svg-tiny');
     for(let j=0;j<8;j++){
@@ -87,7 +92,9 @@ function evidenceDetail() {
   }
   s+=text(27,291,'dᵐᵢ = LN(ẑᵐᵢ,H − zᵐgoal)','svg-mono');
   s+=text(27,308,'8 shown / 192 dimensions per model','svg-tiny');
+  s+='</g>';
   s+=line(255,60,255,309);
+  s+='<g data-computation-zone="1">';
   s+=text(274,65,'Order within each model','svg-label');
   const step=state.sources===2?117:59, x0=state.sources===2?279:272;
   Object.entries(COSTS).slice(0,state.sources).forEach(([key,costs],source)=>{
@@ -103,26 +110,30 @@ function evidenceDetail() {
   });
   s+=text(274,282,'rᵐᵢ = (rank − 1) / (K − 1)','svg-mono');
   s+=text(274,300,'Lower cost → earlier rank → smaller r','svg-tiny');
+  s+='</g>';
   s+=line(513,60,513,309);
+  s+='<g data-computation-zone="2">';
   s+=text(533,65,'Token for candidate '+CANDIDATES[selected],'svg-label svg-accent');
-  s+=rect(528,80,213,193,'var(--surface)','var(--line)',10);
+  s+=depthPanel(528,80,213,193);
   const parts=[['dᴸ · 192','var(--blue)'],['dᵀ · 192','var(--purple)'],[state.sources+' ranks','var(--gold)']];
   parts.forEach(([label,color],i)=>{
     s+='<g data-evidence-piece="'+i+'">';
+    s+='<path data-piece-side="'+i+'" fill="'+color+'" fill-opacity=".36"/>';
     s+='<rect data-piece-box="'+i+'" width="164" height="26" rx="5" fill="'+color+'" fill-opacity=".2" stroke="'+color+'"/>';
     s+='<text data-piece-label="'+i+'" y="17" class="svg-small" text-anchor="middle">'+label+'</text></g>';
   });
   s+='<g id="evidence-encoder"><path d="M634 175V215" class="trace-line"/>';
-  s+=rect(548,220,176,32,'var(--purple-soft)','var(--purple)',7);
+  s+=depthPanel(548,220,176,32,'var(--purple)',7);
   s+=text(636,240,'Shared encoder · '+(state.sources===2?'386':'388')+' → 64','svg-small svg-accent','text-anchor="middle"');
   s+='</g>';
   s+=text(535,292,'192 + 192 + '+state.sources+' = '+(state.sources===2?'386':'388'),'svg-mono');
   s+=text(535,308,'Token segments shown schematically','svg-tiny');
+  s+='</g>';
   s+='<g id="evidence-bank">';
   for(let i=0;i<6;i++){
     const x=31+i*122;
     s+='<g data-linked-candidate="'+i+'" data-evidence-output="'+i+'">';
-    s+=rect(x,323,109,27,i===selected?'var(--purple-soft)':'var(--surface)',i===selected?'var(--purple)':'var(--line)',7);
+    s+=depthPanel(x,323,109,27,i===selected?'var(--purple)':'var(--line)',7);
     s+=tokenMark(i,x+14,336,i===selected,8);
     s+=text(x+59,340,'64D token','svg-small','text-anchor="middle"');
     s+='</g>';
@@ -156,12 +167,12 @@ function updateEvidence(svg) {
       svg.querySelector('[data-evidence-value="'+source+'-'+id+'"]').textContent=phase.sort<1?value.toFixed(2):d.sourceRanks[key][id].toFixed(1);
     });
   });
-  const finalX=[543,607,671], finalW=[62,62,54];
   svg.querySelectorAll('[data-evidence-piece]').forEach(n=>{
-    const i=Number(n.dataset.evidencePiece), p=phase.pack;
-    n.setAttribute('transform','translate('+(550+(finalX[i]-550)*p)+' '+(99+i*40+(145-(99+i*40))*p)+')');
-    const w=164+(finalW[i]-164)*p;
+    const i=Number(n.dataset.evidencePiece),assembly=tokenAssemblyFrame(i,phase.pack);
+    n.setAttribute('transform','translate('+assembly.x+' '+assembly.y+')');
+    const w=assembly.width;
     svg.querySelector('[data-piece-box="'+i+'"]').setAttribute('width',w);
+    svg.querySelector('[data-piece-side="'+i+'"]').setAttribute('d','M0 23L4 29H'+(w+3)+'V5L'+w+' 1V24H0Z');
     svg.querySelector('[data-piece-label="'+i+'"]').setAttribute('x',w/2);
     n.style.opacity=String(.12+.88*(i<2?phase.difference:phase.sort));
   });
@@ -176,55 +187,64 @@ function updateEvidence(svg) {
 
 function relationsDetail() {
   const weights=attention(state.head,state.sources),mix=relationMix(state.candidate,state.head,state.sources);
-  let s='';
+  let s='',candidates='',matrix='',messages='';
   ['Compare candidates','Aggregate evidence','Bound the update'].forEach((label,i)=>{
     const x=16+i*247;
     s+='<g data-relation-step="'+i+'" role="button" tabindex="0" aria-label="'+label+'">';
     s+=rect(x,5,235,36,'var(--surface)','var(--line)',8,'data-relation-operation="'+i+'"');
     s+=text(x+12,28,String(i+1),'svg-small svg-accent')+text(x+29,28,label,'svg-small')+'</g>';
   });
-  s+=text(26,65,'Candidate tokens','svg-label');
-  s+=text(252,65,'Attention · head '+(state.head+1),'svg-label','text-anchor="middle"');
-  s+=text(438,65,'Evidence for '+CANDIDATES[state.candidate],'svg-label','text-anchor="middle"');
-  s+=text(650,65,'Bounded correction','svg-label','text-anchor="middle"');
   const x0=174,y0=93,cell=27;
   for(let i=0;i<6;i++){
     const y=107+i*27;
-    s+='<g data-linked-candidate="'+i+'">';
-    s+=tokenMark(i,36,y,i===state.candidate,10);
-    for(let j=0;j<8;j++)s+=rect(53+j*9,y-7,6,14,'var(--purple)','none',2,'opacity="'+(.25+.7*descriptor(i,0,j))+'"');
-    s+=path('M127 '+y+'H150','detail-line','data-query-link="'+i+'"');
-    s+='</g>';
-    s+=text(x0-12,y+3,CANDIDATES[i],'svg-small','text-anchor="middle"');
-    s+=text(x0+i*cell+12,84,CANDIDATES[i],'svg-small','text-anchor="middle"');
+    candidates+='<g data-linked-candidate="'+i+'" data-query-token="'+i+'">';
+    if(i===state.candidate)candidates+=depthPanel(22,y-14,115,25,'var(--purple)',6);
+    candidates+=tokenMark(i,36,y,i===state.candidate,10);
+    for(let j=0;j<8;j++)candidates+=rect(53+j*9,y-7,6,14,'var(--purple)','none',2,'opacity="'+(.25+.7*descriptor(i,0,j))+'"');
+    candidates+=path('M139 '+y+'H156','detail-line','data-query-link="'+i+'"');
+    candidates+='</g>';
+    matrix+=text(x0-12,y+3,CANDIDATES[i],'svg-small','text-anchor="middle"');
+    matrix+=text(x0+i*cell+12,84,CANDIDATES[i],'svg-small','text-anchor="middle"');
+    matrix+='<g data-matrix-row="'+i+'">';
+    if(i===state.candidate)matrix+=depthPanel(x0-4,y0+i*cell-3,167,29,'var(--purple)',6);
     for(let j=0;j<6;j++){
       const value=weights[i][j],selected=i===state.candidate;
-      s+='<g class="matrix-cell" role="button" tabindex="0" data-row="'+i+'" data-col="'+j+'" data-weight="'+value+'" aria-label="Trace query '+CANDIDATES[i]+', source '+CANDIDATES[j]+'">';
-      s+=rect(x0+j*cell,y0+i*cell,24,24,'var(--purple)',selected?'var(--accent)':'none',4,'fill-opacity="'+(.12+value*1.8)+'"');
-      if(selected)s+=text(x0+j*cell+12,y0+i*cell+16,value.toFixed(2),'svg-tiny','text-anchor="middle"');
-      s+='</g>';
+      matrix+='<g class="matrix-cell" role="button" tabindex="0" data-row="'+i+'" data-col="'+j+'" data-weight="'+value+'" aria-label="Trace query '+CANDIDATES[i]+', source '+CANDIDATES[j]+'">';
+      matrix+=rect(x0+j*cell,y0+i*cell,24,24,'var(--purple)',selected?'var(--accent)':'none',4,'fill-opacity="'+(.12+value*1.8)+'"');
+      if(selected)matrix+=text(x0+j*cell+12,y0+i*cell+16,value.toFixed(2),'svg-tiny matrix-value','text-anchor="middle"');
+      matrix+='</g>';
     }
+    matrix+='</g>';
     const ey=103+i*29,w=mix.weights[i];
-    s+='<g data-linked-candidate="'+i+'" data-message-source="'+i+'">';
-    s+=tokenMark(i,368,ey,i===state.candidate,8);
-    s+=rect(384,ey-5,Math.max(2,w*95),10,'var(--purple)','none',3);
-    s+=text(448,ey+3,w.toFixed(2),'svg-tiny','text-anchor="end"');
-    s+='<path data-message-path="'+i+'" d="M457 '+ey+'C492 '+ey+' 492 114 548 114" fill="none" stroke="var(--purple)" stroke-width="'+(1+w*5)+'" stroke-opacity=".25"/>';
-    s+='<circle data-message-pulse="'+i+'" r="'+(2+w*6)+'" fill="var(--accent)"/>';
-    s+='<circle data-message-arrival="'+i+'" cx="548" cy="114" r="5" fill="none" stroke="var(--accent)" stroke-width="1.4" opacity="0"/>';
-    s+='</g>';
+    messages+='<g data-linked-candidate="'+i+'" data-message-source="'+i+'">';
+    messages+=tokenMark(i,368,ey,i===state.candidate,8);
+    messages+=rect(384,ey-5,Math.max(2,w*95),10,'var(--purple)','none',3);
+    messages+=text(448,ey+3,w.toFixed(2),'svg-tiny','text-anchor="end"');
+    messages+='<path data-message-path="'+i+'" d="M457 '+ey+'C492 '+ey+' 492 114 548 114" fill="none" stroke="var(--purple)" stroke-width="'+(1+w*5)+'" stroke-opacity=".25"/>';
+    messages+='<circle data-message-pulse="'+i+'" r="'+(2+w*6)+'" fill="url(#latent-bead)"/>';
+    messages+='<circle data-message-arrival="'+i+'" cx="548" cy="114" r="5" fill="none" stroke="var(--accent)" stroke-width="1.4" opacity="0"/>';
+    messages+='</g>';
   }
+  s+='<g data-computation-zone="0">';
+  s+=text(26,65,'Candidate tokens','svg-label');
+  s+=text(252,65,'Attention · head '+(state.head+1),'svg-label','text-anchor="middle"');
+  s+=depthPanel(168,89,171,170)+candidates+matrix;
   s+=text(28,287,'Shared 64D tokens','svg-tiny');
-  s+=text(180,287,'Select a row to trace its query','svg-tiny');
-  s+=rect(554,79,186,62,'var(--surface)','var(--line)',9);
+  s+=text(180,287,'Selected query · '+CANDIDATES[state.candidate],'svg-small svg-accent');
+  s+='</g><g data-computation-zone="1">';
+  s+=text(438,65,'Evidence for '+CANDIDATES[state.candidate],'svg-label','text-anchor="middle"');
+  s+=text(647,65,'Context → correction','svg-label','text-anchor="middle"');
+  s+=messages;
+  s+=depthPanel(554,79,186,62,'var(--purple)');
   s+=text(647,97,'Σ αⱼvⱼ · head context','svg-small','text-anchor="middle"');
   for(let j=0;j<8;j++){
     s+='<rect data-mixed-cell="'+j+'" x="'+(568+j*20)+'" y="107" width="15" height="19" rx="3" fill="var(--purple)" fill-opacity=".08"/>';
   }
+  s+='</g><g data-computation-zone="2">';
   s+='<path id="relation-head-link" d="M562 141V158" class="trace-line" pathLength="1"/>';
   s+=text(647,153,'Combine heads · residual / FFN','svg-tiny','text-anchor="middle"');
   s+='<g id="relation-head">';
-  s+=rect(554,160,186,66,'var(--purple-soft)','var(--purple)',9);
+  s+=depthPanel(554,164,186,62,'var(--purple)',9);
   s+=text(647,181,'Shared low-rank head','svg-small','text-anchor="middle"');
   s+=text(647,209,'64 → 8 → 1','svg-title svg-accent','text-anchor="middle"');
   s+='</g>';
@@ -236,6 +256,7 @@ function relationsDetail() {
   s+=text(570,287,'−'+state.bound.toFixed(2),'svg-tiny','text-anchor="middle"')+text(726,287,'+'+state.bound.toFixed(2),'svg-tiny','text-anchor="middle"');
   s+='<text id="relation-delta" x="648" y="310" class="svg-label svg-accent" text-anchor="middle"></text>';
   s+=tokenMark(state.candidate,725,307,true,8);
+  s+='</g>';
   s+=rect(16,323,726,28,'var(--purple-soft)','none',8);
   s+='<text id="relation-takeaway" x="379" y="341" class="svg-small svg-accent" text-anchor="middle"></text>';
   return s;
@@ -249,7 +270,14 @@ function updateRelations(svg) {
   });
   svg.querySelectorAll('.matrix-cell').forEach(n=>{
     const i=Number(n.dataset.row),reveal=smooth((phaseProgress-i*.027)/.16);
-    n.style.opacity=String((i===state.candidate?1:.45)*(.12+.88*reveal));
+    n.style.opacity=String((i===state.candidate?1:.64)*(.2+.8*reveal));
+  });
+  svg.querySelectorAll('[data-matrix-row]').forEach(n=>{
+    const chosen=Number(n.dataset.matrixRow)===state.candidate;
+    n.setAttribute('transform','translate(0 '+(chosen&&!reducedMotion.matches?-2*p.compare:0)+')');
+  });
+  svg.querySelectorAll('[data-query-token]').forEach(n=>{
+    n.style.opacity=Number(n.dataset.queryToken)===state.candidate?'1':'.72';
   });
   svg.querySelectorAll('[data-query-link]').forEach(n=>{
     const selected=Number(n.dataset.queryLink)===state.candidate;
@@ -274,7 +302,7 @@ function updateRelations(svg) {
     n.setAttribute('fill-opacity',.12+.88*Math.abs(value));
     n.setAttribute('data-value',value);
   });
-  svg.querySelector('#relation-head').style.opacity=String(.12+.88*p.head);
+  svg.querySelector('#relation-head').style.opacity=String(.3+.7*p.head);
   svg.querySelector('#relation-head-link').style.strokeDasharray='1';
   svg.querySelector('#relation-head-link').style.strokeDashoffset=1-p.head;
   const delta=example(state).delta[state.candidate]*p.head,x=648+(state.bound?delta/state.bound:0)*78;
@@ -356,6 +384,7 @@ function ordinalLiftingDetail() {
     s+=rect(x,5,171,38,i===active?'var(--purple-soft)':'var(--surface)',i===active?'var(--purple)':'var(--line)',9);
     s+=text(x+11,28,String(i+1),i===active?'svg-small svg-accent':'svg-small')+text(x+29,28,label,'svg-small')+'</g>';
   });
+  s+='<g data-computation-zone="0">';
   s+=text(26,77,'Aligned order','svg-label');
   d.finalOrder.forEach((id,index)=>{
     const y=109+index*28,chosen=id===state.candidate;
@@ -377,46 +406,67 @@ function ordinalLiftingDetail() {
   s+=circle(27+145*selected.target*convert,307,4.5,'var(--accent)','data-lift-radius-bead="true"');
   s+=text(27,329,'0','svg-tiny')+text(172,329,'1','svg-tiny','text-anchor="end"');
   s+=text(26,351,'Aligned rank sets the target radius.','svg-tiny');
+  s+='</g>';
 
-  const cx=358,cy=185,scale=90;
+  const cx=358,cy=191;
+  s+='<g data-computation-zone="1">';
   s+=text(cx,77,'Rewrite the terminal future','svg-label','text-anchor="middle"');
+  const ringPath=radius=>Array.from({length:65},(_,i)=>{
+    const angle=i*Math.PI/32,[x,y]=latentPlanePoint([Math.cos(angle)*radius,Math.sin(angle)*radius]);
+    return (i?'L':'M')+x.toFixed(3)+' '+y.toFixed(3);
+  }).join(' ')+'Z';
+  const outer=ringPath(1.32);
+  s+='<g data-latent-plane="true" pointer-events="none">';
+  s+='<ellipse cx="'+cx+'" cy="'+(cy+20)+'" rx="136" ry="80" fill="var(--depth-side)" opacity=".5"/>';
+  s+='<path d="'+outer+'" transform="translate(0 8)" fill="var(--depth-side)" stroke="var(--line)"/>';
+  s+='<path d="'+outer+'" fill="url(#panel-depth)" stroke="var(--line)"/>';
+  for(let i=0;i<6;i++){
+    const theta=i*Math.PI/6,[ax,ay]=latentPlanePoint([1.3*Math.cos(theta),1.3*Math.sin(theta)]),[bx,by]=latentPlanePoint([-1.3*Math.cos(theta),-1.3*Math.sin(theta)]);
+    s+=line(ax,ay,bx,by,'var(--line)','opacity=".55"');
+  }
   [1,2,3,4,5,6].forEach(rank=>{
     const chosen=rank===selected.rank;
-    s+=circle(cx,cy,Math.SQRT2*rank/7*scale,'none','stroke="'+(chosen?'var(--purple)':'var(--line)')+'" stroke-width="'+(chosen?1.1:1)+'" stroke-dasharray="'+(chosen?'2 3':'2 6')+'" opacity="'+(chosen?(.3+.55*convert):.85)+'"');
+    s+='<path d="'+ringPath(Math.SQRT2*rank/7)+'" fill="none" stroke="'+(chosen?'var(--accent)':'var(--line)')+'" stroke-width="'+(chosen?1.4:.8)+'" opacity="'+(chosen?(.3+.65*convert):.8)+'"/>';
   });
-  s+=circle(cx,cy,Math.SQRT2*selected.target*scale,'var(--purple)','opacity="'+(.035*convert)+'"');
-  for(const g of geometry){
+  s+='<path d="'+ringPath(Math.SQRT2*selected.target)+'" fill="var(--purple)" opacity="'+(.06*convert)+'"/></g>';
+  const drawn=[...geometry].sort((a,b)=>{
+    if(a.id===state.candidate)return 1;if(b.id===state.candidate)return -1;
+    return realizedPoint(a.id,a.rank)[1]-realizedPoint(b.id,b.rank)[1];
+  });
+  for(const g of drawn){
     const i=g.id,from=realizedPoint(i,1+d.base[i]*5),to=realizedPoint(i,d.ordinal[i]);
     const point=[from[0]+(to[0]-from[0])*state.progress,from[1]+(to[1]-from[1])*state.progress];
-    const x=cx+point[0]*scale,y=cy+point[1]*scale,chosen=i===state.candidate;
+    const [x,y]=latentPlanePoint(point),[fx,fy]=latentPlanePoint(from),[tx,ty]=latentPlanePoint(to),chosen=i===state.candidate;
     s+='<g data-linked-candidate="'+i+'" data-latent="'+i+'" data-candidate="'+i+'" role="button" tabindex="0" aria-label="Trace future '+CANDIDATES[i]+'">';
-    s+=line(cx,cy,cx+to[0]*scale,cy+to[1]*scale,chosen?'var(--purple)':'var(--line)','stroke-dasharray="2 4" opacity=".65"');
-    s+=circle(cx+from[0]*scale,cy+from[1]*scale,4,'none','stroke="var(--blue)" opacity=".75"');
-    s+=circle(cx+to[0]*scale,cy+to[1]*scale,6.5,'none','stroke="var(--purple)" opacity="'+(.75*convert)+'"');
+    s+=line(cx,cy,tx,ty,chosen?'var(--purple)':'var(--line)','stroke-dasharray="2 4" opacity=".65"');
+    s+=circle(fx,fy,4.5,'none','stroke="var(--blue)" stroke-dasharray="2 2" opacity=".7"');
+    s+=circle(tx,ty,7,'none','stroke="var(--accent)" opacity="'+(.8*convert)+'"');
     if(chosen){
       // The target exists before the point moves; a single landing cue settles
       // before the native-distance scan. Every cue follows the shared clock.
-      s+=circle(cx+to[0]*scale,cy+to[1]*scale,9+5*cues.arrival,'none','stroke="var(--gold)" stroke-width="1.3" opacity="'+(reducedMotion.matches?0:.7*cues.arrival)+'" data-lift-landing="true"');
+      s+=circle(tx,ty,9+5*cues.arrival,'none','stroke="var(--gold)" stroke-width="1.3" opacity="'+(reducedMotion.matches?0:.7*cues.arrival)+'" data-lift-landing="true"');
       s+=line(cx,cy,x,y,'var(--purple)','stroke-width="1.5"');
-      s+=line(cx+from[0]*scale,cy+from[1]*scale,x,y,'var(--accent)','stroke-width="3" opacity=".45"');
+      s+=line(fx,fy,x,y,'var(--accent)','stroke-width="3" opacity=".45"');
       if(state.progress>0&&state.progress<1){
         for(let tail=1;tail<=3;tail++){
           const p=Math.max(0,state.progress-tail*.055);
-          s+=circle(cx+(from[0]+(to[0]-from[0])*p)*scale,cy+(from[1]+(to[1]-from[1])*p)*scale,4-tail*.65,'var(--purple)','opacity="'+(.4-tail*.08)+'"');
+          const [px,py]=latentPlanePoint([from[0]+(to[0]-from[0])*p,from[1]+(to[1]-from[1])*p]);
+          s+=circle(px,py,4-tail*.65,'var(--purple)','opacity="'+(.4-tail*.08)+'"');
         }
       }
       s+=circle(x,y,10,'var(--purple)','opacity="'+(.14+.08*Math.sin(Math.PI*state.progress))+'"');
     }
-    s+=circle(x,y,chosen?5.5:3.5,chosen?'var(--accent)':'var(--blue)','stroke="var(--panel)" stroke-width="1.2" data-lift-point="'+i+'"');
+    s+='<ellipse cx="'+x+'" cy="'+(y+5)+'" rx="'+(chosen?8:5)+'" ry="2.5" fill="var(--depth-side)"/>';
+    s+=circle(x,y,chosen?6:4,chosen?'url(#latent-bead)':'var(--blue)','stroke="var(--panel)" stroke-width="1" data-lift-point="'+i+'"');
     s+=text(x+9,y+(chosen?4:-8),CANDIDATES[i],chosen?'svg-label svg-accent':'svg-small');
     s+='</g>';
   }
-  s+=circle(cx,cy,3.5,'var(--gold)')+text(cx-6,cy+17,'goal','svg-tiny svg-gold','text-anchor="end"');
+  s+=circle(cx,cy,8,'var(--gold)','opacity=".13"')+circle(cx,cy,3.5,'var(--gold)')+text(cx-6,cy+17,'goal','svg-tiny svg-gold','text-anchor="end"');
   s+=text(cx,297,'Same direction · radius '+fmt(selected.radius),'svg-small svg-accent','text-anchor="middle"');
   for(let step=0;step<5;step++){
     const x=229+step*53,last=step===4;
     s+='<g data-future-step="'+step+'">';
-    s+=rect(x,313,47,27,last?'var(--purple-soft)':'var(--surface)',last?'var(--purple)':'var(--line)',5);
+    s+=depthPanel(x,313,47,27,last?'var(--purple)':'var(--line)',5);
     s+=text(x+6,330,'t'+(step+1),last?'svg-small svg-accent':'svg-small');
     for(let j=0;j<3;j++){
       // Teaching components: earlier cards stay fixed; only the terminal
@@ -427,7 +477,7 @@ function ordinalLiftingDetail() {
     s+='</g>';
   }
   s+=text(cx,354,'t1–t4 retained · only t5 changes','svg-tiny','text-anchor="middle"');
-
+  s+='</g><g data-computation-zone="2">';
   s+=text(548,77,'Native-distance readout','svg-label');
   d.finalOrder.forEach((id,index)=>{
     const g=geometry[id],y=109+index*28,chosen=id===state.candidate,win=id===nearest;
@@ -441,11 +491,12 @@ function ordinalLiftingDetail() {
     s+=text(733,y+1,fmt(g.cost),'svg-mono','text-anchor="end" data-native-cost="'+id+'"');
     s+='</g>';
   });
-  s+=rect(541,274,202,35,'var(--purple-soft)','var(--line)',8);
+  s+=depthPanel(541,274,202,35,'var(--purple)',8);
   s+=text(552,296,'Nearest future','svg-small');
   s+=text(728,297,CANDIDATES[nearest],'svg-title svg-accent','text-anchor="end" data-native-choice="true"');
   s+=text(548,329,'ρ² = '+fmt(selected.cost),'svg-mono svg-accent','data-lift-readout="2"');
   s+=text(548,351,read>=1?'Native order matches aligned order.':'Read the updated goal distances.','svg-tiny');
+  s+='</g>';
   return s;
 }
 function diagnosticDetail() {
@@ -709,14 +760,14 @@ function movingDecision() {
     s+=text(199,y+4,fmt(data.base[id]),'svg-mono','text-anchor="end"');
     s+='<path data-rank-path="'+id+'" data-linked-candidate="'+id+'" class="detail-line"/>';
     s+='<g data-score-row="'+id+'" data-linked-candidate="'+id+'">';
-    s+=rect(544,-17,184,33,id===data.winner?'var(--purple-soft)':'var(--surface)','none',7);
+    s+=depthPanel(544,-17,184,33,id===data.winner?'var(--purple)':'var(--line)',7);
     s+=tokenMark(id,561,0,id===state.candidate,10);
     s+='<rect data-aligned-bar="'+id+'" x="581" y="-6" width="4" height="12" rx="3" fill="'+(id===data.winner?'var(--purple)':'var(--blue)')+'"/>';
     s+='<text data-aligned-value="'+id+'" x="715" y="4" class="svg-mono" text-anchor="end"></text></g>';
     s+=rect(321,y-12,88,24,'var(--panel)','none',6);
     s+=text(365,y+4,(data.delta[id]>0?'+':'')+fmt(data.delta[id]),'svg-mono svg-accent','text-anchor="middle"');
   });
-  s+=rect(26,314,707,35,'var(--surface)','var(--line)',8);
+  s+=depthPanel(26,314,707,35,'var(--line)',8);
   s+='<text id="gate-message" x="380" y="336" class="svg-mono" text-anchor="middle"></text>';
   return s;
 }
@@ -802,6 +853,7 @@ function chapterCopy() {
     chapter.description='Read the aligned rank, set its target radius, then move the terminal future along its original direction. The first four steps stay fixed. Watch the native-distance bars change and recover the same aligned order.';
     chapter.visual='Representation lifting · between aligned ranks and native-distance planning';
     chapter.caption='Follow a candidate: rank → radius → terminal latent → native distance. Click a numbered operation to play its transformation.';
+    chapter.fact+=' The plane is an oblique illustration; RMS distances are computed before display projection.';
   }
   if(state.stage===4&&state.lifting==='transport'){
     chapter.title='Refine the future, step by step.';
@@ -896,7 +948,7 @@ function renderDiagram(transition=false) {
   releaseValidationVideos(svg);
   let renderer=state.stage===0?problemDetail:state.stage===5?(isRecorded()?validationDetail:schematicScenes)
     :[null,evidenceDetail,relationsDetail,movingDecision,liftingDetail][state.stage];
-  svg.innerHTML='<g data-scene-content="true">'+renderer()+'</g>';
+  svg.innerHTML=visualDefs+'<g data-scene-content="true">'+renderer()+'</g>';
   updateViewport();
   $('#matrix-tooltip').hidden=true;
   updateAnimation();
@@ -1012,6 +1064,10 @@ function updateAnimation() {
   } else if(state.stage===4){
     svg.querySelector('[data-scene-content]').innerHTML=liftingDetail();
   }
+  const focus=computationFocus(state.stage,state.comparing?0:phaseProgress);
+  svg.querySelectorAll('[data-computation-zone]').forEach(n=>{
+    n.style.opacity=focus[Number(n.dataset.computationZone)];
+  });
   applyLinkedFocus();
   updateCandidateCarry();
   $('#step-progress').value=phaseProgress;
