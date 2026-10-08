@@ -124,6 +124,16 @@ definitions and task-specific label semantics.
 
 </details>
 
+### Construct candidate actions
+
+[Candidate generation](docs/CANDIDATE_GENERATION.md) provides the recorded
+sampling, transformation and PushT retention rules, with task-specific input
+units, deterministic seeds and a CPU-only runnable example:
+
+```bash
+python examples/generate_candidates.py --output outputs/candidate-example
+```
+
 ### Train a task-local alignment module
 
 ```bash

@@ -1,0 +1,4 @@
+# Five controls from [20,4] replay actions in the original endpoint coordinates.
+# All 63 transformations are selectable, including identity/replay anchor 1.
+profile: granular
+difficulty: standard

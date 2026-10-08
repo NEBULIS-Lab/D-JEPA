@@ -1,0 +1,3 @@
+# 256 quantized proposals, including reference 0. Use the retain command after
+# TD-JEPA native prediction to obtain the 63 selectable actions.
+profile: pusht-confirmation

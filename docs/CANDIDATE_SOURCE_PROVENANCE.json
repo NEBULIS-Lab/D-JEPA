@@ -1,0 +1,33 @@
+{
+  "scope": "Source-faithful extraction of recorded candidate construction; no outcomes or experiment results changed.",
+  "profiles": {
+    "pusht-confirmation": {
+      "implementation": "src/djepa/candidates/controls.py",
+      "source_sampler_sha256": "c0cb0d403983962ec6786f3d9ef68700c771d165c29c9083d342ba1066c66d74",
+      "source_unique_builder_sha256": "8fd2d35b5a1feb1135c1e52d7ca352d6c0f49b317ef753cb61a4ade7a8575772",
+      "source_retention_sha256": "7fe99c6e8b17d7925140516ac653774c78c4077dc578d82eb13cec2fb18c61c9",
+      "adaptation": "Public names and validation; retention omits an outcome-pair branch whose two members are already in the retained top 16. Resulting IDs are unchanged."
+    },
+    "reference-control": {
+      "implementation": "src/djepa/candidates/controls.py",
+      "source_builder_sha256": "d94deb4ff464e06f4725db0356ad81478e4c4572fe787b4350bcbac185dacda9",
+      "adaptation": "Extract per-family RNG draws, source-dtype deduplication and ID order from the recorded control builder."
+    },
+    "visual-shape": {
+      "implementation": "src/djepa/candidates/controls.py",
+      "source_builder_sha256": "27e256b8201a57e787e609da81a9325bea2cce8dd5cbab3644152e239e98da12",
+      "adaptation": "Preserve pixel normalization, whole-bank seed retries and float16-to-float32 quantization."
+    },
+    "granular": {
+      "implementation": "src/djepa/candidates/granular.py",
+      "source_builder_sha256": "d850ad81b8290f2737ed9150c689afb66c7d26979b3945dcf82e95e5ce4009c7",
+      "source_grid_sha256": "df977f91c60c0a50a9b5ba93b5f41ec0f3593d643e70a5e46908e86d8a0b5cb9",
+      "adaptation": "Retain transformation arithmetic, ID order, difficulty multipliers and the immutable hash namespace; omit simulator/publication bookkeeping."
+    }
+  },
+  "verification": {
+    "unit_tests": "tests/test_candidate_generation.py",
+    "source_parity_checks": 30,
+    "comparison": "Exact array equality against original functions over three seeds, two control dtypes, three Granular tiers and three replay offsets; PushT retention additionally compared under three different label patterns."
+  }
+}

@@ -9,7 +9,8 @@ Each split contains `inputs.npz`, optional `labels.npz`, and `metadata.json`.
 NPZ arrays are numeric, Boolean or fixed-width strings; use `allow_pickle=False`.
 
 - `candidate_ids`: original literal IDs, unique within a set; never infer identity
-  from array position. Reference actions are excluded from deployable sets.
+  from array position. Reference ID 0 is excluded from reference-centred control
+  sets; Granular retains its identity/replay anchor ID 1.
 - `features`, `base_scores`: inference-ready relation inputs where exported.
 - `candidate_actions`: task-specific actions; do not mix their units or horizons.
 - `start_ids`, `episode_ids` or `source_identity_sha256`: original identity fields.
@@ -39,6 +40,10 @@ The fixed PushT/PushObj action-selection evaluations execute 25 controls,
 closed-loop episodes. Reacher and Granular keep their own task-specific horizons
 and success metrics. The 63-candidate budget is a reported evaluation choice,
 not a universal model requirement.
+
+The [candidate-generation guide](CANDIDATE_GENERATION.md) gives executable
+construction and retention commands, numerical precision rules, reference
+sources and inputs needed for new starts.
 
 The main PushT independent archive retains both `local_candidate_positions` from
 the execution input release and original `candidate_ids`. Its `start_ids` are

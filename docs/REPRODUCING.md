@@ -14,6 +14,14 @@ bash scripts/smoke_test.sh
 `pyproject.toml` is the dependency authority; `requirements.txt` delegates to it.
 No site-specific runtime settings or accelerator indices are required.
 
+## Construct candidates for new inputs
+
+See [candidate generation](CANDIDATE_GENERATION.md) for the reference-centred
+control samplers, Granular transformation grid and PushT native-cost retention.
+The guide also links the existing VLA, CEM and driving proposal interfaces.
+`python examples/generate_candidates.py --output outputs/candidate-example`
+exercises all four simulation profiles on CPU using synthetic inputs.
+
 ## Download
 
 ```bash

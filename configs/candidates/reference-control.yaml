@@ -1,0 +1,3 @@
+# Reacher and Cube: source-dtype [25,D] controls in [-1,1].
+# CLI excludes reference 0; per-family refill produces 63 selectable actions.
+profile: reference-control
