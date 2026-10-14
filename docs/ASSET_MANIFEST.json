@@ -463,10 +463,10 @@
   },
   {
     "path": "static/data/decision_local_ranking.json",
-    "sha256": "a0edb533593f3c520557e1b7357d458fcdd227a6bcab5a69f44b6bdfb0b880cb",
-    "bytes": 8142,
+    "sha256": "b302881e95bdd5cb05e0ef4a4a7c08399a9fab4608df513364a91327dfa4f9e2",
+    "bytes": 3797,
     "source_identity": "sha256:a0edb533593f3c520557e1b7357d458fcdd227a6bcab5a69f44b6bdfb0b880cb",
-    "transformation": "Byte-identical current Figure 2 export.",
+    "transformation": "Metric definitions and values; plotting metadata omitted.",
     "evidence": "Recorded distance conflict; 96-start audit margins and pair inversions; original correlation coefficients unchanged."
   }
 ]

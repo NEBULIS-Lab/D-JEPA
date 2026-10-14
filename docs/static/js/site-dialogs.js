@@ -42,7 +42,7 @@
   dialog.addEventListener('close', () => { request += 1; opener?.focus({preventScroll:true}); });
   document.querySelectorAll('a[href]').forEach(link => {
     const timeline = link.textContent.includes('View the timeline');
-    const metrics = link.textContent.includes('Metric definitions and source identities');
+    const metrics = link.textContent.includes('Metric definitions');
     if (!timeline && !metrics) return;
     link.setAttribute('aria-haspopup', 'dialog');
     link.setAttribute('aria-controls', 'evidence-dialog');
@@ -80,21 +80,10 @@
           grid.append(card);
         });
         body.append(grid);
-        const provenance = element('details', '', 'evidence-provenance');
-        provenance.append(element('summary', 'Source identities and exact definitions'));
-        const list = document.createElement('ul');
-        data.sources.forEach(source => {
-          const item = document.createElement('li');
-          item.append(element('span', source.id));
-          Object.entries(source).filter(([key]) => key !== 'id').forEach(([key,value]) =>
-            item.append(element('code', key + ': ' + (typeof value === 'object' ? JSON.stringify(value) : value))));
-          list.append(item);
-        });
-        const download = element('a', 'Download the machine-readable definitions');
+        const download = element('a', 'Download metric data (JSON)');
         download.href = link.href;
         download.download = 'decision_local_ranking.json';
-        provenance.append(list, download);
-        body.append(provenance);
+        body.append(download);
       } catch (_) {
         if (id === request && dialog.open) body.replaceChildren(element('p', 'The definitions could not be loaded. Please close the viewer and try again.'));
       }
