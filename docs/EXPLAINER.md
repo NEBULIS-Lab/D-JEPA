@@ -49,7 +49,7 @@ Play tour or the header's close control exits narrated mode. Space toggles the
 active mode, and browser-tab visibility changes pause playback.
 
 The audio files in `static/audio/narration/` are unchanged author-supplied MP3s.
-`static/data/explainer-narration.json` contains their hashes, actual durations,
+`static/data/explainer-narration.json` contains audio filenames, durations,
 sentence boundaries and visual keyframes. Word timestamps were matched to the
 exact supplied script, then sentence boundaries and cue transitions checked;
 the segments were not divided into equal-duration subtitle chunks. Files load
@@ -58,7 +58,7 @@ service, model download or browser transcription is involved.
 
 `explainer-narration-model.mjs` implements the pure time mapping;
 `explainer-narration.mjs` manages audio, captions and mode transitions. The
-narration tests check the source hashes, unique segments, sentence timing,
+narration tests check audio consistency, unique segments, sentence timing,
 visual holds, mechanism selection and preserved task-preview timing.
 
 ## Six stages
@@ -155,7 +155,7 @@ smooth playback between recorded states; no new actions, physics rollouts or
 outcomes are generated. The common viewport, goal pose, shape geometry and
 original outcomes are retained. Colours follow the project palette.
 
-The compact JSON stores source filenames and SHA-256 hashes. Its export tool is:
+The compact JSON stores the recorded motion and source filenames. Export it with:
 
 ```bash
 python scripts/export_explainer_trace.py /path/to/recorded/case \
@@ -176,7 +176,7 @@ goal-relative latents. Camera orientation is illustrative, not a learned 3D
 embedding. Projected screen lengths vary with the view; numeric radii remain fixed.
 
 `static/data/explainer-pair.json` records scores, metric definition, candidate IDs,
-outcomes, trace hashes and source dataset keys. Re-export from an existing case
+outcomes and source dataset keys. Re-export from an existing case
 and its corresponding compact pool:
 
 ```bash
@@ -300,12 +300,12 @@ stage. Training supervision opens in a dialog.
 - `static/js/explainer-problem.mjs`: measured diagnostic endpoints and bounded
   fallback shortlist-reveal timing; no interpolated statistics.
 - `static/js/explainer-pair.mjs`: radial 3D projection and paired-replay timing.
-- `static/data/explainer-pair.json`: verified latent costs, radii and pair provenance.
+- `static/data/explainer-pair.json`: latent costs, radii and paired candidate information.
 - `static/js/explainer-validation.mjs`: task-wall entrance timing and video-clock
   synchronization. Stage 06 lasts 26 seconds; its first eight seconds retain the
   original PushT playback timing.
 - `static/videos/explainer-wall/`: lightweight camera-focused previews and a
-  provenance manifest. Reacher, Granular and shape previews retain baseline/D-JEPA
+  clip index. Reacher, Granular and shape previews retain baseline/D-JEPA
   camera panes and omit peripheral text; shape omits the middle fusion pane.
   Bimanual video retains both camera panes; driving retains recorded camera
   context and simulated trajectories. Baseline is left and D-JEPA is right.
@@ -319,7 +319,7 @@ stage. Training supervision opens in a dialog.
 - `static/js/explainer-evidence.mjs`: illustrative vector subtraction, LayerNorm
   and evidence-stage timing. Eight of 192 descriptor components are displayed.
 - `static/js/explainer-scenes.mjs`: interpolation and SVG recorded-state replay.
-- `static/data/explainer-pusht.json`: compact recorded states and provenance.
+- `static/data/explainer-pusht.json`: compact recorded states and source information.
 - `static/css/explainer.css`: responsive workbench and both themes.
 
 Interaction concepts draw on

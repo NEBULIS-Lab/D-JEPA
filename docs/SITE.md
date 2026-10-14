@@ -56,8 +56,7 @@ evaluation populations match the manuscript, including the separate independent
 and mechanism evaluations. Table notes are enclosed in `tfoot` with a closing rule.
 
 RoboTwin and driving use byte-identical copies of the current manuscript PNGs,
-with the original experimental frames and bird's-eye geometry retained. Provenance,
-transformations and hashes are recorded in `ASSET_MANIFEST.json`. The gallery
+with the original experimental frames and bird's-eye geometry retained. The gallery
 includes PushT, Reacher, Granular manipulation, bimanual grasping, three driving
 scenes, unseen object geometry, changed object appearance and Cube coverage.
 The two appendix driving videos compose saved camera observations with the same
@@ -67,8 +66,8 @@ observed-input plate and an eight-timepoint Cube plate accompany the results.
 The three original core-task clips have header-only
 terminology updates to TD-JEPA and DINO-WM, retaining every frame and the original
 dimensions and frame rate. Their linked timelines have label-only updates with
-byte-identical scene pixels. Source hashes and transformations are recorded;
-lightweight posters are decoded frames, resized proportionally without retouching.
+unchanged scene pixels. Lightweight posters are decoded frames,
+resized proportionally without retouching.
 Clips are not preloaded, keeping initial page loading lightweight.
 
 Non-title typography uses three shared sizes (14, 16 and 18 px). Metric values

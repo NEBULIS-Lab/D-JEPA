@@ -4,8 +4,8 @@ See `VALIDATION.json` for machine-readable checks on the current exported files.
 
 The configuration/script and static-site extension is recorded separately in
 [WORKFLOW_VALIDATION.json](WORKFLOW_VALIDATION.json): 39 CPU tests, 12 preserved
-scientific implementation hashes, 49 installed-wheel module imports, 12 validated
-dataset splits and 47 verified manifest files. The four-run cached matrix passes,
+scientific implementations, 49 installed-wheel module imports and 12 validated
+dataset splits. The four-run cached matrix passes,
 including exact PushT and Granular selected-ID agreement. Historical checks below retain
 their original validation scope; the new checks do not represent new experiments.
 

@@ -183,9 +183,7 @@ by the proposal protocol; the released task-specific adapters retain their
 recorded shape contracts. Model fitting and collecting execution supervision
 remain separate from this CPU-only proposal step.
 
-All output directories must be new. Metadata records the profile, source/config
-identity, actual RNG seed, action precision and output hash. Tests cover exact
+All output directories must be new. Metadata records the profile, configuration,
+RNG seed and action precision. Tests cover exact
 source-generator fixtures, reference exclusion, seeded reproducibility, family
 coverage, malformed inputs, label-free interfaces and non-overwriting output.
-Original implementation fingerprints and extraction notes are recorded in
-[candidate source provenance](CANDIDATE_SOURCE_PROVENANCE.json).

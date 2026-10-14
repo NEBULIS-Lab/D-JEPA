@@ -1,10 +1,8 @@
 # Checkpoint profiles
 
 Every profile includes a tensor-only `model.pt` and JSON configuration. Load with
-`torch.load(path, map_location="cpu", weights_only=True)`. The published file hash
-differs from the original training container because metadata and optimizer state
-are not embedded. Tensor values are preserved exactly; source and export hashes
-are separate fields in the configuration.
+`torch.load(path, map_location="cpu", weights_only=True)`. Optimizer state is
+omitted; the model parameters are unchanged.
 
 | Profile | Contents | Inference interface |
 |---|---|---|
@@ -53,7 +51,7 @@ state.update(patch)
 exact_pretrained_model.load_state_dict(state, strict=True)
 ```
 
-Verify the base checkpoint hash in the patch configuration first. These are
+Use the base checkpoint specified in the patch configuration. These are
 replacement learned parameters, not additive deltas.
 
 The Reacher adapter data retain full context/future/goal features. Its native

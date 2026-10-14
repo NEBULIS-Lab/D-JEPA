@@ -23,11 +23,9 @@ its output directory. It writes:
 
 - `model.pt`: tensor-only state dictionary, strict-loadable through
   `djepa.inference.load_profile`;
-- `config.json`: inference configuration, calibrated strict-gate threshold and
-  SHA-256 of `model.pt`;
+- `config.json`: model settings and calibrated strict-gate threshold;
 - `resolved_config.json`: effective command configuration;
-- `training_receipt.json`: SHA-256 for every input, label and metadata file,
-  plus the exact fit/calibration identities;
+- `training_receipt.json`: training inputs and fit/calibration split information;
 - `metrics.jsonl`: update and calibration trace.
 
 All three routes use the released candidate features and the existing public

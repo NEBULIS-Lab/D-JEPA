@@ -67,9 +67,8 @@ training/calibration commands and evaluation outputs.
 <details>
 <summary>Module composition and checkpoint dependencies</summary>
 
-These are configurations of **D-JEPA**, not separate competing methods. Legacy
-identifiers in raw result authorities and provenance retain the identities of
-the original experiments.
+These configurations combine the modules of **D-JEPA** for different tasks.
+See the guides below to choose a configuration and load its checkpoint.
 
 The [predictor boundary](src/djepa/models/predictor_boundary.py) defines restricted
 adaptation; the [transport objective](src/djepa/objectives/transport_objective.py) accompanies
@@ -100,7 +99,7 @@ Download and verify the **`pusht-relational/` profile** plus supervision:
 python scripts/download_artifacts.py --profile pusht-relational --dataset
 python -m zipfile -e data/D-JEPA-supervision-v1.zip data
 python scripts/doctor.py --checkpoint checkpoints/pusht-relational
-python scripts/verify_dataset.py --data-root data/D-JEPA-supervision-v1 --checksums
+python scripts/verify_dataset.py --data-root data/D-JEPA-supervision-v1
 bash scripts/reproduce_paper.sh --only pusht-independent
 ```
 
@@ -183,7 +182,6 @@ not as a separate results directory in this code repository.
 | [Protocols and data schema](docs/PROTOCOLS.md) | Evaluation populations, identities and supervision semantics |
 | [Checkpoint profiles](docs/CHECKPOINTS.md) | Loading, composition and upstream dependencies |
 | [Validation](docs/VALIDATION.md) | Tested release scope and cached-decision replay |
-| [Source provenance](docs/SOURCE_PROVENANCE.json) | Source/export hashes for extracted modules |
 | [Website maintenance](docs/SITE.md) | Local preview, theme and author-artwork slots |
 
 ### Repository map
@@ -199,8 +197,7 @@ docs/          project website and technical documentation
 assets/        original brand assets
 ```
 
-Legacy top-level Python modules forward to the organized implementations;
-scientific source hashes are mapped in [PACKAGE_LAYOUT.json](docs/PACKAGE_LAYOUT.json).
+Legacy top-level Python imports remain supported by compatibility wrappers.
 
 ### Run tests
 

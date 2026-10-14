@@ -50,7 +50,7 @@ predictions/<token>.npz      prediction arrays above
 labels/<token>.json          candidate IDs, official scores and subscores
 ```
 
-Label files bind the prediction file hash and contain `token`, `role`, and
+Label files are paired with their predictions and contain `token`, `role`, and
 `labels`. Each label has `candidate_id`, `score`, `no_at_fault_collisions`,
 `time_to_collision_within_bound`, and other official subscores. Observed outcomes
 are not input features. The label-free scoring command does not open this folder.

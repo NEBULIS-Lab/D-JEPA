@@ -152,5 +152,4 @@ configs/       prediction-space planning example
 tests/         CPU tests and optional upstream preprocessing integration
 ```
 
-See [source provenance](SOURCE_PROVENANCE.json) for the exported offline modules
-and [third-party notices](../docs/THIRD_PARTY.md) for upstream dependencies.
+See [third-party notices](../docs/THIRD_PARTY.md) for upstream dependencies.

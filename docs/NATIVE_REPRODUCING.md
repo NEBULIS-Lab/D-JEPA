@@ -40,8 +40,7 @@ do not shorten this fixed protocol.
 
 Candidate zero (the source reference) is not deployable. Each start must contain
 63 unique positive literal `candidate_ids`; selection and physics are joined by
-literal ID and by a SHA-256 of each candidate's 25 raw controls, never by an
-unverified array position.
+literal ID, with an automatic check that the controls match.
 
 ## Required raw bundle
 
@@ -73,8 +72,8 @@ population. Do not relabel cached futures as rebuilt native features.
 Install the upstream dependencies recorded in `docs/THIRD_PARTY.md`. The loader
 is concrete: `djepa.native.load_recorded_pusht_model` imports
 `stable_worldmodel.wm.utils.load_pretrained`, instantiates the TD-JEPA template,
-loads the trusted serialized LeWM template, verifies both template hashes against
-the full profile's lineage, and then strict-loads every tensor from
+loads the compatible LeWM template, checks both templates against the
+full profile's configuration, and then strict-loads every tensor from
 `pusht-exact-realization-full`. The exact runtime commonly needs explicit Python
 roots for these source trees:
 
@@ -122,5 +121,4 @@ success, and distance. Add `--start-id ID` to select literal starts.
 
 For 25-frame, 10-fps MP4s, install the optional dependencies with
 `pip install -e '.[media]'`, then add `--video-dir outputs/native/videos`.
-Video files and their SHA-256/frame-count receipts are
-listed in the rollout JSON sidecar. Outputs are never overwritten.
+Video filenames and frame counts are listed in the rollout JSON sidecar. Outputs are never overwritten.
