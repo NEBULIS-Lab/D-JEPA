@@ -69,4 +69,3 @@ test('downloadable metric data retains scientific results without file fingerpri
   assert.ok(data.pair_error_summary.length);
   assert.doesNotMatch(text, /[a-f0-9]{32,64}|sha256|checksum|fingerprint/i);
 });
-
