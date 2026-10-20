@@ -1,8 +1,8 @@
 <p align="center">
   <a href="https://nebulis-lab.com/D-JEPA">
     <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="assets/branding/jepa-full-logo-dark.svg">
-      <source media="(prefers-color-scheme: light)" srcset="assets/branding/jepa-full-logo-light.svg">
+      <source media="(prefers-color-scheme: dark)" srcset="assets/branding/jepa-full-logo-light.svg">
+      <source media="(prefers-color-scheme: light)" srcset="assets/branding/jepa-full-logo-dark.svg">
       <img src="assets/branding/jepa-full-logo-light.svg" alt="D-JEPA" width="600">
     </picture>
   </a>
